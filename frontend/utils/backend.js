@@ -1,22 +1,20 @@
 import axios from 'axios'
 
 //clients CRUD
-export async function getClients() {
-    const { data } = await axios.get(`/api/clients`)
-    return data
-}
-
 export async function postClient(client) {
-    const { data } = await axios.post('/api/clients', client)
+    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
+    const { data } = await axios.post('/api/clients', client, authHeader)
     return data
 }
 export async function updateClient(client, clientId) {
-    const { data } = await axios.put(`/api/clients/${clientId}`, client)
+    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
+    const { data } = await axios.put(`/api/clients/${clientId}`, client, authHeader)
     return data
 }
 
 export async function deleteClient(clientId) {
-    const { data } = await axios.delete(`/api/clients/${clientId}`)
+    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
+    const { data } = await axios.delete(`/api/clients/${clientId}`, authHeader)
     return data
 }
 
@@ -27,16 +25,19 @@ export async function getMusicians() {
 }
 
 export async function postMusician(musician) {
-    const { data } = await axios.post('/api/musicians', musician)
+    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
+    const { data } = await axios.post('/api/musicians', musician, authHeader)
     return data
 }
 export async function updateMusician(musician, musicianId) {
-    const { data } = await axios.put(`/api/musicians/${musicianId}`, musician)
+    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
+    const { data } = await axios.put(`/api/musicians/${musicianId}`, musician, authHeader)
     return data
 }
 
 export async function deleteMusician(musicianId) {
-    const { data } = await axios.delete(`/api/musicians/${musicianId}`)
+    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
+    const { data } = await axios.delete(`/api/musicians/${musicianId}`, authHeader)
     return data
 }
 
@@ -52,75 +53,95 @@ export async function getOpusesByMusician(musicianId) {
 }
 
 export async function postOpus(opus) {
-    const { data } = await axios.post('/api/opuses', opus)
+    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
+    const { data } = await axios.post('/api/opuses', opus, authHeader)
     return data
 }
 export async function updateOpus(opus, opusId) {
-    const { data } = await axios.put(`/api/opuses/${opusId}`, opus)
+    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
+    const { data } = await axios.put(`/api/opuses/${opusId}`, opus, authHeader)
     return data
 }
 
 export async function deleteOpus(opusId) {
-    const { data } = await axios.delete(`/api/opuses/${opusId}`)
+    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
+    const { data } = await axios.delete(`/api/opuses/${opusId}`, authHeader)
     return data
 }
 
 //requests CRUD
 export async function getRequests() {
-    const { data } = await axios.get(`/api/requests`)
+    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
+    const { data } = await axios.get(`/api/requests`, authHeader)
     return data
 }
 
 export async function getRequestsByClient(clientId) {
-    const { data } = await axios.get(`/api/requests/${clientId}`)
+    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
+    const { data } = await axios.get(`/api/requests/${clientId}`, authHeader)
     return data
 }
 
 export async function getRequestsByMusician(musicianId) {
-    const { data } = await axios.get(`/api/requests/${musicianId}`)
+    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
+    const { data } = await axios.get(`/api/requests/${musicianId}`, authHeader)
     return data
 }
 
 export async function postRequest(request) {
-    const { data } = await axios.post('/api/requests', request)
+    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
+    const { data } = await axios.post('/api/requests', request, authHeader)
     return data
 }
 export async function updateRequest(request, requestId) {
-    const { data } = await axios.put(`/api/requests/${requestId}`, request)
+    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
+    const { data } = await axios.put(`/api/requests/${requestId}`, request, authHeader)
     return data
 }
 
 export async function deleteRequest(requestId) {
-    const { data } = await axios.delete(`/api/requests/${requestId}`)
+    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
+    const { data } = await axios.delete(`/api/requests/${requestId}`, authHeader)
     return data
 }
 
 //reviews CRUD
-export async function getReviews() {
-    const { data } = await axios.get(`/api/reviews`)
-    return data
-}
-
 export async function getReviewsByClient(clientId) {
-    const { data } = await axios.get(`/api/reviews/${clientId}`)
+    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
+    const { data } = await axios.get(`/api/reviews/${clientId}`, authHeader)
     return data
 }
 
 export async function getReviewsByMusician(musicianId) {
-    const { data } = await axios.get(`/api/reviews/${musicianId}`)
+    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
+    const { data } = await axios.get(`/api/reviews/${musicianId}`, authHeader)
     return data
 }
 
 export async function postReview(review) {
-    const { data } = await axios.post('/api/reviews', review)
+    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
+    const { data } = await axios.post('/api/reviews', review, authHeader)
     return data
 }
 export async function updateReview(review, reviewId) {
-    const { data } = await axios.put(`/api/reviews/${reviewId}`, review)
+    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
+    const { data } = await axios.put(`/api/reviews/${reviewId}`, review, authHeader)
     return data
 }
 
 export async function deleteReview(reviewId) {
-    const { data } = await axios.delete(`/api/reviews/${reviewId}`)
+    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
+    const { data } = await axios.delete(`/api/reviews/${reviewId}`, authHeader)
+    return data
+}
+
+//signup & login
+export async function signUp(user) {
+    const { data } = await axios.post('/api/users/signup', user)
+    return data
+}
+
+export async function logIn(user) {
+    const { data } = await axios.post('/api/users/login', user)
     return data
 }

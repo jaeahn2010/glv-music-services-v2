@@ -6,7 +6,7 @@ const clientSchema = new mongoose.Schema(
         lastName: { type: String, required: true },
         instruments: [{ type: String }],
         birthdate: { type: Date, required: true },
-        email: { type: String, required: true },
+        email: { type: String, required: true, unique: true },
         password: { type: String, required: true, minLength: 8 },
     },
 );

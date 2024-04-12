@@ -23,15 +23,12 @@ const app = express();
 
 /* middleware
 ---------------------------------------------------------- */
-// cross origin allowance
 app.use(cors())
-// body parser - used for POST/PUT/PATCH routes:
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
 
 /* mount routes
 ---------------------------------------------------------- */
-// look at controllers folders for certain urls
 app.use('/api/clients', clientsCtrl)
 app.use('/api/musicians', musiciansCtrl)
 app.use('/api/opuses', opusesCtrl)

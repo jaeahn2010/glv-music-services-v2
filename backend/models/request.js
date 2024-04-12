@@ -19,6 +19,7 @@ const requestSchema = new mongoose.Schema(
         additionalComments: { type: String },
         status: { type: String, required: true, default: "Pending" }
     },
+    { timestamps: true }
 );
 
 // export to index.js
