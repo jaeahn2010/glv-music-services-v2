@@ -1,13 +1,14 @@
 /* modules
 ---------------------------------------------------------- */
 require('dotenv').config()
-const express = require('express');
+const express = require('express')
 const cors = require('cors')
 const path = require('path')
 
 /* db connection, models, seed data
 ---------------------------------------------------------- */
-const db = require('./models');
+const db = require('./models')
+const seedOpus = require('./models/seedOpus')
 
 /* routes in controllers folder
 --------------------------------------------------------------- */
@@ -40,7 +41,7 @@ app.get('/seed', function (req, res) {
     db.Opus.deleteMany({})
         .then(removedOpuses => {
             console.log(`Removed ${removedOpuses.deletedCount} opuses.`)
-            db.Opus.insertMany(db.seedOpuses)
+            db.Opus.insertMany(seedOpus)
                 .then(addedOpuses => {
                     console.log(`Added ${addedOpuses.length} opuses. Reset to original database.`)
                     res.json(addedOpuses)

@@ -6,9 +6,9 @@ const opusSchema = new mongoose.Schema(
         composer: { type: String, required: true },
         movements: [
             {
-                movementNumber: { type: Number, required: true },
-                movementTitle: { type: String, required: true },
-                movementPrice: { type: Number, required: true },
+                movementNumber: { type: Number },
+                movementTitle: { type: String },
+                movementPrice: { type: Number },
             }
         ],
         instrumentation: [{ type: String, required: true }],

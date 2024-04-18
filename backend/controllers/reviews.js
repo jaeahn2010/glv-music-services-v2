@@ -16,10 +16,6 @@ const db = require('../models')
 --------------------------------------------------------------- */
 const config = require('../../jwt.config.js')
 
-/* require jwt config
---------------------------------------------------------------- */
-const config = require('../../jwt.config.js')
-
 /* jwt middleware
 --------------------------------------------------------------- */
 const authMiddleware = (req, res, next) => {

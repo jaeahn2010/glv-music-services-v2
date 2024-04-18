@@ -5,8 +5,8 @@ import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	root: path.resolve(__dirname, 'frontend'),
 	plugins: [react()],
+	root: path.resolve(__dirname, 'frontend'),
 	server: {
 		proxy: {
 			'/api': {

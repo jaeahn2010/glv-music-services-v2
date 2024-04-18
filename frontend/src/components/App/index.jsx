@@ -52,9 +52,9 @@ export default function App() {
 					className="text-white md:text-lg sm:text-md"
 					onClick={() => {
 						if (confirm("Are you sure you would like to log out?")) {
-						localStorage.clear()
-						setLoginStatus(false)
-						navigate('/')
+							localStorage.clear()
+							setLoginStatus(false)
+							navigate('/')
 						}
 					}}>
 					Log Out
@@ -83,7 +83,7 @@ export default function App() {
 	
 	return (
 		<>
-			<nav className="rer-font-nav flex items-center justify-between h-16 bg-gray-800 shadow-lg lg:px-9 md:px-6 px-3">
+			<nav className="flex items-center justify-between h-16 bg-gray-800 shadow-lg lg:px-9 md:px-6 px-3">
 				<Link to="/" onClick={(evt) => {
 					getOpusData("none", "none")
 				}}>
@@ -101,7 +101,7 @@ export default function App() {
 					<HomePage
 						opuses={opuses}
 						setOpuses={setOpuses}
-						getFilteredData={getData}
+						getFilteredData={getOpusData}
 						updateDetails={setDetailsData}
 						loginStatus={loginStatus}
 					/>}
@@ -111,7 +111,7 @@ export default function App() {
 						loginStatus={loginStatus}
 						opuses={opuses}
 						setOpuses={setOpuses}
-						getFilteredData={getData}
+						getFilteredData={getOpusData}
 						updateDetails={setDetailsData}
 					/>}
 				/>
@@ -120,7 +120,7 @@ export default function App() {
 						loginStatus={loginStatus}
 						opuses={opuses}
 						setOpuses={setOpuses}
-						getFilteredData={getData}
+						getFilteredData={getOpusData}
 						updateDetails={setDetailsData}
 					/>}
 				/>
