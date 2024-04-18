@@ -2120,6 +2120,42 @@ const opuses = [
         price: 15
     },
     {
+        title: "Concerto in C minor",
+        composer: "Finzi, Gerald",
+        movements: [
+            {movementNumber: 1, movementTitle: "I. Allegro vigoroso", movementPrice: 45},
+            {movementNumber: 2, movementTitle: "II. Adagio ma senza rigore", movementPrice: 45},
+            {movementNumber: 3, movementTitle: "III. Rondo. Allegro giocoso", movementPrice: 45},
+        ],
+        instrumentation: ["clarinet", "orchestra"],
+        price: 125
+    },
+    {
+        title: "Susannah",
+        composer: "Floyd, Carlisle",
+        movements: [
+            {movementNumber: 1, movementTitle: "Ain't it a pretty night", movementPrice: 30},
+            {movementNumber: 2, movementTitle: "The trees on the mountains", movementPrice: 30},
+            {movementNumber: 3, movementTitle: "I'm a lonely man, Susannah", movementPrice: 15},
+        ],
+        instrumentation: ["voice", "orchestra"],
+        price: 250
+    },
+    {
+        title: "Beautiful dreamer",
+        composer: "Foster, Stephen",
+        movements: [],
+        instrumentation: ["voice", "piano"],
+        price: 15
+    },
+    {
+        title: "Prelude, fugue, et variation, Op. 18 (arr. Franck",
+        composer: "Franck, César",
+        movements: [],
+        instrumentation: ["piano"],
+        price: 120
+    },
+    {
         title: "Sonata in A major",
         composer: "Franck, César",
         movements: [
@@ -2132,6 +2168,26 @@ const opuses = [
         price: 400
     },
     {
+        title: "Andante et scherzo",
+        composer: "Ganne, Louis",
+        movements: [],
+        instrumentation: ["flute", "piano"],
+        price: 45
+    },
+    {
+        title: "Porgy and Bess",
+        composer: "Gershwin, George",
+        movements: [
+            {movementNumber: 1, movementTitle: "Bess, you is my woman now", movementPrice: 45},
+            {movementNumber: 2, movementTitle: "I got rhythm", movementPrice: 30},
+            {movementNumber: 3, movementTitle: "My man's gone now", movementPrice: 30},
+            {movementNumber: 4, movementTitle: "Summertime", movementPrice: 15},
+            {movementNumber: 5, movementTitle: "A woman is a sometime thing", movementPrice: 30}
+        ],
+        instrumentation: ["voice", "orchestra"],
+        price: null
+    },
+    {
         title: "Rhapsody in Blue (arr. Ahn-Benton)",
         composer: "Gershwin, George",
         movements: [],
@@ -2139,7 +2195,7 @@ const opuses = [
         price: 360
     },
     {
-        title: "Danzas argentinas",
+        title: "Danzas argentinas, Op. 2",
         composer: "Ginastera, Alberto",
         movements: [
             {movementNumber: 1, movementTitle: "I. Danza del viejo boyero", movementPrice: 45},
@@ -2148,6 +2204,51 @@ const opuses = [
         ],
         instrumentation: ["piano"],
         price: 250
+    },
+    {
+        title: "Sonata No. 2, Op. 53",
+        composer: "Ginastera, Alberto",
+        movements: [
+            {movementNumber: 1, movementTitle: "I. Allegramente", movementPrice: 180},
+            {movementNumber: 2, movementTitle: "II. Adagio sereno", movementPrice: 150},
+            {movementNumber: 3, movementTitle: "III. Ostinato aymará", movementPrice: 180}
+        ],
+        instrumentation: ["piano"],
+        price: 500
+    },
+    {
+        title: "Caro mio ben",
+        composer: "Giordano, Giuseppe",
+        movements: [],
+        instrumentation: ["voice", "piano"],
+        price: 15
+    },
+    {
+        title: "Fedora",
+        composer: "Giordano, Umberto",
+        movements: [
+            {movementNumber: 1, movementTitle: "Amor ti vieta", movementPrice: 15},
+        ],
+        instrumentation: ["piano"],
+        price: 250
+    },
+    {
+        title: "Chant du Ménestrel, Op. 71",
+        composer: "Glazunov, Aleksandr",
+        movements: [],
+        instrumentation: ["cello", "orchestra"],
+        price: 30
+    },
+    {
+        title: "Concerto in A minor, Op. 82",
+        composer: "Glazunov, Aleksandr",
+        movements: [
+            {movementNumber: 1, movementTitle: "I. Moderato", movementPrice: 90},
+            {movementNumber: 2, movementTitle: "II. Andante", movementPrice: 30},
+            {movementNumber: 3, movementTitle: "III. Tempo I - Allegro", movementPrice: 60}
+        ],
+        instrumentation: ["violin", "orchestra"],
+        price: 175
     },
     {
         title: "Concerto in E-flat major, Op. 109",
@@ -2159,6 +2260,692 @@ const opuses = [
         ],
         instrumentation: ["saxophone", "orchestra"],
         price: 250
+    },
+    {
+        title: "The lark (arr. Balakirev)",
+        composer: "Glinka, Mikhail",
+        movements: [],
+        instrumentation: ["piano"],
+        price: 90
+    },
+    {
+        title: "Alceste",
+        composer: "Gluck, Christoph Willibald von",
+        movements: [
+            {movementNumber: 1, movementTitle: "Divinités du Styx", movementPrice: 20},
+        ],
+        instrumentation: ["voice", "orchestra"],
+        price: null
+    },
+    {
+        title: "Orfeo ed Euridice",
+        composer: "Gluck, Christoph Willibald von",
+        movements: [
+            {movementNumber: 1, movementTitle: "Che farò senza Euridice", movementPrice: 15},
+            {movementNumber: 2, movementTitle: "Che fiero momento", movementPrice: 20},
+        ],
+        instrumentation: ["voice", "orchestra"],
+        price: null
+    },
+    {
+        title: "Faust",
+        composer: "Gounod, Charles",
+        movements: [
+            {movementNumber: 1, movementTitle: "Avant de quitter ces lieux", movementPrice: 20},
+            {movementNumber: 2, movementTitle: "Salut demeure chaste et pure", movementPrice: 20},
+        ],
+        instrumentation: ["voice", "orchestra"],
+        price: null
+    },
+    {
+        title: "Roméo et Juliette",
+        composer: "Gounod, Charles",
+        movements: [
+            {movementNumber: 1, movementTitle: "Ah! Lève-toi, soleil!", movementPrice: 20},
+            {movementNumber: 2, movementTitle: "Que-fais tu blanche tourterelle", movementPrice: 30},
+        ],
+        instrumentation: ["voice", "orchestra"],
+        price: null
+    },
+    {
+        title: "Amor y odio",
+        composer: "Granados, Enrique",
+        movements: [],
+        instrumentation: ["voice", "piano"],
+        price: 15
+    },
+    {
+        title: "Gracia mia",
+        composer: "Granados, Enrique",
+        movements: [],
+        instrumentation: ["voice", "piano"],
+        price: 30
+    },
+    {
+        title: "La maja dolorosa",
+        composer: "Granados, Enrique",
+        movements: [
+            {movementNumber: 1, movementTitle: "I. Oh muerte cruel", movementPrice: 20},
+            {movementNumber: 2, movementTitle: "II. Ay majo de mi vida", movementPrice: 15},
+            {movementNumber: 3, movementTitle: "III. De aquel majo amante", movementPrice: 20},
+        ],
+        instrumentation: ["voice", "orchestra"],
+        price: 50
+    },
+    {
+        title: "El majo timido",
+        composer: "Granados, Enrique",
+        movements: [],
+        instrumentation: ["voice", "piano"],
+        price: 15
+    },
+    {
+        title: "Sonata No. 2 in G minor, Op. 13",
+        composer: "Grieg, Edvard",
+        movements: [
+            {movementNumber: 1, movementTitle: "I. Lento doloroso", movementPrice: 60},
+            {movementNumber: 2, movementTitle: "II. Allegretto tranquillo", movementPrice: 45},
+            {movementNumber: 3, movementTitle: "III. Allegro animato", movementPrice: 60}
+        ],
+        instrumentation: ["violin", "piano"],
+        price: 150
+    },
+    {
+        title: "Sonata No. 3 in C minor, Op. 45",
+        composer: "Grieg, Edvard",
+        movements: [
+            {movementNumber: 1, movementTitle: "I. Allegro molto ed appassionato", movementPrice: 90},
+            {movementNumber: 2, movementTitle: "II. Allegretto espressivo alla Romanza", movementPrice: 45},
+            {movementNumber: 3, movementTitle: "III. Allegro animato", movementPrice: 90}
+        ],
+        instrumentation: ["violin", "piano"],
+        price: 200
+    },
+    {
+        title: "Lieder, Op. 48",
+        composer: "Grieg, Edvard",
+        movements: [
+            {movementNumber: 6, movementTitle: "VI. Ein Traum", movementPrice: 30},
+        ],
+        instrumentation: ["voice", "piano"],
+        price: null
+    },
+    {
+        title: "Suite",
+        composer: "Haddad, Don",
+        movements: [
+            {movementNumber: 1, movementTitle: "I. Allegro maestoso", movementPrice: 60},
+            {movementNumber: 2, movementTitle: "II. Andante espressivo", movementPrice: 30},
+            {movementNumber: 3, movementTitle: "III. Allegro con brio", movementPrice: 45}
+        ],
+        instrumentation: ["tuba", "piano"],
+        price: 125
+    },
+    {
+        title: "À Chloris",
+        composer: "Hahn, Reynaldo",
+        movements: [],
+        instrumentation: ["voice", "piano"],
+        price: 20
+    },
+    {
+        title: "D'une prison",
+        composer: "Hahn, Reynaldo",
+        movements: [],
+        instrumentation: ["voice", "piano"],
+        price: 15
+    },
+    {
+        title: "L'énamourée",
+        composer: "Hahn, Reynaldo",
+        movements: [],
+        instrumentation: ["voice", "piano"],
+        price: 15
+    },
+    {
+        title: "L'heure exquise",
+        composer: "Hahn, Reynaldo",
+        movements: [],
+        instrumentation: ["voice", "piano"],
+        price: 15
+    },
+    {
+        title: "Quand je fus pris au pavillon",
+        composer: "Hahn, Reynaldo",
+        movements: [],
+        instrumentation: ["voice", "piano"],
+        price: 20
+    },
+    {
+        title: "Si mes vers avaient des ailes",
+        composer: "Hahn, Reynaldo",
+        movements: [],
+        instrumentation: ["voice", "piano"],
+        price: 20
+    },
+    {
+        title: "Guide my feet",
+        composer: "Hairston, Jacqueline",
+        movements: [],
+        instrumentation: ["voice", "piano"],
+        price: 20
+    },
+    {
+        title: "Agrippina",
+        composer: "Händel, Georg Friedrich",
+        movements: [
+            {movementNumber: 1, movementTitle: "Bel piacere", movementPrice: 15},
+        ],
+        instrumentation: ["voice", "orchestra"],
+        price: null
+    },
+    {
+        title: "Alcina",
+        composer: "Händel, Georg Friedrich",
+        movements: [
+            {movementNumber: 1, movementTitle: "Ah, mio cor", movementPrice: 20},
+            {movementNumber: 2, movementTitle: "Tornami a vagheggiar", movementPrice: 20},
+        ],
+        instrumentation: ["voice", "orchestra"],
+        price: null
+    },
+    {
+        title: "L'allegro",
+        composer: "Händel, Georg Friedrich",
+        movements: [
+            {movementNumber: 1, movementTitle: "Come and trip it", movementPrice: 20},
+        ],
+        instrumentation: ["voice", "orchestra"],
+        price: null
+    },
+    {
+        title: "Giulio Cesare",
+        composer: "Händel, Georg Friedrich",
+        movements: [
+            {movementNumber: 1, movementTitle: "Svegliatevi nel core", movementPrice: 30},
+            {movementNumber: 2, movementTitle: "V'adoro, pupille", movementPrice: 15},
+        ],
+        instrumentation: ["voice", "orchestra"],
+        price: null
+    },
+    {
+        title: "Joshua",
+        composer: "Händel, Georg Friedrich",
+        movements: [
+            {movementNumber: 1, movementTitle: "Oh, had I Jubal's lyre", movementPrice: 20},
+        ],
+        instrumentation: ["voice", "orchestra"],
+        price: null
+    },
+    {
+        title: "The Messiah",
+        composer: "Händel, Georg Friedrich",
+        movements: [
+            {movementNumber: 1, movementTitle: "Comfort ye, my people", movementPrice: 15},
+            {movementNumber: 2, movementTitle: "Ev'ry valley shall be exalted", movementPrice: 30},
+            {movementNumber: 3, movementTitle: "Hallelujah", movementPrice: 30},
+            {movementNumber: 4, movementTitle: "O thou that tellest good tidings to Zion", movementPrice: 30},
+            {movementNumber: 3, movementTitle: "Rejoice greatly, o daughter of Zion", movementPrice: 30},
+            {movementNumber: 3, movementTitle: "Thou shalt break them", movementPrice: 30},
+        ],
+        instrumentation: ["voice", "orchestra"],
+        price: null
+    },
+    {
+        title: "Radamisto",
+        composer: "Händel, Georg Friedrich",
+        movements: [
+            {movementNumber: 1, movementTitle: "Sommi Dei", movementPrice: 15},
+        ],
+        instrumentation: ["voice", "orchestra"],
+        price: null
+    },
+    {
+        title: "Rinaldo",
+        composer: "Händel, Georg Friedrich",
+        movements: [
+            {movementNumber: 1, movementTitle: "Lascia ch'io pianga", movementPrice: 15},
+        ],
+        instrumentation: ["voice", "orchestra"],
+        price: null
+    },
+    {
+        title: "Samson",
+        composer: "Händel, Georg Friedrich",
+        movements: [
+            {movementNumber: 1, movementTitle: "Total eclipse", movementPrice: 15},
+        ],
+        instrumentation: ["voice", "orchestra"],
+        price: null
+    },
+    {
+        title: "Semele",
+        composer: "Händel, Georg Friedrich",
+        movements: [
+            {movementNumber: 1, movementTitle: "Hence, Iris hence away", movementPrice: 30},
+            {movementNumber: 2, movementTitle: "Where'er you walk", movementPrice: 20},
+        ],
+        instrumentation: ["voice", "orchestra"],
+        price: null
+    },
+    {
+        title: "Xerxes",
+        composer: "Händel, Georg Friedrich",
+        movements: [
+            {movementNumber: 1, movementTitle: "Ombra mai fu", movementPrice: 15},
+        ],
+        instrumentation: ["voice", "orchestra"],
+        price: null
+    },
+    {
+        title: "Concerto No. 1 in C major",
+        composer: "Haydn, Franz Joseph",
+        movements: [
+            {movementNumber: 1, movementTitle: "I. Moderato", movementPrice: 30},
+            {movementNumber: 2, movementTitle: "II. Adagio", movementPrice: 15},
+            {movementNumber: 3, movementTitle: "III. Allegro molto", movementPrice: 30}
+        ],
+        instrumentation: ["cello", "orchestra"],
+        price: 60
+    },
+    {
+        title: "Concerto No. 2 in D major",
+        composer: "Haydn, Franz Joseph",
+        movements: [
+            {movementNumber: 1, movementTitle: "I. Allegro", movementPrice: 120},
+            {movementNumber: 2, movementTitle: "II. Adagio", movementPrice: 60},
+            {movementNumber: 3, movementTitle: "III. Allegro", movementPrice: 150}
+        ],
+        instrumentation: ["cello", "orchestra"],
+        price: 60
+    },
+    {
+        title: "Concerto in E-flat major",
+        composer: "Haydn, Franz Joseph",
+        movements: [
+            {movementNumber: 1, movementTitle: "I. Allegro", movementPrice: 45},
+            {movementNumber: 2, movementTitle: "II. Andante", movementPrice: 20},
+            {movementNumber: 3, movementTitle: "III. Allegro", movementPrice: 45}
+        ],
+        instrumentation: ["trumpet", "orchestra"],
+        price: 100
+    },
+    {
+        title: "Concerto No. 1 in C major",
+        composer: "Haydn, Franz Joseph",
+        movements: [
+            {movementNumber: 1, movementTitle: "I. Allegro moderato", movementPrice: 30},
+            {movementNumber: 2, movementTitle: "II. Adagio", movementPrice: 15},
+            {movementNumber: 3, movementTitle: "III. Presto", movementPrice: 30}
+        ],
+        instrumentation: ["violin", "orchestra"],
+        price: 60
+    },
+    {
+        title: "Concerto No. 2 in G major",
+        composer: "Haydn, Franz Joseph",
+        movements: [
+            {movementNumber: 1, movementTitle: "I. Allegro moderato", movementPrice: 30},
+            {movementNumber: 2, movementTitle: "II. Adagio", movementPrice: 15},
+            {movementNumber: 3, movementTitle: "III. Allegro", movementPrice: 30}
+        ],
+        instrumentation: ["violin", "orchestra"],
+        price: 60
+    },
+    {
+        title: "Sonata",
+        composer: "Heiden, Bernhard",
+        movements: [
+            {movementNumber: 1, movementTitle: "I. Allegro", movementPrice: 60},
+            {movementNumber: 2, movementTitle: "II. Vivace", movementPrice: 60},
+        ],
+        instrumentation: ["saxophone", "piano"],
+        price: 100
+    },
+    {
+        title: "Sonata",
+        composer: "Hindemith, Paul",
+        movements: [
+            {movementNumber: 1, movementTitle: "I. Heiter bewegt", movementPrice: 60},
+            {movementNumber: 2, movementTitle: "II. Sehr langsam", movementPrice: 30},
+            {movementNumber: 3, movementTitle: "III. Sehr lebhaft", movementPrice: 60},
+            {movementNumber: 4, movementTitle: "IV. Marsch", movementPrice: 30}
+        ],
+        instrumentation: ["flute", "piano"],
+        price: 175
+    },
+    {
+        title: "Sonata",
+        composer: "Hindemith, Paul",
+        movements: [
+            {movementNumber: 1, movementTitle: "I. Munter", movementPrice: 60},
+            {movementNumber: 2, movementTitle: "II. Sehr langsam", movementPrice: 75},
+        ],
+        instrumentation: ["oboe", "piano"],
+        price: 125
+    },
+    {
+        title: "Sonata",
+        composer: "Hindemith, Paul",
+        movements: [
+            {movementNumber: 1, movementTitle: "I. Maßig bewegt", movementPrice: 60},
+            {movementNumber: 2, movementTitle: "II. Lebhaft", movementPrice: 60},
+            {movementNumber: 3, movementTitle: "III. Sehr langsam", movementPrice: 30},
+            {movementNumber: 4, movementTitle: "IV. Kleines Rondo, gemächlich", movementPrice: 60}
+        ],
+        instrumentation: ["clarinet", "piano"],
+        price: 200
+    },
+    {
+        title: "Sonata",
+        composer: "Hindemith, Paul",
+        movements: [
+            {movementNumber: 1, movementTitle: "I. Leicht bewegt", movementPrice: 30},
+            {movementNumber: 2, movementTitle: "II. Langsam", movementPrice: 15},
+            {movementNumber: 3, movementTitle: "III. Marsch", movementPrice: 60},
+            {movementNumber: 4, movementTitle: "IV. Beschluß, Pastorale. Ruhig", movementPrice: 15}
+        ],
+        instrumentation: ["bassoon", "piano"],
+        price: 100
+    },
+    {
+        title: "Sonata",
+        composer: "Hindemith, Paul",
+        movements: [
+            {movementNumber: 1, movementTitle: "I. Mit Kraft", movementPrice: 75},
+            {movementNumber: 2, movementTitle: "II. Maßig bewegt", movementPrice: 45},
+            {movementNumber: 3, movementTitle: "III. Trauermusik. Sehr langsam", movementPrice: 45},
+        ],
+        instrumentation: ["trumpet", "piano"],
+        price: 150
+    },
+    {
+        title: "Sonata",
+        composer: "Hindemith, Paul",
+        movements: [
+            {movementNumber: 1, movementTitle: "I. Allegro moderato maestoso", movementPrice: 90},
+            {movementNumber: 2, movementTitle: "II. Allegretto grazioso", movementPrice: 45},
+            {movementNumber: 3, movementTitle: "III. Allegro pesante", movementPrice: 45},
+            {movementNumber: 4, movementTitle: "IV. Allegro moderato maestoso", movementPrice: 90}
+        ],
+        instrumentation: ["trombone", "piano"],
+        price: 250
+    },
+    {
+        title: "Sonata",
+        composer: "Hindemith, Paul",
+        movements: [
+            {movementNumber: 1, movementTitle: "I. Allegro pesante", movementPrice: 60},
+            {movementNumber: 2, movementTitle: "II. Allegro assai", movementPrice: 75},
+            {movementNumber: 3, movementTitle: "III. Moderato, commodo", movementPrice: 120},
+        ],
+        instrumentation: ["tuba", "piano"],
+        price: 250
+    },
+    {
+        title: "Sonata",
+        composer: "Hindemith, Paul",
+        movements: [
+            {movementNumber: 1, movementTitle: "I. Allegretto", movementPrice: 60},
+            {movementNumber: 2, movementTitle: "II. Scherzo. Allegro assai", movementPrice: 75},
+            {movementNumber: 3, movementTitle: "III. Molto adagio", movementPrice: 60},
+            {movementNumber: 4, movementTitle: "IV. Lied. Allegretto grazioso", movementPrice: 30}
+        ],
+        instrumentation: ["contrabass", "piano"],
+        price: 200
+    },
+    {
+        title: "Der Schwanendreher",
+        composer: "Hindemith, Paul",
+        movements: [
+            {movementNumber: 1, movementTitle: "I. Zwischen Berg und tiefem Tal", movementPrice: 75},
+            {movementNumber: 2, movementTitle: "II. Nun laube, Lindlein laube - Der Gutzgauch auf dem Zaune saß", movementPrice: 90},
+            {movementNumber: 3, movementTitle: "III. Seid ihr nicht der Schwanendreher", movementPrice: 90},
+        ],
+        instrumentation: ["viola", "orchestra"],
+        price: 250
+    },
+    {
+        title: "Concerto in D major",
+        composer: "Hoffmeister, Franz Anton",
+        movements: [
+            {movementNumber: 1, movementTitle: "I. Allegro", movementPrice: 45},
+            {movementNumber: 2, movementTitle: "II. Adagio", movementPrice: 15},
+            {movementNumber: 3, movementTitle: "III. Rondo", movementPrice: 30},
+        ],
+        instrumentation: ["viola", "orchestra"],
+        price: 80
+    },
+    {
+        title: "Deep river",
+        composer: "Hogan, Moses",
+        movements: [],
+        instrumentation: ["voice", "piano"],
+        price: 30
+    },
+    {
+        title: "Give me Jesus",
+        composer: "Hogan, Moses",
+        movements: [],
+        instrumentation: ["voice", "piano"],
+        price: 20
+    },
+    {
+        title: "He never said a mumbalin' word",
+        composer: "Hogan, Moses",
+        movements: [],
+        instrumentation: ["voice", "piano"],
+        price: 20
+    },
+    {
+        title: "He's got the whole world in his hands",
+        composer: "Hogan, Moses",
+        movements: [],
+        instrumentation: ["voice", "piano"],
+        price: 20
+    },
+    {
+        title: "Let us break bread together",
+        composer: "Hogan, Moses",
+        movements: [],
+        instrumentation: ["voice", "piano"],
+        price: 30
+    },
+    {
+        title: "Sometimes I feel like a motherless child",
+        composer: "Hogan, Moses",
+        movements: [],
+        instrumentation: ["voice", "piano"],
+        price: 20
+    },
+    {
+        title: "Walk together children",
+        composer: "Hogan, Moses",
+        movements: [],
+        instrumentation: ["voice", "piano"],
+        price: 30
+    },
+    {
+        title: "Were you there?",
+        composer: "Hogan, Moses",
+        movements: [],
+        instrumentation: ["voice", "piano"],
+        price: 20
+    },
+    {
+        title: "Jabberwocky",
+        composer: "Hoiby, Lee",
+        movements: [],
+        instrumentation: ["voice", "piano"],
+        price: 45
+    },
+    {
+        title: "Transcription of 'Gypsy Song' from Bizet's 'Carmen'",
+        composer: "Horowitz, Vladimir",
+        movements: [],
+        instrumentation: ["piano"],
+        price: 360
+    },
+    {
+        title: "Transcription of Liszt's 'Rakóczy March'",
+        composer: "Horowitz, Vladimir",
+        movements: [],
+        instrumentation: ["piano"],
+        price: 270
+    },
+    {
+        title: "Concerto in E-flat major",
+        composer: "Hummel, Johann Nepomuk",
+        movements: [
+            {movementNumber: 1, movementTitle: "I. Allegro con spirito", movementPrice: 45},
+            {movementNumber: 2, movementTitle: "II. Andante", movementPrice: 30},
+            {movementNumber: 3, movementTitle: "III. Rondo", movementPrice: 45}
+        ],
+        instrumentation: ["trumpet", "orchestra"],
+        price: 100
+    },
+    {
+        title: "Come ready and see me",
+        composer: "Hundley, Richard",
+        movements: [],
+        instrumentation: ["voice", "piano"],
+        price: 20
+    },
+    {
+        title: "I do",
+        composer: "Hundley, Richard",
+        movements: [],
+        instrumentation: ["voice", "piano"],
+        price: 20
+    },
+    {
+        title: "Sweet Suffolk owl",
+        composer: "Hundley, Richard",
+        movements: [],
+        instrumentation: ["voice", "piano"],
+        price: 15
+    },
+    {
+        title: "Waterbird",
+        composer: "Hundley, Richard",
+        movements: [],
+        instrumentation: ["voice", "piano"],
+        price: 30
+    },
+    {
+        title: "Will there really be a morning?",
+        composer: "Hundley, Richard",
+        movements: [],
+        instrumentation: ["voice", "piano"],
+        price: 20
+    },
+    {
+        title: "Élégie et Rondeau",
+        composer: "Husa, Karel",
+        movements: [
+            {movementNumber: 1, movementTitle: "I. Élégie", movementPrice: 30},
+            {movementNumber: 2, movementTitle: "II. Rondeau", movementPrice: 75},
+        ],
+        instrumentation: ["saxophone", "piano"],
+        price: 100
+    },
+    {
+        title: "Chanson du Don Quichotte",
+        composer: "Ibert, Jacques",
+        movements: [
+            {movementNumber: 1, movementTitle: "I. Chanson du départ", movementPrice: 15},
+            {movementNumber: 2, movementTitle: "II. Chanson à dulcinée", movementPrice: 30},
+            {movementNumber: 3, movementTitle: "III. Chanson du duc", movementPrice: 20},
+            {movementNumber: 4, movementTitle: "IV. Chanson de la mort", movementPrice: 15}
+        ],
+        instrumentation: ["voice", "piano"],
+        price: 75
+    },
+    {
+        title: "Concertino da Camera",
+        composer: "Ibert, Jacques",
+        movements: [
+            {movementNumber: 1, movementTitle: "I. Allegro con moto", movementPrice: 120},
+            {movementNumber: 2, movementTitle: "II. Larghetto", movementPrice: 30},
+            {movementNumber: 3, movementTitle: "III. Animato molto", movementPrice: 120},
+        ],
+        instrumentation: ["saxophone", "orchestra"],
+        price: 250
+    },
+    {
+        title: "Concerto",
+        composer: "Ibert, Jacques",
+        movements: [
+            {movementNumber: 1, movementTitle: "I. Allegro", movementPrice: 120},
+            {movementNumber: 2, movementTitle: "II. Andante", movementPrice: 30},
+            {movementNumber: 3, movementTitle: "III. Allegro scherzando", movementPrice: 120},
+        ],
+        instrumentation: ["flute", "orchestra"],
+        price: 250
+    },
+    {
+        title: "Sonata",
+        composer: "Janáček, Leoš",
+        movements: [
+            {movementNumber: 1, movementTitle: "I. Con moto", movementPrice: 60},
+            {movementNumber: 2, movementTitle: "II. Ballada", movementPrice: 60},
+            {movementNumber: 3, movementTitle: "III. Allegretto", movementPrice: 30},
+            {movementNumber: 4, movementTitle: "IV. Adagio", movementPrice: 60},
+        ],
+        instrumentation: ["violin", "piano"],
+        price: 200
+    },
+    {
+        title: "City called heaven",
+        composer: "Johnson, Hall",
+        movements: [],
+        instrumentation: ["voice", "piano"],
+        price: 15
+    },
+    {
+        title: "Honor! Honor!",
+        composer: "Johnson, Hall",
+        movements: [],
+        instrumentation: ["voice", "piano"],
+        price: 20
+    },
+    {
+        title: "I gotta lie down",
+        composer: "Johnson, Hall",
+        movements: [],
+        instrumentation: ["voice", "piano"],
+        price: 20
+    },
+    {
+        title: "Ride on, King Jesus!",
+        composer: "Johnson, Hall",
+        movements: [],
+        instrumentation: ["voice", "piano"],
+        price: 20
+    },
+    {
+        title: "Chant de Linos",
+        composer: "Jolivet, André",
+        movements: [],
+        instrumentation: ["flute", "piano"],
+        price: 240
+    },
+    {
+        title: "Maple leaf rag",
+        composer: "Joplin, Scott",
+        movements: [],
+        instrumentation: ["piano"],
+        price: 120
+    },
+    {
+        title: "24 Preludes, Op. 38",
+        composer: "Kabalevsky, Dmitri",
+        movements: [
+            {movementNumber: 8, movementTitle: "Prelude No. 8 in F-sharp minor", movementPrice: 45},
+            {movementNumber: 24, movementTitle: "Prelude No. 24 in D minor", movementPrice: 75}
+        ],
+        instrumentation: ["piano"],
+        price: null
     },
     {
         title: "Sonata No. 2 in E-flat major, Op. 45",
@@ -2173,7 +2960,7 @@ const opuses = [
     },
     {
         title: "Concerto in C major, Op. 48",
-        composer: "Kabalevsky-Dmitri",
+        composer: "Kabalevsky, Dmitri",
         movements: [
             {movementNumber: 1, movementTitle: "I. Allegro molto e con brio", movementPrice: 45},
             {movementNumber: 2, movementTitle: "II. Andante cantabile", movementPrice: 30},
