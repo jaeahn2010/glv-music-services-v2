@@ -12,7 +12,7 @@ const opusSchema = new mongoose.Schema(
             }
         ],
         instrumentation: [{ type: String, required: true }],
-        price: { type: Number, required: true },
+        price: { type: Number },
     },
 );
 
