@@ -14,9 +14,11 @@ export default function Card({ opus, getFilteredData, updateDetails, loginStatus
                 <h1 className="p-2 text-center">
                     {
                         opus.instrumentation.map(instrument => {
-                            return (
-                                <span>{instrument}, </span>
-                            )
+                            if (opus.instrumentation.indexOf(instrument) === opus.instrumentation.length - 1) {
+                                return <span>{instrument}</span>
+                            } else {
+                                return <span>{instrument}, </span>
+                            }
                         })
                     }
                 </h1>
