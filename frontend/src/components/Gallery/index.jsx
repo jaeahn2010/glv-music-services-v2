@@ -24,7 +24,7 @@ export default function Gallery({ opuses, getFilteredData, updateDetails, loginS
     } 
 
     return (
-        <div className="w-4/5 mt-10 mx-auto xl:columns-4 lg:columns-3 md:columns-2 max-h-24">
+        <div className="w-4/5 mt-10 mx-auto">
             {galleryContent}
         </div>
     )

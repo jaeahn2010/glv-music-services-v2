@@ -47,8 +47,13 @@ export async function getOpuses() {
     return data
 }
 
+export async function getOpusById(opusId) {
+    const { data } = await axios.get(`/api/opuses/opus/${opusId}`)
+    return data
+}
+
 export async function getOpusesByMusician(musicianId) {
-    const { data } = await axios.get(`/api/opuses/${musicianId}`)
+    const { data } = await axios.get(`/api/opuses/musician/${musicianId}`)
     return data
 }
 

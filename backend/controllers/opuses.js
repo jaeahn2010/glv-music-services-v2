@@ -42,9 +42,16 @@ router.get('/', function (req, res) {
 })
 
 // display all available opuses of musician
-router.get('/:musicianId', function (req, res) {
+router.get('/musician/:musicianId', function (req, res) {
     db.Opus.find({ musicianId: req.params.musicianId })
         .then(opuses => res.json(opuses))
+})
+
+// display specific opus
+router.get('/opus/:opusId', function (req, res) {
+    console.log("here")
+    db.Opus.findById(req.params.opusId)
+        .then(opus => res.json(opus))
 })
 
 // create opus (admin access only)
