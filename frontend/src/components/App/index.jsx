@@ -9,6 +9,7 @@ import ClientProfilePage from '../ClientProfilePage'
 import MusicianProfilePage from '../MusicianProfilePage'
 import { getOpuses } from '../../../utils/backend'
 import './styles.css'
+import cartIcon from '../../assets/cart-icon.jpeg'
 let allComposers = []
 
 export default function App() {
@@ -161,6 +162,9 @@ export default function App() {
 					/>} 
 				/>
 			</Routes>
+			<div className='fixed bottom-5 right-5 w-[50px] h-[50px] bg-amber-400 text-white rounded-full flex align-center justify-center cursor-pointer hover:animate-bounce'>
+                <img src={cartIcon} className="rounded-full p-1"/>
+            </div>
 		</>
 	)
 }

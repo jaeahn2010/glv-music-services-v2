@@ -7,7 +7,7 @@ export default function HomePage({ opuses, setOpuses, allComposers, getFilteredD
     return (
         <main className="text-stone-400">
             <h1 className="mt-5 text-center md:text-3xl text-2xl font-bold">Greater Las Vegas Music Services</h1>
-            <h2 className="text-center md:text-xl text-lg font-semibold italic">See all available repertoire below.</h2>
+            <h2 className="text-center font-semibold italic my-5">See all available repertoire below, or use the filters to find your desired repertoire.</h2>
             <div className="border-2 border-stone-400 rounded-xl my-2 py-2">
                 <p className="text-center underline">FILTERS</p>
                 <table className="w-full">
