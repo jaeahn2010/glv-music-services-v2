@@ -9,6 +9,7 @@ import ClientProfilePage from '../ClientProfilePage'
 import MusicianProfilePage from '../MusicianProfilePage'
 import { getOpuses } from '../../../utils/backend'
 import './styles.css'
+let allComposers = []
 
 export default function App() {
 	const [opuses, setOpuses] = useState([])
@@ -17,11 +18,26 @@ export default function App() {
 	const [loginStatus, setLoginStatus] = useState(false)
 	const navigate = useNavigate()
 
+    for (let opus of opuses) {
+        if (!allComposers.includes(opus.composer)) {
+            allComposers.push(opus.composer)
+        }
+    }
+
 	//get entire list of available opuses, or filter by musician, composer, instrumentation, or price range
 	async function getOpusData(category, filter) {
 		const data = await getOpuses()
-		let filteredData = data
-		//code filters here
+		let allData = data[0]
+		let filteredData = []
+		if (category === 'none' && filter === 'none') {
+			filteredData = allData
+		} else if (category === 'composer') {
+			filteredData = allData.filter(opus => opus.composer === filter)
+		} else if (category === 'instrumentation') {
+			filteredData = allData.filter(opus => opus.instrumentation.includes(filter))
+		} else if (category === 'price') {
+			filteredData = allData.filter(opus => opus.price <= filter && opus.price !== null)
+		}
 		setOpuses(filteredData)
 	}
 
@@ -101,6 +117,7 @@ export default function App() {
 					<HomePage
 						opuses={opuses}
 						setOpuses={setOpuses}
+						allComposers={allComposers}
 						getFilteredData={getOpusData}
 						updateDetails={setDetailsData}
 						loginStatus={loginStatus}
