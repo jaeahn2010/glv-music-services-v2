@@ -9,8 +9,8 @@ const musicianSchema = new mongoose.Schema(
         email: { type: String, required: true, unique: true },
         password: { type: String, required: true, minLength: 8 },
         description: { type: String },
-        availableRepertoire: [{ type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Opus'}],
-        isAdmin:  { type: Boolean, required: true, default: false}
+        availableRepertoire: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Opus'}],
+        isAdmin: { type: Boolean, required: true, default: false}
     },
 );
 
