@@ -22,7 +22,12 @@ export default function AuthFormPage({ setLoginStatus }) {
             try {
                 const userCredentials = await logIn(formData)
                 localStorage.setItem('userToken', userCredentials.token)
-                localStorage.setItem('userCategory', userCredentials.category)
+                localStorage.setItem('userCategory', userCredentials.userCategory)
+                localStorage.setItem('email', userCredentials.email)
+                localStorage.setItem('firstName', userCredentials.firstName)
+                localStorage.setItem('lastName', userCredentials.lastName)
+                localStorage.setItem('birthdate', userCredentials.birthdate)
+                localStorage.setItem('instrumentation', userCredentials.instrumentation)
                 setLoginStatus(true)
                 navigate('/')
             } catch(error) {
@@ -33,7 +38,12 @@ export default function AuthFormPage({ setLoginStatus }) {
             try {
                 const userCredentials = await signUp(formData)
                 localStorage.setItem('userToken', userCredentials.token)
-                localStorage.setItem('userCategory', userCredentials.category)
+                localStorage.setItem('userCategory', userCredentials.userCategory)
+                localStorage.setItem('email', userCredentials.email)
+                localStorage.setItem('firstName', userCredentials.firstName)
+                localStorage.setItem('lastName', userCredentials.lastName)
+                localStorage.setItem('birthdate', userCredentials.birthdate)
+                localStorage.setItem('instrumentation', userCredentials.instrumentation)
                 setLoginStatus(true)
                 navigate('/')
             } catch(error) {

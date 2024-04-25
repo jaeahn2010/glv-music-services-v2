@@ -1,20 +1,23 @@
 import { useState, useEffect } from 'react'
 import { Routes, Route, Link, useNavigate } from 'react-router-dom'
+import HomePage from '../HomePage'
 import AboutPage from '../AboutPage'
 import NotFoundPage from '../NotFoundPage'
-import HomePage from '../HomePage'
-import DetailsPage from '../DetailsPage'
 import AuthFormPage from '../AuthFormPage'
+import RepertoirePage from '../RepertoirePage'
+import MusiciansPage from '../MusiciansPage'
+import DetailsPage from '../DetailsPage'
 import ClientProfilePage from '../ClientProfilePage'
 import MusicianProfilePage from '../MusicianProfilePage'
-import { getOpuses } from '../../../utils/backend'
+import { getOpuses, getMusicians } from '../../../utils/backend'
 import './styles.css'
 import cartIcon from '../../assets/cart-icon.jpeg'
 let allComposers = []
 
 export default function App() {
 	const [opuses, setOpuses] = useState([])
-	const [username, setUsername] = useState('')
+	const [musicians, setMusicians] = useState([])
+
 	const [detailsData, setDetailsData] = useState({})
 	const [loginStatus, setLoginStatus] = useState(false)
 	const navigate = useNavigate()
@@ -25,38 +28,47 @@ export default function App() {
         }
     }
 
-	//get entire list of available opuses, or filter by musician, composer, instrumentation, or price range
+	//get full list of available opuses, or filter by musician/composer/instrumentation/price
 	async function getOpusData(category, filter) {
-		const data = await getOpuses()
-		let allData = data[0]
-		let filteredData = []
+		const opusData = await getOpuses()
+		let allOpusData = opusData[0]
+		let filteredOpusData = []
 		if (category === 'none' && filter === 'none') {
-			filteredData = allData
+			filteredOpusData = allOpusData
 		} else if (category === 'composer') {
-			filteredData = allData.filter(opus => opus.composer === filter)
+			filteredOpusData = allOpusData.filter(opus => opus.composer === filter)
 		} else if (category === 'instrumentation') {
-			filteredData = allData.filter(opus => opus.instrumentation.includes(filter))
+			filteredOpusData = allOpusData.filter(opus => opus.instrumentation.includes(filter))
 		} else if (category === 'price') {
-			filteredData = allData.filter(opus => opus.price <= filter && opus.price !== null)
+			filteredOpusData = allOpusData.filter(opus => opus.price <= filter && opus.price !== null)
 		}
-		setOpuses(filteredData)
+		setOpuses(filteredOpusData)
 	}
 
-	//get current user data
-	//write getUserData function here & update backend
+	//get full list of musicians, or filter by instrument
+	async function getMusiciansData(filter) {
+		const musiciansData = await getMusicians()
+		let filteredMusiciansData = []
+		if (filter === 'none') {
+			filteredMusiciansData = musiciansData
+		} else {
+			filteredMusiciansData = musiciansData.filter(musician => musician.instrumentation.includes(filter))
+		}
+		setMusicians(filteredMusiciansData)
+	}
 
 	useEffect(() => {
 		getOpusData("none", "none")
-		// if (loginStatus) getUserData()
+		getMusiciansData("none")
 	}, [])
 
 	let authLink =
 		<div className="flex lg:gap-5 md:gap-4 sm:gap-3 gap-2">
 			<Link to="/auth/signup">
-				<h2 className="text-white md:text-lg sm:text-md">Sign Up</h2>
+				<h2 className="text-white md:text-md sm:text-sm">Sign Up</h2>
 			</Link>
 			<Link to="/auth/login">
-				<h2 className="text-white md:text-lg sm:text-md">Log In</h2>
+				<h2 className="text-white md:text-md sm:text-sm">Log In</h2>
 			</Link>
 		</div>
 	let profileLink = ''
@@ -66,7 +78,7 @@ export default function App() {
 		authLink =
 			<div className="flex lg:gap-5 md:gap-4 sm:gap-3 gap-2">
 				<button
-					className="text-white md:text-lg sm:text-md"
+					className="text-white md:text-md sm:text-sm"
 					onClick={() => {
 						if (confirm("Are you sure you would like to log out?")) {
 							localStorage.clear()
@@ -78,19 +90,19 @@ export default function App() {
 				</button>
 			</div>
 		userGreeting =
-			<h1 className="bg-stone-700 z-10 text-white text-right text-sm sticky top-0">Hello, {username}!</h1>
+			<h1 className="bg-stone-700 z-10 text-white text-right text-sm sticky top-0">{`Hello, ${localStorage.getItem("firstName")} ${localStorage.getItem("lastName")}!`}</h1>
 		if (localStorage.getItem("userCategory") === "musician") {
 			profileLink =
 				<div className="flex lg:gap-5 md:gap-4 sm:gap-3 gap-2">
 					<Link to={"/musicianProfile/" + localStorage.getItem("userToken")}>
-						<h2 className="text-white md:text-lg sm:text-md">My Musician Profile</h2>
+						<h2 className="text-white md:text-md sm:text-sm">My Musician Profile</h2>
 					</Link>
 				</div>
 		} else if (localStorage.getItem("userCategory") === "client") {
 		  	profileLink =
 				<div className="flex lg:gap-5 md:gap-4 sm:gap-3 gap-2">
 					<Link to="/clientProfile">
-						<h2 className="text-white md:text-lg sm:text-md">My Client Profile</h2>
+						<h2 className="text-white md:text-md sm:text-sm">My Client Profile</h2>
 					</Link>
 				</div>
 		}
@@ -101,13 +113,19 @@ export default function App() {
 	return (
 		<>
 			<nav className="flex items-center justify-between h-16 bg-gray-800 shadow-lg lg:px-9 md:px-6 px-3">
-				<Link to="/" onClick={(evt) => {
-					getOpusData("none", "none")
-				}}>
-					<h1 className="text-white font-bold md:text-3xl sm:text-2xl">Greater Las Vegas Music Services</h1>
+				<Link to="/">
+					<h2 className="text-white font-bold md:text-2xl sm:text-xl">Greater Las Vegas Music Services</h2>
 				</Link>
 				<Link to="/about">
-					<h2 className="text-white md:text-lg sm:text-md">About</h2>
+					<h2 className="text-white md:text-md sm:text-sm">About</h2>
+				</Link>
+				<Link to="/repertoire" onClick={(evt) => {
+					getOpusData("none", "none")
+				}}>
+					<h2 className="text-white md:text-md sm:text-sm">See All Available Repertoire</h2>
+				</Link>
+				<Link to="/musicians">
+					<h2 className="text-white md:text-md sm:text-sm">See All Musicians</h2>
 				</Link>
 				{profileLink}
 				{authLink}
@@ -116,10 +134,23 @@ export default function App() {
 			<Routes>
 				<Route path="/" element={
 					<HomePage
+					/>}
+				/>
+				<Route path="/repertoire" element={
+					<RepertoirePage
 						opuses={opuses}
 						setOpuses={setOpuses}
 						allComposers={allComposers}
 						getFilteredData={getOpusData}
+						updateDetails={setDetailsData}
+						loginStatus={loginStatus}
+					/>}
+				/>
+				<Route path="/musicians" element={
+					<MusiciansPage
+						musicians={musicians}
+						setMusicians={setMusicians}
+						getFilteredData={getMusiciansData}
 						updateDetails={setDetailsData}
 						loginStatus={loginStatus}
 					/>}

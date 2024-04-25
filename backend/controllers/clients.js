@@ -40,7 +40,15 @@ router.post('/signup', (req, res) => {
     db.Client.create(req.body)
         .then(client => {
             const token = jwt.encode({ id: client.id }, config.jwtSecret)
-            res.json({ token: token })
+            res.json({
+                userCategory: client.userCategory,
+                firstName: client.firstName,
+                lastName: client.lastName,
+                birthdate: client.birthdate,
+                instruments: client.instruments,
+                email: client.email,
+                token: token
+            })
         })
         .catch(() => {
             res.status(401)
@@ -55,8 +63,13 @@ router.post('/login', async (req, res) => {
         const payload = { id: foundClient.id }
         const token = jwt.encode(payload, config.jwtSecret)
         res.json({
-            token: token,
-            email: foundClient.email
+            userCategory: foundClient.userCategory,
+            firstName: foundClient.firstName,
+            lastName: foundClient.lastName,
+            birthdate: foundClient.birthdate,
+            instruments: foundClient.instruments,
+            email: foundClient.email,
+            token: token
         })
     } else {
         res.status(401)

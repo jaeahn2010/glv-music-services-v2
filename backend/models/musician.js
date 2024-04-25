@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const musicianSchema = new mongoose.Schema(
     {
+        userCategory: {type: String, required: true, default: 'musician'},
         firstName: { type: String, required: true },
         lastName: { type: String, required: true },
         instruments: [{ type: String }],

@@ -46,7 +46,15 @@ router.post('/signup', (req, res) => {
     db.Musician.create(req.body)
         .then(musician => {
             const token = jwt.encode({ id: musician.id }, config.jwtSecret)
-            res.json({ token: token })
+            res.json({             
+                userCategory: musician.userCategory,
+                firstName: musician.firstName,
+                lastName: musician.lastName,
+                birthdate: musician.birthdate,
+                instruments: musician.instruments,
+                email: musician.email,
+                token: token
+            })
         })
         .catch(() => {
             res.status(401)
@@ -61,8 +69,13 @@ router.post('/login', async (req, res) => {
         const payload = { id: foundMusician.id }
         const token = jwt.encode(payload, config.jwtSecret)
         res.json({
-            token: token,
-            email: foundMusician.email
+            userCategory: foundMusician.userCategory,
+            firstName: foundMusician.firstName,
+            lastName: foundMusician.lastName,
+            birthdate: foundMusician.birthdate,
+            instruments: foundMusician.instruments,
+            email: foundMusician.email,
+            token: token
         })
     } else {
         res.status(401)
