@@ -31,15 +31,15 @@ export default function Card({ musician, getFilteredData, updateDetails, loginSt
                                 <td>Birthdate</td>
                                 <td>{musician.birthdate}</td>
                             </tr>
-                            <tr className="h-12">
+                            <tr className="h-12 border-stone-400 border-y-2">
                                 <td>Email</td>
                                 <td>{musician.email}</td>
                             </tr>
-                            <tr className="h-12">
+                            <tr className="h-12 border-stone-400 border-y-2">
                                 <td>Description/Bio</td>
                                 <td>{musician.description}</td>
                             </tr>
-                            <tr className="h-12">
+                            <tr className="h-12 border-stone-400 border-y-2">
                                 <td>Available Repertoire</td>
                                 <td>{musician.availableRepertoire}</td>
                             </tr>

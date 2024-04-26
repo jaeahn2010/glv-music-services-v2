@@ -12,12 +12,13 @@ import MusicianProfilePage from '../MusicianProfilePage'
 import { getOpuses, getMusicians } from '../../../utils/backend'
 import './styles.css'
 import cartIcon from '../../assets/cart-icon.jpeg'
+import emailIcon from '../../assets/email-icon.png'
 let allComposers = []
 
 export default function App() {
 	const [opuses, setOpuses] = useState([])
 	const [musicians, setMusicians] = useState([])
-
+	const [userCart, setUserCart] = useState([])
 	const [detailsData, setDetailsData] = useState({})
 	const [loginStatus, setLoginStatus] = useState(false)
 	const navigate = useNavigate()
@@ -101,7 +102,7 @@ export default function App() {
 		} else if (localStorage.getItem("userCategory") === "client") {
 		  	profileLink =
 				<div className="flex lg:gap-5 md:gap-4 sm:gap-3 gap-2">
-					<Link to="/clientProfile">
+					<Link to={"/clientProfile/" + localStorage.getItem('userToken')}>
 						<h2 className="text-white md:text-md sm:text-sm">My Client Profile</h2>
 					</Link>
 				</div>
@@ -112,7 +113,7 @@ export default function App() {
 	
 	return (
 		<>
-			<nav className="flex items-center justify-between h-16 bg-gray-800 shadow-lg lg:px-9 md:px-6 px-3">
+			<nav className="flex items-center justify-between h-16 bg-green-950 shadow-lg lg:px-9 md:px-6 px-3">
 				<Link to="/">
 					<h2 className="text-white font-bold md:text-2xl sm:text-xl">Greater Las Vegas Music Services</h2>
 				</Link>
@@ -131,71 +132,94 @@ export default function App() {
 				{authLink}
 			</nav>
 			{userGreeting}
-			<Routes>
-				<Route path="/" element={
-					<HomePage
-					/>}
-				/>
-				<Route path="/repertoire" element={
-					<RepertoirePage
-						opuses={opuses}
-						setOpuses={setOpuses}
-						allComposers={allComposers}
-						getFilteredData={getOpusData}
-						updateDetails={setDetailsData}
-						loginStatus={loginStatus}
-					/>}
-				/>
-				<Route path="/musicians" element={
-					<MusiciansPage
-						musicians={musicians}
-						setMusicians={setMusicians}
-						getFilteredData={getMusiciansData}
-						updateDetails={setDetailsData}
-						loginStatus={loginStatus}
-					/>}
-				/>
-				<Route path="/musicianProfile/:userId" element={
-					<MusicianProfilePage
-						loginStatus={loginStatus}
-						opuses={opuses}
-						setOpuses={setOpuses}
-						getFilteredData={getOpusData}
-						updateDetails={setDetailsData}
-					/>}
-				/>
-				<Route path="/clientProfile/:userId" element={
-					<ClientProfilePage
-						loginStatus={loginStatus}
-						opuses={opuses}
-						setOpuses={setOpuses}
-						getFilteredData={getOpusData}
-						updateDetails={setDetailsData}
-					/>}
-				/>
-				<Route path="/auth/:formType" element={
-					<AuthFormPage
-						setLoginStatus={setLoginStatus}
-					/>}
-				/>
-				<Route path="/about" element={
-					<AboutPage
-					/>}
-				/>
-				<Route path="/details/:opusId" element={
-					<DetailsPage
-						opus={detailsData}
-						loginStatus={loginStatus}
-					/>}
-				/>
-				<Route path="/*" element={
-					<NotFoundPage
-					/>} 
-				/>
-			</Routes>
-			<div className='fixed bottom-5 right-5 w-[50px] h-[50px] bg-amber-400 text-white rounded-full flex align-center justify-center cursor-pointer hover:animate-bounce'>
+			<main className="pt-[50px] pb-[200px]">
+				<Routes>
+					<Route path="/" element={
+						<HomePage
+						/>}
+					/>
+					<Route path="/repertoire" element={
+						<RepertoirePage
+							opuses={opuses}
+							setOpuses={setOpuses}
+							allComposers={allComposers}
+							getFilteredData={getOpusData}
+							updateDetails={setDetailsData}
+							loginStatus={loginStatus}
+						/>}
+					/>
+					<Route path="/musicians" element={
+						<MusiciansPage
+							musicians={musicians}
+							setMusicians={setMusicians}
+							getFilteredData={getMusiciansData}
+							updateDetails={setDetailsData}
+							loginStatus={loginStatus}
+						/>}
+					/>
+					<Route path="/musicianProfile/:userId" element={
+						<MusicianProfilePage
+							loginStatus={loginStatus}
+							opuses={opuses}
+							setOpuses={setOpuses}
+							getFilteredData={getOpusData}
+							updateDetails={setDetailsData}
+						/>}
+					/>
+					<Route path="/clientProfile/:userId" element={
+						<ClientProfilePage
+							loginStatus={loginStatus}
+							opuses={opuses}
+							setOpuses={setOpuses}
+							getFilteredData={getOpusData}
+							updateDetails={setDetailsData}
+						/>}
+					/>
+					<Route path="/auth/:formType" element={
+						<AuthFormPage
+							setLoginStatus={setLoginStatus}
+						/>}
+					/>
+					<Route path="/about" element={
+						<AboutPage
+						/>}
+					/>
+					<Route path="/details/:opusId" element={
+						<DetailsPage
+							opus={detailsData}
+							loginStatus={loginStatus}
+							userCart={userCart}
+							setUserCart={setUserCart}
+						/>}
+					/>
+					<Route path="/*" element={
+						<NotFoundPage
+						/>} 
+					/>
+				</Routes>
+			</main>
+			<div className='fixed bottom-5 right-5 w-[50px] h-[50px] bg-amber-400 text-white rounded-full flex align-center justify-center cursor-pointer hover:animate-bounce z-10'>
                 <img src={cartIcon} className="rounded-full p-1"/>
             </div>
+			<footer className="fixed left-0 bottom-0 w-full py-2 bg-green-950 z-0">
+				<section className="flex justify-around">
+					<div className="w-1/2 text-center flex flex-col justify-center items-center py-3">
+						<p className="text-xs">Can't find your desired repertoire or have a custom request? Contact us directly!</p>
+						<a href="mailto:glvmusicservices@gmail.com" className="flex justify-center items-center">
+							<img className="w-[40px]" src={emailIcon}/>
+							<p className="text-xs">Email GLVMS</p>
+						</a>
+					</div>
+					<div className="w-1/2 text-center flex flex-col justify-center items-center py-3">
+						<p className="text-xs">Problems or questions about using this site? Contact the site admin!</p>
+						<a href="mailto:jaeahn2010@gmail.com" className="flex justify-center items-center">
+							<img className="w-[40px]" src={emailIcon}/>
+							<p className="text-xs">Email site admin</p>
+						</a>
+					</div>
+				</section>
+                <p className="text-center border-t-2 border-black text-xs">Copyright &#169; 2024 Greater Las Vegas Music Services</p>
+            </footer>
 		</>
 	)
 }

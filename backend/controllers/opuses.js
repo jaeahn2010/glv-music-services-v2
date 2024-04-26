@@ -49,7 +49,6 @@ router.get('/musician/:musicianId', function (req, res) {
 
 // display specific opus
 router.get('/opus/:opusId', function (req, res) {
-    console.log("here")
     db.Opus.findById(req.params.opusId)
         .then(opus => res.json(opus))
 })
