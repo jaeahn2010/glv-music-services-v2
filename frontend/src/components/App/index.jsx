@@ -8,6 +8,7 @@ import RepertoirePage from '../RepertoirePage'
 import MusiciansPage from '../MusiciansPage'
 import DetailsPage from '../DetailsPage'
 import ClientProfilePage from '../ClientProfilePage'
+import CurrentCart from '../CurrentCart'
 import MusicianProfilePage from '../MusicianProfilePage'
 import { getOpuses, getMusicians } from '../../../utils/backend'
 import './styles.css'
@@ -192,6 +193,13 @@ export default function App() {
 							setUserCart={setUserCart}
 						/>}
 					/>
+					<Route path="/cart" element={
+						<CurrentCart
+							loginStatus={loginStatus}
+							userCart={userCart}
+							setUserCart={setUserCart}
+						/>}
+					/>
 					<Route path="/*" element={
 						<NotFoundPage
 						/>} 
@@ -199,7 +207,9 @@ export default function App() {
 				</Routes>
 			</main>
 			<div className='fixed bottom-5 right-5 w-[50px] h-[50px] bg-amber-400 text-white rounded-full flex align-center justify-center cursor-pointer hover:animate-bounce z-10'>
-                <img src={cartIcon} className="rounded-full p-1"/>
+				<Link to="/cart">
+					<img src={cartIcon} className="rounded-full p-1 cursor-pointer"/>
+				</Link>
             </div>
 			<footer className="fixed left-0 bottom-0 w-full py-2 bg-green-950 z-0">
 				<section className="flex justify-around">

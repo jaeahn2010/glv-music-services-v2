@@ -19,12 +19,12 @@ export default function DetailsPage(props) {
     }, [])
 
     function handleClick(evt) {
-        console.log(opusIdList)
         evt.preventDefault()
         if (evt.target.value === 'bulkPrice') { //if client chooses bulk price
             if (!opusIdList.includes(opus._id)) { //if chosen opus not on id list, put in cart & update id list
                 props.userCart.push(opus)
                 props.setUserCart(props.userCart)
+                localStorage.setItem("userCart", JSON.stringify(props.userCart))
                 opusIdList.push(opus._id)
                 alert('bulk added!')
             } else { //if chosen opus on id list
@@ -35,6 +35,7 @@ export default function DetailsPage(props) {
                         if (opusInCart._id === opus._id) { //once matching opus found, replace any partial mvmts w/ whole opus
                             props.userCart[props.userCart.indexOf(opusInCart)] = opus
                             props.setUserCart(props.userCart)
+                            localStorage.setItem("userCart", JSON.stringify(props.userCart))
                             alert("mvmts already in cart, but replaced by bulk.")
                         }
                     }
@@ -48,6 +49,7 @@ export default function DetailsPage(props) {
                     movementPrice: Number(evt.target.parentElement.innerText.split('$')[1]),
                 }]})
                 props.setUserCart(props.userCart)
+                localStorage.setItem("userCart", JSON.stringify(props.userCart))
                 opusIdList.push(opus._id)
                 alert("mvmt added!")
             } else { //if chosen opus on id list
@@ -67,11 +69,10 @@ export default function DetailsPage(props) {
                         })
                         alert("opus already in cart, updated w/ new mvmt!")
                         props.setUserCart(props.userCart)
+                        localStorage.setItem("userCart", JSON.stringify(props.userCart))
                         break
                     }
                 }
-                console.log(props.userCart)
-                console.log(props.userCart[props.userCart.length - 1])
             }
         }
     }
