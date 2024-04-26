@@ -57,7 +57,7 @@ export default function DetailsPage(props) {
                             console.log(evt.target.parentElement.innerText.split('$')[0].slice(0, evt.target.parentElement.innerText.split('$')[0].length - 1))
                             if (mvmt.movementTitle === evt.target.parentElement.innerText.split('$')[0].slice(0, evt.target.parentElement.innerText.split('$')[0].length - 1)) { //if mvmt title is same as one client chose, do nothing & break outer loop
                                 alert('This movement has already been added to your cart.')
-                                break outerLoop
+                                break outerLoop;
                             }
                         } // if above loop finishes w/o match, update w/ newly selected mvmt & break loop
                         props.userCart[props.userCart.indexOf(opusInCart)].movements.push({
