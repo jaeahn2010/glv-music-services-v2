@@ -195,6 +195,7 @@ export default function App() {
 					/>
 					<Route path="/cart" element={
 						<CurrentCart
+							opuses={opuses}
 							loginStatus={loginStatus}
 							userCart={userCart}
 							setUserCart={setUserCart}
@@ -211,16 +212,17 @@ export default function App() {
 					<img src={cartIcon} className="rounded-full p-1 cursor-pointer"/>
 				</Link>
             </div>
+			<p className="fixed bottom-4 right-4 bg-red-500 rounded-full w-[20px] h-[20px] z-20 text-center pb-6">{userCart.length}</p>
 			<footer className="fixed left-0 bottom-0 w-full py-2 bg-green-950 z-0">
 				<section className="flex justify-around">
-					<div className="w-1/2 text-center flex flex-col justify-center items-center py-3">
+					<div className="w-1/3 text-center flex flex-col justify-center items-center py-3">
 						<p className="text-xs">Can't find your desired repertoire or have a custom request? Contact us directly!</p>
 						<a href="mailto:glvmusicservices@gmail.com" className="flex justify-center items-center">
 							<img className="w-[40px]" src={emailIcon}/>
 							<p className="text-xs">Email GLVMS</p>
 						</a>
 					</div>
-					<div className="w-1/2 text-center flex flex-col justify-center items-center py-3">
+					<div className="w-1/3 text-center flex flex-col justify-center items-center py-3">
 						<p className="text-xs">Problems or questions about using this site? Contact the site admin!</p>
 						<a href="mailto:jaeahn2010@gmail.com" className="flex justify-center items-center">
 							<img className="w-[40px]" src={emailIcon}/>

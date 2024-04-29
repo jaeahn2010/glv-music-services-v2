@@ -120,8 +120,8 @@ export default function DetailsPage(props) {
         return (
             <div className="w-4/5 mx-auto min-h-[300px] border-2 border-stone-400 rounded-lg text-stone-400 p-5 m-5 flex-col justify-center bg-stone-700">
                 <div className='flex'>
-                    <section className="flex justify-center items-center w-1/2">
-                        <img src={placeholder} className="rounded-xl mb-5 h-[250px]"/>
+                    <section className="flex justify-center items-center w-1/2 pr-5">
+                        <img src={placeholder} className="rounded-xl mb-5 h-[250px] w-auto"/>
                     </section>
                     <section>
                         <div>
