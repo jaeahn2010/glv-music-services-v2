@@ -56,7 +56,6 @@ export default function DetailsPage(props) {
                 outerLoop: for (let opusInCart of props.userCart) { //iterate through cart to find the opus to be checked
                     if (opusInCart._id === opus._id) { //if ids match, check if mvmt already exists
                         for (let mvmt of opusInCart.movements) { //iterate through mvmts
-                            console.log(evt.target.parentElement.innerText.split('$')[0].slice(0, evt.target.parentElement.innerText.split('$')[0].length - 1))
                             if (mvmt.movementTitle === evt.target.parentElement.innerText.split('$')[0].slice(0, evt.target.parentElement.innerText.split('$')[0].length - 1)) { //if mvmt title is same as one client chose, do nothing & break outer loop
                                 alert('This movement has already been added to your cart.')
                                 break outerLoop;
@@ -121,7 +120,7 @@ export default function DetailsPage(props) {
             <div className="w-4/5 mx-auto min-h-[300px] border-2 border-stone-400 rounded-lg text-stone-400 p-5 m-5 flex-col justify-center bg-stone-700">
                 <div className='flex'>
                     <section className="flex justify-center items-center w-1/2 pr-5">
-                        <img src={placeholder} className="rounded-xl mb-5 h-[250px] w-auto"/>
+                        <img src={placeholder} className="rounded-xl mb-5"/>
                     </section>
                     <section>
                         <div>
