@@ -5,6 +5,7 @@ import AboutPage from '../AboutPage'
 import NotFoundPage from '../NotFoundPage'
 import AuthFormPage from '../AuthFormPage'
 import RepertoirePage from '../RepertoirePage'
+import RequestPage from '../RequestPage'
 import MusiciansPage from '../MusiciansPage'
 import DetailsPage from '../DetailsPage'
 import ClientProfilePage from '../ClientProfilePage'
@@ -114,7 +115,7 @@ export default function App() {
 	
 	return (
 		<>
-			<nav className="flex items-center justify-between h-16 bg-green-950 shadow-lg lg:px-9 md:px-6 px-3">
+			<nav className="flex items-center justify-between h-16 bg-gradient-to-r from-green-950 via-green-500 to-green-950 shadow-lg lg:px-9 md:px-6 px-3 font-poppins">
 				<Link to="/">
 					<h2 className="text-white font-bold md:text-2xl sm:text-xl">Greater Las Vegas Music Services</h2>
 				</Link>
@@ -133,17 +134,23 @@ export default function App() {
 				{authLink}
 			</nav>
 			{userGreeting}
-			<main className="pt-[50px] pb-[200px]">
+			<main className="pt-[50px] pb-[200px] font-poppins">
 				<Routes>
-					<Route path="/" element={
-						<HomePage
-						/>}
-					/>
+					<Route path="/" element={<HomePage/>}/>
 					<Route path="/repertoire" element={
 						<RepertoirePage
 							opuses={opuses}
 							setOpuses={setOpuses}
 							allComposers={allComposers}
+							getFilteredData={getOpusData}
+							updateDetails={setDetailsData}
+							loginStatus={loginStatus}
+						/>}
+					/>
+					<Route path="/request" element={
+						<RequestPage
+							opuses={opuses}
+							setOpuses={setOpuses}
 							getFilteredData={getOpusData}
 							updateDetails={setDetailsData}
 							loginStatus={loginStatus}
@@ -181,10 +188,7 @@ export default function App() {
 							setLoginStatus={setLoginStatus}
 						/>}
 					/>
-					<Route path="/about" element={
-						<AboutPage
-						/>}
-					/>
+					<Route path="/about" element={<AboutPage/>}/>
 					<Route path="/details/:opusId" element={
 						<DetailsPage
 							opus={detailsData}
@@ -199,12 +203,10 @@ export default function App() {
 							loginStatus={loginStatus}
 							userCart={userCart}
 							setUserCart={setUserCart}
+							getOpusData={getOpusData}
 						/>}
 					/>
-					<Route path="/*" element={
-						<NotFoundPage
-						/>} 
-					/>
+					<Route path="/*" element={<NotFoundPage/>} />
 				</Routes>
 			</main>
 			<div className='fixed bottom-5 right-5 w-[50px] h-[50px] bg-amber-400 text-white rounded-full flex align-center justify-center cursor-pointer hover:animate-bounce z-10'>
@@ -213,7 +215,7 @@ export default function App() {
 				</Link>
             </div>
 			<p className="fixed bottom-4 right-4 bg-red-500 rounded-full w-[20px] h-[20px] z-20 text-center pb-6">{userCart.length}</p>
-			<footer className="fixed left-0 bottom-0 w-full py-2 bg-green-950 z-0">
+			<footer className="fixed left-0 bottom-0 w-full py-2 bg-gradient-to-r from-green-950 via-green-500 to-green-950 z-0 font-poppins">
 				<section className="flex justify-around">
 					<div className="w-1/3 text-center flex flex-col justify-center items-center py-3">
 						<p className="text-xs">Can't find your desired repertoire or have a custom request? Contact us directly!</p>

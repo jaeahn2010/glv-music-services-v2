@@ -1,7 +1,24 @@
 import trashIcon from '../../assets/trash-icon.jpeg'
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import RequestPage from '../RequestPage'
 
-export default function CurrentCart({ opuses, loginStatus, userCart, setUserCart }) {
+export default function CurrentCart({ opuses, loginStatus, userCart, setUserCart, getOpusData }) {
+    let totalPrice = 0
     let cartText = userCart.length > 0 ? 'Your cart' : 'Your cart is empty.'
+
+    for (let item of userCart) {
+        let fullOpus = opuses.filter(opus => opus._id === item._id)[0]
+        if (fullOpus.movements.length === item.movements.length) {
+            totalPrice += fullOpus.price
+        } else {
+            for (let mvmt of item.movements) {
+                totalPrice += mvmt.movementPrice
+            }
+        }
+    }
+
+    let priceText = userCart.length > 0 ? `Your total: $${totalPrice}` : ''
 
     function handleClick(evt) {
         evt.preventDefault()
@@ -20,8 +37,9 @@ export default function CurrentCart({ opuses, loginStatus, userCart, setUserCart
             }
         }
     }
+    
     return (
-        <main>
+        <main className='flex flex-col justify-center items-center'>
             <p className="text-center">{cartText}</p>
             {
                 userCart.map(item => {
@@ -43,8 +61,9 @@ export default function CurrentCart({ opuses, loginStatus, userCart, setUserCart
                             }
                         </tbody>
                     </table> : 'NONE'
+                    
                     return (
-                        <div className='flex justify-around items-center border-2 m-4 border-white rounded-3xl' key={item._id}>
+                        <div className='flex justify-around items-center border-2 m-4 border-white rounded-3xl max-w-[800px]' key={item._id}>
                             <section className="my-3 border-r-2 border-white pl-5">
                                 <div>
                                     <p className="underline">TITLE</p>
@@ -80,13 +99,13 @@ export default function CurrentCart({ opuses, loginStatus, userCart, setUserCart
                                     <div>
                                         <p className="underline">BULK PRICE</p>
                                         {
-                                            opuses.map(opus => {
-                                                if (opus._id === item._id) {
+                                            opuses
+                                                .filter(opus => opus._id === item._id)
+                                                .map(opus => {
                                                     if (opus.movements.length === item.movements.length && opus.price !== null) {
                                                         return <p key={opus._id}>${opus.price}</p>
                                                     } else {
                                                         return <p key={opus._id}>DOES NOT APPLY</p>
-                                                    }
                                                 }
                                             })
                                         }
@@ -102,6 +121,17 @@ export default function CurrentCart({ opuses, loginStatus, userCart, setUserCart
                     )
                 })
             }
+            <p className='text-center text-3xl'>{priceText}</p>
+            <div className="flex justify-around w-1/2 m-5">
+                <Link to="/repertoire" onClick={(evt) => {
+					getOpusData("none", "none")
+				}}>
+                    <button className="border-white border-2 rounded-xl px-3 py-1 hover:scale-125 hover:cursor-pointer hover:bg-amber-400 hover:text-stone-900 hover:duration-500">Back</button>
+                </Link>
+                <Link to="/request">
+                    <button className="border-white border-2 rounded-xl px-3 py-1 hover:scale-125 hover:cursor-pointer hover:bg-amber-400 hover:text-stone-900 hover:duration-500">Next</button>
+                </Link>
+            </div>
         </main>
     )
 }
