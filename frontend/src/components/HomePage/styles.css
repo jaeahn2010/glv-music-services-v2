@@ -8,3 +8,31 @@
     opacity: 1;
     transform: translateY(0);
 }
+
+.fill-container {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.fill-container::before {
+    border-radius: 20px;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-image: linear-gradient(to right, rgb(0, 100, 0), rgb(0, 200, 0), rgb(0, 100, 0));
+    transition: width 0.5s ease-in-out;
+    z-index: -1;
+}
+
+.fill-container:hover::before {
+    width: 100%;
+}
+
+.fill-content {
+    position: relative;
+    z-index: 1;
+}

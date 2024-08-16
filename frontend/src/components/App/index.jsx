@@ -14,7 +14,6 @@ import MusicianProfilePage from '../MusicianProfilePage'
 import { getOpuses, getMusicians } from '../../../utils/backend'
 import './styles.css'
 import cartIcon from '../../assets/cart-icon.jpeg'
-import emailIcon from '../../assets/email-icon.png'
 let allComposers = []
 
 export default function App() {
@@ -215,24 +214,8 @@ export default function App() {
 				</Link>
             </div>
 			<p className="fixed bottom-4 right-4 bg-red-500 rounded-full w-[20px] h-[20px] z-20 text-center pb-6">{userCart.length}</p>
-			<footer className="fixed left-0 bottom-0 w-full py-2 bg-gradient-to-r from-green-950 via-green-500 to-green-950 z-0 font-poppins">
-				<section className="flex justify-around">
-					<div className="w-1/3 text-center flex flex-col justify-center items-center py-3">
-						<p className="text-xs">Can't find your desired repertoire or have a custom request? Contact us directly!</p>
-						<a href="mailto:glvmusicservices@gmail.com" className="flex justify-center items-center">
-							<img className="w-[40px]" src={emailIcon}/>
-							<p className="text-xs">Email GLVMS</p>
-						</a>
-					</div>
-					<div className="w-1/3 text-center flex flex-col justify-center items-center py-3">
-						<p className="text-xs">Problems or questions about using this site? Contact the site admin!</p>
-						<a href="mailto:jaeahn2010@gmail.com" className="flex justify-center items-center">
-							<img className="w-[40px]" src={emailIcon}/>
-							<p className="text-xs">Email site admin</p>
-						</a>
-					</div>
-				</section>
-                <p className="text-center border-t-2 border-black text-xs">Copyright &#169; 2024 Greater Las Vegas Music Services</p>
+			<footer className="w-full py-2 bg-gradient-to-r from-green-950 via-green-500 to-green-950 z-0 font-poppins">
+                <p className="text-center text-xs">Copyright &#169; 2024 Greater Las Vegas Music Services</p>
             </footer>
 		</>
 	)
