@@ -22,6 +22,7 @@ export default function App() {
 	const [userCart, setUserCart] = useState([])
 	const [detailsData, setDetailsData] = useState({})
 	const [loginStatus, setLoginStatus] = useState(false)
+	const [isMenuOpen, setIsMenuOpen] = useState(false)
 	const navigate = useNavigate()
 
     for (let opus of opuses) {
@@ -64,13 +65,14 @@ export default function App() {
 		getMusiciansData("none")
 	}, [])
 
+	let h2Style = "text-stone-200 my-5 hover:scale-110 duration-500"
 	let authLink =
-		<div className="flex lg:gap-5 md:gap-4 sm:gap-3 gap-2">
+		<div>
 			<Link to="/auth/signup">
-				<h2 className="text-white md:text-md sm:text-sm">Sign Up</h2>
+				<h2 className={h2Style}>Sign Up</h2>
 			</Link>
 			<Link to="/auth/login">
-				<h2 className="text-white md:text-md sm:text-sm">Log In</h2>
+				<h2 className={h2Style}>Log In</h2>
 			</Link>
 		</div>
 	let profileLink = ''
@@ -80,7 +82,7 @@ export default function App() {
 		authLink =
 			<div className="flex lg:gap-5 md:gap-4 sm:gap-3 gap-2">
 				<button
-					className="text-white md:text-md sm:text-sm"
+					className={h2Style}
 					onClick={() => {
 						if (confirm("Are you sure you would like to log out?")) {
 							localStorage.clear()
@@ -97,14 +99,14 @@ export default function App() {
 			profileLink =
 				<div className="flex lg:gap-5 md:gap-4 sm:gap-3 gap-2">
 					<Link to={"/musicianProfile/" + localStorage.getItem("userToken")}>
-						<h2 className="text-white md:text-md sm:text-sm">My Musician Profile</h2>
+						<h2 className={h2Style}>My Musician Profile</h2>
 					</Link>
 				</div>
 		} else if (localStorage.getItem("userCategory") === "client") {
 		  	profileLink =
 				<div className="flex lg:gap-5 md:gap-4 sm:gap-3 gap-2">
 					<Link to={"/clientProfile/" + localStorage.getItem('userToken')}>
-						<h2 className="text-white md:text-md sm:text-sm">My Client Profile</h2>
+						<h2 className={h2Style}>My Client Profile</h2>
 					</Link>
 				</div>
 		}
@@ -116,105 +118,118 @@ export default function App() {
 		<>
 			<nav className="flex items-center justify-between h-16 bg-gradient-to-r from-green-950 via-green-500 to-green-950 shadow-lg lg:px-9 md:px-6 px-3 font-poppins">
 				<Link to="/">
-					<h2 className="text-white font-bold md:text-2xl sm:text-xl">Greater Las Vegas Music Services</h2>
+					<h2 onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-white font-bold md:text-2xl sm:text-xl">Greater Las Vegas Music Services</h2>
 				</Link>
-				<Link to="/about">
-					<h2 className="text-white md:text-md sm:text-sm">About</h2>
-				</Link>
-				<Link to="/repertoire" onClick={(evt) => {
-					getOpusData("none", "none")
-				}}>
-					<h2 className="text-white md:text-md sm:text-sm">See All Available Repertoire</h2>
-				</Link>
-				<Link to="/musicians">
-					<h2 className="text-white md:text-md sm:text-sm">See All Musicians</h2>
-				</Link>
+				<div className="text-3xl hover:cursor-pointer" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+					<div className={`border-stone-200 border-y-2 w-[5vw] min-w-[30px] my-1.5 rounded-3xl duration-500 ${isMenuOpen ? '-rotate-45 translate-y-[10px]' : ''}`}></div>
+					<div className={`border-stone-200 border-y-2 w-[5vw] min-w-[30px] my-1.5 rounded-3xl duration-500 ${isMenuOpen ? 'rotate-45' : ''}`}></div>
+					<div className={`border-stone-200 border-y-2 w-[5vw] min-w-[30px] my-1.5 rounded-3xl duration-500 ${isMenuOpen ? '-rotate-45 -translate-y-[10px]' : ''}`}></div>
+				</div>
+			</nav>
+			<div className={`${isMenuOpen ? 'opacity-100 z-50' : 'hidden'} duration-500 absolute left-1/4 top-1/4 w-1/2 text-xl text-center`}>
+				<Link to='/about' onClick={() => setIsMenuOpen(false)}><h1 className={h2Style}>About GLVMS</h1></Link>
+				<Link to='/repertoire' onClick={() => setIsMenuOpen(false)}><h1 className={h2Style}>Repertoire List</h1></Link>
+				<Link to='/musicians' onClick={() => setIsMenuOpen(false)}><h1 className={h2Style}>Our Musicians</h1></Link>
 				{profileLink}
 				{authLink}
-			</nav>
+			</div>
 			{userGreeting}
-			<main className="pt-[50px] pb-[200px] font-poppins">
-				<Routes>
-					<Route path="/" element={<HomePage/>}/>
-					<Route path="/repertoire" element={
-						<RepertoirePage
-							opuses={opuses}
-							setOpuses={setOpuses}
-							allComposers={allComposers}
-							getFilteredData={getOpusData}
-							updateDetails={setDetailsData}
-							loginStatus={loginStatus}
-						/>}
+			<Routes>
+				<Route path="/" element={
+					<HomePage
+						isMenuOpen={isMenuOpen}
 					/>
-					<Route path="/request" element={
-						<RequestPage
-							opuses={opuses}
-							setOpuses={setOpuses}
-							getFilteredData={getOpusData}
-							updateDetails={setDetailsData}
-							loginStatus={loginStatus}
-						/>}
-					/>
-					<Route path="/musicians" element={
-						<MusiciansPage
-							musicians={musicians}
-							setMusicians={setMusicians}
-							getFilteredData={getMusiciansData}
-							updateDetails={setDetailsData}
-							loginStatus={loginStatus}
-						/>}
-					/>
-					<Route path="/musicianProfile/:userId" element={
-						<MusicianProfilePage
-							loginStatus={loginStatus}
-							opuses={opuses}
-							setOpuses={setOpuses}
-							getFilteredData={getOpusData}
-							updateDetails={setDetailsData}
-						/>}
-					/>
-					<Route path="/clientProfile/:userId" element={
-						<ClientProfilePage
-							loginStatus={loginStatus}
-							opuses={opuses}
-							setOpuses={setOpuses}
-							getFilteredData={getOpusData}
-							updateDetails={setDetailsData}
-						/>}
-					/>
-					<Route path="/auth/:formType" element={
-						<AuthFormPage
-							setLoginStatus={setLoginStatus}
-						/>}
-					/>
-					<Route path="/about" element={<AboutPage/>}/>
-					<Route path="/details/:opusId" element={
-						<DetailsPage
-							opus={detailsData}
-							loginStatus={loginStatus}
-							userCart={userCart}
-							setUserCart={setUserCart}
-						/>}
-					/>
-					<Route path="/cart" element={
-						<CurrentCart
-							opuses={opuses}
-							loginStatus={loginStatus}
-							userCart={userCart}
-							setUserCart={setUserCart}
-							getOpusData={getOpusData}
-						/>}
-					/>
-					<Route path="/*" element={<NotFoundPage/>} />
-				</Routes>
-			</main>
+				}/>
+				<Route path="/repertoire" element={
+					<RepertoirePage
+						isMenuOpen={isMenuOpen}
+						opuses={opuses}
+						setOpuses={setOpuses}
+						allComposers={allComposers}
+						getFilteredData={getOpusData}
+						updateDetails={setDetailsData}
+						loginStatus={loginStatus}
+					/>}
+				/>
+				<Route path="/request" element={
+					<RequestPage
+						isMenuOpen={isMenuOpen}
+						opuses={opuses}
+						setOpuses={setOpuses}
+						getFilteredData={getOpusData}
+						updateDetails={setDetailsData}
+						loginStatus={loginStatus}
+					/>}
+				/>
+				<Route path="/musicians" element={
+					<MusiciansPage
+						isMenuOpen={isMenuOpen}
+						musicians={musicians}
+						setMusicians={setMusicians}
+						getFilteredData={getMusiciansData}
+						updateDetails={setDetailsData}
+						loginStatus={loginStatus}
+					/>}
+				/>
+				<Route path="/musicianProfile/:userId" element={
+					<MusicianProfilePage
+						isMenuOpen={isMenuOpen}
+						loginStatus={loginStatus}
+						opuses={opuses}
+						setOpuses={setOpuses}
+						getFilteredData={getOpusData}
+						updateDetails={setDetailsData}
+					/>}
+				/>
+				<Route path="/clientProfile/:userId" element={
+					<ClientProfilePage
+						isMenuOpen={isMenuOpen}
+						loginStatus={loginStatus}
+						opuses={opuses}
+						setOpuses={setOpuses}
+						getFilteredData={getOpusData}
+						updateDetails={setDetailsData}
+					/>}
+				/>
+				<Route path="/auth/:formType" element={
+					<AuthFormPage
+						isMenuOpen={isMenuOpen}
+						setLoginStatus={setLoginStatus}
+					/>}
+				/>
+				<Route path="/about" element={
+					<AboutPage
+						isMenuOpen={isMenuOpen}
+					/>}
+				/>
+				<Route path="/details/:opusId" element={
+					<DetailsPage
+						isMenuOpen={isMenuOpen}
+						thisOpus={detailsData}
+						loginStatus={loginStatus}
+						userCart={userCart}
+						setUserCart={setUserCart}
+					/>}
+				/>
+				<Route path="/cart" element={
+					<CurrentCart
+						isMenuOpen={isMenuOpen}
+						opuses={opuses}
+						loginStatus={loginStatus}
+						userCart={userCart}
+						setUserCart={setUserCart}
+						getOpusData={getOpusData}
+					/>}
+				/>
+				<Route path="/*" element={<NotFoundPage/>} />
+			</Routes>
 			<div className='fixed bottom-5 right-5 w-[50px] h-[50px] bg-amber-400 text-white rounded-full flex align-center justify-center cursor-pointer hover:animate-bounce z-10'>
 				<Link to="/cart">
 					<img src={cartIcon} className="rounded-full p-1 cursor-pointer"/>
 				</Link>
             </div>
-			<p className="fixed bottom-4 right-4 bg-red-500 rounded-full w-[20px] h-[20px] z-20 text-center pb-6">{userCart.length}</p>
-			<footer className="w-full py-2 bg-gradient-to-r from-green-950 via-green-500 to-green-950 z-0 font-poppins">
+			<p className="fixed bottom-4 right-4 bg-red-500 rounded-full w-[20px] h-[20px] z-10 text-center pb-6">{userCart.length}</p>
+			<footer className={`w-full py-2 bg-gradient-to-r from-green-950 via-green-500 to-green-950 font-poppins`}>
                 <p className="text-center text-xs">Copyright &#169; 2024 Greater Las Vegas Music Services</p>
             </footer>
 		</>

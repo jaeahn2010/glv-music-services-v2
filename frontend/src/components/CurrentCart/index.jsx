@@ -1,5 +1,4 @@
 import trashIcon from '../../assets/trash-icon.jpeg'
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import RequestPage from '../RequestPage'
 
@@ -40,31 +39,24 @@ export default function CurrentCart({ opuses, loginStatus, userCart, setUserCart
     
     return (
         <main className='flex flex-col justify-center items-center'>
-            <p className="text-center">{cartText}</p>
-            {
-                userCart.map(item => {
-                    let mvmts = item.movements.length > 0 ? 
-                    <table className="w-11/12">
+            <p className="text-center my-3">{cartText}</p>
+            {userCart.map(item => {
+                    let mvmts = item.movements.length > 0
+                    ? <table className="w-11/12">
                         <tbody>
-                            {
-                                item.movements.map(movement => {
-                                    return (
-                                        <tr key={movement.movementTitle} className="border-b-2 border-white">
-                                            <td>{movement.movementTitle}</td>
-                                            <td>${movement.movementPrice}</td>
-                                            <td>
-                                                <img src={trashIcon} className="w-[25px] hover:bg-red-600 hover:opacity-50 hover:cursor-pointer" id={`${item._id}-movement-${movement.movementNumber}`} onClick={handleClick}/>
-                                            </td>
-                                        </tr>
-                                    )
-                                })
-                            }
+                            {item.movements.map(movement => <tr key={movement.movementTitle} className="border-b-2 border-white">
+                                <td>{movement.movementTitle}</td>
+                                <td>${movement.movementPrice}</td>
+                                <td>
+                                    <img src={trashIcon} className="w-[25px] hover:bg-red-600 hover:opacity-50 hover:cursor-pointer" id={`${item._id}-movement-${movement.movementNumber}`} onClick={handleClick}/>
+                                </td>
+                            </tr>)}
                         </tbody>
-                    </table> : 'NONE'
-                    
+                    </table>
+                    : 'NONE'
                     return (
-                        <div className='flex justify-around items-center border-2 m-4 border-white rounded-3xl max-w-[800px]' key={item._id}>
-                            <section className="my-3 border-r-2 border-white pl-5">
+                        <div className='border m-4 p-4 border-stone-200 bg-stone-800 w-full rounded-3xl' key={item._id}>
+                            <section className="my-3">
                                 <div>
                                     <p className="underline">TITLE</p>
                                     <p>{item.title}</p>
@@ -77,16 +69,7 @@ export default function CurrentCart({ opuses, loginStatus, userCart, setUserCart
                                 <br/>
                                 <div>
                                     <p className="underline">INSTRUMENTATION</p>
-                                    <p>
-                                        {
-                                            item.instrumentation.map(instrument => {
-                                                if (item.instrumentation.indexOf(instrument) !== item.instrumentation.length - 1) {
-                                                    return `${instrument}, `
-                                                } else {
-                                                    return instrument
-                                                }
-                                            })
-                                        }
+                                    <p>{item.instrumentation.map(instrument => <span key={instrument}>{item.instrumentation.indexOf(instrument) !== item.instrumentation.length - 1 ? `${instrument}, ` : instrument}</span>)}
                                     </p>
                                 </div>
                                 <br/>
@@ -95,27 +78,16 @@ export default function CurrentCart({ opuses, loginStatus, userCart, setUserCart
                                     {mvmts}
                                 </div>
                                     <br/>
-                                <div className="flex justify-between w-[400px]">
+                                <div className="flex justify-between">
                                     <div>
                                         <p className="underline">BULK PRICE</p>
-                                        {
-                                            opuses
-                                                .filter(opus => opus._id === item._id)
-                                                .map(opus => {
-                                                    if (opus.movements.length === item.movements.length && opus.price !== null) {
-                                                        return <p key={opus._id}>${opus.price}</p>
-                                                    } else {
-                                                        return <p key={opus._id}>DOES NOT APPLY</p>
-                                                }
-                                            })
-                                        }
+                                        {opuses.filter(opus => opus._id === item._id).map(opus => <p>{opus.movements.length === item.movements.length && opus.price !== null ? `$${opus.price}` : 'DOES NOT APPLY'}</p>)}
                                     </div>
                                 </div>
                                 <br/>
                             </section>
-                            <section className="w-1/6 flex flex-col items-center justify-center mx-auto text-center">
-                                <img src={trashIcon} className="w-[75px] hover:bg-red-600 hover:opacity-50 hover:cursor-pointer" id={`${item._id}-bulk-0`} onClick={handleClick}/>
-                                <p>Remove entire opus from cart</p>
+                            <section className="flex flex-col items-center justify-center mx-auto text-center">
+                                <button className='border border-stone-200 px-4 rounded-xl py-2 hover:bg-red-600 hover:opacity-50 hover:cursor-pointer' id={`${item._id}-bulk-0`} onClick={handleClick}>Remove entire opus from cart</button>
                             </section>
                         </div>
                     )

@@ -16,13 +16,11 @@ export default function Gallery({ opuses, getFilteredData, updateDetails, loginS
             />)
     }
     window.onscroll = () => {
-        if (window.innerHeight + window.scrollY >= document.body.offsetHeight && endDisplayIndex < opuses.length) {
-            setEndDisplayIndex(endDisplayIndex + 20)
-        }
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight && endDisplayIndex < opuses.length) setEndDisplayIndex(endDisplayIndex + 20)
     }
 
     return (
-        <div className="w-4/5 mt-10 mx-auto">
+        <div className="w-11/12 mt-10 mx-auto">
             {galleryContent}
         </div>
     )
