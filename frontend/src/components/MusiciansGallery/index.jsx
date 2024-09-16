@@ -16,13 +16,11 @@ export default function MusiciansGallery({ musicians, getFilteredData, updateDet
             />)
     }
     window.onscroll = () => {
-        if (window.innerHeight + window.scrollY >= document.body.offsetHeight && endDisplayIndex < musicians.length) {
-            setEndDisplayIndex(endDisplayIndex + 10)
-        }
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight && endDisplayIndex < musicians.length) setEndDisplayIndex(endDisplayIndex + 10)
     }
 
     return (
-        <div className="w-4/5 mt-10 mx-auto">
+        <div className="w-11/12 mt-10 mx-auto">
             {galleryContent}
         </div>
     )
