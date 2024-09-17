@@ -31,19 +31,19 @@ export default function Card({ musician, getFilteredData, updateDetails, loginSt
     }
 
     return (
-        <>
-            <figure onClick={() => setShowDetails(true)} className={`${showDetails ? 'opacity-5' : ''} my-24 w-3/4 mx-auto p-2 text-stone-400 border-2 border-stone-200 rounded-xl bg-stone-700 hover:scale-105 hover:cursor-pointer hover:bg-amber-400 hover:text-stone-900 duration-500`}>
+        <figure className={`relative my-12 w-3/4 mx-auto p-2 text-stone-400 border-2 border-stone-200 rounded-xl bg-stone-700 max-h-[100vh]`}>
+            <div className={`h-full ${showDetails ? 'hidden' : 'block'}`}>
                 <img src={headshot} className="rounded-xl w-full mx-auto"/>
-                <figcaption className="py-2 px-2 w-full text-stone-200">
+                <figcaption className="p-2 w-full text-stone-200 flex flex-col items-center justify-center">
                     <h1 className="mt-2 font-bold text-center">{`${musician.firstName} ${musician.lastName}`}</h1>
                     <p className='text-center'>{instruments}</p>
+                    <button onClick={() => setShowDetails(true)} className='border border-stone-200 text-stone-200 p-2 rounded-xl w-1/2 mx-auto my-5 hover:bg-amber-400'>BIOGRAPHY</button>
                 </figcaption>
-            </figure>
-            <div className={`absolute top-24 left-12 w-3/4 border border-stone-200 p-4 rounded-xl bg-stone-600 text-sm flex flex-col justify-center items-center ${showDetails ? 'block z-20' : 'hidden z-0'}`}>
-                <p>{bio}</p>
-                <button onClick={() => setShowDetails(false)} className='border border-stone-200 text-stone-200 p-2 rounded-xl w-1/2 my-5 hover:bg-amber-400'>CLOSE</button>
             </div>
-        </>
-
+            <div className={`max-h-[80vh] overflow-y-auto text-sm p-2 flex flex-col justify-center items-center ${showDetails ? 'block' : 'hidden'}`}>
+                <p>{bio}</p>
+                <button onClick={() => setShowDetails(false)} className='border border-stone-200 text-stone-200 p-2 rounded-xl w-1/2 mx-auto my-5 hover:bg-amber-400'>CLOSE</button>
+            </div>  
+        </figure>
     )
 }
