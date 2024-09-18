@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import placeholder from '../../assets/music-book-placeholder.jpeg'
 
 export default function Card({ opus, getFilteredData, updateDetails, loginStatus }) {
     let bulkPrice = opus.price ? `$${opus.price}` : "Not available in bulk"

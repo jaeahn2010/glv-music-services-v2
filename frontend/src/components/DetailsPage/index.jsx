@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import { getOpusById } from '../../../utils/backend'
-import placeholder from '../../assets/music-book-placeholder.jpeg'
 
-let opusIdList = []
 export default function DetailsPage({isMenuOpen, thisOpus, loginStatus, userCart, setUserCart}) {
     const [opus, setOpus] = useState({ ...thisOpus })
-    // const [loginStatus, setLoginStatus] = useState({ ...props.loginStatus })
+    // const [loginStatus, setLoginStatus] = useState({ ...loginStatus })
     const params = useParams()
+    const navigate = useNavigate()
+    let opusIdList = userCart.map(opusInCart => opusInCart._id)
 
     async function getOpusData() {
         const opusData = await getOpusById(params.opusId)
@@ -26,18 +26,17 @@ export default function DetailsPage({isMenuOpen, thisOpus, loginStatus, userCart
                 setUserCart(userCart)
                 localStorage.setItem("userCart", JSON.stringify(userCart))
                 opusIdList.push(opus._id)
-                alert('bulk added!')
+                alert('Item has been added to the cart.')
             } else { //if chosen opus on id list
                 if (opus.movements.length === 0) { //if opus has no mvmts, do nothing
                     alert('This opus has already been added to your cart.')
-                } else { //if opus has mvmts, 
-                    for (let opusInCart of userCart) { //iterate through cart
-                        if (opusInCart._id === opus._id) { //once matching opus found, replace any partial mvmts w/ whole opus
-                            userCart[userCart.indexOf(opusInCart)] = opus
-                            setUserCart(userCart)
-                            localStorage.setItem("userCart", JSON.stringify(userCart))
-                            alert("mvmts already in cart, but replaced by bulk.")
-                        }
+                } else { //if opus has mvmts,
+                    let opusIndex = opusIdList.findIndex(id => id === opus._id)
+                    if (opusIndex !== -1) { //if matching opus found, replace any partial mvmts w/ whole opus
+                        userCart[opusIndex] = opus
+                        setUserCart(userCart)
+                        localStorage.setItem("userCart", JSON.stringify(userCart))
+                        alert("There are some or all movements already in cart, and they have been replaced by the bulk price.")
                     }
                 }
             }
@@ -51,7 +50,7 @@ export default function DetailsPage({isMenuOpen, thisOpus, loginStatus, userCart
                 setUserCart(userCart)
                 localStorage.setItem("userCart", JSON.stringify(userCart))
                 opusIdList.push(opus._id)
-                alert("mvmt added!")
+                alert("This movement has been added to the cart.")
             } else { //if chosen opus on id list
                 outerLoop: for (let opusInCart of userCart) { //iterate through cart to find the opus to be checked
                     if (opusInCart._id === opus._id) { //if ids match, check if mvmt already exists
@@ -66,7 +65,7 @@ export default function DetailsPage({isMenuOpen, thisOpus, loginStatus, userCart
                             movementTitle: evt.target.parentElement.innerText.split('$')[0].slice(0, evt.target.parentElement.innerText.split('$')[0].length - 1),
                             movementPrice: Number(evt.target.parentElement.innerText.split('$')[1]),
                         })
-                        alert("opus already in cart, updated w/ new mvmt!")
+                        alert("This opus is already in the cart, and has been updated with the new movement.")
                         setUserCart(userCart)
                         localStorage.setItem("userCart", JSON.stringify(userCart))
                         break
@@ -106,34 +105,38 @@ export default function DetailsPage({isMenuOpen, thisOpus, loginStatus, userCart
         : ''
 
         return (
-            <div className={`${isMenuOpen ? 'z-0 opacity-5' : ''} w-11/12 mx-auto min-h-[300px] border border-stone-400 rounded-lg text-stone-300 p-5 m-5 flex-col justify-center bg-stone-600`}>
-                <section>
-                    <div>
-                        <p className="underline">TITLE</p>
-                        <p>{opus.title}</p>
-                    </div>
-                    <br/>
-                    <div>
-                        <p className="underline">COMPOSER</p>
-                        <p>{opus.composer}</p>
-                    </div>
-                    <br/>
-                    <div>
-                        <p className="underline">INSTRUMENTATION</p>
-                        <p>{instrumentation}</p>
-                    </div>
-                    <br/>
-                    <div className="flex justify-between">
-                        <div className="w-1/3">
-                            <p className="underline">BULK PRICE</p>
-                            <p>{bulkPrice}</p>
+            <section className="flex flex-col justify-center items-center">
+                <div className={`${isMenuOpen ? 'z-0 opacity-5' : ''} w-11/12 mx-auto min-h-[300px] border border-stone-400 rounded-lg text-stone-300 p-5 m-5 flex-col justify-center bg-stone-600`}>
+                    <section>
+                        <div>
+                            <p className="underline">TITLE</p>
+                            <p>{opus.title}</p>
                         </div>
-                        <div className="w-2/3 flex justify-center items-center">{bulkPriceBtn}</div>
-                    </div>
-                    <br/>
-                </section>
-                {movementsDisplay}
-            </div>
+                        <br/>
+                        <div>
+                            <p className="underline">COMPOSER</p>
+                            <p>{opus.composer}</p>
+                        </div>
+                        <br/>
+                        <div>
+                            <p className="underline">INSTRUMENTATION</p>
+                            <p>{instrumentation}</p>
+                        </div>
+                        <br/>
+                        <div className="flex justify-between">
+                            <div className="w-1/3">
+                                <p className="underline">BULK PRICE</p>
+                                <p>{bulkPrice}</p>
+                            </div>
+                            <div className="w-2/3 flex justify-center items-center">{bulkPriceBtn}</div>
+                        </div>
+                        <br/>
+                    </section>
+                    {movementsDisplay}
+                </div>
+                <button onClick={() => navigate('/repertoire')} className="border border-stone-200 p-2 rounded-xl my-6 mx-auto hover:bg-amber-400 hover:text-stone-800 hover:scale-105 duration-500">CHOOSE MORE REPERTOIRE</button>
+            </section>
+
         )
     }
 }

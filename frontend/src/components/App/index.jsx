@@ -26,9 +26,7 @@ export default function App() {
 	const navigate = useNavigate()
 
     for (let opus of opuses) {
-        if (!allComposers.includes(opus.composer)) {
-            allComposers.push(opus.composer)
-        }
+        if (!allComposers.includes(opus.composer)) allComposers.push(opus.composer)
     }
 
 	//get full list of available opuses, or filter by musician/composer/instrumentation/price
@@ -52,11 +50,7 @@ export default function App() {
 	async function getMusiciansData(filter) {
 		const musiciansData = await getMusicians()
 		let filteredMusiciansData = []
-		if (filter === 'none') {
-			filteredMusiciansData = musiciansData
-		} else {
-			filteredMusiciansData = musiciansData.filter(musician => musician.instrumentation.includes(filter))
-		}
+		filter === 'none' ? filteredMusiciansData = musiciansData : filteredMusiciansData = musiciansData.filter(musician => musician.instrumentation.includes(filter))
 		setMusicians(filteredMusiciansData)
 	}
 
@@ -159,6 +153,8 @@ export default function App() {
 						getFilteredData={getOpusData}
 						updateDetails={setDetailsData}
 						loginStatus={loginStatus}
+						userCart={userCart}
+						setUserCart={setUserCart}
 					/>}
 				/>
 				<Route path="/musicians" element={
