@@ -142,21 +142,11 @@ export async function deleteReview(reviewId) {
 
 //signup & login
 export async function signUp(user) {
-    if (user.category === 'client') {
-        const { data } = await axios.post('/api/clients/signup', user)
-        return data
-    } else {
-        const { data } = await axios.post('/api/musicians/signup', user)
-        return data
-    }
+    const { data } = await axios.post('/api/clients/signup', user)
+    return data
 }
 
 export async function logIn(user) {
-    if (user.category === 'client') {
-        const { data } = await axios.post('/api/clients/login', user)
-        return data
-    } else {
-        const { data } = await axios.post('/api/musicians/login', user)
-        return data
-    }
+    const { data } = await axios.post('/api/clients/login', user)
+    return data
 }

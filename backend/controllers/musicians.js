@@ -1,23 +1,18 @@
-/* 
-`localhost:3000/api/musicians`
------------------------------------------------------------ */
+// `localhost:3000/api/musicians`
 
-/* require modules
----------------------------------------------------------- */
+
+// req modules
 const jwt = require('jwt-simple')
 const express = require('express')
 const router = express.Router()
 
-/* db connection, models
----------------------------------------------------------- */
+// db connection, models
 const db = require('../models')
 
-/* require jwt config
---------------------------------------------------------------- */
+// req jwt config
 const config = require('../../jwt.config.js')
 
-/* jwt middleware
---------------------------------------------------------------- */
+// jwt middleware
 const authMiddleware = (req, res, next) => {
     const token = req.headers.authorization;
     if (token) {
@@ -26,15 +21,14 @@ const authMiddleware = (req, res, next) => {
             req.user = decodedToken;
             next();
         } catch (err) {
-            res.status(401).json({ message: 'Invalid token' });
+            res.status(401).json({ message: 'Invalid token' })
         }
     } else {
-        res.status(401).json({ message: 'Missing or invalid Authorization header' });
+        res.status(401).json({ message: 'Missing or invalid Authorization header' })
     }
 };
 
-/* routes
----------------------------------------------------------- */
+// routes
 // display all musicians associated with GLVMS
 router.get('/', function (req, res) {
     db.Musician.find()
@@ -47,10 +41,8 @@ router.post('/signup', (req, res) => {
         .then(musician => {
             const token = jwt.encode({ id: musician.id }, config.jwtSecret)
             res.json({             
-                userCategory: musician.userCategory,
                 firstName: musician.firstName,
                 lastName: musician.lastName,
-                birthdate: musician.birthdate,
                 instruments: musician.instruments,
                 email: musician.email,
                 token: token
@@ -58,7 +50,7 @@ router.post('/signup', (req, res) => {
         })
         .catch(() => {
             res.status(401)
-                .json({ message: 'Could not create a new musician. Your email may have been already taken, or your password could be too weak. Try again.' })
+                .json({ message: 'Could not create a new musician. Your email may have been already taken. Try again.' })
         })
 })
 
@@ -69,10 +61,8 @@ router.post('/login', async (req, res) => {
         const payload = { id: foundMusician.id }
         const token = jwt.encode(payload, config.jwtSecret)
         res.json({
-            userCategory: foundMusician.userCategory,
             firstName: foundMusician.firstName,
             lastName: foundMusician.lastName,
-            birthdate: foundMusician.birthdate,
             instruments: foundMusician.instruments,
             email: foundMusician.email,
             token: token
@@ -83,7 +73,7 @@ router.post('/login', async (req, res) => {
     }
 })
 
-// edit musician (musician & admin access only)
+// edit musician (admin access only)
 router.put('/:musicianId', authMiddleware, async (req, res) => {
     const currentMusician = await db.Musician.findById(req.params.musicianId)
     if (currentMusician.musicianId == req.user.id) {
@@ -98,7 +88,7 @@ router.put('/:musicianId', authMiddleware, async (req, res) => {
     }
 })
 
-// delete musician (musician & admin access only)
+// delete musician (admin access only)
 router.delete('/:clientId', authMiddleware, async (req, res) => {
     const currentMusician = await db.Musician.findById(req.params.musicianId)
     if (currentMusician.musicianId == req.user.id) {
@@ -109,6 +99,5 @@ router.delete('/:clientId', authMiddleware, async (req, res) => {
     }
 })
 
-/* export to server.js
----------------------------------------------------------- */
+// export to server.js
 module.exports = router

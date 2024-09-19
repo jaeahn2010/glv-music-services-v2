@@ -1,50 +1,40 @@
-/* 
-`localhost:3000/api/clients`
------------------------------------------------------------ */
-
-/* require modules
----------------------------------------------------------- */
+// `localhost:3000/api/clients`
+// req modules
 const jwt = require('jwt-simple')
 const express = require('express')
 const router = express.Router()
 
-/* db connection, models
----------------------------------------------------------- */
+// db connection, models
 const db = require('../models')
 
-/* require jwt config
---------------------------------------------------------------- */
+// req jwt config
 const config = require('../../jwt.config.js')
 
-/* jwt middleware
---------------------------------------------------------------- */
+// jwt middleware
 const authMiddleware = (req, res, next) => {
-    const token = req.headers.authorization;
+    const token = req.headers.authorization
     if (token) {
         try {
-            const decodedToken = jwt.decode(token, config.jwtSecret);
-            req.user = decodedToken;
-            next();
+            const decodedToken = jwt.decode(token, config.jwtSecret)
+            req.user = decodedToken
+            next()
         } catch (err) {
-            res.status(401).json({ message: 'Invalid token' });
+            res.status(401).json({ message: 'Invalid token' })
         }
     } else {
-        res.status(401).json({ message: 'Missing or invalid Authorization header' });
+        res.status(401).json({ message: 'Missing or invalid Authorization header' })
     }
-};
+}
 
-/* routes
----------------------------------------------------------- */
+// routes
 // create client (signup route)
 router.post('/signup', (req, res) => {
     db.Client.create(req.body)
         .then(client => {
             const token = jwt.encode({ id: client.id }, config.jwtSecret)
             res.json({
-                userCategory: client.userCategory,
                 firstName: client.firstName,
                 lastName: client.lastName,
-                birthdate: client.birthdate,
                 instruments: client.instruments,
                 email: client.email,
                 token: token
@@ -52,7 +42,7 @@ router.post('/signup', (req, res) => {
         })
         .catch(() => {
             res.status(401)
-                .json({ message: 'Could not create a new musician. Your email may have been already taken, or your password could be too weak. Try again.' })
+                .json({ message: 'Could not create a new client account. Your email may have been already taken, or your password could be too weak. Try again.' })
         })
 })
 
@@ -63,17 +53,15 @@ router.post('/login', async (req, res) => {
         const payload = { id: foundClient.id }
         const token = jwt.encode(payload, config.jwtSecret)
         res.json({
-            userCategory: foundClient.userCategory,
             firstName: foundClient.firstName,
             lastName: foundClient.lastName,
-            birthdate: foundClient.birthdate,
             instruments: foundClient.instruments,
             email: foundClient.email,
             token: token
         })
     } else {
         res.status(401)
-	    .json({ message: 'Could not find musician with that email/password' })
+	    .json({ message: 'Could not find client account with that email/password' })
     }
 })
 
@@ -99,10 +87,9 @@ router.delete('/:clientId', authMiddleware, async (req, res) => {
         const deletedClient = await db.Client.findByIdAndDelete(req.params.clientId)
         res.send('You deleted client ' + deletedClient._id)
     } else {
-        res.status(401).json({ message: 'Invalid user or token' });
+        res.status(401).json({ message: 'Invalid user or token' })
     }
 })
 
-/* export to server.js
----------------------------------------------------------- */
+// export to server.js
 module.exports = router

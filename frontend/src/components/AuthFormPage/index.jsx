@@ -44,7 +44,7 @@ export default function AuthFormPage({ isMenuOpen, setLoginStatus }) {
                 navigate('/')
             } catch(err) {
                 alert(err) 
-                navigate('/auth/login')
+                navigate('/auth/signup')
             }
         }
     }
@@ -97,7 +97,7 @@ export default function AuthFormPage({ isMenuOpen, setLoginStatus }) {
                 className={inputStyle}
                 onChange={handleInputChange}
             >
-                <option key='0' value='none' selected disabled>Select an instrument</option>
+                <option key='0' value='none' disabled>Select an instrument</option>
                 {instrumentsArr.map(instrument => <option key={instrument} value={instrument}>{instrument}</option>)}
             </select>
         </div>
