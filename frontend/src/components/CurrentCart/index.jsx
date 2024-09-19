@@ -2,21 +2,21 @@ import trashIcon from '../../assets/trash-icon.jpeg'
 import { Link } from 'react-router-dom'
 import RequestPage from '../RequestPage'
 
-export default function CurrentCart({ opuses, loginStatus, userCart, setUserCart, getOpusData }) {
-    let totalPrice = 0
+export default function CurrentCart({ opuses, loginStatus, userCart, setUserCart, getOpusData, totalPrice }) {
+    // let totalPrice = 0
     let cartText = userCart.length > 0 ? 'Your cart' : 'Your cart is empty.'
     let btnStyle = 'border-stone-200 border rounded-xl px-3 py-1 my-2 w-full hover:scale-125 hover:cursor-pointer hover:bg-amber-400 hover:text-stone-900 hover:duration-500'
 
-    for (let item of userCart) {
-        let fullOpus = opuses.find(opus => opus._id === item._id)
-        if (fullOpus.movements.length === item.movements.length) {
-            totalPrice += fullOpus.price
-        } else {
-            for (let mvmt of item.movements) {
-                totalPrice += mvmt.movementPrice
-            }
-        }
-    }
+    // for (let item of userCart) {
+    //     let fullOpus = opuses.find(opus => opus._id === item._id)
+    //     if (fullOpus.movements.length === item.movements.length) {
+    //         totalPrice += fullOpus.price
+    //     } else {
+    //         for (let mvmt of item.movements) {
+    //             totalPrice += mvmt.movementPrice
+    //         }
+    //     }
+    // }
 
     let priceText = userCart.length > 0 ? `Your total: $${totalPrice}` : ''
 

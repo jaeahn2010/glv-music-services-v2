@@ -24,9 +24,21 @@ export default function App() {
 	const [loginStatus, setLoginStatus] = useState(false)
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
 	const navigate = useNavigate()
+	let totalPrice = 0
 
     for (let opus of opuses) {
         if (!allComposers.includes(opus.composer)) allComposers.push(opus.composer)
+    }
+
+	for (let item of userCart) {
+        let fullOpus = opuses.find(opus => opus._id === item._id)
+        if (fullOpus.movements.length === item.movements.length) {
+            totalPrice += fullOpus.price
+        } else {
+            for (let mvmt of item.movements) {
+                totalPrice += mvmt.movementPrice
+            }
+        }
     }
 
 	//get full list of available opuses, or filter by musician/composer/instrumentation/price
@@ -149,12 +161,13 @@ export default function App() {
 					<RequestPage
 						isMenuOpen={isMenuOpen}
 						opuses={opuses}
-						setOpuses={setOpuses}
+						musicians={musicians}
 						getFilteredData={getOpusData}
 						updateDetails={setDetailsData}
 						loginStatus={loginStatus}
 						userCart={userCart}
 						setUserCart={setUserCart}
+						totalPrice={totalPrice}
 					/>}
 				/>
 				<Route path="/musicians" element={
@@ -215,6 +228,7 @@ export default function App() {
 						userCart={userCart}
 						setUserCart={setUserCart}
 						getOpusData={getOpusData}
+						totalPrice={totalPrice}
 					/>}
 				/>
 				<Route path="/*" element={<NotFoundPage/>} />
