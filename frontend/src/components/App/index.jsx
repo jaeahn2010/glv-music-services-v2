@@ -85,7 +85,7 @@ export default function App() {
 
 	if (loginStatus) {
 		authLink =
-			<div className="flex lg:gap-5 md:gap-4 sm:gap-3 gap-2">
+			<div className="border-t border-stone-200 w-1/2 mx-auto">
 				<button
 					className={h2Style}
 					onClick={() => {
@@ -94,27 +94,16 @@ export default function App() {
 							setLoginStatus(false)
 							navigate('/')
 						}
-					}}>
-					Log Out
-				</button>
+					}}>Log Out</button>
 			</div>
 		userGreeting =
 			<h1 className="bg-stone-700 z-10 text-white text-right text-sm sticky top-0">{`Hello, ${localStorage.getItem("firstName")} ${localStorage.getItem("lastName")}!`}</h1>
-		if (localStorage.getItem("userCategory") === "musician") {
-			profileLink =
-				<div className="flex lg:gap-5 md:gap-4 sm:gap-3 gap-2">
-					<Link to={"/musicianProfile/" + localStorage.getItem("userToken")}>
-						<h2 className={h2Style}>My Musician Profile</h2>
-					</Link>
-				</div>
-		} else if (localStorage.getItem("userCategory") === "client") {
 		  	profileLink =
-				<div className="flex lg:gap-5 md:gap-4 sm:gap-3 gap-2">
-					<Link to={"/clientProfile/" + localStorage.getItem('userToken')}>
-						<h2 className={h2Style}>My Client Profile</h2>
-					</Link>
-				</div>
-		}
+			<div className="border-t border-stone-200 w-1/2 mx-auto">
+				<Link to={"/clientProfile/" + localStorage.getItem('userToken')}>
+					<h2 className={h2Style}>My Client Profile</h2>
+				</Link>
+			</div>
 	} else if (localStorage.userToken) {
 		setLoginStatus(true)
 	}
@@ -222,12 +211,18 @@ export default function App() {
 				/>
 				<Route path="/*" element={<NotFoundPage/>} />
 			</Routes>
-			<div className='fixed bottom-5 right-5 w-[50px] h-[50px] bg-amber-400 text-white rounded-full flex align-center justify-center cursor-pointer hover:animate-bounce z-10'>
-				<Link to="/cart">
-					<img src={cartIcon} className="rounded-full p-1 cursor-pointer"/>
-				</Link>
-            </div>
-			<p className="fixed bottom-4 right-4 bg-red-500 rounded-full w-[20px] h-[20px] z-10 text-center pb-6">{userCart.length}</p>
+			{loginStatus
+			? <>
+				<div className='fixed bottom-5 right-5 w-[50px] h-[50px] bg-amber-400 text-white rounded-full flex align-center justify-center cursor-pointer hover:animate-bounce z-10'>
+					<Link to="/cart">
+						<img src={cartIcon} className="rounded-full p-1 cursor-pointer"/>
+					</Link>
+				</div>
+				<p className="fixed bottom-4 right-4 bg-red-500 rounded-full w-[20px] h-[20px] z-10 text-center pb-6">{userCart.length}</p>
+			</>
+			: ''
+			}
+
 			<footer className={`w-full py-2 bg-gradient-to-r from-green-950 via-green-500 to-green-950 font-poppins`}>
                 <p className="text-center text-xs">Copyright &#169; 2024 Greater Las Vegas Music Services</p>
             </footer>

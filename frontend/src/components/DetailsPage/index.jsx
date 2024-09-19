@@ -4,7 +4,6 @@ import { getOpusById } from '../../../utils/backend'
 
 export default function DetailsPage({isMenuOpen, thisOpus, loginStatus, userCart, setUserCart}) {
     const [opus, setOpus] = useState({ ...thisOpus })
-    // const [loginStatus, setLoginStatus] = useState({ ...loginStatus })
     const params = useParams()
     const navigate = useNavigate()
     let opusIdList = userCart.map(opusInCart => opusInCart._id)
@@ -20,55 +19,59 @@ export default function DetailsPage({isMenuOpen, thisOpus, loginStatus, userCart
 
     function handleClick(evt) {
         evt.preventDefault()
-        if (evt.target.value === 'bulkPrice') { //if client chooses bulk price
-            if (!opusIdList.includes(opus._id)) { //if chosen opus not on id list, put in cart & update id list
-                userCart.push(opus)
-                setUserCart(userCart)
-                localStorage.setItem("userCart", JSON.stringify(userCart))
-                opusIdList.push(opus._id)
-                alert('Item has been added to the cart.')
-            } else { //if chosen opus on id list
-                if (opus.movements.length === 0) { //if opus has no mvmts, do nothing
-                    alert('This opus has already been added to your cart.')
-                } else { //if opus has mvmts,
-                    let opusIndex = opusIdList.findIndex(id => id === opus._id)
-                    if (opusIndex !== -1) { //if matching opus found, replace any partial mvmts w/ whole opus
-                        userCart[opusIndex] = opus
-                        setUserCart(userCart)
-                        localStorage.setItem("userCart", JSON.stringify(userCart))
-                        alert("There are some or all movements already in cart, and they have been replaced by the bulk price.")
+        if (!loginStatus) {
+            alert('Please sign up or log in to put repertoire in your cart.')
+        } else {
+            if (evt.target.value === 'bulkPrice') { //if client chooses bulk price
+                if (!opusIdList.includes(opus._id)) { //if chosen opus not on id list, put in cart & update id list
+                    userCart.push(opus)
+                    setUserCart(userCart)
+                    localStorage.setItem("userCart", JSON.stringify(userCart))
+                    opusIdList.push(opus._id)
+                    alert('Item has been added to the cart.')
+                } else { //if chosen opus on id list
+                    if (opus.movements.length === 0) { //if opus has no mvmts, do nothing
+                        alert('This opus has already been added to your cart.')
+                    } else { //if opus has mvmts,
+                        let opusIndex = opusIdList.findIndex(id => id === opus._id)
+                        if (opusIndex !== -1) { //if matching opus found, replace any partial mvmts w/ whole opus
+                            userCart[opusIndex] = opus
+                            setUserCart(userCart)
+                            localStorage.setItem("userCart", JSON.stringify(userCart))
+                            alert("There are some or all movements already in cart, and they have been replaced by the bulk price.")
+                        }
                     }
                 }
-            }
-        } else { //if client chooses mvmt
-            if (!opusIdList.includes(opus._id)) { //if chosen opus not on id list, destructure opus & put in cart only selected mvmt
-                userCart.push({...opus, movements: [{
-                    movementNumber: Number(evt.target.parentElement.id),
-                    movementTitle: evt.target.parentElement.innerText.split('$')[0].slice(0, evt.target.parentElement.innerText.split('$')[0].length - 1),
-                    movementPrice: Number(evt.target.parentElement.innerText.split('$')[1]),
-                }]})
-                setUserCart(userCart)
-                localStorage.setItem("userCart", JSON.stringify(userCart))
-                opusIdList.push(opus._id)
-                alert("This movement has been added to the cart.")
-            } else { //if chosen opus on id list
-                outerLoop: for (let opusInCart of userCart) { //iterate through cart to find the opus to be checked
-                    if (opusInCart._id === opus._id) { //if ids match, check if mvmt already exists
-                        for (let mvmt of opusInCart.movements) { //iterate through mvmts
-                            if (mvmt.movementTitle === evt.target.parentElement.innerText.split('$')[0].slice(0, evt.target.parentElement.innerText.split('$')[0].length - 1)) { //if mvmt title is same as one client chose, do nothing & break outer loop
-                                alert('This movement has already been added to your cart.')
-                                break outerLoop;
-                            }
-                        } // if above loop finishes w/o match, update w/ newly selected mvmt & break loop
-                        userCart[userCart.indexOf(opusInCart)].movements.push({
-                            movementNumber: Number(evt.target.parentElement.id),
-                            movementTitle: evt.target.parentElement.innerText.split('$')[0].slice(0, evt.target.parentElement.innerText.split('$')[0].length - 1),
-                            movementPrice: Number(evt.target.parentElement.innerText.split('$')[1]),
-                        })
-                        alert("This opus is already in the cart, and has been updated with the new movement.")
-                        setUserCart(userCart)
-                        localStorage.setItem("userCart", JSON.stringify(userCart))
-                        break
+            } else { //if client chooses mvmt
+                if (!opusIdList.includes(opus._id)) { //if chosen opus not on id list, destructure opus & put in cart only selected mvmt
+                    userCart.push({...opus, movements: [{
+                        movementNumber: Number(evt.target.parentElement.id),
+                        movementTitle: evt.target.parentElement.innerText.split('$')[0].slice(0, evt.target.parentElement.innerText.split('$')[0].length - 1),
+                        movementPrice: Number(evt.target.parentElement.innerText.split('$')[1]),
+                    }]})
+                    setUserCart(userCart)
+                    localStorage.setItem("userCart", JSON.stringify(userCart))
+                    opusIdList.push(opus._id)
+                    alert("This movement has been added to the cart.")
+                } else { //if chosen opus on id list
+                    outerLoop: for (let opusInCart of userCart) { //iterate through cart to find the opus to be checked
+                        if (opusInCart._id === opus._id) { //if ids match, check if mvmt already exists
+                            for (let mvmt of opusInCart.movements) { //iterate through mvmts
+                                if (mvmt.movementTitle === evt.target.parentElement.innerText.split('$')[0].slice(0, evt.target.parentElement.innerText.split('$')[0].length - 1)) { //if mvmt title is same as one client chose, do nothing & break outer loop
+                                    alert('This movement has already been added to your cart.')
+                                    break outerLoop;
+                                }
+                            } // if above loop finishes w/o match, update w/ newly selected mvmt & break loop
+                            userCart[userCart.indexOf(opusInCart)].movements.push({
+                                movementNumber: Number(evt.target.parentElement.id),
+                                movementTitle: evt.target.parentElement.innerText.split('$')[0].slice(0, evt.target.parentElement.innerText.split('$')[0].length - 1),
+                                movementPrice: Number(evt.target.parentElement.innerText.split('$')[1]),
+                            })
+                            alert("This opus is already in the cart, and has been updated with the new movement.")
+                            setUserCart(userCart)
+                            localStorage.setItem("userCart", JSON.stringify(userCart))
+                            break
+                        }
                     }
                 }
             }

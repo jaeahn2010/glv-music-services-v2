@@ -8,6 +8,7 @@ export default function AuthFormPage({ isMenuOpen, setLoginStatus }) {
     const [formData, setFormData] = useState({
         email: "",
         password: "",
+        passwordRetype: '',
         firstName: "",
         lastName: "",
         instruments: [],
@@ -21,30 +22,35 @@ export default function AuthFormPage({ isMenuOpen, setLoginStatus }) {
         if (formType === 'login') { //if logging in
             try {
                 const userCredentials = await logIn(formData)
-                localStorage.setItem('userToken', userCredentials.token)
+                localStorage.setItem('userToken', userCredentials.token) //?
                 localStorage.setItem('email', userCredentials.email)
                 localStorage.setItem('firstName', userCredentials.firstName)
                 localStorage.setItem('lastName', userCredentials.lastName)
                 localStorage.setItem('instrumentation', userCredentials.instrumentation)
                 setLoginStatus(true)
                 navigate('/')
-            } catch(err) {
+            } catch (err) {
                 alert(err)
                 navigate('/auth/login')
             }
         } else { //if signing up
-            try {
-                const userCredentials = await signUp(formData)
-                localStorage.setItem('userToken', userCredentials.token)
-                localStorage.setItem('email', userCredentials.email)
-                localStorage.setItem('firstName', userCredentials.firstName)
-                localStorage.setItem('lastName', userCredentials.lastName)
-                localStorage.setItem('instrumentation', userCredentials.instrumentation)
-                setLoginStatus(true)
-                navigate('/')
-            } catch(err) {
-                alert(err) 
+            if (formData.password !== formData.passwordRetype) {
+                alert('Your passwords don\'t match. Please try again.')
                 navigate('/auth/signup')
+            } else {
+                try {
+                    const userCredentials = await signUp(formData)
+                    localStorage.setItem('userToken', userCredentials.token) //?
+                    localStorage.setItem('email', userCredentials.email)
+                    localStorage.setItem('firstName', userCredentials.firstName)
+                    localStorage.setItem('lastName', userCredentials.lastName)
+                    localStorage.setItem('instrumentation', userCredentials.instrumentation)
+                    setLoginStatus(true)
+                    navigate('/')
+                } catch (err) {
+                    alert(err) 
+                    navigate('/auth/signup')
+                }
             }
         }
     }
@@ -56,6 +62,22 @@ export default function AuthFormPage({ isMenuOpen, setLoginStatus }) {
     let btnText = formType === 'login' ? 'Log In' : 'Sign Up'
     let signupFields = formType !== 'login'
     ? <section>
+        <div>
+            <label className={labelStyle} htmlFor="passwordRetype">
+                Retype Password
+            </label>
+            <input
+                className={inputStyle}
+                id="passwordRetype"
+                name="passwordRetype"
+                type="password"
+                minLength="8"
+                required
+                placeholder="Retype Password"
+                value={formData.passwordRetype}
+                onChange={handleInputChange}
+            />
+        </div>
         <div>
             <label className={labelStyle} htmlFor="firstName">
                 First name
