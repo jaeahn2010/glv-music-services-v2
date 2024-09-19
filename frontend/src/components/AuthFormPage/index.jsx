@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { signUp, logIn } from "../../../utils/backend"
 
-export default function AuthFormPage({ setLoginStatus }) {
+export default function AuthFormPage({ isMenuOpen, setLoginStatus }) {
     const { formType } = useParams()
     const navigate = useNavigate()
     const [formData, setFormData] = useState({
@@ -10,11 +10,11 @@ export default function AuthFormPage({ setLoginStatus }) {
         password: "",
         firstName: "",
         lastName: "",
-        birthdate: new Date(),
         instruments: [],
-        category: '',
     })
-    let instrumentsArr = ['bassoon', 'cello', 'clarinet', 'composer', 'conductor', 'contrabass', 'flute', 'guitar', 'harp', 'oboe', 'piano', 'percussion', 'saxophone', 'trombone', 'trumpet', 'tuba/euphonium', 'viola', 'violin', 'other']
+    let instrumentsArr = ['bassoon', 'cello', 'clarinet', 'contrabass', 'flute', 'guitar', 'harp', 'oboe', 'piano', 'percussion', 'saxophone', 'trombone', 'trumpet', 'tuba/euphonium', 'viola', 'violin', 'other']
+    let labelStyle = 'block font-bold mt-4 mb-2'
+    let inputStyle = 'text-stone-800 w-full p-2 rounded-md focus:outline-none focus:ring focus:border-blue-600'
 
     async function handleSubmit(event) {
         event.preventDefault()
@@ -22,190 +22,130 @@ export default function AuthFormPage({ setLoginStatus }) {
             try {
                 const userCredentials = await logIn(formData)
                 localStorage.setItem('userToken', userCredentials.token)
-                localStorage.setItem('userCategory', userCredentials.userCategory)
                 localStorage.setItem('email', userCredentials.email)
                 localStorage.setItem('firstName', userCredentials.firstName)
                 localStorage.setItem('lastName', userCredentials.lastName)
-                localStorage.setItem('birthdate', userCredentials.birthdate)
                 localStorage.setItem('instrumentation', userCredentials.instrumentation)
                 setLoginStatus(true)
                 navigate('/')
-            } catch(error) {
-                alert(error)
+            } catch(err) {
+                alert(err)
                 navigate('/auth/login')
             }
         } else { //if signing up
             try {
                 const userCredentials = await signUp(formData)
                 localStorage.setItem('userToken', userCredentials.token)
-                localStorage.setItem('userCategory', userCredentials.userCategory)
                 localStorage.setItem('email', userCredentials.email)
                 localStorage.setItem('firstName', userCredentials.firstName)
                 localStorage.setItem('lastName', userCredentials.lastName)
-                localStorage.setItem('birthdate', userCredentials.birthdate)
                 localStorage.setItem('instrumentation', userCredentials.instrumentation)
                 setLoginStatus(true)
                 navigate('/')
-            } catch(error) {
-                alert(error) 
+            } catch(err) {
+                alert(err) 
                 navigate('/auth/login')
             }
         }
     }
 
-    const handleInputChange = (event) => {
-        setFormData({ ...formData, [event.target.name]: event.target.value });
+    const handleInputChange = (evt) => {
+        setFormData({ ...formData, [evt.target.name]: evt.target.value })
     }
 
-    let btnText, signupFields, categoryText
+    let btnText = formType === 'login' ? 'Log In' : 'Sign Up'
+    let signupFields = formType !== 'login'
+    ? <section>
+        <div>
+            <label className={labelStyle} htmlFor="firstName">
+                First name
+            </label>
+            <input
+                className={inputStyle}
+                id="firstName"
+                name="firstName"
+                type="text"
+                required
+                placeholder="Your first name"
+                value={formData.firstName}
+                onChange={handleInputChange}
+            />
+        </div>
+        <div>
+            <label className={labelStyle} htmlFor="lastName">
+                Last name
+            </label>
+            <input
+                className={inputStyle}
+                id="lastName"
+                name="lastName"
+                type="text"
+                required
+                placeholder="Your last name"
+                value={formData.lastName}
+                onChange={handleInputChange}
+            />
+        </div>
+        <div>
+            <label className={labelStyle} htmlFor="instrument">
+                Your primary instrument
+            </label>
+            <select
+                name="instrument"
+                id="instrument"
+                defaultValue='none'
+                className={inputStyle}
+                onChange={handleInputChange}
+            >
+                <option key='0' value='none' selected disabled>Select an instrument</option>
+                {instrumentsArr.map(instrument => <option key={instrument} value={instrument}>{instrument}</option>)}
+            </select>
+        </div>
+    </section>
+    : ''
 
-    formType === 'login' ? btnText = 'Log In' : btnText = 'Sign Up'
-    formType === 'login' ? categoryText = 'Are you logging in as a client or a musician?' : categoryText = 'Are you signing up as a new client or a new musician?'
-    if (formType !== 'login') {
-        signupFields = 
-            <div>
-                <div className="auth-div">
-                    <label className="block text-gray-100 font-bold mb-2" htmlFor="email">
-                        First name
+    return (
+        <section className={`${isMenuOpen ? 'z-0 opacity-5' : ''} bg-stone-800 rounded-xl border border-stone-200 p-8 w-1/3 mx-auto my-24`}>
+            <h2 className="text-3xl text-center font-bold mb-8">{btnText}</h2>
+            <form className="w-full flex flex-col" onSubmit={handleSubmit}>
+                <div>
+                    <label className={labelStyle} htmlFor="email">
+                        Email
                     </label>
                     <input
-                        className="w-full p-2 text-gray-800 rounded-md focus:outline-none focus:ring focus:border-blue-600 text-gray-200"
-                        id="firstName"
-                        name="firstName"
-                        type="text"
+                        className={inputStyle}
+                        id="email"
+                        name="email"
+                        type="email"
                         required
-                        placeholder="Your first name"
-                        value={formData.firstName}
-                        onChange={handleInputChange}
-                    />
-                </div>
-                <div className="auth-div">
-                    <label className="block text-gray-00 font-bold mb-2" htmlFor="email">
-                        Last name
-                    </label>
-                    <input
-                        className="w-full p-2 text-gray-800 rounded-md focus:outline-none focus:ring focus:border-blue-600 text-gray-200"
-                        id="lastName"
-                        name="lastName"
-                        type="text"
-                        required
-                        placeholder="Your last name"
-                        value={formData.lastName}
-                        onChange={handleInputChange}
-                    />
-                </div>
-                <div className="auth-div">
-                    <label className="block text-gray-100 font-bold mb-2" htmlFor="birthdate">
-                        Birthdate
-                    </label>
-                    <input
-                        className="w-full p-2 text-gray-800 rounded-md focus:outline-none focus:ring focus:border-blue-600 text-gray-200"
-                        id="birthdate"
-                        name="birthdate"
-                        type="date"
-                        required
-                        placeholder={new Date()}
-                        value={formData.birthdate}
+                        placeholder="Email address"
+                        value={formData.email}
                         onChange={handleInputChange}
                     />
                 </div>
                 <div>
-                    <label className="block text-gray-100 font-bold mb-2" htmlFor="instrument">
-                        Your primary instrument
+                    <label className={labelStyle} htmlFor="password">
+                        Password
                     </label>
-                    <select
-                        name="instrument"
-                        id="instrument"
-                        defaultValue='none'
-                        onChange={handleInputChange}>
-                        <option key='0' value='none' disabled>Select an instrument</option>
-                        {
-                            instrumentsArr.map(instrument => {
-                                return (
-                                    <option key={instrument} value={instrument}>{instrument}</option>
-                                )
-                            })
-                        }
-                    </select>
+                    <input
+                        className={inputStyle}
+                        id="password"
+                        name="password"
+                        type="password"
+                        minLength="8"
+                        required
+                        placeholder="Password"
+                        value={formData.password}
+                        onChange={handleInputChange}
+                    />
                 </div>
-                
-            </div>
-    }
-    return (
-        <div className="py-12">
-            <div className="bg-gray-800 rounded-lg shadow-xl p-8 w-full max-w-md mx-auto grid place-items-center">
-                <h2 className="text-3xl text-center font-bold text-gray-100 mb-8">{btnText}</h2>
-                <form className="auth-form" onSubmit={handleSubmit}>
-                    <div className="auth-div">
-                        <label className="block text-gray-100 font-bold mb-2" htmlFor="email">
-                            Email
-                        </label>
-                        <input
-                            className="w-full p-2 text-gray-800 rounded-md focus:outline-none focus:ring focus:border-blue-600"
-                            id="email"
-                            name="email"
-                            type="email"
-                            required
-                            placeholder="Email address"
-                            value={formData.email}
-                            onChange={handleInputChange}
-                        />
-                    </div>
-                    <div className="auth-div">
-                        <label className="block text-gray-100 font-bold mb-2" htmlFor="password">
-                            Password
-                        </label>
-                        <input
-                            className="w-full p-2 text-gray-800 rounded-md focus:outline-none focus:ring focus:border-blue-600"
-                            id="password"
-                            name="password"
-                            type="password"
-                            minLength="8"
-                            required
-                            placeholder="Password"
-                            value={formData.password}
-                            onChange={handleInputChange}
-                        />
-                    </div>
-                    {signupFields}
-                    <div>
-                        <p className='auth-p text-center'>{categoryText}</p>
-                        <table className="auth-table text-gray-100">
-                            <tbody>
-                                <tr>
-                                    <td><input
-                                        id="categoryClient"
-                                        name="category"
-                                        type="radio"
-                                        required
-                                        value="client"
-                                        onChange={handleInputChange}
-                                    /></td>
-                                    <td><label htmlFor="categoryClient" className="text-gray-200">Client</label></td>
-                                </tr>
-                                <tr>
-                                    <td><input
-                                        id="categoryMusician"
-                                        name="category"
-                                        type="radio"
-                                        required
-                                        value="musician"
-                                        onChange={handleInputChange}
-                                    /></td>
-                                    <td><label htmlFor="categoryMusician" className="text-gray-200">Musician</label></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div className="text-center">
-                        <button
-                            type="submit"
-                            className="w-1/2 my-5 py-2 px-4 bg-green-700 text-gray-100 rounded-md hover:bg-green-500 transition duration-300">
-                            {btnText}
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
+                {signupFields}
+                <button
+                    type="submit"
+                    className="w-1/2 mx-auto border border-stone-200 my-5 rounded-xl duration-500 hover:bg-gradient-to-r from-green-950 via-green-500 to-green-950 py-1">
+                    {btnText}
+                </button>
+            </form>
+        </section>
     )
 }

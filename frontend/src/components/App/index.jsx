@@ -10,7 +10,6 @@ import MusiciansPage from '../MusiciansPage'
 import DetailsPage from '../DetailsPage'
 import ClientProfilePage from '../ClientProfilePage'
 import CurrentCart from '../CurrentCart'
-import MusicianProfilePage from '../MusicianProfilePage'
 import { getOpuses, getMusicians } from '../../../utils/backend'
 import './styles.css'
 import cartIcon from '../../assets/cart-icon.jpeg'
@@ -73,11 +72,11 @@ export default function App() {
 
 	let h2Style = "text-stone-200 my-5 hover:scale-110 duration-500"
 	let authLink =
-		<div>
-			<Link to="/auth/signup">
+		<div className='border-t border-stone-200 w-1/2 mx-auto'>
+			<Link onClick={() => setIsMenuOpen(false)} to="/auth/signup">
 				<h2 className={h2Style}>Sign Up</h2>
 			</Link>
-			<Link to="/auth/login">
+			<Link onClick={() => setIsMenuOpen(false)} to="/auth/login">
 				<h2 className={h2Style}>Log In</h2>
 			</Link>
 		</div>
@@ -178,16 +177,6 @@ export default function App() {
 						getFilteredData={getMusiciansData}
 						updateDetails={setDetailsData}
 						loginStatus={loginStatus}
-					/>}
-				/>
-				<Route path="/musicianProfile/:userId" element={
-					<MusicianProfilePage
-						isMenuOpen={isMenuOpen}
-						loginStatus={loginStatus}
-						opuses={opuses}
-						setOpuses={setOpuses}
-						getFilteredData={getOpusData}
-						updateDetails={setDetailsData}
 					/>}
 				/>
 				<Route path="/clientProfile/:userId" element={
