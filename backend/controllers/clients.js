@@ -12,17 +12,17 @@ const config = require('../../jwt.config.js')
 
 // jwt middleware
 const authMiddleware = (req, res, next) => {
-    const token = req.headers.authorization
+    const token = req.cookies.token
     if (token) {
         try {
-            const decodedToken = jwt.decode(token, config.jwtSecret)
+            const decodedToken = jwt.verify(token, config.jwtSecret)
             req.user = decodedToken
             next()
         } catch (err) {
             res.status(401).json({ message: 'Invalid token' })
         }
     } else {
-        res.status(401).json({ message: 'Missing or invalid Authorization header' })
+        res.status(401).json({ message: 'Missing or invalid authentication token' })
     }
 }
 
@@ -32,12 +32,17 @@ router.post('/signup', (req, res) => {
     db.Client.create(req.body)
         .then(client => {
             const token = jwt.encode({ id: client.id }, config.jwtSecret)
+            res.cookie('token', token, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'Strict',
+                maxAge: 24 * 60 * 60 * 1000
+            })
             res.json({
                 firstName: client.firstName,
                 lastName: client.lastName,
-                instruments: client.instruments,
+                instrument: client.instrument,
                 email: client.email,
-                token: token
             })
         })
         .catch(() => {
@@ -52,12 +57,17 @@ router.post('/login', async (req, res) => {
     if (foundClient && foundClient.password === req.body.password) {
         const payload = { id: foundClient.id }
         const token = jwt.encode(payload, config.jwtSecret)
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production', //use 'secure' in production
+            sameSite: 'Strict',
+            maxAge: 24 * 60 * 60 * 1000,
+        })
         res.json({
             firstName: foundClient.firstName,
             lastName: foundClient.lastName,
-            instruments: foundClient.instruments,
+            instrument: foundClient.instrument,
             email: foundClient.email,
-            token: token
         })
     } else {
         res.status(401)

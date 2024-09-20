@@ -69,7 +69,7 @@ export default function RequestPage({ isMenuOpen, opuses, musicians, getFiltered
                         defaultValue={0}
                         onChange={handleChange}
                     >
-                        <option value="0" disabled selected>Choose a musician</option>
+                        <option value="0" disabled>Choose a musician</option>
                         {musicians.map(musician => <option key={musician._id} value={musician._id}>{musician.lastName}, {musician.firstName}</option>)}
                     </select>
                 </div>

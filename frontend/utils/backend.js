@@ -1,21 +1,36 @@
 import axios from 'axios'
 
-//clients CRUD
-export async function postClient(client) {
-    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
-    const { data } = await axios.post('/api/clients', client, authHeader)
-    return data
-}
-export async function updateClient(client, clientId) {
-    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
-    const { data } = await axios.put(`/api/clients/${clientId}`, client, authHeader)
+//clients CRUD (+signup & login)
+export async function signUp(user) {
+    const { data } = await axios.post('/api/clients/signup', user)
     return data
 }
 
-export async function deleteClient(clientId) {
-    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
-    const { data } = await axios.delete(`/api/clients/${clientId}`, authHeader)
+export async function logIn(user) {
+    const { data } = await axios.post('/api/clients/login', user, {
+        withCredentials: true
+    })
     return data
+}
+
+export async function updateClient(client, clientId) {
+    try {
+        const { data } = await axios.put(`/api/clients/${clientId}`, client, { withCredentials: true })
+        return data
+    } catch (err) {
+        console.error('Error updating client: ', err)
+        throw err
+    }   
+}
+
+export async function deleteClient(clientId) {
+    try {
+        const { data } = await axios.delete(`/api/clients/${clientId}`, { withCredentials: true })
+        return data
+    } catch (err) {
+        console.error('Error deleting client: ', err)
+        throw err
+    }
 }
 
 //musicians CRUD
@@ -25,20 +40,32 @@ export async function getMusicians() {
 }
 
 export async function postMusician(musician) {
-    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
-    const { data } = await axios.post('/api/musicians', musician, authHeader)
-    return data
+    try {
+        const { data } = await axios.post('/api/musicians', musician, { withCredentials: true })
+        return data
+    } catch (err) {
+        console.error('Error creating musician: ', err)
+        throw err
+    }
 }
 export async function updateMusician(musician, musicianId) {
-    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
-    const { data } = await axios.put(`/api/musicians/${musicianId}`, musician, authHeader)
-    return data
+    try {
+        const { data } = await axios.put(`/api/musicians/${musicianId}`, musician, { withCredentials: true })
+        return data
+    } catch (err) {
+        console.error('Error updating musician: ', err)
+        throw err
+    }   
 }
 
 export async function deleteMusician(musicianId) {
-    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
-    const { data } = await axios.delete(`/api/musicians/${musicianId}`, authHeader)
-    return data
+    try {
+        const { data } = await axios.delete(`/api/musicians/${musicianId}`, { withCredentials: true })
+        return data
+    } catch (err) {
+        console.error('Error deleting musician: ', err)
+        throw err
+    }
 }
 
 //opuses CRUD
@@ -58,95 +85,141 @@ export async function getOpusesByMusician(musicianId) {
 }
 
 export async function postOpus(opus) {
-    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
-    const { data } = await axios.post('/api/opuses', opus, authHeader)
-    return data
+    try {
+        const { data } = await axios.post('/api/opuses', opus, { withCredentials: true })
+        return data
+    } catch (err) {
+        console.error('Error creating opus: ', err)
+        throw err
+    }
 }
 export async function updateOpus(opus, opusId) {
-    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
-    const { data } = await axios.put(`/api/opuses/${opusId}`, opus, authHeader)
-    return data
+    try {
+        const { data } = await axios.put(`/api/opuses/${opusId}`, opus, { withCredentials: true })
+        return data
+    } catch (err) {
+        console.error('Error updating opus: ', err)
+        throw err
+    }   
 }
 
 export async function deleteOpus(opusId) {
-    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
-    const { data } = await axios.delete(`/api/opuses/${opusId}`, authHeader)
-    return data
+    try {
+        const { data } = await axios.delete(`/api/opuses/${opusId}`, { withCredentials: true })
+        return data
+    } catch (err) {
+        console.error('Error deleting opus: ', err)
+        throw err
+    }
 }
 
 //requests CRUD
 export async function getRequests() {
-    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
-    const { data } = await axios.get(`/api/requests`, authHeader)
-    return data
+    try {
+        const { data } = await axios.get(`/api/requests`, authHeader)
+        return data
+    } catch (err) {
+        console.error('Error getting requests: ', err)
+        throw err
+    }
 }
 
 export async function getRequestsByClient(clientId) {
-    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
-    const { data } = await axios.get(`/api/requests/${clientId}`, authHeader)
-    return data
+    try {
+        const { data } = await axios.get(`/api/requests/${clientId}`, authHeader)
+        return data
+    } catch (err) {
+        console.error('Error getting requests by client: ', err)
+        throw err
+    }
 }
 
 export async function getRequestsByMusician(musicianId) {
-    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
-    const { data } = await axios.get(`/api/requests/${musicianId}`, authHeader)
-    return data
+    try {
+        const { data } = await axios.get(`/api/requests/${musicianId}`, authHeader)
+        return data
+    } catch (err) {
+        console.error('Error getting requests by musician: ', err)
+        throw err
+    }
+
 }
 
 export async function postRequest(request) {
-    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
-    const { data } = await axios.post('/api/requests', request, authHeader)
-    return data
+    try {
+        const { data } = await axios.post('/api/requests', request, { withCredentials: true })
+        return data
+    } catch (err) {
+        console.error('Error creating request: ', err)
+        throw err
+    }
 }
 export async function updateRequest(request, requestId) {
-    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
-    const { data } = await axios.put(`/api/requests/${requestId}`, request, authHeader)
-    return data
+    try {
+        const { data } = await axios.put(`/api/requests/${requestId}`, request, { withCredentials: true })
+        return data
+    } catch (err) {
+        console.error('Error updating request: ', err)
+        throw err
+    }   
 }
 
 export async function deleteRequest(requestId) {
-    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
-    const { data } = await axios.delete(`/api/requests/${requestId}`, authHeader)
-    return data
+    try {
+        const { data } = await axios.delete(`/api/requests/${requestId}`, { withCredentials: true })
+        return data
+    } catch (err) {
+        console.error('Error deleting request: ', err)
+        throw err
+    }
 }
 
 //reviews CRUD
 export async function getReviewsByClient(clientId) {
-    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
-    const { data } = await axios.get(`/api/reviews/${clientId}`, authHeader)
-    return data
+    try {
+        const { data } = await axios.get(`/api/reviews/${clientId}`, { withCredentials: true })
+        return data
+    } catch (err) {
+        console.error('Error getting reviews by client: ', err)
+        throw err
+    }
 }
 
 export async function getReviewsByMusician(musicianId) {
-    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
-    const { data } = await axios.get(`/api/reviews/${musicianId}`, authHeader)
-    return data
+    try {
+        const { data } = await axios.get(`/api/reviews/${musicianId}`, { withCredentials: true })
+        return data
+    } catch (err) {
+        console.error('Error getting reviews by musician: ', err)
+        throw err
+    }
 }
 
 export async function postReview(review) {
-    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
-    const { data } = await axios.post('/api/reviews', review, authHeader)
-    return data
+    try {
+        const { data } = await axios.post('/api/reviews', review, { withCredentials: true })
+        return data
+    } catch (err) {
+        console.error('Error creating review: ', err)
+        throw err
+    }
 }
 export async function updateReview(review, reviewId) {
-    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
-    const { data } = await axios.put(`/api/reviews/${reviewId}`, review, authHeader)
-    return data
+    try {
+        const { data } = await axios.put(`/api/reviews/${reviewId}`, review, { withCredentials: true })
+        return data
+    } catch (err) {
+        console.error('Error updating review: ', err)
+        throw err
+    }   
 }
 
 export async function deleteReview(reviewId) {
-    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
-    const { data } = await axios.delete(`/api/reviews/${reviewId}`, authHeader)
-    return data
-}
-
-//signup & login
-export async function signUp(user) {
-    const { data } = await axios.post('/api/clients/signup', user)
-    return data
-}
-
-export async function logIn(user) {
-    const { data } = await axios.post('/api/clients/login', user)
-    return data
+    try {
+        const { data } = await axios.delete(`/api/reviews/${reviewId}`, { withCredentials: true })
+        return data
+    } catch (err) {
+        console.error('Error deleting review: ', err)
+        throw err
+    }
 }

@@ -1,20 +1,21 @@
-export default function ClientProfilePage({ opuses, setOpuses, loginStatus, getFilteredData, updateDetails }){
-    console.log(localStorage)
+export default function ClientProfilePage({ isMenuOpen, opuses, setOpuses, loginStatus, getFilteredData, updateDetails }){
+    let trStyle = 'h-12 border-stone-400 border-y-2'
 
     return (
-        <section>
-            <h1>Client profile page of {`${localStorage.getItem('firstName')} ${localStorage.getItem('lastName')}`}</h1>
-            <table className="w-full">
+        <section className={`${isMenuOpen ? 'z-0 opacity-5' : ''} w-11/12 mx-auto`}>
+            <h1 className="text-3xl text-center my-24">Your Account Information</h1>
+            <p className="text-2xl"></p>
+            <table className="w-3/4 mx-auto mb-24">
                 <tbody>
-                    <tr className="h-12">
-                        <td className='w-1/2'>Instruments</td>
-                        <td className="w-1/2">{localStorage.getItem('instruments')}</td>
+                    <tr className={trStyle}>
+                        <td className="w-1/2">Name</td>
+                        <td className="w-1/2">{`${localStorage.getItem('firstName')} ${localStorage.getItem('lastName')}`}</td>
                     </tr>
-                    <tr className="h-12 border-stone-400 border-y-2">
-                        <td>Birthdate</td>
-                        <td>{localStorage.getItem('birthdate')}</td>
+                    <tr className={trStyle}>
+                        <td className='w-1/2'>Primary Instrument</td>
+                        <td className="w-1/2">{localStorage.getItem('instrument')}</td>
                     </tr>
-                    <tr className="h-12 border-stone-400 border-y-2">
+                    <tr className={trStyle}>
                         <td>Email</td>
                         <td>{localStorage.getItem('email')}</td>
                     </tr>

@@ -11,7 +11,7 @@ export default function AuthFormPage({ isMenuOpen, setLoginStatus }) {
         passwordRetype: '',
         firstName: "",
         lastName: "",
-        instruments: [],
+        instrument: '',
     })
     let instrumentsArr = ['bassoon', 'cello', 'clarinet', 'contrabass', 'flute', 'guitar', 'harp', 'oboe', 'piano', 'percussion', 'saxophone', 'trombone', 'trumpet', 'tuba/euphonium', 'viola', 'violin', 'other']
     let labelStyle = 'block font-bold mt-4 mb-2'
@@ -22,11 +22,11 @@ export default function AuthFormPage({ isMenuOpen, setLoginStatus }) {
         if (formType === 'login') { //if logging in
             try {
                 const userCredentials = await logIn(formData)
-                localStorage.setItem('userToken', userCredentials.token) //?
+                console.log(userCredentials)
                 localStorage.setItem('email', userCredentials.email)
                 localStorage.setItem('firstName', userCredentials.firstName)
                 localStorage.setItem('lastName', userCredentials.lastName)
-                localStorage.setItem('instrumentation', userCredentials.instrumentation)
+                localStorage.setItem('instrument', userCredentials.instrument)
                 setLoginStatus(true)
                 navigate('/')
             } catch (err) {
@@ -40,11 +40,10 @@ export default function AuthFormPage({ isMenuOpen, setLoginStatus }) {
             } else {
                 try {
                     const userCredentials = await signUp(formData)
-                    localStorage.setItem('userToken', userCredentials.token) //?
                     localStorage.setItem('email', userCredentials.email)
                     localStorage.setItem('firstName', userCredentials.firstName)
                     localStorage.setItem('lastName', userCredentials.lastName)
-                    localStorage.setItem('instrumentation', userCredentials.instrumentation)
+                    localStorage.setItem('instrument', userCredentials.instrument)
                     setLoginStatus(true)
                     navigate('/')
                 } catch (err) {
@@ -63,9 +62,7 @@ export default function AuthFormPage({ isMenuOpen, setLoginStatus }) {
     let signupFields = formType !== 'login'
     ? <section>
         <div>
-            <label className={labelStyle} htmlFor="passwordRetype">
-                Retype Password
-            </label>
+            <label className={labelStyle} htmlFor="passwordRetype">Retype Password</label>
             <input
                 className={inputStyle}
                 id="passwordRetype"
@@ -79,9 +76,7 @@ export default function AuthFormPage({ isMenuOpen, setLoginStatus }) {
             />
         </div>
         <div>
-            <label className={labelStyle} htmlFor="firstName">
-                First name
-            </label>
+            <label className={labelStyle} htmlFor="firstName">First name</label>
             <input
                 className={inputStyle}
                 id="firstName"
@@ -94,9 +89,7 @@ export default function AuthFormPage({ isMenuOpen, setLoginStatus }) {
             />
         </div>
         <div>
-            <label className={labelStyle} htmlFor="lastName">
-                Last name
-            </label>
+            <label className={labelStyle} htmlFor="lastName">Last name</label>
             <input
                 className={inputStyle}
                 id="lastName"
@@ -109,9 +102,7 @@ export default function AuthFormPage({ isMenuOpen, setLoginStatus }) {
             />
         </div>
         <div>
-            <label className={labelStyle} htmlFor="instrument">
-                Your primary instrument
-            </label>
+            <label className={labelStyle} htmlFor="instrument">Your primary instrument</label>
             <select
                 name="instrument"
                 id="instrument"
@@ -131,9 +122,7 @@ export default function AuthFormPage({ isMenuOpen, setLoginStatus }) {
             <h2 className="text-3xl text-center font-bold mb-8">{btnText}</h2>
             <form className="w-full flex flex-col" onSubmit={handleSubmit}>
                 <div>
-                    <label className={labelStyle} htmlFor="email">
-                        Email
-                    </label>
+                    <label className={labelStyle} htmlFor="email">Email</label>
                     <input
                         className={inputStyle}
                         id="email"
@@ -146,9 +135,7 @@ export default function AuthFormPage({ isMenuOpen, setLoginStatus }) {
                     />
                 </div>
                 <div>
-                    <label className={labelStyle} htmlFor="password">
-                        Password
-                    </label>
+                    <label className={labelStyle} htmlFor="password">Password</label>
                     <input
                         className={inputStyle}
                         id="password"

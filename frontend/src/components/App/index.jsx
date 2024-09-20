@@ -92,6 +92,7 @@ export default function App() {
 						if (confirm("Are you sure you would like to log out?")) {
 							localStorage.clear()
 							setLoginStatus(false)
+							setIsMenuOpen(false)
 							navigate('/')
 						}
 					}}>Log Out</button>
@@ -100,8 +101,8 @@ export default function App() {
 			<h1 className="bg-stone-700 z-10 text-white text-right text-sm sticky top-0">{`Hello, ${localStorage.getItem("firstName")} ${localStorage.getItem("lastName")}!`}</h1>
 		  	profileLink =
 			<div className="border-t border-stone-200 w-1/2 mx-auto">
-				<Link to={"/clientProfile/" + localStorage.getItem('userToken')}>
-					<h2 className={h2Style}>My Client Profile</h2>
+				<Link onClick={() => setIsMenuOpen(false)} to={"/clientProfile"}>
+					<h2 className={h2Style}>My Account</h2>
 				</Link>
 			</div>
 	} else if (localStorage.userToken) {
@@ -168,7 +169,7 @@ export default function App() {
 						loginStatus={loginStatus}
 					/>}
 				/>
-				<Route path="/clientProfile/:userId" element={
+				<Route path="/clientProfile" element={
 					<ClientProfilePage
 						isMenuOpen={isMenuOpen}
 						loginStatus={loginStatus}
