@@ -1,40 +1,73 @@
-/* 
-`localhost:3000/api/requests`
------------------------------------------------------------ */
+//`localhost:3000/api/requests`
 
-/* require modules
----------------------------------------------------------- */
+// req modules
 const jwt = require('jwt-simple')
 const express = require('express')
 const router = express.Router()
+const nodemailer = require('nodemailer')
+const { google } = require('googleapis')
 
-/* db connection, models
----------------------------------------------------------- */
+const OAuth2 = google.auth.OAuth2
+const oauth2Client = new OAuth2 (
+    process.env.CLIENT_ID,
+    process.env.CLIENT_SECRET,
+    "https://developers.google.com/oauthplayground"
+)
+
+oauth2Client.setCredentials({
+    refresh_token: process.env.REFRESH_TOKEN,
+})
+
+const sendEmail = async (formData) => {
+    try {
+        const accessToken = await oauth2Client.getAccessToken()
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                type: 'OAuth2',
+                user: process.env.GMAIL_USER,
+                clientId: process.env.CLIENT_ID,
+                clientSecret: process.env.CLIENT_SECRET,
+                refreshToken: process.env.REFRESH_TOKEN,
+                accessToken: accessToken.token,
+            }
+        })
+        const mailOptions = {
+            from: formData.email,
+            to: 'glvmusicservices@gmail.com',
+            subject: `Performance Request from ${formData.lastName}, ${formData.firstName}`,
+            text: formData.message, //fix later,
+        }
+        const result = await transporter.sendMail(mailOptions)
+        return result
+    } catch (err) {
+        throw new Error(`Failed to send email: ${err.message}`)
+    }
+}
+
+// db connections, models
 const db = require('../models')
 
-/* require jwt config
---------------------------------------------------------------- */
+// req jwt config
 const config = require('../../jwt.config.js')
 
-/* jwt middleware
---------------------------------------------------------------- */
+// jwt middlewawre
 const authMiddleware = (req, res, next) => {
-    const token = req.headers.authorization;
+    const token = req.headers.authorization
     if (token) {
         try {
-            const decodedToken = jwt.decode(token, config.jwtSecret);
-            req.user = decodedToken;
-            next();
+            const decodedToken = jwt.decode(token, config.jwtSecret)
+            req.user = decodedToken
+            next()
         } catch (err) {
-            res.status(401).json({ message: 'Invalid token' });
+            res.status(401).json({ message: 'Invalid token' })
         }
     } else {
-        res.status(401).json({ message: 'Missing or invalid Authorization header' });
+        res.status(401).json({ message: 'Missing or invalid Authorization header' })
     }
-};
+}
 
-/* routes
----------------------------------------------------------- */
+// routes
 // display all requests made by client
 router.get('/:clientId', function (req, res) {
     db.Request.find({ clientId: req.params.clientId })
@@ -54,6 +87,18 @@ router.post('/', authMiddleware, (req, res) => {
         senderId: req.user.id
     })
         .then(review => res.json(review))
+})
+
+router.post('/send-email', authMiddleware, async (req, res) => {
+    const formData = req.body
+    try {
+        const result = await sendEmail(formData)
+        console.log('Email sent:', result)
+        res.status(200).send('Email sent successfully')
+    } catch (err) {
+        console.error('Error sending email:', err)
+        res.status(500).send('Error sending email')
+    }
 })
 
 // edit request (client & admin access only)

@@ -2,7 +2,7 @@ import trashIcon from '../../assets/trash-icon.jpeg'
 import { Link } from 'react-router-dom'
 import RequestPage from '../RequestPage'
 
-export default function CurrentCart({ opuses, loginStatus, userCart, setUserCart, getOpusData, totalPrice }) {
+export default function CurrentCart({ isMenuOpen, opuses, loginStatus, userCart, setUserCart, getOpusData, totalPrice }) {
     let cartText = userCart.length > 0 ? 'Your cart' : 'Your cart is empty.'
     let btnStyle = 'border-stone-200 border rounded-xl px-3 py-1 my-2 w-full hover:scale-125 hover:cursor-pointer hover:bg-amber-400 hover:text-stone-900 hover:duration-500'
 
@@ -38,7 +38,7 @@ export default function CurrentCart({ opuses, loginStatus, userCart, setUserCart
     
     return loginStatus
     ? (
-        <main className='flex flex-col justify-center items-center'>
+        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} flex flex-col justify-center items-center`}>
             <p className="text-center my-12">{cartText}</p>
             {userCart.map(item => {
                 let mvmts = item.movements.length > 0
@@ -98,5 +98,5 @@ export default function CurrentCart({ opuses, loginStatus, userCart, setUserCart
             </div>
         </main>
     )
-    : <h1 className='text-3xl text-center min-h-[75vh] mt-24'>Please sign up or log in to access this part of the site.</h1>
+    : <h1 className={`${isMenuOpen ? 'z-0 opacity-5' : ''} text-3xl text-center min-h-[75vh] mt-24`}>Please sign up or log in to access this part of the site.</h1>
 }

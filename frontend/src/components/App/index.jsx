@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import { Routes, Route, Link, useNavigate } from 'react-router-dom'
 import HomePage from '../HomePage'
 import AboutPage from '../AboutPage'
+import NewCompositionsPage from '../NewCompositionsPage'
+import MobilePianoConcertSeriesPage from '../MobilePianoConcertSeriesPage'
 import NotFoundPage from '../NotFoundPage'
 import AuthFormPage from '../AuthFormPage'
 import RepertoirePage from '../RepertoirePage'
@@ -24,6 +26,7 @@ export default function App() {
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
 	const navigate = useNavigate()
 	let totalPrice = 0
+	let pCategoryStyle = 'underline font-bold text-2xl p-2'
 
     for (let opus of opuses) {
         if (!allComposers.includes(opus.composer)) allComposers.push(opus.composer)
@@ -73,6 +76,7 @@ export default function App() {
 	let h2Style = "text-stone-200 my-5 hover:scale-110 duration-500"
 	let authLink =
 		<div className='border-t border-stone-200 w-1/2 mx-auto'>
+			<p className={pCategoryStyle}>ACCOUNT</p>
 			<Link onClick={() => setIsMenuOpen(false)} to="/auth/signup">
 				<h2 className={h2Style}>Sign Up</h2>
 			</Link>
@@ -122,9 +126,19 @@ export default function App() {
 				</div>
 			</nav>
 			<div className={`${isMenuOpen ? 'opacity-100 z-50' : 'hidden'} duration-500 absolute left-1/4 top-1/4 w-1/2 text-xl text-center`}>
+				<p className={pCategoryStyle}>INFORMATION</p>
 				<Link to='/about' onClick={() => setIsMenuOpen(false)}><h1 className={h2Style}>About GLVMS</h1></Link>
 				<Link to='/repertoire' onClick={() => setIsMenuOpen(false)}><h1 className={h2Style}>Repertoire List</h1></Link>
 				<Link to='/musicians' onClick={() => setIsMenuOpen(false)}><h1 className={h2Style}>Our Musicians</h1></Link>
+				<div className='border-t border-stone-200 w-1/2 mx-auto'>
+					<p className={pCategoryStyle}>STORES</p>
+					<Link onClick={() => setIsMenuOpen(false)} to="/ncs">
+						<h2 className={h2Style}>New Compositions Store</h2>
+					</Link>
+					<Link onClick={() => setIsMenuOpen(false)} to="/mpcs">
+						<h2 className={h2Style}>Mobile Piano Concert Series</h2>
+					</Link>
+				</div>
 				{profileLink}
 				{authLink}
 			</div>
@@ -187,6 +201,16 @@ export default function App() {
 				/>
 				<Route path="/about" element={
 					<AboutPage
+						isMenuOpen={isMenuOpen}
+					/>}
+				/>
+				<Route path="/ncs" element={
+					<NewCompositionsPage
+						isMenuOpen={isMenuOpen}
+					/>}
+				/>
+				<Route path="/mpcs" element={
+					<MobilePianoConcertSeriesPage
 						isMenuOpen={isMenuOpen}
 					/>}
 				/>

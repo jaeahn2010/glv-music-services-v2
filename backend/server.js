@@ -21,7 +21,7 @@ const reviewsCtrl = require('./controllers/reviews')
 
 /* create express app
 ---------------------------------------------------------- */
-const app = express();
+const app = express()
 
 /* middleware
 ---------------------------------------------------------- */
@@ -52,7 +52,7 @@ app.get('/seed', function (req, res) {
                     res.json(addedOpuses)
                 })
         })           
-});
+})
 
 // Any other route not matching the routes above gets routed by React
 // app.get('*', (req, res) => {
@@ -62,5 +62,5 @@ app.get('/seed', function (req, res) {
 /* listen to port
 ---------------------------------------------------------- */
 app.listen(process.env.PORT, function () {
-    console.log('Express is listening to port', process.env.PORT);
-});
+    console.log('Express is listening to port', process.env.PORT)
+})

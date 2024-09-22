@@ -174,6 +174,16 @@ export async function deleteRequest(requestId) {
     }
 }
 
+// email sender
+export async function sendEmail(email) {
+    try {
+        const { data } = await axios.post('/request/send-email', email, { withCredentials: true })
+    } catch (err) {
+        console.error('Error sending email: ', err)
+        throw err
+    }
+}
+
 //reviews CRUD
 export async function getReviewsByClient(clientId) {
     try {
