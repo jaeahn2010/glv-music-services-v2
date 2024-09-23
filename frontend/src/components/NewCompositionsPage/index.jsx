@@ -191,7 +191,7 @@ export default function NewCompositionsPage({ isMenuOpen }) {
                 <p className="my-6">Year composed: {currentComposition.yearComposed}</p>
             </div>
             : ''}
-            <h1 className="text-center text-3xl my-24">GLVMS Composition Store</h1>
+            <h1 className="text-center text-3xl my-24">GLVMS New Compositions Store</h1>
             <table className={`${showDetails ? 'opacity-20 z-0' : 'z-50'} border border-stone-200 text-sm w-11/12 mx-auto mb-12 table-fixed`}>
                 <thead>
                     <tr className="font-bold border border-stone-200 bg-stone-700">

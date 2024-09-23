@@ -1,7 +1,10 @@
+import { useState } from "react"
+
 class Concert {
-    constructor(title, opuses = [], duration, basePrice) {
+    constructor(pianist, title, program = [], duration, basePrice) {
+        this.pianist = pianist
         this.title = title
-        this.opuses = opuses
+        this.program = program
         this.duration = duration
         this.basePrice = basePrice
     }
@@ -72,8 +75,72 @@ const availableConcerts = [
     ], 60, 125],
 ]
 
+const concertObjs = availableConcerts.map(concert => new Concert ('Ahn-Benton, Jae', concert[0], concert[1], concert[2], concert[3]))
+let tdStyle = 'border border-stone-200 text-center py-1'
+let btnStyle = 'border border-stone-200 rounded-xl p-2 m-3 hover:bg-amber-400 hover:text-stone-800'
+
 export default function MobilePianoConcertSeriesPage({ isMenuOpen }) {
+    const [showDetails, setShowDetails] = useState(false)
+    const [currentConcert, setCurrentConcert] = useState({})
     return (
-        <h1>mobile piano concert series page</h1>
+        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} relative`}>
+            {currentConcert.pianist
+            ? <div className={`${showDetails ? 'z-50' : 'hidden'} absolute w-3/4 h-[75%] left-[12.5%] top-[10%] border border-stone-200 flex flex-col justify-center items-center bg-stone-700 rounded-3xl overflow-y-auto py-6`}>
+                <p className="text-3xl my-6 font-bold text-center">{currentConcert.title}</p>
+                <p className="italic my-2">presented by</p>
+                <p>{`${currentConcert.pianist.split(', ')[1]} ${currentConcert.pianist.split(', ')[0]}`}, piano</p>
+                <img className="border border-stone-200 rounded-xl min-h-[30vh] h-1/2 w-1/2 my-5" src="" alt=""/>
+                <div className="border border-stone-200 rounded-xl w-11/12">
+                    <p className="text-2xl underline text-center my-2">Program</p>
+                    {currentConcert.program.map(opus => <div key={opus[0] + opus[1]} className="flex justify-between m-1 p-1 text-sm">
+                        <p className="w-3/4">{opus[0]}</p>
+                        <p className="w-1/4">{opus[1]}</p>
+                    </div>)}
+                </div>
+                <p className="mt-3">Approximate Duration: <span className="font-bold">{currentConcert.duration} minutes</span></p>
+                <p className="mb-3">Base Price: <span className="font-bold">${currentConcert.basePrice}</span></p>
+                <div>
+                    <button className={btnStyle}>BOOK THIS CONCERT</button>
+                    <button className={btnStyle} onClick={() => {
+                        setShowDetails(false)
+                    }}>CLOSE</button>
+                </div>
+            </div>
+            : ''}
+            <h1 className="text-center text-3xl my-24">GLVMS Mobile Piano Concert Series</h1>
+            <p>Bring a professional-caliber classical piano performance right to your doorstep! Simply pick a concert from the below menu, and request a date, time, and location. Once confirmed by GLVMS, one of our pianists will show up at your designated location at the designated date and time, and will perform the requested concert. That's it! No hassle, no confusion.</p>
+            <table className={`border border-stone-200 text-sm w-11/12 mx-auto mb-12 table-fixed my-12`}>
+                <thead>
+                    <tr className="font-bold border border-stone-200 bg-stone-700" >
+                        <td className={tdStyle + ' w-[20%]'}>Pianist</td>
+                        <td className={tdStyle + ' w-[50%]'}>Title</td>
+                        <td className={tdStyle + ' w-[15%]'}>Approximate Duration</td>
+                        <td className={tdStyle + ' w-[15%]'}>Base Price</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {concertObjs.map(concert => <tr key={concert.title} className="hover:bg-stone-600 hover:cursor-pointer" onClick={() => {
+                        setShowDetails(true)
+                        setCurrentConcert(concert)
+                    }}>
+                        <td className={tdStyle}>{concert.pianist}</td>
+                        <td className={tdStyle}>{concert.title}</td>
+                        <td className={tdStyle}>{concert.duration} minutes</td>
+                        <td className={tdStyle}>${concert.basePrice}</td>
+                    </tr>)}
+                </tbody>
+            </table>
+            <aside>
+                <p>Disclaimers:</p>
+                <ul className="list-disc list-inside">
+                    <li>These concerts are primarily designed for intimate home settings, either completely private just for 1 person, or up to an audience size of 10 people. For large-scale performance requests, please visit the main GLVMS repertoire page.</li>
+                    <li>Light snacks may be added for your enjoyment during the concert for a small fee.</li>
+                    <li>No piano at home? No problem. Our pianist will bring a fully functional electric keyboard.</li>
+                    <li>Please allow up to 15 minutes of setup and strike-down time before and after the requested performance timeframe.</li>
+                    <li>A travel fee ranging from $5 to $25 may apply depending on the requested location within the greater Las Vegas area. Additional fees may apply for performance requests outside of the greater Las Vegas area.</li>
+                    <li>Repertoire substitutions may be allowed. Additional fees may apply.</li>
+                </ul>
+            </aside>
+        </main>
     )
 }
