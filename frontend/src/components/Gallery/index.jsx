@@ -20,7 +20,7 @@ export default function Gallery({ opuses, getFilteredData, updateDetails, loginS
     }
 
     return (
-        <div className="w-11/12 mt-10 mx-auto">
+        <div className="w-11/12 lg:w-1/2 mt-10 mx-auto font-poppins">
             {galleryContent}
         </div>
     )

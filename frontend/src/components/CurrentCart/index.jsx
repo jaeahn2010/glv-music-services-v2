@@ -38,7 +38,7 @@ export default function CurrentCart({ isMenuOpen, opuses, loginStatus, userCart,
     
     return loginStatus
     ? (
-        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} flex flex-col justify-center items-center`}>
+        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} flex flex-col justify-center items-center font-poppins`}>
             <p className="text-center my-12">{cartText}</p>
             {userCart.map(item => {
                 let mvmts = item.movements.length > 0

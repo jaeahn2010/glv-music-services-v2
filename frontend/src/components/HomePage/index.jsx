@@ -44,7 +44,7 @@ export default function HomePage({isMenuOpen}) {
     }, [])
 
     return (
-        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} mx-auto w-5/6`}>
+        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} mx-auto w-5/6 font-poppins`}>
             <h1 className="text-center text-xl my-5">Welcome to the Greater Las Vegas Music Services (GLVMS)!</h1>
             <p className="tex mx-auto w-11/12">In a need to hire musicians for your event? On this website, you can customize your music setlist to perfectly match your event - weddings, corporate events, open houses, private parties, formal recitals, and more! And the exact cost of the music is disclosed to you up front. No hassle, no ambiguity. Explore our menu above to explore more about us, our musicians, and our available repertoire.</p>
             <section className="w-full">

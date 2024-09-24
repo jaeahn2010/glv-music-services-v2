@@ -8,10 +8,10 @@ export default function RepertoirePage({ isMenuOpen, opuses, setOpuses, allCompo
     let filterInputStyle = 'w-1/2 text-stone-800 text-sm'
 
     return (
-        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} text-stone-200`}>
+        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} text-stone-200 font-poppins`}>
             <h1 className="mt-5 text-center text-2xl font-bold">Available Repertoire</h1>
             <h2 className="text-center font-semibold italic my-5">See all available repertoire below, or use the filters to find your desired repertoire.</h2>
-            <section className="border border-stone-400 rounded-xl my-2 py-2 w-11/12 mx-auto">
+            <section className="border border-stone-400 rounded-xl my-2 py-2 w-11/12 lg:w-1/2 mx-auto">
                 <p className="text-center underline">FILTERS</p>
                 <div className="w-full">
                     <div className={filterDivStyle}>

@@ -5,7 +5,7 @@ export default function MusiciansPage({ isMenuOpen, musicians, setMusicians, get
     let instruments = ['bassoon', 'cello', 'clarinet', 'contrabass', 'flute', 'guitar', 'harp', 'oboe', 'orchestra', 'piano', 'percussion', 'saxophone', 'trombone', 'trumpet', 'tuba/euphonium', 'viola', 'violin']
 
     return (
-        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} text-stone-400"`}>
+        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} text-stone-400 font-poppins`}>
             <h1 className="mt-5 text-center md:text-3xl text-2xl font-bold">Our Musicians</h1>
             <section className="flex flex-col justify-center items-center my-2 py-2">
                 <label htmlFor='instrumentFilter'>FILTER BY INSTRUMENT</label>

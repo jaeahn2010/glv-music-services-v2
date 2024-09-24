@@ -117,7 +117,7 @@ export default function App() {
 		<>
 			<nav className="flex items-center justify-between h-16 bg-gradient-to-r from-green-950 via-green-500 to-green-950 shadow-lg lg:px-9 md:px-6 px-3 font-poppins">
 				<Link to="/">
-					<h2 onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-white font-bold md:text-2xl sm:text-xl">Greater Las Vegas Music Services</h2>
+					<h2 onClick={() => setIsMenuOpen(false)} className="text-white font-bold md:text-2xl sm:text-xl">Greater Las Vegas Music Services</h2>
 				</Link>
 				<div className="text-3xl hover:cursor-pointer" onClick={() => setIsMenuOpen(!isMenuOpen)}>
 					<div className={`border-stone-200 border-y-2 w-[5vw] min-w-[30px] my-1.5 rounded-3xl duration-500 ${isMenuOpen ? '-rotate-45 translate-y-[10px]' : ''}`}></div>
@@ -125,7 +125,7 @@ export default function App() {
 					<div className={`border-stone-200 border-y-2 w-[5vw] min-w-[30px] my-1.5 rounded-3xl duration-500 ${isMenuOpen ? '-rotate-45 -translate-y-[10px]' : ''}`}></div>
 				</div>
 			</nav>
-			<div className={`${isMenuOpen ? 'opacity-100 z-50' : 'hidden'} duration-500 absolute left-1/4 top-1/4 w-1/2 text-xl text-center`}>
+			<div className={`${isMenuOpen ? 'opacity-100 z-50' : 'hidden'} duration-500 absolute left-1/4 top-1/4 w-1/2 text-xl text-center font-poppins`}>
 				<p className={pCategoryStyle}>INFORMATION</p>
 				<Link to='/about' onClick={() => setIsMenuOpen(false)}><h1 className={h2Style}>About GLVMS</h1></Link>
 				<Link to='/repertoire' onClick={() => setIsMenuOpen(false)}><h1 className={h2Style}>Repertoire List</h1></Link>

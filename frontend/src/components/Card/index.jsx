@@ -9,7 +9,7 @@ export default function Card({ opus, getFilteredData, updateDetails, loginStatus
 
     return (
         <Link to={"/details/" + opus._id} onClick={() => updateDetails(opus)}>
-            <figure className="flex my-5 p-2 text-stone-400 border-2 border-stone-400 rounded-xl bg-stone-800 shadow-lg hover:scale-105 hover:cursor-pointer hover:bg-amber-400 hover:text-stone-900 hover:duration-500">
+            <figure className="flex my-5 p-2 text-stone-400 border-2 border-stone-400 rounded-xl bg-stone-800 shadow-lg hover:scale-105 hover:cursor-pointer hover:bg-amber-400 hover:text-stone-900 hover:duration-500 font-poppins">
                 <figcaption className="py-2 px-2 w-full">
                     <h1 className="p-2 bg-stone-600 text-stone-200 font-bold">{opus.title.toUpperCase()}</h1>
                     <table className="w-full">

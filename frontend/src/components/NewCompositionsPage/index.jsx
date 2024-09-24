@@ -166,7 +166,7 @@ export default function NewCompositionsPage({ isMenuOpen }) {
     const [showDetails, setShowDetails] = useState(false)
     const [currentComposition, setCurrentComposition] = useState({})
     return (
-        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} relative`}>
+        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} relative font-poppins`}>
             {currentComposition.composer
             ? <div className={`${showDetails ? 'z-50' : 'hidden'} absolute w-2/3 h-[50%] left-[16.67%] top-[10%] border border-stone-200 flex flex-col justify-center items-center bg-stone-700 rounded-3xl overflow-y-auto`}>
                 <p className="font-bold text-lg my-2">{currentComposition.composer}</p>

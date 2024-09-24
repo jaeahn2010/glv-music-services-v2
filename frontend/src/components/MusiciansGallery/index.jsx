@@ -20,7 +20,7 @@ export default function MusiciansGallery({ musicians, getFilteredData, updateDet
     }
 
     return (
-        <div className="w-11/12 mt-10 mx-auto">
+        <div className="w-11/12 mt-10 mx-auto font-poppins">
             {galleryContent}
         </div>
     )

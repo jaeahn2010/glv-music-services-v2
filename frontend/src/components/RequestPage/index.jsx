@@ -54,7 +54,7 @@ export default function RequestPage({ isMenuOpen, opuses, musicians, getFiltered
     }
 
     return (
-        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''}`}>
+        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} font-poppins`}>
             <div className="flex flex-col justify-center items-center w-11/12 mx-auto my-6">
                 <p className="text-xl">Please fill out the form below to finalize your request.</p>
             </div>
