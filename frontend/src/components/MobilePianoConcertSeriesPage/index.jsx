@@ -7,8 +7,10 @@ import ballroom3 from '../../assets/mpcs-ballroom-3.jpg'
 import carnival from '../../assets/mpcs-carnival.png'
 import airEarth from '../../assets/mpcs-elements-air-earth.jpg'
 import fireWater from '../../assets/mpcs-elements-fire-water.png'
-import zookeeper from '../../assets/mpcs-zookeeper.png'
-import ukraineResistance from '../../assets/mpcs-ukraine-resistance.png'
+import zookeeper1 from '../../assets/mpcs-zookeeper.png'
+import zookeeper2 from '../../assets/mpcs-zookeeper-2.png'
+import ukraineResistance1 from '../../assets/mpcs-ukraine-resistance.png'
+import ukraineResistance2 from '../../assets/mpcs-ukrainian-resistance-2.png'
 import impostorsThieves from '../../assets/mpcs-impostors-thieves.png'
 import classics1 from '../../assets/mpcs-classics-1.jpg'
 import classics2 from '../../assets/mpcs-classics-2.jpg'
@@ -29,8 +31,11 @@ import chopin from '../../assets/mpcs-chopin.jpeg'
 import liszt from '../../assets/mpcs-liszt.jpeg'
 import mozart from '../../assets/mpcs-mozart.jpeg'
 import rachmaninov from '../../assets/mpcs-rachmaninov.jpeg'
+import prokofiev from '../../assets/mpcs-prokofiev.jpeg'
 import shostakovich from '../../assets/mpcs-shostakovich.jpeg'
 import remembrance from '../../assets/mpcs-remembrance.jpg'
+import traveling from '../../assets/mpcs-traveling.png'
+import march from '../../assets/mpcs-march.png'
 
 class Concert {
     constructor(pianist, title, program = [], duration, basePrice, poster) {
@@ -131,6 +136,7 @@ const beethovenTurkish = ['Turkish March', 'Ludwig van Beethoven']
 const bePrepared = ['"Be Prepared" from "The Lion King"', 'Elton John']
 const blueDanube = ['Blue Danube Waltz', 'Johann Strauss II']
 const blumenlied = ['Blumenlied, Op. 39', 'Gustav Lange']
+const bortkevychMorceaux = ['3 Morceaux, Op. 24', 'Sergei Bortkevych']
 const bozzaAria = ['Aria (arr. Ahn-Benton)', 'Eugene Bozza']
 const brahmsHandel = ['Variations on a Theme by Händel, Op. 24', 'Johannes Brahms']
 const brahmsIntermezzo118_2 = ['Intermezzo, Op. 118, No. 2', 'Johannes Brahms']
@@ -263,7 +269,8 @@ const diabelli = ['Diabelli Variations, Op. 120', 'Ludwig van Beethoven']
 const diabolicSuggestion = ['Suggestion diabolique, Op. 4, No. 4', 'Sergei Prokofiev']
 const dvorakHumoresque = ['Humoresque in G-flat major, Op. 101, No. 7', 'Antonin Dvořák']
 const dvorakLargo = ['"Largo" from "New World Symphony" (arr. Juon)', 'Antonin Dvořák']
-const dvorakSymphony9 = ['"New World Symphony"', 'Antonin Dvorak']
+const dvorakSymphony9 = ['"New World Symphony"', 'Antonin Dvořák']
+const dvorakSymphony9Finale = ['"Finale" from "New World Symphony"', 'Antonin Dvořák']
 const entertainer = ['The entertainer', 'Scott Joplin']
 const erdasWarning = ['Erda\'s Warning from "Das Rheingold" (arr. Ahn-Benton)', 'Richard Wagner']
 const eros = ['"Eros" from "3 morceaux, Op. 24"', 'Sergei Bortkevych']
@@ -308,10 +315,11 @@ const gaston = ['"Gaston" from "Beauty and the Beast"', 'Alan Menken']
 const gershwinPrelude2 = ['Prelude No. 2', 'George Gershwin']
 const gershwinPreludes = ['3 Preludes', 'George Gershwin']
 const ginasteraSonata1 = ['Sonata No. 1, Op. 22', 'Alberto Ginastera']
-const ginasteraSonatat2 = ['Sonata No. 2, Op. 53', 'Alberto Ginastera']
+const ginasteraSonata2 = ['Sonata No. 2, Op. 53', 'Alberto Ginastera']
 const giovanniOverture = ['Overture from "Don Giovanni"', 'Wolfgang Amadeus Mozart']
 const goldberg = ['Goldberg Variations', 'Johann Sebastian Bach']
 const gretchen = ['Gretchen am Spinnrade (arr. Liszt)', 'Franz Schubert']
+const hakunaMatata = ['"Hakuna Matata" from "The Lion King"', 'Elton John']
 const halloweenTheme = ['Theme from "Halloween" (arr. Ahn-Benton)', 'John Carpenter']
 const harryPotterSelections = ['Selections from "Harry Potter" (arr. Ahn-Benton)', 'John Williams']
 const hanselGretel = ['Selections from "Hänsel und Gretel"', 'Engelbert Humperdinck']
@@ -394,6 +402,8 @@ const peopleUnited = ['The People United Will Never Be Defeated!', 'Frederic Rze
 const petrushka = ['Petrushka', 'Igor Stravinsky']
 const phantomSelections = ['Selections from "The Phantom of the Opera"', 'Andrew Lloyd Weber']
 const pictures = ['Pictures at an Exhibition', 'Modest Mussorgsky']
+const picturesBydlo = ['"Bydło" from "Pictures at an Exhibition"', 'Modest Mussorgsky']
+const picturesUnhatched = ['"Ballet of the Unhatched Chickens" from "Pictures at an Exhibition"', 'Modest Mussorgsky']
 const pilgrimage1_5 = ['Orage', 'Franz Liszt']
 const pilgrimage2_1 = ['Sposalizio', 'Franz Liszt']
 const pilgrimage2s = ['Années de pèlerinage, Italie - Venezia', 'Franz Liszt']
@@ -406,6 +416,7 @@ const pompCircumstance = ['Pomp and Circumstance No. 1', 'Edward Elgar']
 const poule = ['La poule', 'Jean-Philippe Rameau']
 const poorUnfortunateSouls = ['"Poor Unfortunate Souls" from "The Little Mermaid"', 'Alan Menken']
 const preludeFugueVariation = ['Prelude, Fugue, and Variation, Op. 18', 'César Franck']
+const prokofievCinderella = ['Selections from "Cinderella"', 'Sergei Prokofiev']
 const prokofievRomeoJuliet = ['Selections from "Romeo and Juliet"', 'Sergei Prokofiev']
 const prokofievSonata1 = ['Sonata No. 1 in F minor, Op. 1', 'Sergei Prokofiev']
 const prokofievSonata2 = ['Sonata No. 2 in D minor, Op. 14', 'Sergei Prokofiev']
@@ -553,18 +564,23 @@ const availableConcerts = [
     ['Impostors and Thieves', [bachChaconne, bozzaAria, chopinEtude25_1, chopinEtude25_7, lisztPaganini3, preludeFugueVariation, vivaldiWinter, vocalise, brahmsPaganini1], 75, 150, impostorsThieves],
     ['Lisztomania', [hungarianRhapsody2, consolation3, lisztPaganini3, pilgrimage2s, liebestraum ,lisztSonata], 75, 200, liszt],
     ['Lullaby Collection', [consolation3, beethovenSonata14_1, chopinBerceuse, clairDeLune, scarlatti87, traumerei, brahmsLullaby, beethovenSonata1_2, chopinNocturne9_2, debussyReverie, solveig, gershwinPrelude2, bachAir, americanPreludes2, bachWTC1_1_1, chansonTriste, vocalise, salutDamour], 75, 100, lullaby],
+    ['Marching On', [radetzky, ahnbenton3, chopinPolonaise40_1, beethovenSonata12_3, militaryMarch, bridalMarch, rakoczy, chopinFuneral, pompCircumstance, etudeTableau33_4, starsStripes], 60, 150, march],
     ['Mozart Mastermind', [giovanniOverture, mozartSonata12, mozartAdagio, mozartVariations, mozartSonata8, volodosTurkish], 75, 150, mozart],
     ['Ocean Waves', [silveryWaves, etudeTableau39_2, miroirs3, chopinEtude25_12, ahnbenton79_4, mer], 65, 125, ocean],
     ['The Opera House 1', [figaroOverture, isoldesLiebestod, carmenVariations, forzaOverture, songbookSelections, vocalise, lisztFigaro], 60, 150, opera1],
     ['The Opera House 2', [williamTellOverture, solveig, chopinGiovanni, mascagniIntermezzo, tarasBulbaOverture, carmenSelections, erlkonig, lisztRigoletto], 65, 150, opera2],
+    ['Power of Prokofiev', [diabolicSuggestion, prokofievRomeoJuliet, prokofievSonata3, prokofievToccata, prokofievSonata7], 65, 175, prokofiev],
     ['Raisin Brahms', [brahmsSonata1, brahmsIntermezzo118_2, brahmsPaganini1, brahmsLullaby, hungarianDance5, brahmsHandel], 75, 175, brahms],
     ['Remembrance', [faurePavane, mozartSonata8, rachmaninovElegy, ravelPavane, bachChaconne, chopinFuneral, lisztBallade2, babadjanianElegy], 80, 125, remembrance],
     ['Rockin\' with Rachmaninov', [etudeTableau39_1, etudeTableau39_5, etudeTableau39_6, rachmaninovElegy, rachmaninovMusical16_3, rachmaninovMusical16_4, rachmaninovPrelude23_5, rachmaninovPrelude32_10, etudeTableau33_5, vocalise, rachmaninovSonata2], 75, 200, rachmaninov],
     ['Shadow of Shostakovich', [shostakovichPreludeFugue24, fantasticDances, shostakovichSonata2, shostakovichPreludes34, shostakovichSymphony5_4], 80, 200, shostakovich],
-    ['Ukrainian Resistance', [tarasBulbaOverture, kitschMusyka, revutskyPreludes7, ahnbenton99, skorykBurleska, lyatoshynskyPreludes, kosenkoSonata2], 75, 175, ukraineResistance],
+    ['Traveling Musician', [wanderersFantasy, pilgrimage3_4, dvorakSymphony9Finale, islamey, ahnbenton76, americanInParis], 70, 175, traveling],
+    ['Ukrainian Resistance 1', [tarasBulbaOverture, kitschMusyka, revutskyPreludes7, ahnbenton99, skorykBurleska, lyatoshynskyPreludes, kosenkoSonata2], 75, 175, ukraineResistance1],
+    ['Ukrainian Resistance 2', [ukrainianSuite1, bortkevychMorceaux, skorykPartita5, shamoToccata, revutskyPieces17, kosenkoSonata3, skorykMelodia], 65, 125, ukraineResistance2],
     ['Valentine\'s Day Special 1', [ahnbenton64_2, pasDeDeux, chopinBallade3, canYouFeelTheLoveTonight, liebestraum, loveMeTender, mascagniIntermezzo, weddingMarch, isoldesLiebestod, ahnbenton87], 60, 125, valentine1],
     ['Valentine\'s Day Special 2', [salutDamour, chopinGiovanni, eros, bridalMarch, cantHelpFallingInLove, weddingMarch, aWholeNewWorld, vienneseDances, chopinBallade2, ahnbenton87], 65, 150, valentine2],
-    ['Zookeeper', [swanLakeTheme, miroirs2, poule, images6, chopinEtude25_2, beethovenSonata25, scarlatti30, chopinEtude25_9, lark, cygne, ahnbenton91, bumblebee], 60, 125, zookeeper],
+    ['Zookeeper 1', [swanLakeTheme, miroirs2, poule, images6, chopinEtude25_2, beethovenSonata25, scarlatti30, chopinEtude25_9, lark, cygne, ahnbenton91, bumblebee], 60, 125, zookeeper1],
+    ['Zookeeper 2', [vivaldiSpring, etudeTableau39_2, chopinWaltz64_1, picturesBydlo, forelle, picturesUnhatched, annaKarenina, chopinEtude25_3, miroirs1, cuckooWaltz, etudeTableau39_6, carnavalDesAnimaux], 55, 100, zookeeper2],
 ]
 
 const concertObjs = availableConcerts.map(concert => new Concert ('Ahn-Benton, Jae', concert[0], concert[1], concert[2], concert[3], concert[4]))
@@ -581,7 +597,7 @@ export default function MobilePianoConcertSeriesPage({ isMenuOpen }) {
                 <p className="text-3xl my-6 font-bold text-center">{currentConcert.title}</p>
                 <p className="italic my-2">presented by</p>
                 <p>{`${currentConcert.pianist.split(', ')[1]} ${currentConcert.pianist.split(', ')[0]}`}, piano</p>
-                <img className="border border-stone-200 rounded-xl min-h-[60vh] h-1/2 w-1/2 my-5" src={currentConcert.poster} alt='poster'/>
+                <img className="border border-stone-200 rounded-xl min-h-[30vh] w-1/4 my-5" src={currentConcert.poster} alt='poster'/>
                 <div className="border border-stone-200 rounded-xl w-11/12 bg-stone-500">
                     <p className="text-2xl underline text-center my-2">Program</p>
                     {currentConcert.program.map(opus => <div key={opus[0] + opus[1]} className="flex justify-between m-1 p-1 text-sm">
