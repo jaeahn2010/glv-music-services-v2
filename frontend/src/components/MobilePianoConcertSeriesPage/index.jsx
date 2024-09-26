@@ -595,7 +595,7 @@ export default function MobilePianoConcertSeriesPage({ isMenuOpen }) {
     return (
         <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} relative font-poppins`}>
             {currentConcert.pianist
-            ? <div className={`${showDetails ? 'z-50' : 'hidden'} absolute w-3/4 h-[75%] left-[12.5%] border border-stone-200 flex flex-col justify-center items-center bg-stone-700 rounded-3xl overflow-y-auto py-6`}>
+            ? <div className={`${showDetails ? 'z-50' : 'hidden'} absolute w-3/4 h-[50%] left-[12.5%] border border-stone-200 flex flex-col justify-center items-center bg-stone-700 rounded-3xl overflow-y-auto py-6`}>
                 <p className="text-3xl my-6 font-bold text-center">{currentConcert.title}</p>
                 <p className="italic my-2">presented by</p>
                 <p>{`${currentConcert.pianist.split(', ')[1]} ${currentConcert.pianist.split(', ')[0]}`}, piano</p>

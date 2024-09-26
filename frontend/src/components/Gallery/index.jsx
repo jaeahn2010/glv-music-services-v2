@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Card from '../Card'
 
-export default function Gallery({ opuses, getFilteredData, updateDetails, loginStatus }) {
+export default function Gallery({ opuses, getFilteredOpusData, updateDetails, loginStatus }) {
     const [endDisplayIndex, setEndDisplayIndex] = useState(20)
     let galleryContent = <p>None found</p>
     if (opuses.length > 0) {
@@ -10,7 +10,7 @@ export default function Gallery({ opuses, getFilteredData, updateDetails, loginS
             .map(opus => <Card
                 key={opus._id}
                 opus={opus}
-                getFilteredData={getFilteredData}
+                getFilteredOpusData={getFilteredOpusData}
                 updateDetails={updateDetails}
                 loginStatus={loginStatus}
             />)

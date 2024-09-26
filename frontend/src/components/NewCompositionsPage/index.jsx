@@ -161,6 +161,7 @@ const ahnBentonAvailableCompositions = [
 const ahnBentonCompositionObjs = ahnBentonAvailableCompositions.map(composition => new Composition ('Ahn-Benton, Jae', composition[0], composition[1], composition[2], composition[3], composition[4], composition[5], composition[6]))
 
 let tdStyle = 'border border-stone-200 text-center py-1'
+let btnStyle = 'border border-stone-200 rounded-xl p-2 m-3 hover:bg-amber-400 hover:text-stone-800'
 
 export default function NewCompositionsPage({ isMenuOpen }) {
     const [showDetails, setShowDetails] = useState(false)
@@ -189,6 +190,12 @@ export default function NewCompositionsPage({ isMenuOpen }) {
                         : ''}</p>)
                     : 'None'}</div>
                 <p className="my-6">Year composed: {currentComposition.yearComposed}</p>
+                <div>
+                    <button className={btnStyle}>BUY THIS COMPOSITION</button>
+                    <button className={btnStyle} onClick={() => {
+                        setShowDetails(false)
+                    }}>CLOSE</button>
+                </div>
             </div>
             : ''}
             <h1 className="text-center text-3xl my-24">GLVMS New Compositions Store</h1>

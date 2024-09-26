@@ -19,6 +19,7 @@ oauth2Client.setCredentials({
 })
 
 const sendEmail = async (formData) => {
+    console.log('within sendEmail function: ', formData)
     try {
         const accessToken = await oauth2Client.getAccessToken()
         const transporter = nodemailer.createTransport({
@@ -33,10 +34,21 @@ const sendEmail = async (formData) => {
             }
         })
         const mailOptions = {
-            from: formData.email,
+            from: formData.clientEmail,
             to: 'glvmusicservices@gmail.com',
-            subject: `Performance Request from ${formData.lastName}, ${formData.firstName}`,
-            text: formData.message, //fix later,
+            subject: `Performance Request from ${formData.clientEmail}`, // change to fname/lname later
+            text: `eventName: ${formData.eventName},
+            locationName: ${formData.eventLocation.locationName},
+            address: ${formData.eventLocation.address},
+            city: ${formData.eventLocation.city},
+            state: ${formData.eventLocation.state},
+            zipCode: ${formData.eventLocation.zipCode},
+            eventDate: ${formData.eventDate},
+            eventStartTime: ${formData.eventStartTime},
+            eventEndTime: ${formData.eventEndTime},
+            requestedRepertoire: ${formData.requestedRepertoire.map(rep => `${rep.composer}: ${rep.title} (${rep.movements})`)},
+            additionalComments: ${formData.additionalComments},
+            status: pending,`
         }
         const result = await transporter.sendMail(mailOptions)
         return result
@@ -53,7 +65,7 @@ const config = require('../../jwt.config.js')
 
 // jwt middlewawre
 const authMiddleware = (req, res, next) => {
-    const token = req.headers.authorization
+    const token = req.cookies.token
     if (token) {
         try {
             const decodedToken = jwt.decode(token, config.jwtSecret)

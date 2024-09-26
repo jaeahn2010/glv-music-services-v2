@@ -120,9 +120,9 @@ export default function App() {
 					<h2 onClick={() => setIsMenuOpen(false)} className="text-white font-bold md:text-2xl sm:text-xl">Greater Las Vegas Music Services</h2>
 				</Link>
 				<div className="text-3xl hover:cursor-pointer" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-					<div className={`border-stone-200 border-y-2 w-[5vw] min-w-[30px] my-1.5 rounded-3xl duration-500 ${isMenuOpen ? '-rotate-45 translate-y-[10px]' : ''}`}></div>
-					<div className={`border-stone-200 border-y-2 w-[5vw] min-w-[30px] my-1.5 rounded-3xl duration-500 ${isMenuOpen ? 'rotate-45' : ''}`}></div>
-					<div className={`border-stone-200 border-y-2 w-[5vw] min-w-[30px] my-1.5 rounded-3xl duration-500 ${isMenuOpen ? '-rotate-45 -translate-y-[10px]' : ''}`}></div>
+					<div className={`border-stone-200 border-y-2 w-[5vw] lg:w-[30px] min-w-[30px] my-1.5 rounded-3xl duration-500 ${isMenuOpen ? '-rotate-45 translate-y-[10px]' : ''}`}></div>
+					<div className={`border-stone-200 border-y-2 w-[5vw] lg:w-[30px] min-w-[30px] my-1.5 rounded-3xl duration-500 ${isMenuOpen ? 'rotate-45' : ''}`}></div>
+					<div className={`border-stone-200 border-y-2 w-[5vw] lg:w-[30px] min-w-[30px] my-1.5 rounded-3xl duration-500 ${isMenuOpen ? '-rotate-45 -translate-y-[10px]' : ''}`}></div>
 				</div>
 			</nav>
 			<div className={`${isMenuOpen ? 'opacity-100 z-50' : 'hidden'} duration-500 absolute left-1/4 top-1/4 w-1/2 text-xl text-center font-poppins`}>
@@ -155,7 +155,7 @@ export default function App() {
 						opuses={opuses}
 						setOpuses={setOpuses}
 						allComposers={allComposers}
-						getFilteredData={getOpusData}
+						getFilteredOpusData={getOpusData}
 						updateDetails={setDetailsData}
 						loginStatus={loginStatus}
 					/>}

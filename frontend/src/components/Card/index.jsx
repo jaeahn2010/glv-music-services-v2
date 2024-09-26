@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-export default function Card({ opus, getFilteredData, updateDetails, loginStatus }) {
+export default function Card({ opus, getFilteredOpusData, updateDetails, loginStatus }) {
     let bulkPrice = opus.price ? `$${opus.price}` : "Not available in bulk"
     let instrumentation = ''
     for (let instrument of opus.instrumentation) {

@@ -1,10 +1,11 @@
 import { useState } from "react"
+import { sendEmail } from "../../../utils/backend"
 let states = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VA', 'WA', 'WV', 'WI', 'WY']
 
 export default function RequestPage({ isMenuOpen, opuses, musicians, getFilteredData, updateDetails, loginStatus, userCart, setUserCart, totalPrice }) {
     const [requestData, setRequestData] = useState({
-        senderId: '',
-        recipientId: '',
+        clientEmail: '',
+        musicianEmail: '',
         eventName: '',
         eventLocation: {
             locationName: '',
@@ -21,8 +22,8 @@ export default function RequestPage({ isMenuOpen, opuses, musicians, getFiltered
         status: 'pending',
     })
     let divStyle = 'w-1/2 mx-auto flex'
-    let labelStyle = 'w-1/2 text-right m-1'
-    let inputStyle = 'w-1/2 text-left m-1 px-1 bg-stone-200 text-stone-800'
+    let labelStyle = 'w-1/2 text-right m-2'
+    let inputStyle = 'w-1/2 text-left m-2 p-1 bg-stone-200 text-stone-800 rounded-lg'
 
     function handleChange(evt) {
         setRequestData({
@@ -33,9 +34,27 @@ export default function RequestPage({ isMenuOpen, opuses, musicians, getFiltered
 
     function handleSubmit(evt) {
         evt.preventDefault()
+        sendEmail({
+            clientEmail: localStorage.getItem('email'),
+            musicianEmail: requestData.musicianEmail,
+            eventName: requestData.eventName,
+            eventLocation: {
+                locationName: requestData.locationName,
+                address: requestData.address,
+                city: requestData.city,
+                state: requestData.state,
+                zipCode:requestData.zipCode,
+            },
+            eventDate: requestData.eventDate,
+            eventStartTime: requestData.eventStartTime,
+            eventEndTime: requestData.eventEndTime,
+            requestedRepertoire: userCart,
+            additionalComments: requestData.additionalComments,
+            status: 'pending',
+        })
         setRequestData({
-            senderId: '',
-            recipientId: '',
+            clientEmail: '',
+            musicianEmail: '',
             eventName: '',
             eventLocation: {
                 locationName: '',
@@ -58,19 +77,18 @@ export default function RequestPage({ isMenuOpen, opuses, musicians, getFiltered
             <div className="flex flex-col justify-center items-center w-11/12 mx-auto my-6">
                 <p className="text-xl">Please fill out the form below to finalize your request.</p>
             </div>
-            <form className="w-11/12 mx-auto my-12 flex flex-col justify-center items-center">
-                <input type="hidden" value='tempSenderID'/>
+            <form onSubmit={handleSubmit} className="w-11/12 mx-auto my-12 flex flex-col justify-center items-center">
                 <div className={divStyle}>
-                    <label htmlFor="musician" className={labelStyle}>Requested musician:</label>
+                    <label htmlFor="musicianEmail" className={labelStyle}>Requested musician:</label>
                     <select
-                        name="musician"
-                        id="musician"
+                        name="musicianEmail"
+                        id="musicianEmail"
                         className={`text-stone-800 ${inputStyle}`}
                         defaultValue={0}
                         onChange={handleChange}
                     >
                         <option value="0" disabled>Choose a musician</option>
-                        {musicians.map(musician => <option key={musician._id} value={musician._id}>{musician.lastName}, {musician.firstName}</option>)}
+                        {musicians.map(musician => <option key={musician._id} value={musician.email}>{musician.lastName}, {musician.firstName}</option>)}
                     </select>
                 </div>
                 <div className={divStyle}>
@@ -98,10 +116,10 @@ export default function RequestPage({ isMenuOpen, opuses, musicians, getFiltered
                         />
                     </div>
                     <div className={divStyle}>
-                        <label htmlFor="locationAddress" className={labelStyle}>Address:</label>
+                        <label htmlFor="address" className={labelStyle}>Address:</label>
                         <input
-                            name='locationAddress'
-                            id='locationAddress'
+                            name='address'
+                            id='address'
                             className={inputStyle}
                             defaultValue={requestData.eventLocation.address}
                             placeholder="Location Address"
@@ -128,7 +146,7 @@ export default function RequestPage({ isMenuOpen, opuses, musicians, getFiltered
                             defaultValue={0}
                             onChange={handleChange}
                         >
-                            <option value="0" disabled selected>Choose a state</option>
+                            <option value="0" disabled>Choose a state</option>
                             {states.map(state => <option key={state} value={state}>{state}</option>)}
                         </select>
                     </div>
@@ -182,13 +200,13 @@ export default function RequestPage({ isMenuOpen, opuses, musicians, getFiltered
                 <div className='flex w-1/2 mx-auto'>
                     <p className={labelStyle}>Requested Repertoire:</p>
                     <div className="w-1/2">
-                        {userCart.map(opusInCart => <div key={opusInCart._id} className="border border-stone-200 p-2">
+                        {userCart.map(opusInCart => <div key={opusInCart._id} className="border border-stone-200 p-2 rounded-xl bg-stone-700">
                             <p className="underline">{opusInCart.composer}: {opusInCart.title}</p>
                             {opusInCart.movements.map(movement => <p key={movement.movementTitle}>{movement.movementTitle}</p>)}
                         </div>)}
                     </div>
                 </div>
-                <p className="text-center">Total price: ${totalPrice}</p>
+                <p className="text-center my-5">Total price: ${totalPrice}</p>
                 <div className={divStyle}>
                     <label htmlFor="additionalComments" className={labelStyle + ' min-h-[30vh]'}>Additional Comments:</label>
                     <textarea

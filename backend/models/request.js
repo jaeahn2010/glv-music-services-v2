@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 const requestSchema = new mongoose.Schema(
     {
@@ -23,4 +23,4 @@ const requestSchema = new mongoose.Schema(
 );
 
 // export to index.js
-module.exports = mongoose.model('Request', requestSchema);
+module.exports = mongoose.model('Request', requestSchema)

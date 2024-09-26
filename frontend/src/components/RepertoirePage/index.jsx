@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Gallery from '../Gallery'
 
-export default function RepertoirePage({ isMenuOpen, opuses, setOpuses, allComposers, getFilteredData, updateDetails, loginStatus }) {
+export default function RepertoirePage({ isMenuOpen, opuses, setOpuses, allComposers, getFilteredOpusData, updateDetails, loginStatus }) {
     let instruments = ['bassoon', 'cello', 'clarinet', 'contrabass', 'flute', 'guitar', 'harp', 'oboe', 'orchestra', 'piano', 'percussion', 'saxophone', 'trombone', 'trumpet', 'tuba/euphonium', 'viola', 'violin']
     let filterDivStyle = 'flex justify-center items-center w-11/12 mx-auto my-2'
     let filterLabelStyle = 'w-1/2 text-right mr-2 text-sm'
@@ -13,7 +13,7 @@ export default function RepertoirePage({ isMenuOpen, opuses, setOpuses, allCompo
             <h2 className="text-center font-semibold italic my-5">See all available repertoire below, or use the filters to find your desired repertoire.</h2>
             <section className="border border-stone-400 rounded-xl my-2 py-2 w-11/12 lg:w-1/2 mx-auto">
                 <p className="text-center underline">FILTERS</p>
-                <div className="w-full">
+                <div className="w-full flex flex-col">
                     <div className={filterDivStyle}>
                         <label className={filterLabelStyle} htmlFor='composerFilter'>COMPOSER</label>
                         <select
@@ -21,7 +21,7 @@ export default function RepertoirePage({ isMenuOpen, opuses, setOpuses, allCompo
                             name="composerFilter"
                             id="composerFilter"
                             defaultValue='none'
-                            onChange={evt => getFilteredData('composer', evt.target.value)}>
+                            onChange={evt => getFilteredOpusData('composer', evt.target.value)}>
                             <option key='0' value='none' disabled>Select a composer</option>
                             {allComposers.map(composer => <option key={composer} value={composer}>{composer}</option>)}
                         </select>
@@ -33,7 +33,7 @@ export default function RepertoirePage({ isMenuOpen, opuses, setOpuses, allCompo
                             name="instrumentationFilter"
                             id="instrumentationFilter"
                             defaultValue='none'
-                            onChange={evt => getFilteredData('instrumentation', evt.target.value)}>
+                            onChange={evt => getFilteredOpusData('instrumentation', evt.target.value)}>
                             <option key='0' value='none' disabled>Select an instrument</option>
                             {instruments.map(instrument => <option key={instrument} value={instrument}>{instrument}</option>)}
                         </select>
@@ -45,14 +45,15 @@ export default function RepertoirePage({ isMenuOpen, opuses, setOpuses, allCompo
                             name="priceFilter"
                             id="priceFilter"
                             defaultValue={0}
-                            onChange={evt => getFilteredData('price', evt.target.value)}
+                            onChange={evt => getFilteredOpusData('price', evt.target.value)}
                         />
                     </div>
+                    <button className='mx-auto my-5 p-2 border border-stone-200 rounded-xl hover:bg-amber-400 hover:text-stone-800 bg:scale-105' onClick={evt => getFilteredOpusData('none', 'none')}>CLEAR</button>
                 </div>
             </section>
             <Gallery
                 opuses={opuses}
-                getFilteredData={getFilteredData}
+                getFilteredOpusData={getFilteredOpusData}
                 updateDetails={updateDetails}
                 loginStatus={loginStatus}
             />

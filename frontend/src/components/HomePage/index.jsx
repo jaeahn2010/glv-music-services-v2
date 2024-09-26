@@ -17,7 +17,7 @@ export default function HomePage({isMenuOpen}) {
     let imgStyle = 'w-[350px] rounded-xl hover:scale-110'
     let pStyle = 'text-center text-lg mt-6'
     let contactDivStyle = 'text-center mx-auto py-3 border-t border-stone-200'
-    let aStyle = 'fill-container flex justify-center items-center w-2/3 mx-auto my-5 p-2 border-stone-200 border rounded-3xl'
+    let aStyle = 'fill-container flex justify-center items-center w-2/3 lg:w-1/4 mx-auto my-5 p-2 border-stone-200 border rounded-3xl'
 
     useEffect(() => {
         const observers = domRefs.map((domRef, index) => {

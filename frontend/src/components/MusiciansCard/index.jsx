@@ -31,16 +31,16 @@ export default function Card({ musician, getFilteredData, updateDetails, loginSt
     }
 
     return (
-        <figure className={`relative my-12 w-3/4 mx-auto p-2 text-stone-400 border-2 border-stone-200 rounded-xl bg-stone-700 max-h-[100vh] font-poppins`}>
-            <div className={`h-full ${showDetails ? 'hidden' : 'block'}`}>
-                <img src={headshot} className="rounded-xl w-full mx-auto"/>
+        <figure className={`relative my-12 w-3/4 lg:w-1/2 min-h-[75vh] mx-auto p-2 text-stone-400 border-2 border-stone-200 rounded-xl bg-stone-700 font-poppins flex justify-center items-center`}>
+            <div className={`h-[90%] ${showDetails ? 'hidden' : 'block'}`}>
+                <img src={headshot} className="rounded-xl mx-auto lg:w-1/2"/>
                 <figcaption className="p-2 w-full text-stone-200 flex flex-col items-center justify-center">
                     <h1 className="mt-2 font-bold text-center">{`${musician.firstName} ${musician.lastName}`}</h1>
                     <p className='text-center'>{instruments}</p>
                     <button onClick={() => setShowDetails(true)} className='border border-stone-200 text-stone-200 p-2 rounded-xl w-1/2 mx-auto my-5 hover:bg-amber-400'>BIOGRAPHY</button>
                 </figcaption>
             </div>
-            <div className={`max-h-[80vh] overflow-y-auto text-sm p-2 flex flex-col justify-center items-center ${showDetails ? 'block' : 'hidden'}`}>
+            <div className={`overflow-y-auto text-sm p-2 flex flex-col justify-center items-center ${showDetails ? 'block' : 'hidden'}`}>
                 <p>{bio}</p>
                 <button onClick={() => setShowDetails(false)} className='border border-stone-200 text-stone-200 p-2 rounded-xl w-1/2 mx-auto my-5 hover:bg-amber-400'>CLOSE</button>
             </div>  

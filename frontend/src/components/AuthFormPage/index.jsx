@@ -22,7 +22,6 @@ export default function AuthFormPage({ isMenuOpen, setLoginStatus }) {
         if (formType === 'login') { //if logging in
             try {
                 const userCredentials = await logIn(formData)
-                console.log(userCredentials)
                 localStorage.setItem('email', userCredentials.email)
                 localStorage.setItem('firstName', userCredentials.firstName)
                 localStorage.setItem('lastName', userCredentials.lastName)
