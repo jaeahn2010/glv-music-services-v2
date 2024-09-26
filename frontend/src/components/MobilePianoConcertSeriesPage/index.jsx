@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import allAmerican1 from '../../assets/mpcs-all-american-1.jpg'
 import ballroom1 from '../../assets/mpcs-dance-floor-1.jpg'
 import ballroom2 from '../../assets/mpcs-dance-floor-2.jpg'
+import ballroom3 from '../../assets/mpcs-ballroom-3.jpg'
 import carnival from '../../assets/mpcs-carnival.png'
 import airEarth from '../../assets/mpcs-elements-air-earth.jpg'
 import fireWater from '../../assets/mpcs-elements-fire-water.png'
@@ -13,7 +14,9 @@ import classics1 from '../../assets/mpcs-classics-1.jpg'
 import classics2 from '../../assets/mpcs-classics-2.jpg'
 import classics3 from '../../assets/mpcs-classics-3.jpg'
 import valentine1 from '../../assets/mpcs-valentine-1.png'
+import valentine2 from '../../assets/mpcs-valentine-2.png'
 import halloween1 from '../../assets/mpcs-halloween-1.png'
+import halloween2 from '../../assets/mpcs-halloween-2.png'
 import lullaby from '../../assets/mpcs-lullaby.png'
 import botanical from '../../assets/mpcs-botanical.png'
 import opera1 from '../../assets/mpcs-opera-1.png'
@@ -27,6 +30,7 @@ import liszt from '../../assets/mpcs-liszt.jpeg'
 import mozart from '../../assets/mpcs-mozart.jpeg'
 import rachmaninov from '../../assets/mpcs-rachmaninov.jpeg'
 import shostakovich from '../../assets/mpcs-shostakovich.jpeg'
+import remembrance from '../../assets/mpcs-remembrance.jpg'
 
 class Concert {
     constructor(pianist, title, program = [], duration, basePrice, poster) {
@@ -39,273 +43,239 @@ class Concert {
     }
 }
 
+const ahnbenton1 = ['Minuetto e Trio in E major, Op. 1', 'Jae Young Ahn-Benton']
+const ahnbenton7 = ['Scherzetto No. 3 "A Sad Clown\'s Day"', 'Jae Young Ahn-Benton']
+const ahnbenton11_2_3 = ['"Ghost of Halloween" from "Sonatina in G major, Op. 11, No. 2"', 'Jae Young Ahn-Benton']
+const ahnbenton15_1 = ['Etude in D-flat major, Op. 15, No. 1 "Water"', 'Jae Young Ahn-Benton']
+const ahnbenton15_2 = ['Etude in F-sharp minor, Op. 15, No. 2 "Earth"', 'Jae Young Ahn-Benton']
+const ahnbenton15_3 = ['Etude in G minor, Op. 15, No. 3 "Fire"', 'Jae Young Ahn-Benton']
+const ahnbenton15_4 = ['Etude in F-sharp major, Op. 15, No. 4 "Air"', 'Jae Young Ahn-Benton']
+const ahnbenton28 = ['2 Scherzi, Op. 28 "Halloween Mischief"', 'Jae Young Ahn-Benton']
+const ahnbenton64_2 = ['A Letter to You, Op. 64, No. 2', 'Jae Young Ahn-Benton']
+const ahnbenton79_4 = ['"Lamentation" from "Sonata No. 7 in C-sharp minor, Op. 79"', 'Jae Young Ahn-Benton']
+const ahnbenton87 = ['Reminiscence, Op. 87', 'Jae Young Ahn-Benton']
+const ahnbenton91 = ['Variations on "The Haunted Mouse" by Faber, Op. 91', 'Jae Young Ahn-Benton']
+const ahnbenton96 = ['Variations on "In the Garden" by Maykapar, Op. 96', 'Jae Young Ahn-Benton']
+const ahnbenton99 = ['Theme and Variations, Op. 99 "Impressions of Ukraine"', 'Jae Young Ahn-Benton']
+const arabianDance = ['Arabian Dance from "The Nutcraker"', 'Piotr Tchaikovsky']
+const aWholeNewWorld = ['"A Whole New World" from "Aladdin" (arr. Ahn-Benton)', 'Alan Menken']
+const babadjanianElegy = ['Elegy in G minor', 'Arno Babadjanian']
+const bachAir = ['"Air" from "Orchestral Suite No. 3" (arr. Martucci)', 'Johann Sebastian Bach']
+const bachChaconne = ['Transcription of J.S. Bach\'s "Chaconne"', 'Ferruccio Busoni']
+const bachPartita2 = ['Partita No. 2 in C minor', 'Johann Sebastian Bach']
+const bachPartita6 = ['Partita No. 6 in E minor', 'Johann Sebastian Bach']
+const bachToccata = ['Transcription of J.S. Bach\'s "Toccata and Fugue in D minor"', 'Ferruccio Busoni']
+const bachWTC1_1_1 = ['"Prelude" from "Prelude and Fugue in C major, WTC 1"', 'Johann Sebastian Bach']
+const bachWTC1_1 = ['Prelude and Fugue in C major, WTC 1', 'Johann Sebastian Bach']
+const beethovenBagatelles33 = ['6 Bagatelles, Op. 33', 'Ludwig van Beethoven']
+const beethovenMinuet = ['Minuet in G major', 'Ludwig van Beethoven']
+const beethovenRondo = ['Rondo a capriccio, Op. 129', 'Ludwig van Beethoven']
+const beethovenSonata1_2 = ['"Adagio" from "Sonata No. 1 in F minor"', 'Ludwig van Beethoven']
+const beethovenSonata8 = ['Sonata No. 8 in C minor "Pathétique", Op. 13', 'Ludwig van Beethoven']
+const beethovenSonata14 = ['Sonata No. 14 in C-sharp minor "Moonlight"', 'Ludwig van Beethoven']
+const beethovenSonata14_1 = ['"Adagio sostenuto" from "Sonata No. 14 in C-sharp Minor"', 'Ludwig van Beethoven']
+const beethovenSonata15 = ['Sonata No. 15 in D major "Pastoral"', 'Ludwig van Beethoven']
+const beethovenSonata17 = ['Sonata No. 17 in D minor "Tempest"', 'Ludwig van Beethoven']
+const beethovenSonata23 = ['Sonata No. 23 in F minor "Appassionata", Op. 57', 'Ludwig van Beethoven']
+const beethovenSonata25 = ['Sonata No. 25 in G major, Op. 79 "Cuckoo"', 'Ludwig van Beethoven']
+const blueDanube = ['Blue Danube Waltz', 'Johann Strauss II']
+const blumenlied = ['Blumenlied, Op. 39', 'Gustav Lange']
+const bozzaAria = ['Aria (arr. Ahn-Benton)', 'Eugene Bozza']
+const brahmsHandel = ['Variations on a Theme by Händel, Op. 24', 'Johannes Brahms']
+const brahmsIntermezzo118_2 = ['Intermezzo, Op. 118, No. 2', 'Johannes Brahms']
+const brahmsLullaby = ['Wiegenlied, Op. 49, No. 4', 'Johannes Brahms']
+const brahmsPaganini1 = ['Paganini Variations, Op. 35, No. 1', 'Johannes Brahms']
+const brahmsSonata1 = ['Sonata No. 1 in C major, Op. 1', 'Johannes Brahms']
+const bridalMarch = ['Bridal March (arr. Liszt)', 'Richard Wagner']
+const bumblebee = ['The flight of the bumblebee (arr. Cziffra)', 'Nikolai Rimsky-Korsakov']
+const campanella = ['La Campanella', 'Franz Liszt']
+const canon = ['Canon in D (arr. Ahn-Benton)', 'Johann Pachelbel']
+const cantHelpFallingInLove = ['"Can\'t help falling in love" (arr. Ahn-Benton)', 'Elvis Preesley']
+const canYouFeelTheLoveTonight = ['Can You Feel the Love Tonight (arr. Ahn-Benton)', 'Elton John']
+const carmenVariations = ['Carmen variations', 'Vladimir Horowitz']
+const carmenSelections = ['Selections from "Carmen"', 'Georges Bizet']
+const carnaval = ['Carnaval, Op. 9', 'Robert Schumann']
+const chansonTriste = ['Chanson triste', 'Vasily Kalinnikov']
+const chopinBallade1 = ['Ballade No. 1 in G minor, Op. 23', 'Frederic Chopin']
+const chopinBallade2 = ['Ballade No. 2 in F major, Op. 38', 'Frederic Chopin']
+const chopinBallade3 = ['Ballade No. 3 in A-flat major', 'Frederic Chopin']
+const chopinBerceuse = ['Berceuse, Op. 57', 'Frederic Chopin']
+const chopinBarcarolle = ['Barcarolle, Op. 60', 'Frederic Chopin']
+const chopinFuneral = ['"Funeral March" from "Sonata No. 2 in B-flat minor, Op. 35"', 'Frederic Chopin']
+const chopinGiovanni = ['Variations on "Là ci darem la mano"', 'Frederic Chopin']
+const chopinEtude10_1 = ['Etude in C major, Op. 10, No. 1 "Waterfall"', 'Frederic Chopin']
+const chopinEtude25_1 = ['Etude in A-flat major, Op. 25, No. 1 "Aeolian Harp"', 'Frederic Chopin']
+const chopinEtude25_2 = ['Etude in F minor, Op. 25, No. 2 "Bees"', 'Frederic Chopin']
+const chopinEtude25_7 = ['Etude in C-sharp minor, Op. 25, No. 7 "Cello"', 'Frederic Chopin']
+const chopinEtude25_9 = ['Etude in G-flat major, Op. 25, No. 9 "Butterfly"', 'Chopin, Frederic Chopin']
+const chopinEtude25_11 = ['Etude in A minor, Op. 25, No. 11 "Winter Wind"', 'Frederic Chopin']
+const chopinEtude25_12 = ['Etude in C minor, Op. 25, No. 12 "Ocean"', 'Frederic Chopin']
+const chopinMazurka6_1 = ['Mazurka in F-sharp minor, Op. 6, No. 1', 'Frederic Chopin']
+const chopinMazurka7_1 = ['Mazurka in A minor, Op. 17, No. 4', 'Frederic Chopin']
+const chopinMazurka17_4 = ['Mazurka in B-flat major, Op. 7, No. 1', 'Frederic Chopin']
+const chopinMazurkas17 = ['4 Mazurkas, Op. 17', 'Frederic Chopin']
+const chopinNocturne9_2 = ['Nocturne in E-flat major, Op. 9, No. 2', 'Frederic Chopin']
+const chopinNocturne27_1 = ['Nocturne in C-sharp minor, Op. 27, No. 1', 'Frederic Chopin']
+const chopinNocturnes48 = ['2 Nocturnes, Op. 48', 'Frederic Chopin']
+const chopinNocturne48_1 = ['Nocturne in C minor, Op. 48, No. 1', 'Frederic Chopin']
+const chopinPolonaise53 = ['Polonaise in A-flat major, Op. 53 "Heroic"', 'Frederic Chopin']
+const chopinScherzo4 = ['Scherzo No. 4 in E major, Op. 54', 'Frederic Chopin']
+const chopinWaltz18 = ['Waltz in E-flat major, Op. 18', 'Frederic Chopin']
+const chopinWaltzes70 = ['3 Waltzes, Op. 70', 'Frederic Chopin']
+const chromaticFantasy = ['Chromatic Fantasy and Fugue', 'Johann Sebastian Bach']
+const clairDeLune = ['Clair de lune', 'Claude Debussy']
+const consolation3 = ['Consolation No. 3 in D-flat major', 'Franz Liszt']
+const cygne = ['Le cygne', 'Camille Saint-Saëns']
+const danseMacabre = ['Danse macabre (arr. Liszt)', 'Camille Saint-Saëns']
+const danzaCriolla = ['Danza criolla', 'Alberto Ginastera']
+const danzaRitualDelFugeo = ['Danza ritual del fuego', 'Manuel de Falla']
+const danzasArgentinas = ['Danzas argentinas', 'Alberto Ginastera']
+const debussyReverie = ['Rêverie', 'Claude Debussy']
+const dvorakHumoresque = ['Humoresque in G-flat major, Op. 101, No. 7', 'Antonin Dvořák']
+const dvorakLargo = ['"Largo" from "New World Symphony" (arr. Juon)', 'Antonin Dvořák']
+const entertainer = ['The entertainer', 'Scott Joplin']
+const erdasWarning = ['Erda\'s Warning from "Das Rheingold" (arr. Ahn-Benton)', 'Richard Wagner']
+const eros = ['"Eros" from "3 morceaux, Op. 24"', 'Sergei Bortkevych']
+const estampes3 = ['Jardins sous la pluie from "Estampes"', 'Claude Debussy']
+const etudeTableau33_5 = ['Etude-Tableau in E-flat minor, Op. 33, No. 5', 'Sergei Rachmaninov']
+const etudeTableau39_1 = ['Etude-Tableau in C minor, Op. 39, No. 1', 'Sergei Rachmaninov']
+const etudeTableau39_2 = ['Etude-Tableau in A minor, Op. 39, No. 2', 'Sergei Rachmaninov']
+const etudeTableau39_5 = ['Etude-Tableau in E-flat minor, Op. 39, No. 5', 'Sergei Rachmaninov']
+const etudeTableau39_6 = ['Etude-Tableau in A minor, Op. 39, No. 6', 'Sergei Rachmaninov']
+const fantaisieImpromptu = ['Fantaisie-Impromptu, Op. 66', 'Frederic Chopin']
+const fantasticDances = ['Fantastic Dances, Op. 5', 'Dmitri Shostakovich']
+const faurePavane = ['Pavane', 'Gabriel Faure']
+const figaroOverture = ['Overture from "Le nozze di Figaro"', 'Wolfgang Amadeus Mozart']
+const firebird = ['The Firebird', 'Igor Stravinsky']
+const flowerSong = ['"Flower Song" from "Carmen" (arr. Ahn-Benton)', 'Georges Bizet']
+const forzaOverture = ['Overture from "La forza del destino"', 'Giuseppe Verdi']
+const furElise = ['Für Elise', 'Ludwig van Beethoven']
+const erlkonig = ['Erlkönig (arr. Liszt)', 'Franz Schubert']
+const excursions = ['Excursions, Op. 20', 'Samuel Barber']
+const gaspard3 = ['"Scarbo" from "Gaspard de la nuit"', 'Maurice Ravel']
+const gershwinPrelude2 = ['Prelude No. 2', 'George Gershwin']
+const ginasteraPastorale = ['Pastorale', 'Alberto Ginastera']
+const giovanniOverture = ['Overture from "Don Giovanni"', 'Wolfgang Amadeus Mozart']
+const halloweenTheme = ['Theme from "Halloween" (arr. Ahn-Benton)', 'John Carpenter']
+const harryPotterSelections = ['Selections from "Harry Potter" (arr. Ahn-Benton)', 'John Williams']
+const hungarianDance5 = ['Hungarian Dance No. 5', 'Johannes Brahms']
+const hungarianRhapsody2 = ['Hungarian Rhapsody No. 2', 'Franz Liszt']
+const images6 = ['Poissons d\'or', 'Claude Debussy']
+const isleOfTheDead = ['Isle of the Dead, Op. 29 (arr. Kirkor)', 'Sergei Rachmaninov']
+const isoldesLiebestod = ['Isoldes Liebestod (arr. Liszt)', 'Richard Wagner']
+const jeuxDeau = ['Jeux d\'eau', 'Maurice Ravel']
+const kitschMusyka = ['Kitsch-Musyka', 'Valentin Silvestrov']
+const kosenkoSonata2 = ['Sonata No. 2 in C-sharp minor', 'Viktor Kosenko']
+const lark = ['The Lark (arr. Balakirev)', 'Mikhael Glinka']
+const libertango = ['Libertango (arr. Ahn-Benton)', 'Astor Piazzolla']
+const liebestraum = ['Liebestraum No. 3', 'Franz Liszt']
+const lilacs = ['Lilacs', 'Sergei Rachmaninov']
+const lisztBallade2 = ['Ballade No. 2 in B minor', 'Franz Liszt']
+const lisztFigaro = ['Fantasy on Themes from Mozart\'s "Le nozze di Figaro"', 'Franz Liszt']
+const lisztPastorale = ['"Pastorale" from "Années de Pélérinage"', 'Franz Liszt']
+const lisztRigoletto = ['Rigoletto-Paraphrase', 'Franz Liszt']
+const lisztSonata = ['Sonata in B minor', 'Franz Liszt']
+const loveMeTender = ['Love Me Tender (arr. Ahn-Benton)', 'Elvis Presley']
+const lyatoshynskyPreludes = ['5 Preludes', 'Boris Lyatoshynsky']
+const mapleLeafRag = ['Maple Leaf Rag', 'Scott Joplin']
+const mascagniIntermezzo = ['"Intermezzo" from "Cavalleria Rusticana"', 'Pietro Mascagni']
+const mephisto = ['Mephisto Waltz No. 1', 'Franz Liszt']
+const mer = ['La mer (arr. Garban)', 'Claude Debussy']
+const miroirs2 = ['Oiseaux tristes', 'Maurice Ravel']
+const miroirs3 = ['Une barque sur l\'ocean', 'Maurice Ravel']
+const miroirs4 = ['Alborada del gracioso', 'Maurice Ravel']
+const mozartAdagio = ['Adagio in B minor, K. 540', 'Wolfgang Amadeus Mozart']
+const mozartSonata8 = ['Piano Sonata No. 8 in A minor', 'Wolfgang Amadeus Mozart']
+const mozartSonata12 = ['Piano Sonata No. 12 in F major', 'Wolfgang Amadeus Mozart']
+const mozartVariations = ['12 Variations on "Ah vous dirai-je, Maman"', 'Wolfgang Amadeus Mozart']
+const oblivion = ['Oblivion (arr. Ahn-Benton)', 'Astor Piazzolla']
+const orage = ['Orage', 'Franz Liszt']
+const pasDeDeux = ['"Pas de deux" from "The Nutcracker"', 'Piotr Tchaikovsky']
+const passacagliaFugue = ['Passacaglia and Fugue (arr. d\'Albert)', 'Johann Sebastian Bach']
+const petrushka = ['Petrushka', 'Igor Stravinsky']
+const pilgrimage2_2 = ['Années de pélérinage, Italie - Venezia', 'Franz Liszt']
+const poule = ['La poule', 'Jean-Philippe Rameau']
+const preludeFugueVariation = ['Prelude, Fugue, and Variation, Op. 18', 'César Franck']
+const rachmaninovElegy = ['Elegie in E-flat minor, Op. 3, No. 1', 'Sergei Rachmaninov']
+const rachmaninovMusical16_3 = ['Moment musical in B minor, Op. 16, No. 3', 'Sergei Rachmaninov']
+const rachmaninovMusical16_4 = ['Moment musical in E minor, Op. 16, No. 4', 'Sergei Rachmaninov']
+const rachmaninovPrelude3_2 = ['Prelude in C-sharp minor, Op. 3, No. 2', 'Sergei Rachmaninov']
+const rachmaninovPrelude23_5 = ['Prelude in G minor, Op. 23, No. 5', 'Sergei Rachmaninov']
+const rachmaninovPrelude32_10 = ['Prelude in B minor, Op. 32, No. 10', 'Sergei Rachmaninov']
+const rachmaninovSonata2 = ['Sonata No. 2 in B-flat minor, Op. 36', 'Sergei Rachmaninov']
+const radetzky = ['Radetzky March', 'Johann Strauss II']
+const ravelPavane = ['Pavane pour une infante defunte', 'Maurice Ravel']
+const revutskyPreludes7 = ['2 Preludes, Op. 7', 'Lev Revutsky']
+const rhapsodyInBlue = ['Rhapsody in Blue', 'George Gershwin']
+const romanianFolkDances = ['Romanian folk dances', 'Bela Bartok']
+const sabreDance = ['Transcription of Khachaturian\'s "Sabre Dance"', 'Gyorgy Cziffra']
+const salutDamour = ['Salut d\'amour, Op. 12', 'Edward Elgar']
+const scaramouche = ['Scaramouche (arr. Ahn-Benton)', 'Darius Milhaud']
+const scarlatti30 = ['Sonata No. 30 in G minor "Cat Fugue"', 'Scarlatti, Domenico Scarlatti']
+const scarlatti87 = ['Sonata No. 87 in B minor', 'Domenico Scarlatti']
+const shostakovichPreludeFugue24 = ['Prelude and Fugue in D minor, Op. 87, No. 24', 'Dmitri Shostakovich']
+const shostakovichPreludes34 = ['24 Preludes, Op. 34', 'Dmitri Shostakovich']
+const shostakovichSonata2 = ['Piano Sonata No. 2, Op. 61', 'Dmitri Shostakovich']
+const shostakovichSymphony5_4 = ['"Allegro non troppo" from "Symphony No. 5, Op. 47"', 'Dmitri Shostakovich']
+const silveryWaves = ['Silvery Waves', 'Addison Wyman']
+const skorykBurleska = ['Burleska', 'Myroslav Skoryk']
+const solveig = ['Solveigs Sang', 'Edvard Grieg']
+const songbookSelections = ['Selections from the Songbook', 'George Gershwin']
+const starsStripes = ['Stars and Stripes Forever (arr. Horowitz)', 'John Philip Sousa']
+const sugarPlumFairy = ['"Dance of the Sugar Plum Fairy" from "The Nutcracker"', 'Piotr Tchaikovsky']
+const swanLakeTheme = ['Theme from "Swan Lake"', 'Piotr Tchaikovsky']
+const tarantella = ['Tarantella', 'Franz Liszt']
+const tarasBulbaOverture = ['Overture from "Taras Bulba"', 'Mykola Lysenko']
+const tchaikovskyJune = ['"June" from "The Seasons, Op. 37"', 'Piotr Tchaikovsky']
+const thaisMeditation = ['"Meditation" from "Thaïs" (arr. Ahn-Benton)', 'Jules Massenet']
+const totentanz = ['Totentanz (arr. Ahn-Benton)', 'Franz Liszt']
+const transcendental6 = ['"Feux follets"', 'Franz Liszt']
+const traumerei = ['Träumerei', 'Robert Schumann']
+const triste = ['Triste', 'Alberto Ginastera']
+const valseGrotesque = ['"Valse grotesque" from "3 morceaux, Op. 24"', 'Sergei Bortkevych']
+const versLaFlamme = ['Vers la flamme', 'Aleksandr Scriabin']
+const vienneseDances = ['3 Viennese Dances (arr. Ahn-Benton)', 'Fritz Kreisler']
+const vivaldiSpring = ['"Spring" from "The Four Seasons" (arr. Ahn-Benton)', 'Antonio Vivaldi']
+const vivaldiWinter = ['"Winter" from "The Four Seasons" (arr. Ahn-Benton)', 'Antonio Vivaldi']
+const vocalise = ['Vocalise, Op. 34, No. 14 (arr. Ahn-Benton)', 'Sergei Rachmaninov']
+const volodosTurkish = ['Concert Paraphrase on Mozart\'s "Turkish March"', 'Arcadi Volodos']
+const waltzOfFlowers = ['Waltz of the Flowers from "The Nutcracker"', 'Piotr Tchaikovsky']
+const weddingMarch = ['Transcription of Mendelssohn\'s "Wedding March"', 'Vladimir Horowitz']
+const westSideStorySelections = ['Selections from "West Side Story" (arr. Ahn-Benton)', 'Leonard Bernstein']
+const williamTellOverture = ['Overture from "Guillaume Tell" (arr. Liszt)', 'Gioachino Rossini']
+
 const availableConcerts = [
-    ['American Pride 1', [
-        ['Stars and Stripes Forever (arr. Horowitz)', 'John Philip Sousa'],
-        ['Excursions, Op. 20', 'Samuel Barber'],
-        ['Maple Leaf Rag', 'Scott Joplin'],
-        ['Selections from "West Side Story" (arr. Ahn-Benton)', 'Leonard Bernstein'],
-        ['Rhapsody in Blue', 'George Gershwin'],
-    ], 65, 150, allAmerican1],
-    ['At the Carnival', [
-        ['Alborada del gracioso', 'Maurice Ravel'],
-        ['Scaramouche (arr. Ahn-Benton)', 'Darius Milhaud'],
-        ['Petrushka', 'Igor Stravinsky'],
-        ['Transcription of Khachaturian\'s "Sabre Dance"', 'Gyorgy Cziffra'],
-        ['Scherzetto No. 3 "A Sad Clown\'s Day"', 'Jae Young Ahn-Benton'],
-        ['Carnaval, Op. 9', 'Robert Schumann'],
-    ], 75, 200, carnival],
-    ['Ballroom 1', [
-        ['Waltz in E-flat major, Op. 18', 'Frederic Chopin'],
-        ['Arabian Dance from "The Nutcraker"', 'Piotr Tchaikovsky'],
-        ['Fantastic Dances, Op. 5', 'Dmitri Shostakovich'],
-        ['Mephisto Waltz No. 1', 'Franz Liszt'],
-        ['Hungarian Dance No. 5', 'Johannes Brahms'],
-        ['3 Viennese Dances (arr. Ahn-Benton)', 'Fritz Kreisler'],
-        ['Oblivion (arr. Ahn-Benton)', 'Astor Piazzolla'],
-        ['Danzas argentinas', 'Alberto Ginastera'],
-        ['Carmen variations', 'HVladimir Horowitz'],
-    ], 55, 150, ballroom1],
-    ['Ballroom 2', [
-        ['Waltz of the Flowers from "The Nutcracker"', 'Piotr Tchaikovsky'],
-        ['Romanian folk dances', 'Bela Bartok'],
-        ['Danse macabre (arr. Liszt)', 'Camille Saint-Saëns'],
-        ['Sabre Dance (arr. Cziffra)', 'Aram Khachaturian'],
-        ['Mazurka in F-sharp minor, Op. 6, No. 1', 'Frederic Chopin'],
-        ['Mazurka in A minor, Op. 17, No. 4', 'Frederic Chopin'],
-        ['Mazurka in B-flat major, Op. 7, No. 1', 'Frederic Chopin'],
-        ['Libertango (arr. Ahn-Benton)', 'Astor Piazzolla'],
-        ['Tarantella', 'Franz Liszt']
-    ], 55, 150, ballroom2],
-    ['Beethoven Blast', [
-        ['Sonata No. 8 in C minor "Pathétique", Op. 13', 'Ludwig van Beethoven'],
-        ['Rondo a capriccio, Op. 129', 'Ludwig van Beethoven'],
-        ['Für Elise', 'Ludwig van Beethoven'],
-        ['6 Bagatelles, Op. 33', 'Ludwig van Beethoven'],
-        ['Sonata No. 23 in F minor "Appassionata", Op. 57', 'Ludwig van Beethoven']
-    ], 70, 125, beethoven],
-    ['Botanical Garden', [
-        ['Lilacs', 'Sergei Rachmaninov'],
-        ['Pastorale', 'Alberto Ginastera'],
-        ['Blumenlied, Op. 39', 'Gustav Lange'],
-        ['Sonata No. 15 in D major "Pastoral"', 'Ludwig van Beethoven'],
-        ['"Flower Song" from "Carmen" (arr. Ahn-Benton)', 'Georges Bizet'],
-        ['"Pastorale" from "Années de Pélérinage"', 'Franz Liszt'],
-        ['"Waltz of the Flowers" from "The Nutcracker"', 'Piotr Tchaikovsky'],
-        ['Variations on "In the Garden" by Maykapar, Op. 96', 'Jae Young Ahn-Benton']
-    ], 60, 125, botanical],
-    ['Chopin Cart', [
-        ['Polonaise in A-flat major, Op. 53 "Heroic"', 'Frederic Chopin'],
-        ['2 Nocturnes, Op. 48', 'Frederic Chopin'],
-        ['4 Mazurkas, Op. 17', 'Frederic Chopin'],
-        ['Barcarolle, Op. 60', 'Frederic Chopin'],
-        ['3 Waltzes, Op. 70', 'Frederic Chopin'],
-        ['Scherzo No. 4 in E major, Op. 54', 'Frederic Chopin']
-    ], 65, 125, chopin],
-    ['The Classics 1', [
-        ['Hungarian Rhapsody No. 2', 'Franz Liszt'],
-        ['Salut d\'amour, Op. 12', 'Edward Elgar'],
-        ['Humoresque in G-flat major, Op. 101, No. 7', 'Antonin Dvořák'],
-        ['Clair de lune', 'Claude Debussy'],
-        ['Prelude in C-sharp minor, Op. 3, No. 2', 'Sergei Rachmaninov'],
-        ['The entertainer', 'Scott Joplin'],
-        ['Canon in D (arr. Ahn-Benton)', 'Johann Pachelbel'],
-        ['Fantaisie-Impromptu, Op. 66', 'Frederic Chopin'],
-        ['"Spring" from "The Four Seasons" (arr. Ahn-Benton', 'Antonio Vivaldi'],
-        ['Concert Paraphrase on Mozart\'s "Turkish March"', 'Arcadi Volodos']
-    ], 65, 125, classics1],
-    ['The Classics 2', [
-        ['Radetzky March', 'Johann Strauss II'],
-        ['Für Elise', 'Ludwig van Beethoven'],
-        ['Liebestraum No. 3', 'Franz Liszt'],
-        ['"June" from "The Seasons, Op. 37"', 'Piotr Tchaikovsky'],
-        ['"Meditation" from "Thaïs" (arr. Ahn-Benton)', 'Jules Massenet'],
-        ['Maple Leaf Rag', 'Scott Joplin'],
-        ['Nocturne in E-flat major, Op. 9, No. 2', 'Frederic Chopin'],
-        ['Rhapsody in Blue', 'George Gershwin'],
-    ], 55, 100, classics2],
-    ['The Classics 3', [
-        ['Prelude and Fugue in C major, WTC 1', 'Johann Sebastian Bach'],
-        ['Sonata in C minor, Op. 13 "Pathétique"', 'Ludwig van Beethoven'],
-        ['Wiegenlied, Op. 49, No. 4', 'Johannes Brahms'],
-        ['Ballade No. 1 in G minor, Op. 23', 'Frederic Chopin'],
-        ['Blue Danube Waltz', 'Johann Strauss II'],
-        ['"Winter" from "The Four Seasons" (arr. Ahn-Benton)', 'Antonio Vivaldi'],
-        ['"Largo" from "New World Symphony" (arr. Juon)', 'Antonin Dvořák'],
-        ['Transcription of Mendelssohn\'s "Wedding March"', 'Vladimir Horowitz'],
-    ], 75, 150, classics3],
-    ['Four Elements: Air & Earth', [
-        ['Sonata No. 17 in D minor "Tempest"', 'Ludwig van Beethoven'],
-        ['Etude in F-sharp minor, Op. 15, No. 2 "Earth"', 'Jae Young Ahn-Benton'],
-        ['Orage', 'Franz Liszt'],
-        ['Erda\'s Warning from "Das Rheingold" (arr. Ahn-Benton)', 'Richard Wagner'],
-        ['Etude in F-sharp major, Op. 15, No. 4 "Air"', 'Jae Young Ahn-Benton'],
-        ['Isle of the Dead, Op. 29', 'Sergei Rachmaninov'],
-        ['Etude in A minor, Op. 25, No. 11 "Winter Wind"', 'Frederic Chopin'],
-    ], 70, 150, airEarth],
-    ['Four Elements: Water & Fire', [
-        ['Etude in C major, Op. 10, No. 1 "Waterfall"', 'Frederic Chopin'],
-        ['Vers la flamme', 'Aleksandr Scriabin'],
-        ['Etude in D-flat major, Op. 15, No. 1 "Water"', 'Jae Young Ahn-Benton'],
-        ['Danza ritual del fuego', 'Manuel de Falla'],
-        ['Jardins sous la pluie from "Estampes"', 'Claude Debussy'],
-        ['Etude in G minor, Op. 15, No. 3 "Fire"', 'Jae Young Ahn-Benton'],
-        ['Jeux d\'eau', 'Maurice Ravel'],
-        ['The Firebird', 'Igor Stravinsky'],
-    ], 60, 175, fireWater],
-    ['Halloween Special', [
-        ['Transcription of J.S. Bach\'s "Toccata and Fugue in D minor"', 'Ferruccio Busoni'],
-        ['Sonata No. 14 in C-sharp minor "Moonlight"', 'Ludwig van Beethoven'],
-        ['Selections from "Harry Potter" (arr. Ahn-Benton)', 'John Williams'],
-        ['Theme from "Halloween" (arr. Ahn-Benton)', 'John Carpenter'],
-        ['2 Scherzi, Op. 28 "Halloween Mischief"', 'Jae Young Ahn-Benton'],
-        ['Nocturne in C-sharp minor, Op. 27, No. 1', 'Frederic Chopin'],
-        ['Totentanz', 'Franz Liszt']
-    ], 75, 175, halloween1],
-    ['I\'ll Be Bach', [
-        ['Passacaglia and Fugue (arr. d\'Albert)', 'Johann Sebastian Bach'],
-        ['"Air" from "Orchestral Suite No. 3" (arr. Martucci)', 'Johann Sebastian Bach'],
-        ['Chromatic Fantasy and Fugue', 'Johann Sebastian Bach'],
-        ['Partita No. 2 in C minor', 'Johann Sebastian Bach'],
-        ['Transcription of J.S. Bach\'s "Toccata and Fugue in D minor"', 'Ferruccio Busoni'],
-    ], 60, 150, bach],
-    ['Impostors and Thieves', [
-        ['Transcription of J.S. Bach\'s "Chaconne"', 'Ferruccio Busoni'],
-        ['Aria (arr. Ahn-Benton)', 'Eugene Bozza'],
-        ['Etude in A-flat major, Op. 25, No. 1 "Aeolian Harp"', 'Frederic Chopin'],
-        ['Etude in C-sharp minor, Op. 25, No. 7 "Cello"', 'Frederic Chopin'],
-        ['La Campanella', 'Franz Liszt'],
-        ['Prelude, Fugue, and Variation, Op. 18', 'César Franck'],
-        ['Transcription of Vivaldi\'s "Winter"', 'Jae Young Ahn-Benton'],
-        ['Vocalise, Op. 34, No. 14', 'Sergei Rachmaninov'],
-        ['Paganini Variations, Op. 35, No. 1', 'Johannes Brahms'],
-    ], 75, 150, impostorsThieves],
-    ['Lisztomania', [
-        ['Hungarian Rhapsody No. 2 in C-sharp minor', 'Franz Liszt'],
-        ['Consolation No. 3 in D-flat major', 'Franz Liszt'],
-        ['La Campanella', 'Franz Liszt'],
-        ['Années de pélérinage, Italie - Venezia', 'Franz Liszt'],
-        ['Liebestraum No. 3', 'Franz Liszt'],
-        ['Sonata in B minor', 'Franz Liszt'],
-    ], 75, 200, liszt],
-    ['Lullaby Collection', [
-        ['Consolation No. 3 in D-flat major', 'Franz Liszt'],
-        ['"Adagio sostenuto" from "Sonata No. 14 in C-sharp Minor"', 'Ludwig van Beethoven'],
-        ['Berceuse, Op. 57', 'Frederic Chopin'],
-        ['Clair de lune', 'Claude Debussy'],
-        ['Sonata No. 87 in B minor', 'Domenico Scarlatti'],
-        ['Träumerei', 'Robert Schumann'],
-        ['Wiegenlied, Op. 49, No. 4', 'Johannes Brahms'],
-        ['"Adagio" from "Sonata No. 1 in F minor"', 'Ludwig van Beethoven'],
-        ['Nocturne in E-flat major, Op. 9, No. 2', 'Frederic Chopin'],
-        ['Rêverie', 'Claude Debussy'],
-        ['Solveigs Sang', 'Edvard Grieg'],
-        ['Prelude No. 2', 'George Gershwin'],
-        ['"Air" from "Orchestra Suite No. 3" (arr. Martucci)', 'Johann Sebastian Bach'],
-        ['Triste', 'Alberto Ginastera'],
-        ['"Prelude" from "Prelude and Fugue in C major, WTC 1"', 'Johann Sebastian Bach'],
-        ['Chanson triste', 'Vasily Kalinnikov'],
-        ['Vocalise, Op. 34, No. 14 (arr. Ahn-Benton)', 'Sergei Rachmaninov'],
-        ['Salut d\'amour', 'Edward Elgar'],
-    ], 75, 100, lullaby],
-    ['Mozart Mastermind', [
-        ['Overture from "Don Giovanni"', 'Wolfgang Amadeus Mozart'],
-        ['Piano Sonata No. 12 in F major', 'Wolfgang Amadeus Mozart'],
-        ['Adagio in B minor, K. 540', 'Wolfgang Amadeus Mozart'],
-        ['12 Variations on "Ah vous dirai-je, Maman"', 'Wolfgang Amadeus Mozart'],
-        ['Piano Sonata No. 8 in A minor', 'Wolfgang Amadeus Mozart'],
-        ['Concert Paraphrase on Mozart\'s "Turkish March"', 'Arcadi Volodos'],
-    ], 75, 150, mozart],
-    ['Ocean Waves', [
-        ['Silvery Waves', 'Addison Wyman'],
-        ['Etude-Tableau in A minor, Op. 39, No. 2', 'Sergei Rachmaninov'],
-        ['Une barque sur l\'ocean', 'Maurice Ravel'],
-        ['Etude in C minor, Op. 25, No. 12 "Ocean"', 'Frederic Chopin'],
-        ['"Lamentation" from "Sonata No. 7 in C-sharp minor, Op. 79"', 'Jae Young Ahn-Benton'],
-        ['La mer (arr. Garban)', 'Claude Debussy'],
-    ], 65, 125, ocean],
-    ['The Opera House 1', [
-        ['Overture from "Le nozze di Figaro"', 'Wolfgang Amadeus Mozart'],
-        ['Isoldes Liebestod (arr. Liszt)', 'Richard Wagner'],
-        ['Carmen Variations', 'Vladimir Horowitz'],
-        ['Overture from "La forza del destino"', 'Giuseppe Verdi'],
-        ['Selections from the Songbook', 'George Gershwin'],
-        ['Vocalise, Op. 34, No. 14 (arr. Ahn-Benton)', 'Sergei Rachmaninov'],
-        ['Fantasy on Themes from Mozart\'s "Le nozze di Figaro"', 'Franz Liszt'],
-    ], 60, 150, opera1],
-    ['The Opera House 2', [
-        ['Overture from "Guillaume Tell" (arr. Liszt)', 'Gioachino Rossini'],
-        ['Solveigs Sang', 'Edvard Grieg'],
-        ['Variations on "Là ci darem la mano"', 'Frederic Chopin'],
-        ['"Intermezzo" from "Cavalleria Rusticana"', 'Pietro Mascagni'],
-        ['Overture from "Taras Bulba"', 'Mykola Lysenko'],
-        ['Selections from "Carmen"', 'Georges Bizet'],
-        ['Erlkönig (arr. Liszt)', 'Franz Schubert'],
-        ['Rigoletto-Paraphrase', 'Franz Liszt'],
-    ], 65, 150, opera2],
-    ['Raisin Brahms', [
-        ['Sonata No. 1 in C major, Op. 1', 'Johannes Brahms'],
-        ['Intermezzo, Op. 118, No. 2', 'Johannes Brahms'],
-        ['Paganini Variations, Op. 35, No. 1', 'Johannes Brahms'],
-        ['Wiegenlied, Op. 49, No. 4', 'Johannes Brahms'],
-        ['Hungarian Dance No. 5', 'Johannes Brahms'],
-        ['Variations on a Theme by Händel, Op. 24', 'Johannes Brahms'],
-    ], 75, 175, brahms],
-    ['Rockin\' with Rachmaninov', [
-        ['Etude-Tableau in C minor, Op. 39, No. 1', 'Sergei Rachmaninov'],
-        ['Etude-Tableau in E-flat minor, Op. 39, No. 5', 'Sergei Rachmaninov'],
-        ['Etude-Tableau in A minor, Op. 39, No. 6', 'Sergei Rachmaninov'],
-        ['Elegie in E-flat minor, Op. 3, No. 1', 'Sergei Rachmaninov'],
-        ['Moment musical in B minor, Op. 16, No. 3', 'Sergei Rachmaninov'],
-        ['Moment musical in E minor, Op. 16, No. 4', 'Sergei Rachmaninov'],
-        ['Prelude in G minor, Op. 23, No. 5', 'Sergei Rachmaninov'],
-        ['Prelude in B minor, Op. 32, No. 10', 'Sergei Rachmaninov'],
-        ['Etude-Tableau in E-flat minor, Op. 33, No. 5', 'Sergei Rachmaninov'],
-        ['Vocalise, Op. 34, No. 14 (arr. Ahn-Benton)', 'Sergei Rachmaninov'],
-        ['Sonata No. 2 in B-flat minor, Op. 36', 'Sergei Rachmaninov'],
-    ], 75, 200, rachmaninov],
-    ['Shadow of Shostakovich', [
-        ['Prelude and Fugue in D minor, Op. 87, No. 24', 'Dmitri Shostakovich'],
-        ['3 Fantastic Dances, Op. 5', 'Dmitri Shostakovich'],
-        ['Piano Sonata No. 2, Op. 61', 'Dmitri Shostakovich'],
-        ['24 Preludes, Op. 34', 'Dmitri Shostakovich'],
-        ['"Allegro non troppo" from "Symphony No. 5, Op. 47"', 'Dmitri Shostakovich'],
-    ], 80, 200, shostakovich],
-    ['Ukrainian Resistance', [
-        ['Overture from "Taras Bulba"', 'Mykola Lysenko'],
-        ['Kitsch-Musyka', 'Valentin Silvestrov'],
-        ['2 Preludes, Op. 7', 'Lev Revutsky'],
-        ['Theme and Variations, Op. 99 "Impressions of Ukraine"', 'Jae Young Ahn-Benton'],
-        ['Burleska', 'Myroslav Skoryk'],
-        ['5 Preludes', 'Boris Lyatoshynsky'],
-        ['Sonata No. 2 in C-sharp minor', 'Viktor Kosenko',]
-    ], 75, 175, ukraineResistance],
-    ['Valentine\'s Day Special', [
-        ['A Letter to You, Op. 64, No. 2', 'Jae Young Ahn-Benton'],
-        ['"Pas de deux" from "The Nutcracker"', 'Piotr Tchaikovsky'],
-        ['Ballade No. 3 in A-flat major', 'Frederic Chopin'],
-        ['Can You Feel the Love Tonight (arr. Ahn-Benton)', 'Elton John'],
-        ['Liebestraum No. 3', 'Franz Liszt'],
-        ['Love Me Tender (arr. Ahn-Benton)', 'Elvis Presley'],
-        ['"Intermezzo" from "Cavalleria Rusticana"', 'Pietro Mascagni'],
-        ['Transcription of Mendelssohn\'s "Wedding March"', 'Vladimir Horowitz'],
-        ['Isoldes Liebestod (arr. Liszt)', 'Richard Wagner'],
-        ['Reminiscence, Op. 87', 'Jae Young Ahn-Benton'],
-    ], 60, 125, valentine1],
-    ['Zookeeper', [
-        ['Theme from "Swan Lake"', 'Piotr Tchaikovsky'],
-        ['Oiseaux tristes', 'Maurice Ravel'],
-        ['La poule', 'Jean-Philippe Rameau'],
-        ['Poissons d\'or', 'Claude Debussy'],
-        ['Etude in F minor, Op. 25, No. 2 "Bees"', 'Frederic Chopin'],
-        ['Sonata No. 25 in G major, Op. 79 "Cuckoo"', 'Ludwig van Beethoven'],
-        ['Sonata No. 30 in G minor "Cat Fugue"', 'Scarlatti, Domenico Scarlatti'],
-        ['Etude in G-flat major, Op. 25, No. 9 "Butterfly"', 'Chopin, Frederic Chopin'],
-        ['The Lark (arr. Balakirev)', 'Mikhael Glinka'],
-        ['Le cygne', 'Camille Saint-Saëns'],
-        ['Variations on "The haunted mouse" by Faber, Op. 91', 'Jae Young Ahn-Benton'],
-        ['The flight of the bumblebee (arr. Cziffra)', 'Nikolai Rimsky-Korsakov'],
-    ], 60, 125, zookeeper],
+    ['American Pride 1', [starsStripes, excursions, mapleLeafRag, westSideStorySelections, rhapsodyInBlue], 65, 150, allAmerican1],
+    ['At the Carnival', [miroirs4, scaramouche, petrushka, sabreDance, ahnbenton7, carnaval], 75, 200, carnival],
+    ['Ballroom 1', [chopinWaltz18, arabianDance, fantasticDances, mephisto, hungarianDance5, vienneseDances, oblivion, danzasArgentinas, carmenVariations], 55, 150, ballroom1],
+    ['Ballroom 2', [waltzOfFlowers, romanianFolkDances, danseMacabre, sabreDance, chopinMazurka6_1, chopinMazurka7_1, chopinMazurka17_4, libertango, tarantella], 55, 150, ballroom2],
+    ['Ballroom 3', [chopinPolonaise53, beethovenMinuet, bachPartita6, valseGrotesque, ahnbenton1, danzaCriolla, sugarPlumFairy, totentanz], 70, 150, ballroom3],
+    ['Beethoven Blast', [beethovenSonata8, beethovenRondo, furElise, beethovenBagatelles33, beethovenSonata23], 70, 125, beethoven],
+    ['Botanical Garden', [lilacs, ginasteraPastorale, blumenlied, beethovenSonata15, flowerSong, lisztPastorale, waltzOfFlowers, ahnbenton96], 60, 125, botanical],
+    ['Chopin Cart', [chopinPolonaise53, chopinNocturnes48, chopinMazurkas17, chopinBarcarolle, chopinWaltzes70, chopinScherzo4], 65, 125, chopin],
+    ['The Classics 1', [hungarianRhapsody2, salutDamour, dvorakHumoresque, clairDeLune, rachmaninovPrelude3_2, entertainer, canon, fantaisieImpromptu, vivaldiSpring, volodosTurkish], 65, 125, classics1],
+    ['The Classics 2', [radetzky, furElise, liebestraum, tchaikovskyJune, thaisMeditation, mapleLeafRag, chopinNocturne9_2, rhapsodyInBlue], 55, 100, classics2],
+    ['The Classics 3', [bachWTC1_1, beethovenSonata8, brahmsLullaby, chopinBallade1, blueDanube, vivaldiWinter, dvorakLargo, weddingMarch], 75, 150, classics3],
+    ['Four Elements: Air & Earth', [beethovenSonata17, ahnbenton15_2, orage, erdasWarning, ahnbenton15_4, isleOfTheDead, chopinEtude25_11], 70, 150, airEarth],
+    ['Four Elements: Water & Fire', [chopinEtude10_1, versLaFlamme, ahnbenton15_1, danzaRitualDelFugeo, estampes3, ahnbenton15_3, jeuxDeau, firebird], 60, 175, fireWater],
+    ['Halloween Special 1', [bachToccata, beethovenSonata14, harryPotterSelections, halloweenTheme, ahnbenton28, chopinNocturne27_1, totentanz], 75, 175, halloween1],
+    ['Halloween Special 2', [ahnbenton91, chopinNocturne48_1, transcendental6, isleOfTheDead, gaspard3, ahnbenton11_2_3, erlkonig, danseMacabre], 65, 150, halloween2],
+    ['I\'ll Be Bach', [passacagliaFugue, bachAir, chromaticFantasy, bachPartita2, bachToccata], 60, 150, bach],
+    ['Impostors and Thieves', [bachChaconne, bozzaAria, chopinEtude25_1, chopinEtude25_7, campanella, preludeFugueVariation, vivaldiWinter, vocalise, brahmsPaganini1], 75, 150, impostorsThieves],
+    ['Lisztomania', [hungarianRhapsody2, consolation3, campanella, pilgrimage2_2, liebestraum ,lisztSonata], 75, 200, liszt],
+    ['Lullaby Collection', [consolation3, beethovenSonata14_1, chopinBerceuse, clairDeLune, scarlatti87, traumerei, brahmsLullaby, beethovenSonata1_2, chopinNocturne9_2, debussyReverie, solveig, gershwinPrelude2, bachAir, triste, bachWTC1_1_1, chansonTriste, vocalise, salutDamour], 75, 100, lullaby],
+    ['Mozart Mastermind', [giovanniOverture, mozartSonata12, mozartAdagio, mozartVariations, mozartSonata8, volodosTurkish], 75, 150, mozart],
+    ['Ocean Waves', [silveryWaves, etudeTableau39_2, miroirs3, chopinEtude25_12, ahnbenton79_4, mer], 65, 125, ocean],
+    ['The Opera House 1', [figaroOverture, isoldesLiebestod, carmenVariations, forzaOverture, songbookSelections, vocalise, lisztFigaro], 60, 150, opera1],
+    ['The Opera House 2', [williamTellOverture, solveig, chopinGiovanni, mascagniIntermezzo, tarasBulbaOverture, carmenSelections, erlkonig, lisztRigoletto], 65, 150, opera2],
+    ['Raisin Brahms', [brahmsSonata1, brahmsIntermezzo118_2, brahmsPaganini1, brahmsLullaby, hungarianDance5, brahmsHandel], 75, 175, brahms],
+    ['Remembrance', [faurePavane, mozartSonata8, rachmaninovElegy, ravelPavane, bachChaconne, chopinFuneral, lisztBallade2, babadjanianElegy], 80, 125, remembrance],
+    ['Rockin\' with Rachmaninov', [etudeTableau39_1, etudeTableau39_5, etudeTableau39_6, rachmaninovElegy, rachmaninovMusical16_3, rachmaninovMusical16_4, rachmaninovPrelude23_5, rachmaninovPrelude32_10, etudeTableau33_5, vocalise, rachmaninovSonata2], 75, 200, rachmaninov],
+    ['Shadow of Shostakovich', [shostakovichPreludeFugue24, fantasticDances, shostakovichSonata2, shostakovichPreludes34, shostakovichSymphony5_4], 80, 200, shostakovich],
+    ['Ukrainian Resistance', [tarasBulbaOverture, kitschMusyka, revutskyPreludes7, ahnbenton99, skorykBurleska, lyatoshynskyPreludes, kosenkoSonata2], 75, 175, ukraineResistance],
+    ['Valentine\'s Day Special 1', [ahnbenton64_2, pasDeDeux, chopinBallade3, canYouFeelTheLoveTonight, liebestraum, loveMeTender, mascagniIntermezzo, weddingMarch, isoldesLiebestod, ahnbenton87], 60, 125, valentine1],
+    ['Valentine\'s Day Special 2', [salutDamour, chopinGiovanni, eros, bridalMarch, cantHelpFallingInLove, weddingMarch, aWholeNewWorld, vienneseDances, chopinBallade2, ahnbenton87], 65, 150, valentine2],
+    ['Zookeeper', [swanLakeTheme, miroirs2, poule, images6, chopinEtude25_2, beethovenSonata25, scarlatti30, chopinEtude25_9, lark, cygne, ahnbenton91, bumblebee], 60, 125, zookeeper],
 ]
 
 const concertObjs = availableConcerts.map(concert => new Concert ('Ahn-Benton, Jae', concert[0], concert[1], concert[2], concert[3], concert[4]))
