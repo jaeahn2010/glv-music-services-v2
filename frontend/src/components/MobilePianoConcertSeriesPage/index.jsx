@@ -36,6 +36,7 @@ import shostakovich from '../../assets/mpcs-shostakovich.jpeg'
 import remembrance from '../../assets/mpcs-remembrance.jpg'
 import traveling from '../../assets/mpcs-traveling.png'
 import march from '../../assets/mpcs-march.png'
+import meditation from '../../assets/mpcs-meditation.png'
 
 class Concert {
     constructor(pianist, title, program = [], duration, basePrice, poster) {
@@ -502,7 +503,7 @@ const swanLakeTheme = ['Theme from "Swan Lake"', 'Piotr Tchaikovsky']
 const symphonicEtudes = ['Symphonic Etudes, Op. 13', 'Robert Schumann']
 const tarasBulbaOverture = ['Overture from "Taras Bulba"', 'Mykola Lysenko']
 const tchaikovskyJune = ['"June" from "The Seasons, Op. 37"', 'Piotr Tchaikovsky']
-const tchaikovskyMorceaux72_2 = ['Berceus, Op. 72, No. 2', 'Piotry Tchaikovsky']
+const tchaikovskyMorceaux72_2 = ['Berceuse, Op. 72, No. 2', 'Piotry Tchaikovsky']
 const tchaikovskyMorceaux72_5 = ['Meditation, Op. 72, No. 5', 'Piotr Tchaikovsky']
 const tchaikovskyMorceaux72_7 = ['Polacca de concert, Op. 72, No. 7', 'Piotr Tchaikovsky']
 const tchaikovskyMorceaux72_10 = ['Scherzo-Fantaisie, Op. 72, No. 10', 'Piotr Tchaikovsky']
@@ -565,6 +566,7 @@ const availableConcerts = [
     ['Lisztomania', [hungarianRhapsody2, consolation3, lisztPaganini3, pilgrimage2s, liebestraum ,lisztSonata], 75, 200, liszt],
     ['Lullaby Collection', [consolation3, beethovenSonata14_1, chopinBerceuse, clairDeLune, scarlatti87, traumerei, brahmsLullaby, beethovenSonata1_2, chopinNocturne9_2, debussyReverie, solveig, gershwinPrelude2, bachAir, americanPreludes2, bachWTC1_1_1, chansonTriste, vocalise, salutDamour], 75, 100, lullaby],
     ['Marching On', [radetzky, ahnbenton3, chopinPolonaise40_1, beethovenSonata12_3, militaryMarch, bridalMarch, rakoczy, chopinFuneral, pompCircumstance, etudeTableau33_4, starsStripes], 60, 150, march],
+    ['Meditation and Peace', [peerGynt1_1, thaisMeditation, scarlatti466, traumerei, canon, tchaikovskyMorceaux72_5, rachmaninovPrelude32_5, images1, chopinWaltz34_2, dvorakLargo, debussyReverie, americanPreludes10, bachAir, aveMaria, chopinNocturne62_1], 85, 125, meditation],
     ['Mozart Mastermind', [giovanniOverture, mozartSonata12, mozartAdagio, mozartVariations, mozartSonata8, volodosTurkish], 75, 150, mozart],
     ['Ocean Waves', [silveryWaves, etudeTableau39_2, miroirs3, chopinEtude25_12, ahnbenton79_4, mer], 65, 125, ocean],
     ['The Opera House 1', [figaroOverture, isoldesLiebestod, carmenVariations, forzaOverture, songbookSelections, vocalise, lisztFigaro], 60, 150, opera1],
