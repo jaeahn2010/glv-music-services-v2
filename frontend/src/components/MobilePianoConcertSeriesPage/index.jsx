@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import allAmerican1 from '../../assets/mpcs-all-american-1.jpg'
+import allAmerican2 from '../../assets/mpcs-all-american-2.png'
 import ballroom1 from '../../assets/mpcs-dance-floor-1.jpg'
 import ballroom2 from '../../assets/mpcs-dance-floor-2.jpg'
 import ballroom3 from '../../assets/mpcs-ballroom-3.jpg'
@@ -37,6 +38,8 @@ import remembrance from '../../assets/mpcs-remembrance.jpg'
 import traveling from '../../assets/mpcs-traveling.png'
 import march from '../../assets/mpcs-march.png'
 import meditation from '../../assets/mpcs-meditation.png'
+import tragedy from '../../assets/mpcs-tragedy.png'
+import womenPower from '../../assets/mpcs-women-power.png'
 
 class Concert {
     constructor(pianist, title, program = [], duration, basePrice, poster) {
@@ -104,7 +107,9 @@ const bachPartita6 = ['Partita No. 6 in E minor', 'Johann Sebastian Bach']
 const bachToccata = ['Transcription of J.S. Bach\'s "Toccata and Fugue in D minor"', 'Ferruccio Busoni']
 const bachWTC1_1_1 = ['"Prelude" from "Prelude and Fugue in C major, WTC 1"', 'Johann Sebastian Bach']
 const bachWTC1_1 = ['Prelude and Fugue in C major, WTC 1', 'Johann Sebastian Bach']
+const balkanVariations = ['Variations on a Balkan Theme, Op. 60', 'Amy Beach']
 const batmanSelections = ['Selections from "Batman Suite"', 'Danny Elfman']
+const beachBallade = ['Ballade, Op. 6', 'Amy Beach']
 const beautyAndTheBeast = ['Beauty and the Beast', 'Alan Menken']
 const beethovenBagatelles33 = ['6 Bagatelles, Op. 33', 'Ludwig van Beethoven']
 const beethovenMinuet = ['Minuet in G major', 'Ludwig van Beethoven']
@@ -115,6 +120,7 @@ const beethovenSonata2 = ['Sonata No. 2 in A major, Op. 2, No. 2', 'Ludwig van B
 const beethovenSonata3 = ['Sonata No. 3 in C major, Op. 2, No. 3', 'Ludwig van Beethoven']
 const beethovenSonata4 = ['Sonata No. 4 in E-flat major, Op. 7 "Grand Sonata"', 'Ludwig van Beethoven']
 const beethovenSonata7 = ['Sonata No. 7 in D major, Op. 10, No. 3', 'Ludwig van Beethoven']
+const beethovenSonata7_2 = ['"Largo e mesto" from "Sonata No. 7 in D major, Op. 10, No. 3"', 'Ludwig van Beethoven']
 const beethovenSonata8 = ['Sonata No. 8 in C minor "Pathétique", Op. 13', 'Ludwig van Beethoven']
 const beethovenSonata11 = ['Sonata No. 11 in B-flat major, Op. 22', 'Ludwig van Beethoven']
 const beethovenSonata12_3 = ['"Maestoso andante" from "Sonata No. 12 in A-flat major"', 'Ludwig van Beethoven']
@@ -137,7 +143,9 @@ const beethovenTurkish = ['Turkish March', 'Ludwig van Beethoven']
 const bePrepared = ['"Be Prepared" from "The Lion King"', 'Elton John']
 const blueDanube = ['Blue Danube Waltz', 'Johann Strauss II']
 const blumenlied = ['Blumenlied, Op. 39', 'Gustav Lange']
+const bonisBarcarolle = ['Barcarolle, Op. 71', 'Mel Bonis']
 const bortkevychMorceaux = ['3 Morceaux, Op. 24', 'Sergei Bortkevych']
+const boulangerMorceaux = ['3 Morceaux', 'Lili Boulanger']
 const bozzaAria = ['Aria (arr. Ahn-Benton)', 'Eugene Bozza']
 const brahmsHandel = ['Variations on a Theme by Händel, Op. 24', 'Johannes Brahms']
 const brahmsIntermezzo118_2 = ['Intermezzo, Op. 118, No. 2', 'Johannes Brahms']
@@ -150,9 +158,6 @@ const brahmsSonata1 = ['Sonata No. 1 in C major, Op. 1', 'Johannes Brahms']
 const brahmsSonata3 = ['Sonata No. 3 in F minor, Op. 5', 'Johannes Brahms']
 const bridalMarch = ['Bridal March (arr. Liszt)', 'Richard Wagner']
 const bumblebee = ['The flight of the bumblebee (arr. Cziffra)', 'Nikolai Rimsky-Korsakov']
-const lisztPaganini1 = ['Paganini Etude No. 1 in G minor', 'Franz Liszt']
-const lisztPaganini3 = ['Paganini Etude No. 3 in G-sharp minor "La Campanella"', 'Franz Liszt']
-const lisztPaganini4 = ['Paganini Etude No. 4 in E major', 'Franz Liszt']
 const canon = ['Canon in D (arr. Ahn-Benton)', 'Johann Pachelbel']
 const cantHelpFallingInLove = ['"Can\'t help falling in love" (arr. Ahn-Benton)', 'Elvis Preesley']
 const canYouFeelTheLoveTonight = ['Can You Feel the Love Tonight (arr. Ahn-Benton)', 'Elton John']
@@ -160,6 +165,8 @@ const carmenVariations = ['Carmen variations', 'Vladimir Horowitz']
 const carmenSelections = ['Selections from "Carmen"', 'Georges Bizet']
 const carnaval = ['Carnaval, Op. 9', 'Robert Schumann']
 const carnavalDesAnimaux = ['Le carnaval des animaux', 'Camille Saint-Saëns']
+const chaminadeBallade = ['Ballade in A minor, Op. 86', 'Cécile Chaminade']
+const chaminadePiecesHumoristiques = ['6 Pièces humoristiques, Op. 87', 'Cécile Chaminade']
 const chansonTriste = ['Chanson triste', 'Vasily Kalinnikov']
 const childrensCorner1 = ['Doctor Gradus ad Parnassum', 'Claude Debussy']
 const childrensCorner4 = ['The Snow is Dancing', 'Claude Debussy']
@@ -251,6 +258,10 @@ const chopinWaltzes70 = ['3 Waltzes, Op. 70', 'Frederic Chopin']
 const chopinWaltzPosth = ['Waltz in E minor, Op. Posth', 'Frederic Chopin']
 const chromaticFantasy = ['Chromatic Fantasy and Fugue', 'Johann Sebastian Bach']
 const clairDeLune = ['Clair de lune', 'Claude Debussy']
+const claraSchumannScherzo1 = ['Scherzo No. 1 in D minor, Op. 10', 'Clara Schumann']
+const claraSchumannScherzo2 = ['Scherzo No. 2 in C minor, Op. 14', 'Clara Schumann']
+const claraSchumannSonata = ['Sonata in G minor', 'Clara Schumann']
+const claraSchumannVariations = ['Variations on a Theme by Robert Schumann, Op. 20', 'Clara Schumann']
 const clementiSonata40_2 = ['Sonata in B minor, Op. 40, No. 2', 'Muzio Clementi']
 const consolation3 = ['Consolation No. 3 in D-flat major', 'Franz Liszt']
 const cruella = ['"Cruella de Vil" from "101 Dalmatians"', 'Roger Radcliffe']
@@ -259,6 +270,7 @@ const cygne = ['Le cygne', 'Camille Saint-Saëns']
 const danseMacabre = ['Danse macabre (arr. Liszt)', 'Camille Saint-Saëns']
 const danzaRitualDelFugeo = ['Danza ritual del fuego', 'Manuel de Falla']
 const danzasArgentinas = ['Danzas argentinas', 'Alberto Ginastera']
+const dasJahr = ['Das Jahr', 'Fanny Mendelssohn']
 const debussyArabesque1 = ['Arabesque No. 1 in E major', 'Claude Debussy']
 const debussyEtude1 = ['Pour les cinq doigts', 'Claude Debussy']
 const debussyEtude6 = ['Pour les huit doigts', 'Claude Debussy']
@@ -359,6 +371,9 @@ const lilacs = ['Lilacs', 'Sergei Rachmaninov']
 const lisztBallade2 = ['Ballade No. 2 in B minor', 'Franz Liszt']
 const lisztFigaro = ['Fantasy on Themes from Mozart\'s "Le nozze di Figaro"', 'Franz Liszt']
 const lisztPastorale = ['"Pastorale" from "Années de Pélérinage"', 'Franz Liszt']
+const lisztPaganini1 = ['Paganini Etude No. 1 in G minor', 'Franz Liszt']
+const lisztPaganini3 = ['Paganini Etude No. 3 in G-sharp minor "La Campanella"', 'Franz Liszt']
+const lisztPaganini4 = ['Paganini Etude No. 4 in E major', 'Franz Liszt']
 const lisztRigoletto = ['Rigoletto-Paraphrase', 'Franz Liszt']
 const lisztSonata = ['Sonata in B minor', 'Franz Liszt']
 const loveMeTender = ['Love Me Tender (arr. Ahn-Benton)', 'Elvis Presley']
@@ -497,6 +512,7 @@ const skorykPartita5 = ['Partita No. 5', 'Myroslav Skoryk']
 const solveig = ['Solveigs Sang', 'Edvard Grieg']
 const songbookSelections = ['Selections from the Songbook', 'George Gershwin']
 const starsStripes = ['Stars and Stripes Forever (arr. Horowitz)', 'John Philip Sousa']
+const starWarsSelections = ['Selections from "Star Wars"', 'John Williams']
 const sugarPlumFairy = ['"Dance of the Sugar Plum Fairy" from "The Nutcracker"', 'Piotr Tchaikovsky']
 const supermanSelections = ['Selections from "Superman Suite"', 'John Williams']
 const swanLakeTheme = ['Theme from "Swan Lake"', 'Piotr Tchaikovsky']
@@ -547,6 +563,7 @@ const williamTellOverture = ['Overture from "Guillaume Tell" (arr. Liszt)', 'Gio
 
 const availableConcerts = [
     ['American Pride 1', [starsStripes, excursions, mapleLeafRag, westSideStorySelections, rhapsodyInBlue], 65, 150, allAmerican1],
+    ['American Pride 2', [gershwinPreludes, supermanSelections, ahnbenton56, phantomSelections, entertainer, beachBallade, americanInParis], 65, 125, allAmerican2],
     ['At the Carnival', [miroirs4, scaramouche, petrushka, sabreDance, ahnbenton7, carnaval], 75, 200, carnival],
     ['Ballroom 1', [chopinWaltz18, arabianDance, fantasticDances, mephisto, hungarianDance5, vienneseDances, oblivion, danzasArgentinas, carmenVariations], 55, 150, ballroom1],
     ['Ballroom 2', [waltzOfFlowers, romanianFolkDances, danseMacabre, sabreDance, chopinMazurka6_1, chopinMazurka7_1, chopinMazurka17_4, libertango, pilgrimage2s_3], 55, 150, ballroom2],
@@ -569,6 +586,7 @@ const availableConcerts = [
     ['Meditation and Peace', [peerGynt1_1, thaisMeditation, scarlatti466, traumerei, canon, tchaikovskyMorceaux72_5, rachmaninovPrelude32_5, images1, chopinWaltz34_2, dvorakLargo, debussyReverie, americanPreludes10, bachAir, aveMaria, chopinNocturne62_1], 85, 125, meditation],
     ['Mozart Mastermind', [giovanniOverture, mozartSonata12, mozartAdagio, mozartVariations, mozartSonata8, volodosTurkish], 75, 150, mozart],
     ['Ocean Waves', [silveryWaves, etudeTableau39_2, miroirs3, chopinEtude25_12, ahnbenton79_4, mer], 65, 125, ocean],
+    ['Overcoming Tragedy', [chopinPolonaise44, beethovenSonata7_2, preludeFugueVariation, scriabinEtude42_5, etudeTableau33_7, beethovenSonata27, dvorakLargo], 70, 100, tragedy],
     ['The Opera House 1', [figaroOverture, isoldesLiebestod, carmenVariations, forzaOverture, songbookSelections, vocalise, lisztFigaro], 60, 150, opera1],
     ['The Opera House 2', [williamTellOverture, solveig, chopinGiovanni, mascagniIntermezzo, tarasBulbaOverture, carmenSelections, erlkonig, lisztRigoletto], 65, 150, opera2],
     ['Power of Prokofiev', [diabolicSuggestion, prokofievRomeoJuliet, prokofievSonata3, prokofievToccata, prokofievSonata7], 65, 175, prokofiev],
@@ -581,6 +599,7 @@ const availableConcerts = [
     ['Ukrainian Resistance 2', [ukrainianSuite1, bortkevychMorceaux, skorykPartita5, shamoToccata, revutskyPieces17, kosenkoSonata3, skorykMelodia], 65, 125, ukraineResistance2],
     ['Valentine\'s Day Special 1', [ahnbenton64_2, pasDeDeux, chopinBallade3, canYouFeelTheLoveTonight, liebestraum, loveMeTender, mascagniIntermezzo, weddingMarch, isoldesLiebestod, ahnbenton87], 60, 125, valentine1],
     ['Valentine\'s Day Special 2', [salutDamour, chopinGiovanni, eros, bridalMarch, cantHelpFallingInLove, weddingMarch, aWholeNewWorld, vienneseDances, chopinBallade2, ahnbenton87], 65, 150, valentine2],
+    ['Women Power', [chaminadeBallade, balkanVariations, claraSchumannScherzo2, bonisBarcarolle, dasJahr], 85, 175, womenPower],
     ['Zookeeper 1', [swanLakeTheme, miroirs2, poule, images6, chopinEtude25_2, beethovenSonata25, scarlatti30, chopinEtude25_9, lark, cygne, ahnbenton91, bumblebee], 60, 125, zookeeper1],
     ['Zookeeper 2', [vivaldiSpring, etudeTableau39_2, chopinWaltz64_1, picturesBydlo, forelle, picturesUnhatched, annaKarenina, chopinEtude25_3, miroirs1, cuckooWaltz, etudeTableau39_6, carnavalDesAnimaux], 55, 100, zookeeper2],
 ]
