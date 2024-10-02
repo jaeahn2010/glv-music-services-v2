@@ -18,6 +18,7 @@ import classics2 from '../../assets/mpcs-classics-2.jpg'
 import classics3 from '../../assets/mpcs-classics-3.jpg'
 import valentine1 from '../../assets/mpcs-valentine-1.png'
 import valentine2 from '../../assets/mpcs-valentine-2.png'
+import valentine3 from '../../assets/mpcs-valentine-3.png'
 import halloween1 from '../../assets/mpcs-halloween-1.png'
 import halloween2 from '../../assets/mpcs-halloween-2.png'
 import lullaby from '../../assets/mpcs-lullaby.png'
@@ -157,7 +158,7 @@ const wyman = 'Addison Wyman'
 const adiosNonino = ['Adios nonino (arr. Ahn-Benton)', piazzolla]
 const ahnbenton1 = ['Minuetto e Trio in E major, Op. 1', ahnbenton]
 const ahnbenton3 = ['Bagatelle in F major, Op. 3 "Children\'s March"', ahnbenton]
-const ahnbenton5 = ['Sonatina No. 1 in C major, Op. 5 "The Weater"', ahnbenton]
+const ahnbenton5 = ['Sonatina No. 1 in C major, Op. 5 "The Weather"', ahnbenton]
 const ahnbenton6_3 = ['Prelude in C-sharp minor, Op. 6, No. 3 "Dance of the Barbarians"', ahnbenton]
 const ahnbenton6_4 = ['Prelude in C minor, Op. 6, No. 4 "Sorrow"', ahnbenton]
 const ahnbenton7 = ['Scherzetto No. 3 "A Sad Clown\'s Day"', ahnbenton]
@@ -263,7 +264,7 @@ const brahmsPaganini2 = ['Paganini Variations, Op. 35, No. 2', brahms]
 const brahmsRhapsody1 = ['Rhapsody No. 1 in B minor, Op. 79, No. 1', brahms]
 const brahmsRhapsody2 = ['Rhapsody No. 2 in G minor, Op. 79, No. 2', brahms]
 const brahmsSonata1 = ['Sonata No. 1 in C major, Op. 1', brahms]
-const brahmssonata1_3 = ['"Scherzo" from "Sonata No. 1 in C major, Op. 1', brahms]
+const brahmsSonata1_3 = ['"Scherzo" from "Sonata No. 1 in C major, Op. 1', brahms]
 const brahmsSonata3 = ['Sonata No. 3 in F minor, Op. 5', brahms]
 const bridalMarch = ['Bridal March (arr. Liszt)', wagner]
 const bumblebee = ['The flight of the bumblebee (arr. Cziffra)', rimskyKorsakov]
@@ -638,8 +639,8 @@ const schubertMoment = ['Moment musical No. 3 in F minor', schubert]
 const scriabinEtude8_12 = ['Etude in D-sharp minor, Op. 8, No. 12', scriabin]
 const scriabinEtude42_5 = ['Etude in C-sharp minor, Op. 42, No. 5', scriabin]
 const scriabinEtude65_3 = ['Etude, Op. 65, No. 3', scriabin]
-const scriabineSonata3 = ['Sonata No. 3 in F-sharp minor, Op. 23', scriabin]
-const scriabineSonata5 = ['Sonata No. 5, Op. 53', scriabin]
+const scriabinSonata3 = ['Sonata No. 3 in F-sharp minor, Op. 23', scriabin]
+const scriabinSonata5 = ['Sonata No. 5, Op. 53', scriabin]
 const shamoToccata = ['Toccata', 'Yuri Shamo']
 const shostakovichPreludeFugue4 = ['Prelude and Fugue in E minor, Op. 87, No. 4', shostakovich]
 const shostakovichPreludeFugue15 = ['Prelude and Fugue in D-flat major, Op. 87, No. 15', shostakovich]
@@ -733,21 +734,22 @@ const availableConcerts = [
     ['Overcoming Tragedy', 'Tragedy is an unfortunate but inevitable part of life. Let this concert assist you with expressing and overcoming grief and allow yourself to slowly enter the stage of acceptance.', [chopinPolonaise44, beethovenSonata7_2, preludeFugueVariation, scriabinEtude42_5, consolation3, etudeTableau33_7, bachAir, beethovenSonata27, dvorakLargo], 80, 100, tragedy],
     ['The Opera House 1', 'Explore the drama, the romance, the scandal, and the tragedy of famous operatic works, now brought to you in a home concert on the piano.', [figaroOverture, isoldesLiebestod, carmenVariations, forzaOverture, songbookSelections, vocalise, lisztFigaro], 60, 150, opera1],
     ['The Opera House 2', 'The world of opera is vast and deep: with this opera-inside-a-piano concert, delve more into the storyline, the plot, and the hidden meanings and intentions of characters.', [williamTellOverture, solveig, chopinGiovanni, mascagniIntermezzo, tarasBulbaOverture, carmenSelections, erlkonig, babbino, lisztRigoletto], 70, 150, opera2],
-    ['A Pokémon Journey: Kanto - Part 1', 'Let out both your inner nerd and childhood nostalgia! Explore both the iconic music of Junichi Masuda, and the epic battling music of the protagonist against many foes, if the battles were to be represented by equally iconic classical music. Follow the first generation gameplay through the Kanto region, from Pallet Town to Celadon City.', [masudaKantoOpening, masudaPallet, masudaOakLab, haydnSonata33_3, masudaKantoTravel1, masudaViridian, clementiSonata40_2_1, masudaViridianForest, masudaPewter, brahmssonata1_3, masudaMoon, masudaCerulean, chopinEtude25_2, mozartSonata8_3, masudaVermillion, masudaAnne, beethovenSonata5_3, kapustin3, masudaRock, masudaLavender, masudaTower, beethovenSonata1_4, masudaKantoTravel2, masudaCeladon, masudaKantoRocket, diabolicSuggestion, mendelssohnRondo], 80, 125, kanto1],
+    ['A Pokémon Journey: Kanto - Part 1', 'Let out both your inner nerd and childhood nostalgia! Explore both the iconic music of Junichi Masuda, and the epic battling music of the protagonist against many foes, if the battles were to be represented by equally iconic classical music. Follow the first generation gameplay through the Kanto region, from Pallet Town to Celadon City.', [masudaKantoOpening, masudaPallet, masudaOakLab, haydnSonata33_3, masudaKantoTravel1, masudaViridian, clementiSonata40_2_1, masudaViridianForest, masudaPewter, brahmsSonata1_3, masudaMoon, masudaCerulean, chopinEtude25_2, mozartSonata8_3, masudaVermillion, masudaAnne, beethovenSonata5_3, kapustin3, masudaRock, masudaLavender, masudaTower, beethovenSonata1_4, masudaKantoTravel2, masudaCeladon, masudaKantoRocket, diabolicSuggestion, mendelssohnRondo], 80, 125, kanto1],
     ['A Pokémon Journey: Kanto - Part 2', 'Continue your trip down the memory lane in the region of Kanto, accompanied by the music of Masuda and equally dramatic works by other composers. Conquer the last four gym leaders, the elite four, and the champion!', [masudaBike, masudaFuchsia, transcendental8, masudaKantoTravel3, masudaSaffron, beethovenSonata17_1, prokofievToccata, scriabinEtude65_3, masudaSurf, masudaCinnabar, masudaMansion, ginasteraSonata1_4, prokofievSonata7_3, beethovenSonata23_3, masudaKantoVictory, chopinEtude25_11, rachmaninovPrelude23_5, ginasteraSonata1_2, valkyries, masudaChampion, masudaHall, masudaKantoEnding], 80, 125, kanto2],
     ['Power of Prokofiev', 'Immerse in the powerfully striking musical fantasy land of Sergei Prokofiev, filled with obsession, feud, lust, war, and sarcasm.', [diabolicSuggestion, prokofievRomeoJuliet, prokofievSonata3, prokofievToccata, prokofievSonata7], 65, 175, prokofievPortrait],
     ['Raisin Brahms', 'Take a plunge into the musical world of Johannes Brahms: larger-than-life, symphonic sounds mixed in with inner emotional tension, all carefully calculated to perfect equilibrium on the piano.', [brahmsSonata1, brahmsIntermezzo118_2, brahmsPaganini1, brahmsLullaby, hungarianDance5, brahmsHandel], 75, 175, brahmsPortrait],
-    ['Remembrance', '', [faurePavane, mozartSonata8, rachmaninovElegy, ravelPavane, bachChaconne, chopinFuneral, lisztBallade2, babadjanianElegy], 80, 125, remembrance],
-    ['Rockin\' with Rachmaninov', '', [etudeTableau39_1, etudeTableau39_5, etudeTableau39_6, rachmaninovElegy, rachmaninovMusical16_3, rachmaninovMusical16_4, rachmaninovPrelude23_5, rachmaninovPrelude32_10, etudeTableau33_5, vocalise, rachmaninovSonata2], 75, 200, rachmaninovPortrait],
-    ['Shadow of Shostakovich', '', [shostakovichPreludeFugue24, fantasticDances, shostakovichSonata2, shostakovichPreludes34, shostakovichSymphony5_4], 80, 200, shostakovichPortrait],
-    ['Traveling Musician', '', [wanderersFantasy, pilgrimage3_4, dvorakSymphony9Finale, islamey, ahnbenton76, americanInParis], 70, 175, traveling],
-    ['Ukrainian Resistance 1', '', [tarasBulbaOverture, kitschMusyka, revutskyPreludes7, ahnbenton99, skorykBurleska, lyatoshynskyPreludes, kosenkoSonata2], 75, 175, ukraineResistance1],
-    ['Ukrainian Resistance 2', '', [ukrainianSuite1, bortkevychMorceaux, skorykPartita5, shamoToccata, revutskyPieces17, kosenkoSonata3, skorykMelodia], 65, 125, ukraineResistance2],
-    ['Valentine\'s Day Special 1', '', [ahnbenton64_2, pasDeDeux, chopinBallade3, canYouFeelTheLoveTonight, liebestraum, loveMeTender, mascagniIntermezzo, weddingMarch, isoldesLiebestod, ahnbenton87], 60, 125, valentine1],
-    ['Valentine\'s Day Special 2', '', [salutDamour, chopinGiovanni, eros, bridalMarch, cantHelpFallingInLove, weddingMarch, aWholeNewWorld, vienneseDances, chopinBallade2, ahnbenton87], 65, 150, valentine2],
-    ['Women Power', '', [chaminadeBallade, balkanVariations, claraSchumannScherzo2, bonisBarcarolle, dasJahr], 85, 175, womenPower],
-    ['Zookeeper 1', '', [swanLakeTheme, miroirs2, poule, images6, chopinEtude25_2, beethovenSonata25, scarlatti30, chopinEtude25_9, lark, cygne, ahnbenton91, bumblebee], 60, 125, zookeeper1],
-    ['Zookeeper 2', '', [vivaldiSpring, etudeTableau39_2, chopinWaltz64_1, picturesBydlo, forelle, picturesUnhatched, annaKarenina, chopinEtude25_3, miroirs1, cuckooWaltz, etudeTableau39_6, carnavalDesAnimaux], 55, 100, zookeeper2],
+    ['Remembrance', 'Honor the dearly departed with a musical journey through remembrance, reverence, and nostalgia, filled with many relatable moments of inner suffering, displays of outcry, and eventual tranquility.', [faurePavane, mozartSonata8, rachmaninovElegy, ravelPavane, bachChaconne, chopinFuneral, lisztBallade2, babadjanianElegy], 80, 125, remembrance],
+    ['Rockin\' with Rachmaninov', 'Enter the incredibly complex world of Sergei Rachmaninov, where endless depth of emotion meets extreme pianistic dexterity to create an unforgettable musical experience.', [etudeTableau39_1, etudeTableau39_5, etudeTableau39_6, rachmaninovElegy, rachmaninovMusical16_3, rachmaninovMusical16_4, rachmaninovPrelude23_5, rachmaninovPrelude32_10, etudeTableau33_5, vocalise, rachmaninovSonata2], 75, 200, rachmaninovPortrait],
+    ['Shadow of Shostakovich', 'Learn how the genius of Dmitri Shostakovich prevailed over political oppression and heavy tragedy and was still able to find hope, humor, and humanity in the dark times of the 20th century.', [shostakovichPreludeFugue24, fantasticDances, shostakovichSonata2, shostakovichPreludes34, shostakovichSymphony5_4], 80, 200, shostakovichPortrait],
+    ['Traveling Musician', 'Take a tour of the world with the colorful imaginations and impressions of different parts of the world by different creative minds.', [wanderersFantasy, pilgrimage3_4, dvorakSymphony9Finale, islamey, ahnbenton76, americanInParis], 70, 175, traveling],
+    ['Ukrainian Resistance 1', 'Stand with the brave people of Ukraine by immersing yourself in this program of composers of Ukraine: from the father of Ukrainian music to currently living composers, to those who were impacted by Ukrainian culture.', [tarasBulbaOverture, kitschMusyka, revutskyPreludes7, ahnbenton99, skorykBurleska, lyatoshynskyPreludes, kosenkoSonata2], 75, 175, ukraineResistance1],
+    ['Ukrainian Resistance 2', 'Continue your Ukrainian journey and explore how the Ukrainian people and culture withstood hundreds of years of oppression, and how they continue to resist occupation and fight for their independence.', [ukrainianSuite1, bortkevychMorceaux, skorykPartita5, shamoToccata, revutskyPieces17, kosenkoSonata3, skorykMelodia], 65, 125, ukraineResistance2],
+    ['Valentine\'s Day Special 1', 'Enjoy a romantic dinner or a couple\'s dance with your loved one while listening to some of the most beloved romances of classical music.', [ahnbenton64_2, pasDeDeux, chopinBallade3, canYouFeelTheLoveTonight, liebestraum, loveMeTender, mascagniIntermezzo, weddingMarch, isoldesLiebestod, ahnbenton87], 60, 125, valentine1],
+    ['Valentine\'s Day Special 2', 'Follow a lifecycle of love with this wordless musical storyline that tells how love evolves from butterflies in the stomach to full-blown passion to a mere ghost of a memory.', [salutDamour, chopinGiovanni, eros, bridalMarch, cantHelpFallingInLove, weddingMarch, aWholeNewWorld, vienneseDances, chopinBallade2, ahnbenton87], 65, 150, valentine2],
+    ['Valentine\'s Day Special 3', 'Explore the more innocent side of love with this collection of youthful, hope-filled romances.', [widmung, beautyAndTheBeast, pilgrimage2_1, flowerSong, prokofievCinderella, beethovenSonata30], 55, 100, valentine3],
+    ['Women Power', 'Celebrate the power of women and help raise their voices with some of the greatest female composers to ever exist. Perfect birthday or Mother\'s Day gift for any musically interested woman in your life!', [chaminadeBallade, balkanVariations, claraSchumannScherzo2, bonisBarcarolle, dasJahr], 85, 175, womenPower],
+    ['Zookeeper 1', 'Immerse yourself in a land of famous animals of music: from a cat that inspired an epic fugue to a bumblebee that begot one of the most virtuosic piano pieces ever composed.', [swanLakeTheme, miroirs2, poule, images6, chopinEtude25_2, beethovenSonata25, scarlatti30, chopinEtude25_9, lark, cygne, ahnbenton91, bumblebee], 60, 125, zookeeper1],
+    ['Zookeeper 2', 'Add more musical animals to your collection - birds in springtime, a dancing cuckoo, a big bad wolf, a dog chasing its own tail, a violently racing horse, and many more!', [vivaldiSpring, etudeTableau39_2, chopinWaltz64_1, picturesBydlo, forelle, picturesUnhatched, annaKarenina, chopinEtude25_3, miroirs1, cuckooWaltz, etudeTableau39_6, carnavalDesAnimaux], 55, 100, zookeeper2],
 ]
 
 const concertObjs = availableConcerts.map(concert => new Concert ('Ahn-Benton, Jae', concert[0], concert[1], concert[2], concert[3], concert[4], concert[5]))
