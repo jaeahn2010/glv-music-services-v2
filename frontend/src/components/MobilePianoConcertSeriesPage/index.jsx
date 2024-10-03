@@ -43,6 +43,7 @@ import tragedy from '../../assets/mpcs-tragedy.png'
 import womenPower from '../../assets/mpcs-women-power.png'
 import kanto1 from '../../assets/mpcs-pokemon-kanto.jpeg'
 import kanto2 from '../../assets/mpcs-pokemon-kanto-2.jpeg'
+import heroesVillains from '../../assets/mpcs-heroes-villains.png'
 
 class Concert {
     constructor(pianist, title, description, program = [], duration, basePrice, poster) {
@@ -195,7 +196,7 @@ const americanPreludes2 = ['American Prelude No. 2 "Triste"', ginastera]
 const americanPreludes3 = ['American Prelude No. 3 "Danza criolla"', ginastera]
 const americanPreludes6 = ['American Prelude No. 6 "Homenaje a Roberto Garcia Morillo"', ginastera]
 const americanPreludes8 = ['American Prelude No. 8 "Homenaje a Juan Jose Castro"', ginastera]
-const americanPreludes9 = ['American Prelude No. 9 "Homenje a Aaron Copland"', ginastera]
+const americanPreludes9 = ['American Prelude No. 9 "Homenaje a Aaron Copland"', ginastera]
 const americanPreludes10 = ['American Prelude No. 10 "Pastorale"', ginastera]
 const annaKarenina = ['"Prologue and Horse Race" from "Anna Karenina"', shchedrin]
 const arabianDance = ['Arabian Dance from "The Nutcraker"', tchaikovsky]
@@ -721,8 +722,9 @@ const availableConcerts = [
     ['The Classics 3', 'Enjoy even more familiar melodies, specially catered to please both the amateurs and connoisseurs of classical music!', [bachWTC1_1, beethovenSonata8, brahmsLullaby, chopinBallade1, blueDanube, vivaldiWinter, dvorakLargo, weddingMarch], 75, 150, classics3],
     ['Four Elements: Air & Earth', 'Wind shapes the Earth, and the resulting topography in turn affects the flow of the wind. Get ready to be swept up in the classical music depiction of this endless battle of nature.', [beethovenSonata17, ahnbenton15_2, pilgrimage1_5, erdasWarning, ahnbenton15_4, isleOfTheDead, chopinEtude25_11], 70, 150, airEarth],
     ['Four Elements: Water & Fire', 'Water douses fire, and fire quenches water. Who will you root for - the scorching lava, or the raging ocean? Listen and decide!', [chopinEtude10_1, versLaFlamme, ahnbenton15_1, danzaRitualDelFuego, estampes3, ahnbenton15_3, jeuxDeau, firebird], 60, 175, fireWater],
-    ['Halloween Special 1', 'Feeling spooky? Fuel the fire of fear with these classic horror tunes, filled with ghosts, witches, and the undead.', [bachToccata, beethovenSonata14, harryPotterSelections, halloweenTheme, ahnbenton28, chopinNocturne27_1, totentanz], 75, 175, halloween1],
+    ['Halloween Special 1', 'Feeling spooky? Fuel the fear with these classic horror tunes, filled with ghosts, witches, and the undead.', [bachToccata, beethovenSonata14, harryPotterSelections, halloweenTheme, ahnbenton28, chopinNocturne27_1, totentanz], 75, 175, halloween1],
     ['Halloween Special 2', 'Enter this musical haunted house and participate in the mysteries of the paranormal. Beware - some spirits are harmless, but others love to exploit the scare factor!', [ahnbenton91, chopinNocturne48_1, transcendental6, isleOfTheDead, gaspard3, ahnbenton11_2_3, erlkonig, danseMacabre], 65, 150, halloween2],
+    ['Heroes vs. Villains', [tarasBulbaOverture, cruella, queenOfTheNight, poorUnfortunateSouls, batmanSelections, transcendental7, starWarsSelections, beethovenSonata12_3, bePrepared, gaston, elegantCaptainHook, chopinPolonaise53], 65, 125, heroesVillains],
     ['I\'ll Be Bach', 'Take a dive into the perfect balance of mathematical structure, musical dramaturgy, emotional depth of the timeless composer J. S. Bach.', [passacagliaFugue, bachAir, chromaticFantasy, bachPartita2, bachToccata], 60, 150, bachPortrait],
     ['Impostors and Thieves', 'Look carefully with a magnifying glass: this may be a piano concert, but the composers of these works either didn\'t originally write them for the piano, or tried to depict other instruments with the piano.', [bachChaconne, bozzaAria, chopinEtude25_1, chopinEtude25_7, lisztPaganini3, preludeFugueVariation, vivaldiWinter, vocalise, brahmsPaganini1], 75, 150, impostorsThieves],
     ['Lisztomania', 'Be prepared to lose your mind with this up-close-and-personal concert of legendary pianist and composer, international icon, and unmatched master recitalist - Franz Liszt.', [hungarianRhapsody2, consolation3, lisztPaganini3, pilgrimage2s, liebestraum ,lisztSonata], 75, 200, lisztPortrait],
