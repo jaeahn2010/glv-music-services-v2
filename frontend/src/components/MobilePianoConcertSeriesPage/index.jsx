@@ -44,6 +44,7 @@ import womenPower from '../../assets/mpcs-women-power.png'
 import kanto1 from '../../assets/mpcs-pokemon-kanto.jpeg'
 import kanto2 from '../../assets/mpcs-pokemon-kanto-2.jpeg'
 import heroesVillains from '../../assets/mpcs-heroes-villains.png'
+import goodbye from '../../assets/mpcs-goodbye.png'
 
 class Concert {
     constructor(pianist, title, description, program = [], duration, basePrice, poster) {
@@ -160,6 +161,7 @@ const adiosNonino = ['Adios nonino (arr. Ahn-Benton)', piazzolla]
 const ahnbenton1 = ['Minuetto e Trio in E major, Op. 1', ahnbenton]
 const ahnbenton3 = ['Bagatelle in F major, Op. 3 "Children\'s March"', ahnbenton]
 const ahnbenton5 = ['Sonatina No. 1 in C major, Op. 5 "The Weather"', ahnbenton]
+const ahnbenton6_1 = ['Prelude in C major, Op. 6, No. 1 "Nostalgia"', ahnbenton]
 const ahnbenton6_3 = ['Prelude in C-sharp minor, Op. 6, No. 3 "Dance of the Barbarians"', ahnbenton]
 const ahnbenton6_4 = ['Prelude in C minor, Op. 6, No. 4 "Sorrow"', ahnbenton]
 const ahnbenton7 = ['Scherzetto No. 3 "A Sad Clown\'s Day"', ahnbenton]
@@ -590,7 +592,7 @@ const prokofievSonata7_3 = ['"Precipitato" from "Sonata No. 7 in B-flat major, O
 const prokofievSonata8 = ['Sonata No. 8 in B-flat major, Op. 84', prokofiev]
 const prokofievSonata9 = ['Sonata No. 9 in C major, Op. 103', prokofiev]
 const prokofievToccata = ['Toccata in D minor, Op. 11', prokofiev]
-const queenOfTheNight = ['"Die Hölle Rache" (arr. Ahn-Benton)', mozart]
+const queenOfTheNight = ['"Der Hölle Rache" (arr. Ahn-Benton)', mozart]
 const rachmaninovChopin = ['Variations on a Theme by Chopin, Op. 22', rachmaninov]
 const rachmaninovCorelli = ['Variations on a Theme by Corelli, Op. 42', rachmaninov]
 const rachmaninovElegy = ['Elegie in E-flat minor, Op. 3, No. 1', rachmaninov]
@@ -724,7 +726,7 @@ const availableConcerts = [
     ['Four Elements: Water & Fire', 'Water douses fire, and fire quenches water. Who will you root for - the scorching lava, or the raging ocean? Listen and decide!', [chopinEtude10_1, versLaFlamme, ahnbenton15_1, danzaRitualDelFuego, estampes3, ahnbenton15_3, jeuxDeau, firebird], 60, 175, fireWater],
     ['Halloween Special 1', 'Feeling spooky? Fuel the fear with these classic horror tunes, filled with ghosts, witches, and the undead.', [bachToccata, beethovenSonata14, harryPotterSelections, halloweenTheme, ahnbenton28, chopinNocturne27_1, totentanz], 75, 175, halloween1],
     ['Halloween Special 2', 'Enter this musical haunted house and participate in the mysteries of the paranormal. Beware - some spirits are harmless, but others love to exploit the scare factor!', [ahnbenton91, chopinNocturne48_1, transcendental6, isleOfTheDead, gaspard3, ahnbenton11_2_3, erlkonig, danseMacabre], 65, 150, halloween2],
-    ['Heroes vs. Villains', [tarasBulbaOverture, cruella, queenOfTheNight, poorUnfortunateSouls, batmanSelections, transcendental7, starWarsSelections, beethovenSonata12_3, bePrepared, gaston, elegantCaptainHook, chopinPolonaise53], 65, 125, heroesVillains],
+    ['Heroes vs. Villains', 'Which is more convincing: the music of the good, or the music of the evil? Decide for yourself in this exciting concert depicting the constant struggle between heroes and villains.', [tarasBulbaOverture, cruella, queenOfTheNight, poorUnfortunateSouls, batmanSelections, transcendental7, starWarsSelections, beethovenSonata12_3, bePrepared, gaston, elegantCaptainHook, chopinPolonaise53], 65, 125, heroesVillains],
     ['I\'ll Be Bach', 'Take a dive into the perfect balance of mathematical structure, musical dramaturgy, emotional depth of the timeless composer J. S. Bach.', [passacagliaFugue, bachAir, chromaticFantasy, bachPartita2, bachToccata], 60, 150, bachPortrait],
     ['Impostors and Thieves', 'Look carefully with a magnifying glass: this may be a piano concert, but the composers of these works either didn\'t originally write them for the piano, or tried to depict other instruments with the piano.', [bachChaconne, bozzaAria, chopinEtude25_1, chopinEtude25_7, lisztPaganini3, preludeFugueVariation, vivaldiWinter, vocalise, brahmsPaganini1], 75, 150, impostorsThieves],
     ['Lisztomania', 'Be prepared to lose your mind with this up-close-and-personal concert of legendary pianist and composer, international icon, and unmatched master recitalist - Franz Liszt.', [hungarianRhapsody2, consolation3, lisztPaganini3, pilgrimage2s, liebestraum ,lisztSonata], 75, 200, lisztPortrait],
@@ -742,6 +744,7 @@ const availableConcerts = [
     ['Raisin Brahms', 'Take a plunge into the musical world of Johannes Brahms: larger-than-life, symphonic sounds mixed in with inner emotional tension, all carefully calculated to perfect equilibrium on the piano.', [brahmsSonata1, brahmsIntermezzo118_2, brahmsPaganini1, brahmsLullaby, hungarianDance5, brahmsHandel], 75, 175, brahmsPortrait],
     ['Remembrance', 'Honor the dearly departed with a musical journey through remembrance, reverence, and nostalgia, filled with many relatable moments of inner suffering, displays of outcry, and eventual tranquility.', [faurePavane, mozartSonata8, rachmaninovElegy, ravelPavane, bachChaconne, chopinFuneral, lisztBallade2, babadjanianElegy], 80, 125, remembrance],
     ['Rockin\' with Rachmaninov', 'Enter the incredibly complex world of Sergei Rachmaninov, where endless depth of emotion meets extreme pianistic dexterity to create an unforgettable musical experience.', [etudeTableau39_1, etudeTableau39_5, etudeTableau39_6, rachmaninovElegy, rachmaninovMusical16_3, rachmaninovMusical16_4, rachmaninovPrelude23_5, rachmaninovPrelude32_10, etudeTableau33_5, vocalise, rachmaninovSonata2], 75, 200, rachmaninovPortrait],
+    ['Saying Goodbye', 'Farewells are difficult, whether they are a separation from a loved one or a departure from a hometown. Ease the heartache and express the nostalgia with some of the best depictions in classical music of this uniquely human emotion.', [ahnbenton6_1, haydnSymphony45, chopinEtude10_3, adiosNonino, ahnbenton87, chopinWaltzes69, beethovenSonata26], 80, 175, goodbye],
     ['Shadow of Shostakovich', 'Learn how the genius of Dmitri Shostakovich prevailed over political oppression and heavy tragedy and was still able to find hope, humor, and humanity in the dark times of the 20th century.', [shostakovichPreludeFugue24, fantasticDances, shostakovichSonata2, shostakovichPreludes34, shostakovichSymphony5_4], 80, 200, shostakovichPortrait],
     ['Traveling Musician', 'Take a tour of the world with the colorful imaginations and impressions of different parts of the world by different creative minds.', [wanderersFantasy, pilgrimage3_4, dvorakSymphony9Finale, islamey, ahnbenton76, americanInParis], 70, 175, traveling],
     ['Ukrainian Resistance 1', 'Stand with the brave people of Ukraine by immersing yourself in this program of composers of Ukraine: from the father of Ukrainian music to currently living composers, to those who were impacted by Ukrainian culture.', [tarasBulbaOverture, kitschMusyka, revutskyPreludes7, ahnbenton99, skorykBurleska, lyatoshynskyPreludes, kosenkoSonata2], 75, 175, ukraineResistance1],
