@@ -1,7 +1,6 @@
-import { useState } from 'react'
 import Gallery from '../Gallery'
 
-export default function RepertoirePage({ isMenuOpen, opuses, setOpuses, allComposers, getFilteredOpusData, updateDetails, loginStatus }) {
+export default function RepertoirePage({ isMenuOpen, opuses, allComposers, getFilteredOpusData, updateDetails, loginStatus }) {
     let instruments = ['bassoon', 'cello', 'clarinet', 'contrabass', 'flute', 'guitar', 'harp', 'oboe', 'orchestra', 'piano', 'percussion', 'saxophone', 'trombone', 'trumpet', 'tuba/euphonium', 'viola', 'violin']
     let filterDivStyle = 'flex justify-center items-center w-11/12 mx-auto my-2'
     let filterLabelStyle = 'w-1/2 text-right mr-2 text-sm'
@@ -53,9 +52,7 @@ export default function RepertoirePage({ isMenuOpen, opuses, setOpuses, allCompo
             </section>
             <Gallery
                 opuses={opuses}
-                getFilteredOpusData={getFilteredOpusData}
                 updateDetails={updateDetails}
-                loginStatus={loginStatus}
             />
         </main>
     )

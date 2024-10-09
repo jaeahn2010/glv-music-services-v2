@@ -2,7 +2,7 @@ import { useState } from "react"
 import { sendEmail } from "../../../utils/backend"
 let states = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VA', 'WA', 'WV', 'WI', 'WY']
 
-export default function RequestPage({ isMenuOpen, opuses, musicians, getFilteredData, updateDetails, loginStatus, userCart, setUserCart, totalPrice }) {
+export default function RequestPage({ isMenuOpen, musicians, loginStatus, userCart, totalPrice }) {
     const [requestData, setRequestData] = useState({
         clientEmail: '',
         musicianEmail: '',

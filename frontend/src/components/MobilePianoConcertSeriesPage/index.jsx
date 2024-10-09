@@ -761,13 +761,17 @@ const concertObjs = availableConcerts.map(concert => new Concert ('Ahn-Benton, J
 let tdStyle = 'border border-stone-200 text-center py-1'
 let btnStyle = 'border border-stone-200 rounded-xl p-2 m-3 hover:bg-amber-400 hover:text-stone-800'
 
-export default function MobilePianoConcertSeriesPage({ isMenuOpen }) {
+export default function MobilePianoConcertSeriesPage({ isMenuOpen, musicians, loginStatus, userCart, totalPrice }) {
     const [showDetails, setShowDetails] = useState(false)
+    const [showScheduleModal, setShowScheduleModal] = useState(false)
     const [currentConcert, setCurrentConcert] = useState({})
+
+    const modalStyle = 'absolute w-3/4 h-[50%] left-[12.5%] border border-stone-200 flex flex-col justify-center items-center bg-stone-700 rounded-3xl'
+
     return (
         <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} relative font-poppins`}>
             {currentConcert.pianist
-            ? <div className={`${showDetails ? 'z-50' : 'hidden'} absolute w-3/4 h-[50%] left-[12.5%] border border-stone-200 flex flex-col justify-center items-center bg-stone-700 rounded-3xl overflow-y-auto py-6`}>
+            ? <div className={`${showDetails ? 'z-50' : 'hidden'} ${modalStyle} overflow-y-auto py-6`}>
                 <p className="text-3xl my-6 font-bold text-center">{currentConcert.title}</p>
                 <p className="italic my-2">presented by</p>
                 <p>{`${currentConcert.pianist.split(', ')[1]} ${currentConcert.pianist.split(', ')[0]}`}, piano</p>
@@ -783,13 +787,56 @@ export default function MobilePianoConcertSeriesPage({ isMenuOpen }) {
                 <p className="mt-3">Approximate Duration: <span className="font-bold">{currentConcert.duration} minutes</span></p>
                 <p className="mb-3">Base Price: <span className="font-bold">${currentConcert.basePrice}</span></p>
                 <div>
-                    <button className={btnStyle}>BOOK THIS CONCERT</button>
+                    <button className={btnStyle} onClick={() => {
+                        setShowDetails(false)
+                        setShowScheduleModal(true)
+                    }}>BOOK THIS CONCERT</button>
                     <button className={btnStyle} onClick={() => {
                         setShowDetails(false)
                     }}>CLOSE</button>
                 </div>
             </div>
             : ''}
+            <section className={`${showScheduleModal ? 'z-50' : 'hidden'} ${modalStyle}`}>
+                {/* place for client to request date, time, location, audience size, snacks, comments (change in rep), etc. */}
+                <form>
+                    <div>
+                        <p>YOUR REQUEST</p>
+                        <p>Concert Title: {currentConcert.title}</p>
+                        <p>Requested Pianist: {currentConcert.pianist}</p>
+                        <p>Approximate duration: {currentConcert.duration}</p>
+                    </div>
+                    <p>REQUIRED INFORMATION</p>
+                    <div>
+                        <label htmlFor="concertDate">Requested Date:</label>
+                        <input type="date" name="concertDate" id="concertDate"/>
+                    </div>
+                    <div>
+                        <label htmlFor="concertTime">Requested Start Time:</label>
+                        <input type="time" name="concertTime" id="concertTime"/>
+                    </div>
+                    <p>Location:</p>
+                    <div>
+                        <label htmlFor="locationAddress">Address:</label>
+                        <input type="text" name="locationAddress" id='locationAddress'/>
+                    </div>
+                    <div>
+                        <label htmlFor="locationCity">City</label>
+                        <input type="text" name='locationCity' id='locationCity' />
+                    </div>
+                    <div>
+                        <label htmlFor="locationState"></label>
+                    </div>
+                    <div>
+                        <button className={btnStyle} onClick={() => {
+                            setShowScheduleModal(false)
+                        }}>SEND REQUEST</button>
+                        <button className={btnStyle} onClick={() => {
+                            setShowScheduleModal(false)
+                        }}>CLOSE</button>
+                    </div>
+                </form>
+            </section>
             <h1 className={`${showDetails ? 'z-0 opacity-5' : ''} text-center text-3xl my-24`}>GLVMS Mobile Piano Concert Series</h1>
             <p className={`${showDetails ? 'z-0 opacity-5' : ''} w-11/12 mx-auto text-lg`}>Bring a professional classical piano performance right to your doorstep! Simply pick a concert from the menu below, and request a date, time, and location. Once confirmed by GLVMS and payment is made, the designated pianist will show up at your location at the specified date and time, and will perform the requested concert. That's it! No hassle, no confusion.</p>
             <table className={`${showDetails ? 'z-0 opacity-5' : ''} border border-stone-200 w-11/12 lg:w-2/3 mx-auto mb-12 table-fixed my-12`}>
@@ -805,6 +852,10 @@ export default function MobilePianoConcertSeriesPage({ isMenuOpen }) {
                     {concertObjs.map(concert => <tr key={concert.title} className="hover:bg-stone-600 hover:cursor-pointer" onClick={() => {
                         setShowDetails(true)
                         setCurrentConcert(concert)
+                        window.scrollTo({
+                            top: 100,
+                            behavior: "smooth",
+                        })
                     }}>
                         <td className={tdStyle}>{concert.pianist}</td>
                         <td className={tdStyle}>{concert.title}</td>

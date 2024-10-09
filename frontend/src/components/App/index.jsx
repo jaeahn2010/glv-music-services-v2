@@ -163,13 +163,9 @@ export default function App() {
 				<Route path="/request" element={
 					<RequestPage
 						isMenuOpen={isMenuOpen}
-						opuses={opuses}
 						musicians={musicians}
-						getFilteredData={getOpusData}
-						updateDetails={setDetailsData}
 						loginStatus={loginStatus}
 						userCart={userCart}
-						setUserCart={setUserCart}
 						totalPrice={totalPrice}
 					/>}
 				/>
@@ -212,6 +208,10 @@ export default function App() {
 				<Route path="/mpcs" element={
 					<MobilePianoConcertSeriesPage
 						isMenuOpen={isMenuOpen}
+						musicians={musicians}
+						loginStatus={loginStatus}
+						userCart={userCart}
+						totalPrice={totalPrice}
 					/>}
 				/>
 				<Route path="/details/:opusId" element={

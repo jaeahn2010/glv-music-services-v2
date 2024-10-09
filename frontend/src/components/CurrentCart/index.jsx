@@ -1,6 +1,5 @@
 import trashIcon from '../../assets/trash-icon.jpeg'
 import { Link } from 'react-router-dom'
-import RequestPage from '../RequestPage'
 
 export default function CurrentCart({ isMenuOpen, opuses, loginStatus, userCart, setUserCart, getOpusData, totalPrice }) {
     let cartText = userCart.length > 0 ? 'Your cart' : 'Your cart is empty.'
