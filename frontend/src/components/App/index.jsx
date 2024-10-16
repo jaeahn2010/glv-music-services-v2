@@ -15,7 +15,47 @@ import CurrentCart from '../CurrentCart'
 import { getOpuses, getMusicians } from '../../../utils/backend'
 import './styles.css'
 import cartIcon from '../../assets/cart-icon.jpeg'
+
 let allComposers = []
+let states = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VA', 'WA', 'WV', 'WI', 'WY']
+
+const scrollToTop = () => 
+	window.scrollTo({
+		top: 100,
+		behavior: "smooth",
+	})
+
+/*
+in userCart:
+
+format from repertoire details page:
+    {
+		_id
+        title: str
+        composer: str
+        movements: [
+            {
+                movementNumber: num
+                movementTitle: str
+                movementPrice: num
+            }
+        ],
+        instrumentation: [str]
+        price: num
+    }
+
+format from mpcs page:
+    {
+        pianist: str
+        title: str
+        description: str
+        program: [str, str]
+        duration: num
+        basePrice: num
+        poster: str (img url)
+    } // +suggested atmosphere (snacks, drinks, lighting, attire, etc)
+
+*/
 
 export default function App() {
 	const [opuses, setOpuses] = useState([])
@@ -43,29 +83,37 @@ export default function App() {
         }
     }
 
-	//get full list of available opuses, or filter by musician/composer/instrumentation/price
+	//get full list of available opuses, or filter by musician / composer / instrumentation / price range
 	async function getOpusData(category, filter) {
-		const opusData = await getOpuses()
-		let allOpusData = opusData[0]
-		let filteredOpusData = []
-		if (category === 'none' && filter === 'none') {
-			filteredOpusData = allOpusData
-		} else if (category === 'composer') {
-			filteredOpusData = allOpusData.filter(opus => opus.composer === filter)
-		} else if (category === 'instrumentation') {
-			filteredOpusData = allOpusData.filter(opus => opus.instrumentation.includes(filter))
-		} else if (category === 'price') {
-			filteredOpusData = allOpusData.filter(opus => opus.price <= filter && opus.price !== null)
+		try {
+			const opusData = await getOpuses()
+			let allOpusData = opusData[0]
+			let filteredOpusData = []
+			if (category === 'none' && filter === 'none') {
+				filteredOpusData = allOpusData
+			} else if (category === 'composer') {
+				filteredOpusData = allOpusData.filter(opus => opus.composer === filter)
+			} else if (category === 'instrumentation') {
+				filteredOpusData = allOpusData.filter(opus => opus.instrumentation.includes(filter))
+			} else if (category === 'price') {
+				filteredOpusData = allOpusData.filter(opus => opus.price <= filter && opus.price !== null)
+			}
+			setOpuses(filteredOpusData)
+		} catch {
+			alert('Cannot load repertoire data at this time. Please check your internet connection. If the problem persists, please contact the site administrator.')
 		}
-		setOpuses(filteredOpusData)
 	}
 
 	//get full list of musicians, or filter by instrument
 	async function getMusiciansData(filter) {
-		const musiciansData = await getMusicians()
-		let filteredMusiciansData = []
-		filter === 'none' ? filteredMusiciansData = musiciansData : filteredMusiciansData = musiciansData.filter(musician => musician.instrumentation.includes(filter))
-		setMusicians(filteredMusiciansData)
+		try {
+			const musiciansData = await getMusicians()
+			let filteredMusiciansData = []
+			filter === 'none' ? filteredMusiciansData = musiciansData : filteredMusiciansData = musiciansData.filter(musician => musician.instrumentation.includes(filter))
+			setMusicians(filteredMusiciansData)
+		} catch {
+			alert('Cannot load musicians data at this time. Please check your internet connection. If the problem persists, please contact the site administrator.')
+		}
 	}
 
 	useEffect(() => {
@@ -167,6 +215,7 @@ export default function App() {
 						loginStatus={loginStatus}
 						userCart={userCart}
 						totalPrice={totalPrice}
+						states={states}
 					/>}
 				/>
 				<Route path="/musicians" element={
@@ -210,8 +259,8 @@ export default function App() {
 						isMenuOpen={isMenuOpen}
 						musicians={musicians}
 						loginStatus={loginStatus}
-						userCart={userCart}
-						totalPrice={totalPrice}
+						states={states}
+						scrollToTop={scrollToTop}
 					/>}
 				/>
 				<Route path="/details/:opusId" element={

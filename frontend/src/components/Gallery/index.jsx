@@ -3,7 +3,7 @@ import Card from '../Card'
 
 export default function Gallery({ opuses, updateDetails }) {
     const [endDisplayIndex, setEndDisplayIndex] = useState(20)
-    let galleryContent = <p>None found</p>
+    let galleryContent = <p className='text-center my-10'>No repertoire found. Please check your internect connection. If the problem persists, please contact the site administrator.</p>
     if (opuses.length > 0) {
         galleryContent = opuses
             .slice(0, endDisplayIndex)

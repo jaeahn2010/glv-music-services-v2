@@ -13,7 +13,7 @@ export default function MusiciansGallery({ musicians, getFilteredData, updateDet
             updateDetails={updateDetails}
             loginStatus={loginStatus}
         />)
-    : <p>None found</p>
+    : <p className='text-center my-10'>No musicians found. Please check your internect connection. If the problem persists, please contact the site administrator.</p>
     window.onscroll = () => {
         if (window.innerHeight + window.scrollY >= document.body.offsetHeight && endDisplayIndex < musicians.length) setEndDisplayIndex(endDisplayIndex + 10)
     }

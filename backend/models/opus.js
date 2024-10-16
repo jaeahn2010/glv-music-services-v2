@@ -14,7 +14,7 @@ const opusSchema = new mongoose.Schema(
         instrumentation: [{ type: String, required: true }],
         price: { type: Number },
     },
-);
+)
 
 // export to index.js
 module.exports = mongoose.model('Opus', opusSchema);

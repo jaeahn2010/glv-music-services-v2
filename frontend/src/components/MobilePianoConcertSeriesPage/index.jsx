@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
+import { sendEmail } from "../../../utils/backend"
 import allAmerican1 from '../../assets/mpcs-all-american-1.jpg'
 import allAmerican2 from '../../assets/mpcs-all-american-2.png'
 import ballroom1 from '../../assets/mpcs-dance-floor-1.jpg'
@@ -55,7 +56,7 @@ class Concert {
         this.duration = duration
         this.basePrice = basePrice
         this.poster = poster
-    } // add suggested snacks, suggested atmosphere (lighting, attire, etc)
+    } // add suggested atmosphere (snacks, drinks, lighting, attire, etc)
 }
 
 const ahnbenton = 'Jae Young Ahn-Benton'
@@ -473,6 +474,7 @@ const islamey = ['Islamey', balakirev]
 const isleOfTheDead = ['Isle of the Dead, Op. 29 (arr. Kirkor)', rachmaninov]
 const isoldesLiebestod = ['Isoldes Liebestod (arr. Liszt)', wagner]
 const italianConcerto = ['Italian Concerto', bachJS]
+const jesu = ['Jesu, Joy of Man\'s Desiring', bachJS]
 const jeuxDeau = ['Jeux d\'eau', ravel]
 const kabalevskyPreludes = ['24 Preludes, Op. 38', kabalevsky]
 const kabalevskySonata2 = ['Sonata No. 2 in E-flat major, Op. 45', kabalevsky]
@@ -761,101 +763,274 @@ const concertObjs = availableConcerts.map(concert => new Concert ('Ahn-Benton, J
 let tdStyle = 'border border-stone-200 text-center py-1'
 let btnStyle = 'border border-stone-200 rounded-xl p-2 m-3 hover:bg-amber-400 hover:text-stone-800'
 
-export default function MobilePianoConcertSeriesPage({ isMenuOpen, musicians, loginStatus, userCart, totalPrice }) {
+export default function MobilePianoConcertSeriesPage({ isMenuOpen, musicians, loginStatus, states, scrollToTop }) {
     const [showDetails, setShowDetails] = useState(false)
     const [showScheduleModal, setShowScheduleModal] = useState(false)
-    const [currentConcert, setCurrentConcert] = useState({})
+    const [currentConcert, setCurrentConcert] = useState(concertObjs[0])
+    const [concertRequestData, setConcertRequestData] = useState({
+        clientEmail: '',
+        musicianEmail: '',
+        eventName: '',
+        eventLocation: {
+            locationName: '',
+            address: '',
+            city: '',
+            state: '',
+            zipCode: 0,
+        },
+        eventDate: new Date(),
+        eventStartTime: '',
+        eventEndTime: '',
+        requestedRepertoire: [],
+        additionalComments: '',
+        status: 'pending',
+    })
 
-    const modalStyle = 'absolute w-3/4 h-[50%] left-[12.5%] border border-stone-200 flex flex-col justify-center items-center bg-stone-700 rounded-3xl'
+    const modalStyle = 'absolute w-3/4 left-[12.5%] border border-stone-200 flex flex-col justify-center items-center bg-stone-700 rounded-3xl'
+    const liStyle = 'my-4'
+
+    function handleChange(evt) {
+        setConcertRequestData({
+            ...concertRequestData,
+            [evt.target.name]: evt.target.value
+        })
+    }
+
+    function handleSubmit(evt) {
+        evt.preventDefault()
+        let [musicianLastName, musicianFirstName] = currentConcert.pianist.split(', ')
+        sendEmail({
+            clientEmail: localStorage.getItem('email'),
+            musicianEmail: musicians.find(musician => musician.lastName === musicianLastName && musician.firstName === musicianFirstName).email,
+            eventName: concertRequestData.eventName,
+            eventLocation: {
+                locationName: concertRequestData.locationName,
+                address: concertRequestData.address,
+                city: concertRequestData.city,
+                state: concertRequestData.state,
+                zipCode: concertRequestData.zipCode,
+            },
+            eventDate: concertRequestData.eventDate,
+            eventStartTime: concertRequestData.eventStartTime,
+            eventEndTime: concertRequestData.eventEndTime,
+            requestedRepertoire: currentConcert.program,
+            additionalComments: concertRequestData.additionalComments,
+            status: 'pending',
+        })
+        setConcertRequestData({
+            clientEmail: '',
+            musicianEmail: '',
+            eventName: '',
+            eventLocation: {
+                locationName: '',
+                address: '',
+                city: '',
+                state: '',
+                zipCode: 0,
+            },
+            eventDate: new Date(),
+            eventStartTime: '',
+            eventEndTime: '',
+            requestedRepertoire: [],
+            additionalComments: '',
+            status: 'pending',
+        })
+    }
+    let divStyle = 'w-11/12 mx-auto flex'
+    let labelStyle = 'w-1/2 text-right m-2'
+    let inputStyle = 'w-1/2 text-left m-2 p-1 bg-stone-200 text-stone-800 rounded-lg'
 
     return (
         <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} relative font-poppins`}>
             {currentConcert.pianist
-            ? <div className={`${showDetails ? 'z-50' : 'hidden'} ${modalStyle} overflow-y-auto py-6`}>
+            ? <div className={`${showDetails ? 'z-50' : 'hidden'} ${modalStyle} overflow-y-auto py-6 h-[40%]`}>
                 <p className="text-3xl my-6 font-bold text-center">{currentConcert.title}</p>
                 <p className="italic my-2">presented by</p>
                 <p>{`${currentConcert.pianist.split(', ')[1]} ${currentConcert.pianist.split(', ')[0]}`}, piano</p>
-                <img className="border border-stone-200 rounded-xl min-h-[30vh] w-1/4 my-5" src={currentConcert.poster} alt='poster'/>
+                <img className="border border-stone-200 rounded-xl w-1/2 my-5" src={currentConcert.poster} alt='poster'/>
                 <div className="w-11/12 mx-auto my-5">{currentConcert.description}</div>
                 <div className="border border-stone-200 rounded-xl w-11/12 bg-stone-500">
-                    <p className="text-2xl underline text-center my-2">Program</p>
-                    {currentConcert.program.map(opus => <div key={opus[0] + opus[1]} className="flex justify-between m-1 p-1 text-sm">
-                        <p className="w-3/4">{opus[0]}</p>
-                        <p className="w-1/4">{opus[1]}</p>
+                    <p className="text-xl underline text-center my-2">Program</p>
+                    {currentConcert.program.map(opus => <div key={opus[0] + opus[1]} className="flex justify-between my-1 p-1 text-xs">
+                        <p className="w-1/2">{opus[0]}</p>
+                        <p className="w-1/3">{opus[1]}</p>
                     </div>)}
                 </div>
                 <p className="mt-3">Approximate Duration: <span className="font-bold">{currentConcert.duration} minutes</span></p>
                 <p className="mb-3">Base Price: <span className="font-bold">${currentConcert.basePrice}</span></p>
-                <div>
+                <div className="text-center">
                     <button className={btnStyle} onClick={() => {
-                        setShowDetails(false)
-                        setShowScheduleModal(true)
-                    }}>BOOK THIS CONCERT</button>
+                        if (loginStatus) {
+                            setShowDetails(false)
+                            setShowScheduleModal(true)
+                            scrollToTop()
+                        } else {
+                            alert('Please log in to order a concert.')
+                        }
+                    }}>ADD THIS CONCERT TO CART</button>
                     <button className={btnStyle} onClick={() => {
                         setShowDetails(false)
                     }}>CLOSE</button>
                 </div>
             </div>
             : ''}
-            <section className={`${showScheduleModal ? 'z-50' : 'hidden'} ${modalStyle}`}>
+            <section className={`${showScheduleModal ? 'z-50' : 'hidden'} ${modalStyle} h-[100%]`}>
                 {/* place for client to request date, time, location, audience size, snacks, comments (change in rep), etc. */}
-                <form>
-                    <div>
-                        <p>YOUR REQUEST</p>
-                        <p>Concert Title: {currentConcert.title}</p>
-                        <p>Requested Pianist: {currentConcert.pianist}</p>
-                        <p>Approximate duration: {currentConcert.duration}</p>
+                <form onSubmit={handleSubmit} className="w-11/12 mx-auto my-12 flex flex-col justify-center items-center">
+                    <div className={divStyle}>
+                        <label htmlFor="musician" className={labelStyle}>Requested musician:</label>
+                        <input
+                            name='musician'
+                            id='musician'
+                            className={inputStyle}
+                            defaultValue={currentConcert.pianist}
+                            disabled
+                        />
                     </div>
-                    <p>REQUIRED INFORMATION</p>
-                    <div>
-                        <label htmlFor="concertDate">Requested Date:</label>
-                        <input type="date" name="concertDate" id="concertDate"/>
+                    <div className={divStyle}>
+                        <label htmlFor="eventName" className={labelStyle}>Event Name:</label>
+                        <input
+                            name='eventName'
+                            id='eventName'
+                            className={inputStyle}
+                            defaultValue={currentConcert.title}
+                            disabled
+                        />
                     </div>
-                    <div>
-                        <label htmlFor="concertTime">Requested Start Time:</label>
-                        <input type="time" name="concertTime" id="concertTime"/>
+                    <section className="w-full my-4">
+                        <p className="text-center underline text-xl">Event location</p>
+                        <div className={divStyle}>
+                            <label htmlFor="locationName" className={labelStyle}>Location Name:</label>
+                            <input
+                                name='locationName'
+                                id='locationName'
+                                className={inputStyle}
+                                defaultValue={concertRequestData.eventLocation.locationName}
+                                placeholder="Location Name"
+                                onChange={handleChange}
+                            />
+                        </div>
+                        <div className={divStyle}>
+                            <label htmlFor="address" className={labelStyle}>Address:</label>
+                            <input
+                                name='address'
+                                id='address'
+                                className={inputStyle}
+                                defaultValue={concertRequestData.eventLocation.address}
+                                placeholder="Location Address"
+                                onChange={handleChange}
+                            />
+                        </div>
+                        <div className={divStyle}>
+                            <label htmlFor="city" className={labelStyle}>City:</label>
+                            <input
+                                name='city'
+                                id='city'
+                                className={inputStyle}
+                                defaultValue={concertRequestData.eventLocation.city}
+                                placeholder="City"
+                                onChange={handleChange}
+                            />
+                        </div>
+                        <div className={divStyle}>
+                            <label htmlFor="state" className={labelStyle}>State:</label>
+                            <select
+                                name="state"
+                                id="state"
+                                className={`text-stone-800 ${inputStyle}`}
+                                defaultValue={0}
+                                onChange={handleChange}
+                            >
+                                <option value="0" disabled>Choose a state</option>
+                                {states.map(state => <option key={state} value={state}>{state}</option>)}
+                            </select>
+                        </div>
+                        <div className={divStyle}>
+                            <label htmlFor="zipCode" className={labelStyle}>Zip Code:</label>
+                            <input
+                                name='zipCode'
+                                type='number'
+                                id='zipCode'
+                                className={inputStyle}
+                                defaultValue={concertRequestData.eventLocation.zipCode}
+                                placeholder="Zip Code"
+                                onChange={handleChange}
+                            />
+                        </div>
+                    </section>
+                    <div className={divStyle}>
+                        <label htmlFor="eventDate" className={labelStyle}>Event Date:</label>
+                        <input
+                            name='eventDate'
+                            type='date'
+                            id='eventDate'
+                            className={inputStyle}
+                            defaultValue={concertRequestData.eventDate}
+                            placeholder={new Date()}
+                            onChange={handleChange}
+                        />
                     </div>
-                    <p>Location:</p>
-                    <div>
-                        <label htmlFor="locationAddress">Address:</label>
-                        <input type="text" name="locationAddress" id='locationAddress'/>
+                    <div className={divStyle}>
+                        <label htmlFor="eventStartTime" className={labelStyle}>Event Start Time:</label>
+                        <input
+                            name='eventStartTime'
+                            type='time'
+                            id='eventStartTime'
+                            className={inputStyle}
+                            defaultValue={concertRequestData.eventStartTime}
+                            onChange={handleChange}
+                        />
                     </div>
-                    <div>
-                        <label htmlFor="locationCity">City</label>
-                        <input type="text" name='locationCity' id='locationCity' />
+                    <div className={divStyle}>
+                        <label htmlFor="eventEndTime" className={labelStyle}>Event End Time:</label>
+                        <input
+                            name='eventEndTime'
+                            type='time'
+                            id='eventEndTime'
+                            className={inputStyle}
+                            defaultValue={concertRequestData.eventEndTime}
+                            onChange={handleChange}
+                        />
                     </div>
-                    <div>
-                        <label htmlFor="locationState"></label>
+                    <p className='text-center underline text-xl my-6 '>Requested Repertoire</p>
+                    <div className='w-11/12 mx-auto'>
+                        {currentConcert.program.map(opus => <div key={opus} className="flex p-2 rounded-xl bg-stone-700">
+                            <p className="w-2/3">{opus[0]}</p>
+                            <p className="w-1/3">{opus[1]}</p>
+                        </div>)}
                     </div>
-                    <div>
-                        <button className={btnStyle} onClick={() => {
-                            setShowScheduleModal(false)
-                        }}>SEND REQUEST</button>
-                        <button className={btnStyle} onClick={() => {
-                            setShowScheduleModal(false)
-                        }}>CLOSE</button>
+                    <p className="text-center my-5">Total price: ${currentConcert.basePrice}</p>
+                    <div className={divStyle}>
+                        <label htmlFor="additionalComments" className={labelStyle + ' min-h-[30vh]'}>Additional Comments:</label>
+                        <textarea
+                            name="additionalComments"
+                            id="additionalComments"
+                            className={inputStyle}
+                            defaultValue={concertRequestData.additionalComments}
+                            onChange={handleChange}
+                        />
                     </div>
+                    <input type="hidden" name="status" value="pending"/>
+                    <input type="submit" value="SUBMIT REQUEST" className="w-1/4 my-5 border border-stone-200 rounded-xl hover:bg-amber-400 hover:text-stone-800 hover:cursor-pointer" onClick={() => setShowScheduleModal(false)}/>
+                    <button className={btnStyle} onClick={() => setShowScheduleModal(false)}>CLOSE</button>
                 </form>
             </section>
             <h1 className={`${showDetails ? 'z-0 opacity-5' : ''} text-center text-3xl my-24`}>GLVMS Mobile Piano Concert Series</h1>
             <p className={`${showDetails ? 'z-0 opacity-5' : ''} w-11/12 mx-auto text-lg`}>Bring a professional classical piano performance right to your doorstep! Simply pick a concert from the menu below, and request a date, time, and location. Once confirmed by GLVMS and payment is made, the designated pianist will show up at your location at the specified date and time, and will perform the requested concert. That's it! No hassle, no confusion.</p>
-            <table className={`${showDetails ? 'z-0 opacity-5' : ''} border border-stone-200 w-11/12 lg:w-2/3 mx-auto mb-12 table-fixed my-12`}>
+            <table className={`${showDetails ? 'z-0 opacity-5' : ''} border border-stone-200 w-11/12 lg:w-2/3 mx-auto mb-12 table-fixed my-12 text-xs`}>
                 <thead>
-                    <tr className="font-bold border border-stone-200 bg-stone-700" >
-                        <td className={tdStyle + ' w-[20%]'}>Pianist</td>
-                        <td className={tdStyle + ' w-[50%]'}>Title</td>
-                        <td className={tdStyle + ' w-[15%]'}>Approximate Duration</td>
+                    <tr className="font-bold border border-stone-200 bg-gradient-to-r from-green-950 via-green-700 to-green-950" >
+                        <td className={tdStyle + ' w-[25%]'}>Pianist</td>
+                        <td className={tdStyle + ' w-[35%]'}>Title</td>
+                        <td className={tdStyle + ' w-[25%]'}>Approximate Duration</td>
                         <td className={tdStyle + ' w-[15%]'}>Base Price</td>
                     </tr>
                 </thead>
                 <tbody>
-                    {concertObjs.map(concert => <tr key={concert.title} className="hover:bg-stone-600 hover:cursor-pointer" onClick={() => {
+                    {concertObjs.map(concert => <tr key={concert.title} className="hover:bg-gradient-to-r from-green-950 via-green-700 to-green-950 hover:cursor-pointer" onClick={() => {
                         setShowDetails(true)
                         setCurrentConcert(concert)
-                        window.scrollTo({
-                            top: 100,
-                            behavior: "smooth",
-                        })
+                        scrollToTop()
                     }}>
                         <td className={tdStyle}>{concert.pianist}</td>
                         <td className={tdStyle}>{concert.title}</td>
@@ -867,12 +1042,12 @@ export default function MobilePianoConcertSeriesPage({ isMenuOpen, musicians, lo
             <aside className={`${showDetails ? 'z-0 opacity-5' : ''} w-11/12 mx-auto`}>
                 <p className="text-2xl underline text-center my-6">Disclaimers</p>
                 <ul className="list-disc list-inside text-sm mb-10">
-                    <li>These mobile concerts are primarily designed for intimate home settings, either completely private just for 1 person, or up to an audience size of 10 people. They are not recommended for large audiences or for the general public. For large-scale performance requests, please visit the main GLVMS repertoire page <Link to="/repertoire" className="underline hover:text-amber-600">here</Link>.</li>
-                    <li>Light snacks and/or ambience lighting may be added for your enjoyment during the concert for a small fee.</li>
-                    <li>No piano at home? No problem. Our pianist will bring a fully functional electric keyboard.</li>
-                    <li>Please allow up to 15 minutes of setup and strike-down time before and after the requested performance timeframe.</li>
-                    <li>A travel fee ranging from $5 to $25 may apply depending on the requested location within the greater Las Vegas area. Additional fees may apply for performance requests outside of the greater Las Vegas area.</li>
-                    <li>Repertoire substitutions may be allowed upon request. Additional fees may apply.</li>
+                    <li className={liStyle}>These mobile concerts are primarily designed for intimate home settings, either completely private just for 1 person, or up to an audience size of 10 people. They are not recommended for large audiences or for the general public. For large-scale performance requests, please visit the main GLVMS repertoire page <Link to="/repertoire" className="underline hover:text-amber-600">here</Link>.</li>
+                    <li className={liStyle}>Light snacks and/or ambience lighting may be added for your enjoyment during the concert for a small fee.</li>
+                    <li className={liStyle}>No piano at home? No problem. Our pianist will bring a fully functional electric keyboard.</li>
+                    <li className={liStyle}>Please allow up to 15 minutes of setup and strike-down time before and after the requested performance timeframe.</li>
+                    <li className={liStyle}>A travel fee ranging from $5 to $25 may apply depending on the requested location within the greater Las Vegas area. Additional fees may apply for performance requests outside of the greater Las Vegas area.</li>
+                    <li className={liStyle}>Repertoire substitutions may be allowed upon request. Additional fees may apply.</li>
                 </ul>
             </aside>
         </main>
