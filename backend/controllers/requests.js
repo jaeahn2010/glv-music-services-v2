@@ -11,7 +11,7 @@ const OAuth2 = google.auth.OAuth2
 const oauth2Client = new OAuth2 (
     process.env.CLIENT_ID,
     process.env.CLIENT_SECRET,
-    "https://developers.google.com/oauthplayground"
+    process.env.REDIRECT_URI,
 )
 
 oauth2Client.setCredentials({
@@ -19,9 +19,11 @@ oauth2Client.setCredentials({
 })
 
 const sendEmail = async (formData) => {
-    console.log('within sendEmail function: ', formData)
     try {
         const accessToken = await oauth2Client.getAccessToken()
+        if (!accessToken.token) {
+            throw new Error('No access token returned')
+        }
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
@@ -46,7 +48,7 @@ const sendEmail = async (formData) => {
             eventDate: ${formData.eventDate},
             eventStartTime: ${formData.eventStartTime},
             eventEndTime: ${formData.eventEndTime},
-            requestedRepertoire: ${formData.requestedRepertoire.map(rep => `${rep.composer}: ${rep.title} (${rep.movements})`)},
+            requestedRepertoire: ${formData.mainRequest ? formData.requestedRepertoire.map(rep => `${rep.composer}: ${rep.title} (${rep.movements})`) : formData.requestedRepertoire.map(rep => `${rep[1]}: ${rep[0]}`)},
             additionalComments: ${formData.additionalComments},
             status: pending,`
         }
@@ -139,6 +141,5 @@ router.delete('/:requestId', authMiddleware, async (req, res) => {
     }
 })
 
-/* export to server.js
----------------------------------------------------------- */
+// export to server.js
 module.exports = router

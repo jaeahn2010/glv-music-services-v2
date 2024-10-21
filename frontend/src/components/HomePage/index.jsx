@@ -22,7 +22,7 @@ export default function HomePage({isMenuOpen}) {
     ]
     let services = [ // service, description, fee type, musicians who offer the service
         ['AUDITIONS, COMPETITIONS, JURIES, & EXAMS', 'Increase your chances of success by hiring our collaborative pianists. They are highly experienced in representing your best musical interests in a high-importance and/or high-stress settings, such as a college audition, state or national level competition, or a music school examinations or jury.', 'flat'],
-        ['COMPOSING & ARRANGING', 'Commission a composition with a composer on our team. Our composers are versatile and creative - they can customize it to perfectly fit your vision, in terms of style, instrumentation, duration, theme, and/or atmosphere. Already found perfect music or song, but not quite the right instrumentation? No problem! Our composers can expertly arrange the original for your desired instrumentation.', 'repertoire'],
+        ['COMPOSING & ARRANGING', 'Commission a composition with a composer on our team. Our composers are versatile and creative - they can customize it to perfectly fit your vision, in terms of style, instrumentation, duration, theme, and/or atmosphere. Already found the perfect music or song, but not quite the right instrumentation? No problem! Our composers can expertly arrange the original for your desired instrumentation.', 'repertoire'],
         ['FORMAL RECITALS & CONCERTS', 'Need an accompanist for your academic recital or formal concert? We have a vast amount of repertoire under our belts, ready to go at a moment\'s notice. Available for all instruments (piano, strings, woodwinds, brass, percussion, and voice), as well as for conductors and composers.', 'repertoire'],
         ['PRIVATE HOME & MOBILE CONCERTS', 'Love classical piano music, but don\'t really enjoy public concert setting? Bring a professional caliber performance right to your doorstep! Simply pick a concert from our designated menu above, and request a date, time, and location. Once confirmed, a pianist from our team will show up at your location at the specified date and time, and will perform the requested concert.', 'flat'],
         ['PRIVATE MUSIC LESSONS', 'Whether you would like private music lessons for your children or for yourself, you will be in good hands with our musicians. We only hire professionally trained, college educated musicians with proven experience and expertise in their field. Currently offering lessons in solo piano, collaborative piano, ear training, and music theory. Suitable for both children and adults of any level.', 'hourly'],
@@ -32,7 +32,7 @@ export default function HomePage({isMenuOpen}) {
         ['WEDDING & PARTY MUSIC', 'We provide fully customized sets of music for any special occasion, from weddings to private home parties. We offer traditional classical tunes, popular songs, and everything in between, whether you need full-pledged performances, intermittent ceremonial musical inserts, or continuous atmospheric background music.', 'repertoire'],
     ]
     let imgStyle = 'w-[350px] rounded-xl hover:scale-110 duration-500'
-    let pStyle = 'text-center text-lg mt-6 hover:text-amber-500'
+    let pStyle = 'text-center text-lg mt-6 hover:text-green-300'
     let contactDivStyle = 'text-center mx-auto py-3'
     let aStyle = 'fill-container flex justify-center items-center w-2/3 lg:w-1/6 mx-auto my-5 p-2 border-stone-200 border rounded-3xl'
 

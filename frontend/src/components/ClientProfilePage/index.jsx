@@ -2,7 +2,7 @@ export default function ClientProfilePage({ isMenuOpen, opuses, setOpuses, login
     let trStyle = 'h-12 border-stone-400 border-y-2'
 
     return (
-        <section className={`${isMenuOpen ? 'z-0 opacity-5' : ''} w-11/12 mx-auto font-poppins`}>
+        <section className={`${isMenuOpen ? 'z-0 opacity-5' : ''} w-11/12 mx-auto font-poppins h-[200vh]`}>
             <h1 className="text-3xl text-center my-24">Your Account Information</h1>
             <p className="text-2xl"></p>
             <table className="w-3/4 mx-auto mb-24">

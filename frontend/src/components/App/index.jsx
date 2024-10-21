@@ -25,38 +25,6 @@ const scrollToTop = () =>
 		behavior: "smooth",
 	})
 
-/*
-in userCart:
-
-format from repertoire details page:
-    {
-		_id
-        title: str
-        composer: str
-        movements: [
-            {
-                movementNumber: num
-                movementTitle: str
-                movementPrice: num
-            }
-        ],
-        instrumentation: [str]
-        price: num
-    }
-
-format from mpcs page:
-    {
-        pianist: str
-        title: str
-        description: str
-        program: [str, str]
-        duration: num
-        basePrice: num
-        poster: str (img url)
-    } // +suggested atmosphere (snacks, drinks, lighting, attire, etc)
-
-*/
-
 export default function App() {
 	const [opuses, setOpuses] = useState([])
 	const [musicians, setMusicians] = useState([])
@@ -83,22 +51,40 @@ export default function App() {
         }
     }
 
+	function sortObjects(objs) {
+		return objs.sort((a, b) => {
+			const titleA = a.title.toUpperCase().replace(/[^a-zA-Z]/g, '')
+			const titleB = b.title.toUpperCase().replace(/[^a-zA-Z]/g, '')
+			if (titleA < titleB) return -1
+			if (titleA > titleB) return 1
+			return 0
+		})
+	}
+
 	//get full list of available opuses, or filter by musician / composer / instrumentation / price range
 	async function getOpusData(category, filter) {
 		try {
 			const opusData = await getOpuses()
 			let allOpusData = opusData[0]
 			let filteredOpusData = []
-			if (category === 'none' && filter === 'none') {
-				filteredOpusData = allOpusData
-			} else if (category === 'composer') {
-				filteredOpusData = allOpusData.filter(opus => opus.composer === filter)
-			} else if (category === 'instrumentation') {
-				filteredOpusData = allOpusData.filter(opus => opus.instrumentation.includes(filter))
-			} else if (category === 'price') {
-				filteredOpusData = allOpusData.filter(opus => opus.price <= filter && opus.price !== null)
+			switch(category) {
+				case 'none':
+					if (filter === 'none') filteredOpusData = allOpusData
+					break
+				case 'composer':
+					filteredOpusData = allOpusData.filter(opus => opus.composer === filter)
+					break
+				case 'instrumentation':
+					filteredOpusData = allOpusData.filter(opus => opus.instrumentation.includes(filter))
+					break
+				case 'price':
+					filteredOpusData = allOpusData.filter(opus => opus.price <= filter && opus.price !== null)
+					break
+				case 'keyword':
+					filteredOpusData = allOpusData.filter(opus => opus.title.includes(filter))
+					break
 			}
-			setOpuses(filteredOpusData)
+			setOpuses(sortObjects(filteredOpusData))
 		} catch {
 			alert('Cannot load repertoire data at this time. Please check your internet connection. If the problem persists, please contact the site administrator.')
 		}
@@ -296,9 +282,8 @@ export default function App() {
 			</>
 			: ''
 			}
-
 			<footer className={`w-full py-2 bg-gradient-to-r from-green-950 via-green-500 to-green-950 font-poppins`}>
-                <p className="text-center text-xs">Copyright &#169; 2024 Greater Las Vegas Music Services</p>
+                <p className="text-center text-xs">Copyright &#169; 2024 DMZ.DEV</p>
             </footer>
 		</>
 	)

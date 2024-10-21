@@ -34,6 +34,7 @@ export default function RequestPage({ isMenuOpen, musicians, loginStatus, userCa
     function handleSubmit(evt) {
         evt.preventDefault()
         sendEmail({
+            mainRequest: true,
             clientEmail: localStorage.getItem('email'),
             musicianEmail: requestData.musicianEmail,
             eventName: requestData.eventName,

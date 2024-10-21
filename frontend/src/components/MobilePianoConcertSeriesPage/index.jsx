@@ -800,6 +800,7 @@ export default function MobilePianoConcertSeriesPage({ isMenuOpen, musicians, lo
         evt.preventDefault()
         let [musicianLastName, musicianFirstName] = currentConcert.pianist.split(', ')
         sendEmail({
+            mainRequest: false,
             clientEmail: localStorage.getItem('email'),
             musicianEmail: musicians.find(musician => musician.lastName === musicianLastName && musician.firstName === musicianFirstName).email,
             eventName: concertRequestData.eventName,
