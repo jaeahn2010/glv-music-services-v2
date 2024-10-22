@@ -5,9 +5,9 @@ import noHiddenFees from '../../assets/homepage-no-hidden-fees.png'
 import hassleFreeScheduling from '../../assets/homepage-hassle-free-scheduling.jpg'
 import './styles.css'
 
-export default function HomePage({isMenuOpen}) {
+export default function HomePage({isMenuOpen, isMobile}) {
     const [currentServiceDisplay, setCurrentServiceDisplay] = useState({
-        description: 'Click on any of the services to the left for more details.',
+        description: `Click on any of the services ${isMobile ? 'above' : 'to the left'} for more details.`,
         index: -1,
         feeType: '',
     })
@@ -75,33 +75,33 @@ export default function HomePage({isMenuOpen}) {
                 )}
             </section>
             <h2 className='text-center text-xl my-6'>OUR SERVICES</h2>
-            <section className='py-2 font-poppins flex items-center'>
-                <div className='flex flex-col p-2 w-1/2'>
+            <section className={`py-2 font-poppins ${isMobile ? '' : 'flex items-center'}`}>
+                <ul className={`flex flex-col p-2 list-disc list-inside ${isMobile ? 'w-full' : 'w-1/2'}`}>
                     {services.map(([service, description, feeType], index) => 
-                        <p key={index} className={`w-3/4 mx-auto hover:text-green-300 my-2 hover:cursor-pointer hover:scale-105 duration-500 ${currentServiceDisplay.index === -1 ? 'text-stone-200' : currentServiceDisplay.index === index ? 'text-green-300' : 'text-stone-700'}`} onClick={() => {
+                        <li key={index} className={`${isMobile ? 'w-full' : 'w-3/4'} mx-auto hover:text-green-300 my-2 hover:cursor-pointer hover:scale-105 duration-500 ${currentServiceDisplay.index === -1 ? 'text-stone-200' : currentServiceDisplay.index === index ? 'text-green-300' : 'text-stone-700'}`} onClick={() => {
                             setCurrentServiceDisplay({
                                 description: description,
                                 index: index,
                                 feeType: feeType,
                             })
-                        }}>{service}</p>
+                        }}>{service}</li>
                     )}
-                </div>
-                <div className={`w-1/2 mx-1 p-2 ${currentServiceDisplay.index === -1 ? 'flex justify-center items-center' : ''}`}>
+                </ul>
+                <div className={`${isMobile ? 'w-full' : 'w-1/2'} mx-1 p-2 border border-stone-200 bg-stone-700 rounded-xl ${currentServiceDisplay.index === -1 ? 'flex justify-center items-center' : ''}`}>
                     {currentServiceDisplay.description}
                     {currentServiceDisplay.index !== -1
                     ? <div className='my-5 flex justify-center items-center relative'>
                         <p>Fee type</p>
                         <p className='border border-stone-200 rounded-full text-[9px] mr-1 px-1 -translate-y-2 hover:bg-green-700 hover:cursor-pointer' onMouseEnter={() => setFeeModalDisplay(true)} onMouseLeave={() => setFeeModalDisplay(false)}>?</p>
                         <p>: {currentServiceDisplay.feeType}</p>
-                        <p className={`${feeModalDisplay ? 'absolute top-3/4 left-[16.67%] w-3/4 mx-auto text-xs border border-stone-200 p-2 rounded-xl bg-stone-700 leading-6' : 'hidden'}`}>
+                        <p className={`${feeModalDisplay ? 'absolute top-3/4 z-50 left-[16.67%] w-3/4 mx-auto text-xs border border-stone-200 p-2 rounded-xl bg-stone-700 leading-6' : 'hidden'}`}>
                             Fee types describe how an event is charged. A <span className='font-bold'>flat</span> fee is a small one-time fee that covers a small performance usually with a time limit, such as an audition or a competition. A <span className='font-bold'>repertoire</span> fee is a larger, custom-quoted fee that covers a full performance that depends on a variety of factors such as difficulty of the repertoire, duration of the performance, distance traveled, and equipment setup. An <span className='font-bold'>hourly</span> fee is solely dependent on the duration of the event that would have a designated time frame, such as a rehearsal, lesson, or a class.
                         </p>
                     </div>
                     : ''}
                 </div>
             </section>
-            <section className="w-[vw-100] py-2 font-poppins flex flex-col">
+            <section className="w-[vw-100] py-2 mt-12 font-poppins flex flex-col">
                 <p className='w-full mx-auto text-center my-5 text-xl'>CONTACT US</p>
                 <div>
                     <div className={contactDivStyle}>

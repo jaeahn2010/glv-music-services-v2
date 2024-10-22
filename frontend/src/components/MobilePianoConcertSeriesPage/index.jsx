@@ -761,7 +761,12 @@ const availableConcerts = [
 
 const concertObjs = availableConcerts.map(concert => new Concert ('Ahn-Benton, Jae', concert[0], concert[1], concert[2], concert[3], concert[4], concert[5]))
 let tdStyle = 'border border-stone-200 text-center py-1'
-let btnStyle = 'border border-stone-200 rounded-xl p-2 m-3 hover:bg-amber-400 hover:text-stone-800'
+let btnStyle = 'w-1/2 border border-stone-200 rounded-xl p-2 m-3 hover:bg-amber-400 hover:text-stone-800'
+let modalStyle = 'absolute w-full lg:w-3/4 lg:left-[12.5%] border border-stone-200 flex flex-col justify-center items-center bg-stone-700 rounded-3xl'
+let liStyle = 'my-4'
+let divStyle = 'w-full lg:w-11/12 mx-auto flex'
+let labelStyle = 'w-1/3 lg:w-1/2 text-right m-2'
+let inputStyle = 'w-2/3 lg:w-1/2 text-left m-2 p-1 bg-stone-200 text-stone-800 rounded-lg'
 
 export default function MobilePianoConcertSeriesPage({ isMenuOpen, musicians, loginStatus, states, scrollToTop }) {
     const [showDetails, setShowDetails] = useState(false)
@@ -785,9 +790,6 @@ export default function MobilePianoConcertSeriesPage({ isMenuOpen, musicians, lo
         additionalComments: '',
         status: 'pending',
     })
-
-    const modalStyle = 'absolute w-3/4 left-[12.5%] border border-stone-200 flex flex-col justify-center items-center bg-stone-700 rounded-3xl'
-    const liStyle = 'my-4'
 
     function handleChange(evt) {
         setConcertRequestData({
@@ -837,15 +839,12 @@ export default function MobilePianoConcertSeriesPage({ isMenuOpen, musicians, lo
             status: 'pending',
         })
     }
-    let divStyle = 'w-11/12 mx-auto flex'
-    let labelStyle = 'w-1/2 text-right m-2'
-    let inputStyle = 'w-1/2 text-left m-2 p-1 bg-stone-200 text-stone-800 rounded-lg'
 
     return (
         <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} relative font-poppins`}>
             {currentConcert.pianist
             ? <div className={`${showDetails ? 'z-50' : 'hidden'} ${modalStyle} overflow-y-auto py-6 h-[40%]`}>
-                <p className="text-3xl my-6 font-bold text-center">{currentConcert.title}</p>
+                <p className="text-lg lg:text-3xl my-6 font-bold text-center">{currentConcert.title}</p>
                 <p className="italic my-2">presented by</p>
                 <p>{`${currentConcert.pianist.split(', ')[1]} ${currentConcert.pianist.split(', ')[0]}`}, piano</p>
                 <img className="border border-stone-200 rounded-xl w-1/2 my-5" src={currentConcert.poster} alt='poster'/>
@@ -875,9 +874,9 @@ export default function MobilePianoConcertSeriesPage({ isMenuOpen, musicians, lo
                 </div>
             </div>
             : ''}
-            <section className={`${showScheduleModal ? 'z-50' : 'hidden'} ${modalStyle} h-[100%]`}>
+            <section className={`${showScheduleModal ? 'z-50' : 'hidden'} ${modalStyle} lg:h-[100%]`}>
                 {/* place for client to request date, time, location, audience size, snacks, comments (change in rep), etc. */}
-                <form onSubmit={handleSubmit} className="w-11/12 mx-auto my-12 flex flex-col justify-center items-center">
+                <form onSubmit={handleSubmit} className="lg:w-11/12 mx-auto my-12 flex flex-col justify-center items-center">
                     <div className={divStyle}>
                         <label htmlFor="musician" className={labelStyle}>Requested musician:</label>
                         <input
@@ -1012,7 +1011,7 @@ export default function MobilePianoConcertSeriesPage({ isMenuOpen, musicians, lo
                         />
                     </div>
                     <input type="hidden" name="status" value="pending"/>
-                    <input type="submit" value="SUBMIT REQUEST" className="w-1/4 my-5 border border-stone-200 rounded-xl hover:bg-amber-400 hover:text-stone-800 hover:cursor-pointer" onClick={() => setShowScheduleModal(false)}/>
+                    <input type="submit" value="SUBMIT REQUEST" className={btnStyle} onClick={() => setShowScheduleModal(false)}/>
                     <button className={btnStyle} onClick={() => setShowScheduleModal(false)}>CLOSE</button>
                 </form>
             </section>

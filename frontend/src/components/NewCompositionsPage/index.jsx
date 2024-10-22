@@ -164,7 +164,7 @@ const ahnBentonCompositionObjs = ahnBentonAvailableCompositions.map(composition 
 let tdStyle = 'border border-stone-200 text-center py-1'
 let btnStyle = 'border border-stone-200 rounded-xl p-2 m-3 hover:bg-amber-400 hover:text-stone-800'
 
-export default function NewCompositionsPage({ isMenuOpen }) {
+export default function NewCompositionsPage({ isMenuOpen, loginStatus, scrollToTop }) {
     const [showDetails, setShowDetails] = useState(false)
     const [currentComposition, setCurrentComposition] = useState({})
     const [currentSamplePage, setCurrentSamplePage] = useState('')
@@ -183,9 +183,9 @@ export default function NewCompositionsPage({ isMenuOpen }) {
     return (
         <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} relative font-poppins`}>
             {currentComposition.composer
-            ? <div className={`${showDetails ? 'z-50' : 'hidden'} absolute w-2/3 h-[50%] left-[16.67%] top-[10%] border border-stone-200 flex flex-col justify-center items-center bg-stone-700 rounded-3xl overflow-y-auto`}>
+            ? <div className={`${showDetails ? 'z-50' : 'hidden'} absolute w-11/12 left-[4.17%] top-[5%] border border-stone-200 flex flex-col justify-center items-center bg-stone-700 rounded-3xl overflow-y-auto`}>
                 <p className="font-bold text-lg my-2">{currentComposition.composer}</p>
-                <p className="text-3xl my-2 font-bold text-center">{currentComposition.title}
+                <p className="text-lg lg:text-3xl my-2 font-bold text-center">{currentComposition.title}
                     {currentComposition.nickname
                     ? <span> "{currentComposition.nickname}"</span>
                     : ''}
@@ -196,7 +196,7 @@ export default function NewCompositionsPage({ isMenuOpen }) {
                         ? `${String(currentComposition.opusNo).split('_')[0]}, No. ${String(currentComposition.opusNo).split('_')[1]}`
                         : currentComposition.opusNo}</span></p>
                 <p className="italic">for {currentComposition.instrumentation}</p>
-                <img className="border border-stone-200 rounded-xl min-h-[60vh] h-1/2 w-1/2 my-5" src={currentSamplePage} alt={`Sample page: Op.${currentComposition.opusNo}`}/>
+                <img className="border border-stone-200 rounded-xl w-11/12 my-5" src={currentSamplePage} alt={`Sample page: Op.${currentComposition.opusNo}`}/>
                 <p className="underline">Movements</p>
                 <div>{currentComposition.movements.length
                     ? currentComposition.movements.map(movement => <p key={movement.movementNo}>{movement.movementTitle} {movement.movementNickname
@@ -213,13 +213,13 @@ export default function NewCompositionsPage({ isMenuOpen }) {
             </div>
             : ''}
             <h1 className="text-center text-3xl my-24">GLVMS New Compositions Store</h1>
-            <table className={`${showDetails ? 'opacity-20 z-0' : 'z-50'} border border-stone-200 text-sm w-11/12 mx-auto mb-12 table-fixed`}>
+            <table className={`${showDetails ? 'opacity-20 z-0' : 'z-50'} border border-stone-200 text-[0.7em] w-11/12 mx-auto mb-12 table-fixed`}>
                 <thead>
-                    <tr className="font-bold border border-stone-200 bg-stone-700">
-                        <td className={tdStyle + ' w-[15%]'}>Composer</td>
-                        <td className={tdStyle + ' w-[10%]'}>Opus</td>
-                        <td className={tdStyle + ' w-[35%]'}>Title</td>
-                        <td className={tdStyle + ' w-[30%]'}>Instrumentation</td>
+                    <tr className="font-bold border border-stone-200 bg-gradient-to-r from-green-950 via-green-700 to-green-950">
+                        <td className={tdStyle + ' w-[25%]'}>Composer</td>
+                        <td className={tdStyle + ' w-[20%]'}>Opus</td>
+                        <td className={tdStyle + ' w-[30%]'}>Title</td>
+                        <td className={tdStyle + ' w-[35%]'}>Instrumentation</td>
                         <td className={tdStyle + ' w-[10%]'}>Price</td>
                     </tr>
                 </thead>
@@ -228,10 +228,11 @@ export default function NewCompositionsPage({ isMenuOpen }) {
                     <tr key={composition.composer + composition.opusNo} className="hover:bg-stone-600 hover:cursor-pointer" onClick={() => {
                         setShowDetails(true)
                         setCurrentComposition(composition)
+                        scrollToTop()
                     }}>
                         <td className={tdStyle}>{composition.composer}</td>
                         <td className={tdStyle}>{'Op. ' + composition.opusNo.replace('_', ', No. ')}</td>
-                        <td className='border border-stone-200 pl-2'>{composition.nickname
+                        <td className='border border-stone-200 p-1 text-center'>{composition.nickname
                             ? composition.title + ` "${composition.nickname}"`
                             : composition.title}</td>
                         <td className={tdStyle}>{composition.instrumentation}</td>

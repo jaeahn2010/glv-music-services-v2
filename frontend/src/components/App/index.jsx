@@ -32,6 +32,7 @@ export default function App() {
 	const [detailsData, setDetailsData] = useState({})
 	const [loginStatus, setLoginStatus] = useState(false)
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
+	const [isMobile, setIsMobile] = useState(false)
 	const navigate = useNavigate()
 	let totalPrice = 0
 	let pCategoryStyle = 'underline font-bold text-2xl p-2'
@@ -107,9 +108,20 @@ export default function App() {
 		getMusiciansData("none")
 	}, [])
 
+	useEffect(() => {
+		const handleResize = () => {
+			setIsMobile(window.innerWidth <= 768)
+		}
+		handleResize()
+		window.addEventListener("resize", handleResize)
+		return () => {
+			window.removeEventListener("resize", handleResize)
+		}
+	}, [])
+
 	let h2Style = "text-stone-200 my-5 hover:scale-110 duration-500"
 	let authLink =
-		<div className='border-t border-stone-200 w-1/2 mx-auto'>
+		<div className='border-t border-stone-200 pt-3 lg:w-1/2 mx-auto'>
 			<p className={pCategoryStyle}>ACCOUNT</p>
 			<Link onClick={() => setIsMenuOpen(false)} to="/auth/signup">
 				<h2 className={h2Style}>Sign Up</h2>
@@ -123,7 +135,7 @@ export default function App() {
 
 	if (loginStatus) {
 		authLink =
-			<div className="border-t border-stone-200 w-1/2 mx-auto">
+			<div className="border-t border-stone-200 lg:w-1/2 mx-auto">
 				<button
 					className={h2Style}
 					onClick={() => {
@@ -138,7 +150,7 @@ export default function App() {
 		userGreeting =
 			<h1 className="bg-stone-700 z-10 text-white text-right text-sm sticky top-0">{`Hello, ${localStorage.getItem("firstName")} ${localStorage.getItem("lastName")}!`}</h1>
 		  	profileLink =
-			<div className="border-t border-stone-200 w-1/2 mx-auto">
+			<div className="border-t border-stone-200 lg:w-1/2 mx-auto">
 				<Link onClick={() => setIsMenuOpen(false)} to={"/clientProfile"}>
 					<h2 className={h2Style}>My Account</h2>
 				</Link>
@@ -159,12 +171,12 @@ export default function App() {
 					<div className={`border-stone-200 border-y-2 w-[5vw] lg:w-[30px] min-w-[30px] my-1.5 rounded-3xl duration-500 ${isMenuOpen ? '-rotate-45 -translate-y-[10px]' : ''}`}></div>
 				</div>
 			</nav>
-			<div className={`${isMenuOpen ? 'opacity-100 z-50' : 'hidden'} duration-500 absolute left-1/4 top-1/4 w-1/2 text-xl text-center font-poppins`}>
+			<div className={`${isMenuOpen ? 'opacity-100 z-50' : 'hidden'} duration-500 absolute left-[12.5%] top-1/4 w-3/4 text-xl text-center font-poppins`}>
 				<p className={pCategoryStyle}>INFORMATION</p>
 				<Link to='/about' onClick={() => setIsMenuOpen(false)}><h1 className={h2Style}>About GLVMS</h1></Link>
 				<Link to='/repertoire' onClick={() => setIsMenuOpen(false)}><h1 className={h2Style}>Repertoire List</h1></Link>
 				<Link to='/musicians' onClick={() => setIsMenuOpen(false)}><h1 className={h2Style}>Our Musicians</h1></Link>
-				<div className='border-t border-stone-200 w-1/2 mx-auto'>
+				<div className='border-t pt-3 border-stone-200 lg:w-1/2 mx-auto'>
 					<p className={pCategoryStyle}>STORES</p>
 					<Link onClick={() => setIsMenuOpen(false)} to="/ncs">
 						<h2 className={h2Style}>New Compositions Store</h2>
@@ -181,6 +193,7 @@ export default function App() {
 				<Route path="/" element={
 					<HomePage
 						isMenuOpen={isMenuOpen}
+						isMobile={isMobile}
 					/>
 				}/>
 				<Route path="/repertoire" element={
@@ -238,6 +251,8 @@ export default function App() {
 				<Route path="/ncs" element={
 					<NewCompositionsPage
 						isMenuOpen={isMenuOpen}
+						loginStatus={loginStatus}
+						scrollToTop={scrollToTop}
 					/>}
 				/>
 				<Route path="/mpcs" element={

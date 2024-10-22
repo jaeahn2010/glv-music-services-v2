@@ -20,9 +20,9 @@ export default function RequestPage({ isMenuOpen, musicians, loginStatus, userCa
         additionalComments: '',
         status: 'pending',
     })
-    let divStyle = 'w-1/2 mx-auto flex'
-    let labelStyle = 'w-1/2 text-right m-2'
-    let inputStyle = 'w-1/2 text-left m-2 p-1 bg-stone-200 text-stone-800 rounded-lg'
+    let divStyle = 'w-full lg:w-1/2 mx-auto flex'
+    let labelStyle = 'w-1/3 m-2 flex justify-end items-center text-right'
+    let inputStyle = 'w-2/3 text-left m-2 p-1 bg-stone-200 text-stone-800 rounded-lg'
 
     function handleChange(evt) {
         setRequestData({
@@ -74,35 +74,37 @@ export default function RequestPage({ isMenuOpen, musicians, loginStatus, userCa
 
     return (
         <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} font-poppins`}>
-            <div className="flex flex-col justify-center items-center w-11/12 mx-auto my-6">
-                <p className="text-xl">Please fill out the form below to finalize your request.</p>
-            </div>
-            <form onSubmit={handleSubmit} className="w-11/12 mx-auto my-12 flex flex-col justify-center items-center">
-                <div className={divStyle}>
-                    <label htmlFor="musicianEmail" className={labelStyle}>Requested musician:</label>
-                    <select
-                        name="musicianEmail"
-                        id="musicianEmail"
-                        className={`text-stone-800 ${inputStyle}`}
-                        defaultValue={0}
-                        onChange={handleChange}
-                    >
-                        <option value="0" disabled>Choose a musician</option>
-                        {musicians.map(musician => <option key={musician._id} value={musician.email}>{musician.lastName}, {musician.firstName}</option>)}
-                    </select>
+            {loginStatus
+            ? 
+            <>
+                <div className="text-center w-11/12 mx-auto my-6">
+                    <p className="text-xl">Please fill out the form below to finalize your request.</p>
                 </div>
-                <div className={divStyle}>
-                    <label htmlFor="eventName" className={labelStyle}>Event Name:</label>
-                    <input
-                        name='eventName'
-                        id='eventName'
-                        className={inputStyle}
-                        defaultValue={requestData.eventName}
-                        placeholder="Event Name"
-                        onChange={handleChange}
-                    />
-                </div>
-                <section className="w-full my-4">
+                <form onSubmit={handleSubmit} className="w-11/12 mx-auto my-12 flex flex-col justify-center items-center">
+                    <div className={divStyle}>
+                        <label htmlFor="musicianEmail" className={labelStyle}>Requested musician:</label>
+                        <select
+                            name="musicianEmail"
+                            id="musicianEmail"
+                            className={`text-stone-800 ${inputStyle}`}
+                            defaultValue={0}
+                            onChange={handleChange}
+                        >
+                            <option value="0" disabled>Choose a musician</option>
+                            {musicians.map(musician => <option key={musician._id} value={musician.email}>{musician.lastName}, {musician.firstName}</option>)}
+                        </select>
+                    </div>
+                    <div className={divStyle}>
+                        <label htmlFor="eventName" className={labelStyle}>Event Name:</label>
+                        <input
+                            name='eventName'
+                            id='eventName'
+                            className={inputStyle}
+                            defaultValue={requestData.eventName}
+                            placeholder="Event Name"
+                            onChange={handleChange}
+                        />
+                    </div>
                     <p className="text-center underline text-xl">Event location</p>
                     <div className={divStyle}>
                         <label htmlFor="locationName" className={labelStyle}>Location Name:</label>
@@ -162,64 +164,65 @@ export default function RequestPage({ isMenuOpen, musicians, loginStatus, userCa
                             onChange={handleChange}
                         />
                     </div>
-                </section>
-                <div className={divStyle}>
-                    <label htmlFor="eventDate" className={labelStyle}>Event Date:</label>
-                    <input
-                        name='eventDate'
-                        type='date'
-                        id='eventDate'
-                        className={inputStyle}
-                        defaultValue={requestData.eventDate}
-                        placeholder={new Date()}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div className={divStyle}>
-                    <label htmlFor="eventStartTime" className={labelStyle}>Event Start Time:</label>
-                    <input
-                        name='eventStartTime'
-                        type='time'
-                        id='eventStartTime'
-                        className={inputStyle}
-                        defaultValue={requestData.eventStartTime}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div className={divStyle}>
-                    <label htmlFor="eventEndTime" className={labelStyle}>Event End Time:</label>
-                    <input
-                        name='eventEndTime'
-                        type='time'
-                        id='eventEndTime'
-                        className={inputStyle}
-                        defaultValue={requestData.eventEndTime}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div className='flex w-1/2 mx-auto'>
-                    <p className={labelStyle}>Requested Repertoire:</p>
-                    <div className="w-1/2">
-                        {userCart.map(opusInCart => <div key={opusInCart._id} className="border border-stone-200 p-2 rounded-xl bg-stone-700">
-                            <p className="underline">{opusInCart.composer}: {opusInCart.title}</p>
-                            {opusInCart.movements.map(movement => <p key={movement.movementTitle}>{movement.movementTitle}</p>)}
-                        </div>)}
+                    <div className={divStyle}>
+                        <label htmlFor="eventDate" className={labelStyle}>Event Date:</label>
+                        <input
+                            name='eventDate'
+                            type='date'
+                            id='eventDate'
+                            className={inputStyle}
+                            defaultValue={requestData.eventDate}
+                            placeholder={new Date()}
+                            onChange={handleChange}
+                        />
                     </div>
-                </div>
-                <p className="text-center my-5">Total price: ${totalPrice}</p>
-                <div className={divStyle}>
-                    <label htmlFor="additionalComments" className={labelStyle + ' min-h-[30vh]'}>Additional Comments:</label>
-                    <textarea
-                        name="additionalComments"
-                        id="additionalComments"
-                        className={inputStyle}
-                        defaultValue={requestData.additionalComments}
-                        onChange={handleChange}
-                    />
-                </div>
-                <input type="hidden" name="status" value="pending"/>
-                <input type="submit" value="SUBMIT REQUEST" className="w-1/4 my-5 border border-stone-200 rounded-xl hover:bg-amber-400 hover:text-stone-800 hover:cursor-pointer"/>
-            </form>
+                    <div className={divStyle}>
+                        <label htmlFor="eventStartTime" className={labelStyle}>Event Start Time:</label>
+                        <input
+                            name='eventStartTime'
+                            type='time'
+                            id='eventStartTime'
+                            className={inputStyle}
+                            defaultValue={requestData.eventStartTime}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className={divStyle}>
+                        <label htmlFor="eventEndTime" className={labelStyle}>Event End Time:</label>
+                        <input
+                            name='eventEndTime'
+                            type='time'
+                            id='eventEndTime'
+                            className={inputStyle}
+                            defaultValue={requestData.eventEndTime}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className='flex lg:w-1/2 mx-auto'>
+                        <p className={labelStyle}>Requested Repertoire:</p>
+                        <div className="w-2/3">
+                            {userCart.map(opusInCart => <div key={opusInCart._id} className="border border-stone-200 p-2 rounded-xl bg-stone-700 my-2">
+                                <p className="underline">{opusInCart.composer}: {opusInCart.title}</p>
+                                {opusInCart.movements.map(movement => <p key={movement.movementTitle}>{movement.movementTitle}</p>)}
+                            </div>)}
+                        </div>
+                    </div>
+                    <p className="text-center my-5">Total price: ${totalPrice}</p>
+                    <div className={divStyle}>
+                        <label htmlFor="additionalComments" className={labelStyle + ' min-h-[30vh]'}>Additional Comments:</label>
+                        <textarea
+                            name="additionalComments"
+                            id="additionalComments"
+                            className={inputStyle}
+                            defaultValue={requestData.additionalComments}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <input type="hidden" name="status" value="pending"/>
+                    <input type="submit" value="SUBMIT REQUEST" className="w-1/2 lg:w-1/4 my-5 border border-stone-200 rounded-xl hover:bg-amber-400 hover:text-stone-800 hover:cursor-pointer"/>
+                </form>
+            </>
+            : <h1 className={`${isMenuOpen ? 'z-0 opacity-5' : ''} text-3xl text-center min-h-[75vh] mt-24`}>Please sign up or log in to access this part of the site.</h1>}
         </main>
     )
 }
