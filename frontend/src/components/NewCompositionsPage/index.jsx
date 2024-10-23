@@ -183,7 +183,7 @@ export default function NewCompositionsPage({ isMenuOpen, loginStatus, scrollToT
     return (
         <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} relative font-poppins`}>
             {currentComposition.composer
-            ? <div className={`${showDetails ? 'z-50' : 'hidden'} absolute w-11/12 left-[4.17%] top-[5%] border border-stone-200 flex flex-col justify-center items-center bg-stone-700 rounded-3xl overflow-y-auto`}>
+            ? <div className={`${showDetails ? 'z-50' : 'hidden'} absolute w-11/12 left-[4.17%] top-[5%] lg:w-1/2 lg:left-1/4 border border-stone-200 flex flex-col justify-center items-center bg-stone-700 rounded-3xl overflow-y-auto`}>
                 <p className="font-bold text-lg my-2">{currentComposition.composer}</p>
                 <p className="text-lg lg:text-3xl my-2 font-bold text-center">{currentComposition.title}
                     {currentComposition.nickname
@@ -196,7 +196,7 @@ export default function NewCompositionsPage({ isMenuOpen, loginStatus, scrollToT
                         ? `${String(currentComposition.opusNo).split('_')[0]}, No. ${String(currentComposition.opusNo).split('_')[1]}`
                         : currentComposition.opusNo}</span></p>
                 <p className="italic">for {currentComposition.instrumentation}</p>
-                <img className="border border-stone-200 rounded-xl w-11/12 my-5" src={currentSamplePage} alt={`Sample page: Op.${currentComposition.opusNo}`}/>
+                <img className="border border-stone-200 rounded-xl w-11/12 lg:w-2/3 my-5" src={currentSamplePage} alt={`Sample page: Op.${currentComposition.opusNo}`}/>
                 <p className="underline">Movements</p>
                 <div>{currentComposition.movements.length
                     ? currentComposition.movements.map(movement => <p key={movement.movementNo}>{movement.movementTitle} {movement.movementNickname
@@ -213,14 +213,14 @@ export default function NewCompositionsPage({ isMenuOpen, loginStatus, scrollToT
             </div>
             : ''}
             <h1 className="text-center text-3xl my-24">GLVMS New Compositions Store</h1>
-            <table className={`${showDetails ? 'opacity-20 z-0' : 'z-50'} border border-stone-200 text-[0.7em] w-11/12 mx-auto mb-12 table-fixed`}>
+            <table className={`${showDetails ? 'opacity-20 z-0' : 'z-50'} border border-stone-200 text-[0.7em] lg:text-sm w-11/12 mx-auto mb-12 table-fixed`}>
                 <thead>
                     <tr className="font-bold border border-stone-200 bg-gradient-to-r from-green-950 via-green-700 to-green-950">
-                        <td className={tdStyle + ' w-[25%]'}>Composer</td>
-                        <td className={tdStyle + ' w-[20%]'}>Opus</td>
-                        <td className={tdStyle + ' w-[30%]'}>Title</td>
-                        <td className={tdStyle + ' w-[35%]'}>Instrumentation</td>
-                        <td className={tdStyle + ' w-[10%]'}>Price</td>
+                        <td className={tdStyle + ' w-[25%] lg:w-[15%]'}>Composer</td>
+                        <td className={tdStyle + ' w-[20%] lg:w-[10%]'}>Opus</td>
+                        <td className={tdStyle + ' w-[30%] lg:w-[50%]'}>Title</td>
+                        <td className={tdStyle + ' w-[35%] lg:w-[20%]'}>Instrumentation</td>
+                        <td className={tdStyle + ' w-[10%] lg:w-[5%]'}>Price</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -232,7 +232,7 @@ export default function NewCompositionsPage({ isMenuOpen, loginStatus, scrollToT
                     }}>
                         <td className={tdStyle}>{composition.composer}</td>
                         <td className={tdStyle}>{'Op. ' + composition.opusNo.replace('_', ', No. ')}</td>
-                        <td className='border border-stone-200 p-1 text-center'>{composition.nickname
+                        <td className='border border-stone-200 p-1 text-center lg:text-left'>{composition.nickname
                             ? composition.title + ` "${composition.nickname}"`
                             : composition.title}</td>
                         <td className={tdStyle}>{composition.instrumentation}</td>

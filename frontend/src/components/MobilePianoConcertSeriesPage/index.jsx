@@ -761,7 +761,7 @@ const availableConcerts = [
 
 const concertObjs = availableConcerts.map(concert => new Concert ('Ahn-Benton, Jae', concert[0], concert[1], concert[2], concert[3], concert[4], concert[5]))
 let tdStyle = 'border border-stone-200 text-center py-1'
-let btnStyle = 'w-1/2 border border-stone-200 rounded-xl p-2 m-3 hover:bg-amber-400 hover:text-stone-800'
+let btnStyle = 'w-1/2 lg:w-3/4 border border-stone-200 rounded-xl p-2 m-3 hover:bg-amber-400 hover:text-stone-800'
 let modalStyle = 'absolute w-full lg:w-3/4 lg:left-[12.5%] border border-stone-200 flex flex-col justify-center items-center bg-stone-700 rounded-3xl'
 let liStyle = 'my-4'
 let divStyle = 'w-full lg:w-11/12 mx-auto flex'
@@ -874,7 +874,7 @@ export default function MobilePianoConcertSeriesPage({ isMenuOpen, musicians, lo
                 </div>
             </div>
             : ''}
-            <section className={`${showScheduleModal ? 'z-50' : 'hidden'} ${modalStyle} lg:h-[100%]`}>
+            <section className={`${showScheduleModal ? 'z-50' : 'hidden'} ${modalStyle} lg:h-[75%]`}>
                 {/* place for client to request date, time, location, audience size, snacks, comments (change in rep), etc. */}
                 <form onSubmit={handleSubmit} className="lg:w-11/12 mx-auto my-12 flex flex-col justify-center items-center">
                     <div className={divStyle}>
@@ -1017,13 +1017,13 @@ export default function MobilePianoConcertSeriesPage({ isMenuOpen, musicians, lo
             </section>
             <h1 className={`${showDetails ? 'z-0 opacity-5' : ''} text-center text-3xl my-24`}>GLVMS Mobile Piano Concert Series</h1>
             <p className={`${showDetails ? 'z-0 opacity-5' : ''} w-11/12 mx-auto text-lg`}>Bring a professional classical piano performance right to your doorstep! Simply pick a concert from the menu below, and request a date, time, and location. Once confirmed by GLVMS and payment is made, the designated pianist will show up at your location at the specified date and time, and will perform the requested concert. That's it! No hassle, no confusion.</p>
-            <table className={`${showDetails ? 'z-0 opacity-5' : ''} border border-stone-200 w-11/12 lg:w-2/3 mx-auto mb-12 table-fixed my-12 text-xs`}>
+            <table className={`${showDetails ? 'z-0 opacity-5' : ''} border border-stone-200 w-11/12 mx-auto mb-12 table-fixed my-12 text-xs lg:text-base`}>
                 <thead>
                     <tr className="font-bold border border-stone-200 bg-gradient-to-r from-green-950 via-green-700 to-green-950" >
-                        <td className={tdStyle + ' w-[25%]'}>Pianist</td>
-                        <td className={tdStyle + ' w-[35%]'}>Title</td>
-                        <td className={tdStyle + ' w-[25%]'}>Approximate Duration</td>
-                        <td className={tdStyle + ' w-[15%]'}>Base Price</td>
+                        <td className={tdStyle + ' w-[25%] lg:w-[20%]'}>Pianist</td>
+                        <td className={tdStyle + ' w-[35%] lg:w-[45%]'}>Title</td>
+                        <td className={tdStyle + ' w-[25%] lg:w-[20%]'}>Approximate Duration</td>
+                        <td className={tdStyle + ' w-[15%] lg:w-[10%]'}>Base Price</td>
                     </tr>
                 </thead>
                 <tbody>

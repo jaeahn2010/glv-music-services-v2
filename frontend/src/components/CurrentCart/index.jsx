@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 export default function CurrentCart({ isMenuOpen, opuses, loginStatus, userCart, setUserCart, getOpusData, totalPrice }) {
     let cartText = userCart.length > 0 ? 'Your cart' : 'Your cart is empty.'
-    let btnStyle = 'border-stone-200 border rounded-xl px-3 py-1 my-2 w-full hover:scale-125 hover:cursor-pointer hover:bg-amber-400 hover:text-stone-900 hover:duration-500'
+    let btnStyle = 'border-stone-200 border rounded-xl px-3 py-1 my-2 w-full hover:scale-110 hover:cursor-pointer hover:bg-amber-400 hover:text-stone-900 hover:duration-500'
 
     let priceText = userCart.length > 0 ? `Your total: $${totalPrice}` : ''
 
@@ -86,7 +86,7 @@ export default function CurrentCart({ isMenuOpen, opuses, loginStatus, userCart,
                             <br/>
                         </section>
                         <section className="flex flex-col items-center justify-center mx-auto text-center">
-                            <button className='border border-stone-200 px-4 rounded-xl py-2 hover:bg-red-600 hover:opacity-50 hover:cursor-pointer' id={`${item._id}-bulk-0`} onClick={handleClick}>Remove entire opus from cart</button>
+                            <button className='border border-stone-200 px-4 rounded-xl py-2 hover:bg-red-600 hover:cursor-pointer' id={`${item._id}-bulk-0`} onClick={handleClick}>Remove entire opus from cart</button>
                         </section>
                     </div>
                 )})

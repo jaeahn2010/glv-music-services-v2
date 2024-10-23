@@ -108,7 +108,7 @@ export default function DetailsPage({isMenuOpen, thisOpus, loginStatus, userCart
         : ''
 
         return (
-            <section className={`${isMenuOpen ? 'z-0 opacity-5' : ''} flex flex-col justify-center items-center font-poppins h-[200vh]`}>
+            <section className={`${isMenuOpen ? 'z-0 opacity-5' : ''} flex flex-col justify-center items-center font-poppins h-[200vh] lg:h-[75vh]`}>
                 <div className={`w-11/12 lg:w-1/2 mx-auto min-h-[300px] border border-stone-400 rounded-lg text-stone-300 p-5 m-5 flex-col justify-center bg-stone-600`}>
                     <section>
                         <div>

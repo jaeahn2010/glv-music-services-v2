@@ -33,8 +33,8 @@ export default function HomePage({isMenuOpen, isMobile}) {
     ]
     let imgStyle = 'w-[350px] rounded-xl hover:scale-110 duration-500'
     let pStyle = 'text-center text-lg mt-6 hover:text-green-300'
-    let contactDivStyle = 'text-center mx-auto py-3'
-    let aStyle = 'fill-container flex justify-center items-center w-2/3 lg:w-1/6 mx-auto my-5 p-2 border-stone-200 border rounded-3xl'
+    let contactDivStyle = 'text-center mx-auto py-3 lg:w-1/2 lg:mx-10'
+    let aStyle = 'fill-container flex justify-center items-center w-2/3 lg:w-1/2 mx-auto my-5 p-2 border-stone-200 border rounded-3xl'
 
     useEffect(() => {
         const observers = domRefs.map((domRef, index) => {
@@ -87,7 +87,7 @@ export default function HomePage({isMenuOpen, isMobile}) {
                         }}>{service}</li>
                     )}
                 </ul>
-                <div className={`${isMobile ? 'w-full' : 'w-1/2'} mx-1 p-2 border border-stone-200 bg-stone-700 rounded-xl ${currentServiceDisplay.index === -1 ? 'flex justify-center items-center' : ''}`}>
+                <div className={`${isMobile ? 'w-full' : 'w-1/2'} mx-1 my-10 p-2 border border-stone-200 bg-stone-700 rounded-xl ${currentServiceDisplay.index === -1 ? 'flex justify-center items-center' : ''}`}>
                     {currentServiceDisplay.description}
                     {currentServiceDisplay.index !== -1
                     ? <div className='my-5 flex justify-center items-center relative'>
@@ -103,7 +103,7 @@ export default function HomePage({isMenuOpen, isMobile}) {
             </section>
             <section className="w-[vw-100] py-2 mt-12 font-poppins flex flex-col">
                 <p className='w-full mx-auto text-center my-5 text-xl'>CONTACT US</p>
-                <div>
+                <div className='lg:flex'>
                     <div className={contactDivStyle}>
                         <p className="text-sm">Can't find your desired repertoire or have a custom request? Contact us directly.</p>
                         <a href="mailto:glvmusicservices@gmail.com" className={aStyle}>
