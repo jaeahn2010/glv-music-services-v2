@@ -9,6 +9,7 @@ import AuthFormPage from '../AuthFormPage'
 import RepertoirePage from '../RepertoirePage'
 import RequestPage from '../RequestPage'
 import MusiciansPage from '../MusiciansPage'
+import AdminPage from '../AdminPage'
 import DetailsPage from '../DetailsPage'
 import ClientProfilePage from '../ClientProfilePage'
 import CurrentCart from '../CurrentCart'
@@ -31,6 +32,7 @@ export default function App() {
 	const [userCart, setUserCart] = useState([])
 	const [detailsData, setDetailsData] = useState({})
 	const [loginStatus, setLoginStatus] = useState(false)
+	const [adminLogin, setAdminLogin] = useState(false)
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
 	const [isMobile, setIsMobile] = useState(false)
 	const navigate = useNavigate()
@@ -241,6 +243,8 @@ export default function App() {
 					<AuthFormPage
 						isMenuOpen={isMenuOpen}
 						setLoginStatus={setLoginStatus}
+						adminLogin={adminLogin}
+						setAdminLogin={setAdminLogin}
 					/>}
 				/>
 				<Route path="/about" element={
@@ -282,6 +286,13 @@ export default function App() {
 						setUserCart={setUserCart}
 						getOpusData={getOpusData}
 						totalPrice={totalPrice}
+					/>}
+				/>
+				<Route path='/admin' element={
+					<AdminPage
+						isMenuOpen={isMenuOpen}
+						opuses={opuses}
+						adminLogin={adminLogin}
 					/>}
 				/>
 				<Route path="/*" element={<NotFoundPage/>} />

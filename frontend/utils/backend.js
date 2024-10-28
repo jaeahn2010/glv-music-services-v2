@@ -6,10 +6,18 @@ export async function signUp(user) {
     return data
 }
 
-export async function logIn(user) {
+export async function clientLogIn(user) {
     const { data } = await axios.post('/api/clients/login', user, {
         withCredentials: true
     })
+    return data
+}
+
+export async function adminLogIn(user) {
+    const { data } = await axios.post('/api/admins/login', user, {
+        withCredentials: true
+    })
+    console.log(data)
     return data
 }
 

@@ -28,7 +28,7 @@ const authMiddleware = (req, res, next) => {
 
 // routes
 // login route
-router.post('/login', authMiddleware, async (req, res) => {
+router.post('/login', async (req, res) => {
     const foundAdmin = await db.Admin.findOne({ email: req.body.email })
     if (foundAdmin && foundAdmin.password === req.body.password) {
         const payload = { id: foundAdmin.id }

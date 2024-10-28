@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { signUp, logIn } from "../../../utils/backend"
+import { signUp, clientLogIn, adminLogIn } from "../../../utils/backend"
 
-export default function AuthFormPage({ isMenuOpen, setLoginStatus }) {
+export default function AuthFormPage({ isMenuOpen, setLoginStatus, adminLogin, setAdminLogin }) {
     const { formType } = useParams()
     const navigate = useNavigate()
+    const [isAdmin, setIsAdmin] = useState(false)
     const [formData, setFormData] = useState({
         email: "",
         password: "",
@@ -19,18 +20,30 @@ export default function AuthFormPage({ isMenuOpen, setLoginStatus }) {
 
     async function handleSubmit(event) {
         event.preventDefault()
-        if (formType === 'login') { //if logging in
-            try {
-                const userCredentials = await logIn(formData)
-                localStorage.setItem('email', userCredentials.email)
-                localStorage.setItem('firstName', userCredentials.firstName)
-                localStorage.setItem('lastName', userCredentials.lastName)
-                localStorage.setItem('instrument', userCredentials.instrument)
+        if (formType === 'login') { // if logging in
+            if (!isAdmin) { // if logging in as client
+                try {
+                    const userCredentials = await clientLogIn(formData)
+                    localStorage.setItem('email', userCredentials.email)
+                    localStorage.setItem('firstName', userCredentials.firstName)
+                    localStorage.setItem('lastName', userCredentials.lastName)
+                    localStorage.setItem('instrument', userCredentials.instrument)
+                    setLoginStatus(true)
+                    navigate('/')
+                } catch (err) {
+                    alert(err)
+                    navigate('/auth/login')
+                }
+            } else { // if logging in as admin
+                console.log(formData)
+                const adminCredentials = await adminLogIn(formData)
+                localStorage.setItem('email', adminCredentials.email)
+                localStorage.setItem('firstName', 'Site')
+                localStorage.setItem('lastName', 'Admin')
+                localStorage.setItem('instrument', 'N/A')
+                setAdminLogin(true)
                 setLoginStatus(true)
-                navigate('/')
-            } catch (err) {
-                alert(err)
-                navigate('/auth/login')
+                navigate('/admin')
             }
         } else { //if signing up
             if (formData.password !== formData.passwordRetype) {
@@ -54,7 +67,7 @@ export default function AuthFormPage({ isMenuOpen, setLoginStatus }) {
     }
 
     const handleInputChange = (evt) => {
-        setFormData({ ...formData, [evt.target.name]: evt.target.value })
+        evt.target.name === 'adminCheckbox' ? setIsAdmin(evt.target.checked) : setFormData({ ...formData, [evt.target.name]: evt.target.value })
     }
 
     let btnText = formType === 'login' ? 'Log In' : 'Sign Up'
@@ -115,6 +128,19 @@ export default function AuthFormPage({ isMenuOpen, setLoginStatus }) {
         </div>
     </section>
     : ''
+    let adminField = formType === 'login'
+    ? <section className="flex items-center justify-center">
+        <input
+            className='mr-2 my-4'
+            id='adminCheckbox'
+            name='adminCheckbox'
+            type='checkbox'
+            value={formData.isAdmin}
+            onChange={handleInputChange}
+        />
+        <label htmlFor="adminCheckbox">Click here if logging in as admin</label>
+    </section>
+    : ''
 
     return (
         <section className={`${isMenuOpen ? 'z-0 opacity-5' : ''} bg-stone-800 rounded-xl border border-stone-200 p-8 lg:w-1/3 mx-auto mt-24 mb-48 font-poppins`}>
@@ -148,6 +174,7 @@ export default function AuthFormPage({ isMenuOpen, setLoginStatus }) {
                     />
                 </div>
                 {signupFields}
+                {adminField}
                 <button
                     type="submit"
                     className="w-1/2 mx-auto border border-stone-200 my-5 rounded-xl duration-500 hover:bg-gradient-to-r from-green-950 via-green-500 to-green-950 py-1">
