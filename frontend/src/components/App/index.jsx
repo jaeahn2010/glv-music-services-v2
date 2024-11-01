@@ -18,7 +18,8 @@ import './styles.css'
 import cartIcon from '../../assets/cart-icon.jpeg'
 
 let allComposers = []
-let states = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VA', 'WA', 'WV', 'WI', 'WY']
+const instruments = ['bassoon', 'cello', 'clarinet', 'contrabass', 'flute', 'guitar', 'harp', 'oboe', 'orchestra', 'piano', 'percussion', 'saxophone', 'trombone', 'trumpet', 'tuba/euphonium', 'viola', 'violin', 'voice']
+const states = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VA', 'WA', 'WV', 'WI', 'WY']
 
 const scrollToTop = () => 
 	window.scrollTo({
@@ -227,6 +228,7 @@ export default function App() {
 						getFilteredData={getMusiciansData}
 						updateDetails={setDetailsData}
 						loginStatus={loginStatus}
+						instruments={instruments}
 					/>}
 				/>
 				<Route path="/clientProfile" element={
@@ -291,8 +293,9 @@ export default function App() {
 				<Route path='/admin' element={
 					<AdminPage
 						isMenuOpen={isMenuOpen}
-						opuses={opuses}
 						adminLogin={adminLogin}
+						sortObjects={sortObjects}
+						instruments={instruments}
 					/>}
 				/>
 				<Route path="/*" element={<NotFoundPage/>} />

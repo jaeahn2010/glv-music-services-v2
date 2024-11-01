@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 const opusSchema = new mongoose.Schema(
     {
@@ -17,4 +17,4 @@ const opusSchema = new mongoose.Schema(
 )
 
 // export to index.js
-module.exports = mongoose.model('Opus', opusSchema);
+module.exports = mongoose.model('Opus', opusSchema)

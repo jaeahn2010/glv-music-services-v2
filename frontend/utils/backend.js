@@ -1,6 +1,11 @@
 import axios from 'axios'
 
 //clients CRUD (+signup & login)
+export async function getClients() {
+    const { data } = await axios.get(`/api/clients`)
+    return data
+}
+
 export async function signUp(user) {
     const { data } = await axios.post('/api/clients/signup', user)
     return data
@@ -17,7 +22,6 @@ export async function adminLogIn(user) {
     const { data } = await axios.post('/api/admins/login', user, {
         withCredentials: true
     })
-    console.log(data)
     return data
 }
 

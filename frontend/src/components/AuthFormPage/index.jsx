@@ -35,7 +35,6 @@ export default function AuthFormPage({ isMenuOpen, setLoginStatus, adminLogin, s
                     navigate('/auth/login')
                 }
             } else { // if logging in as admin
-                console.log(formData)
                 const adminCredentials = await adminLogIn(formData)
                 localStorage.setItem('email', adminCredentials.email)
                 localStorage.setItem('firstName', 'Site')

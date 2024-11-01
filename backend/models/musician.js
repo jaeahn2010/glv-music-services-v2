@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 const musicianSchema = new mongoose.Schema(
     {
@@ -8,7 +8,7 @@ const musicianSchema = new mongoose.Schema(
         email: { type: String, required: true, unique: true },
         availableRepertoire: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Opus'}],
     },
-);
+)
 
 // export to index.js
-module.exports = mongoose.model('Musician', musicianSchema);
+module.exports = mongoose.model('Musician', musicianSchema)

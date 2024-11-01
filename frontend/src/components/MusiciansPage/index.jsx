@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import MusiciansGallery from '../MusiciansGallery'
 
-export default function MusiciansPage({ isMenuOpen, musicians, setMusicians, getFilteredData, updateDetails, loginStatus }) {
-    let instruments = ['bassoon', 'cello', 'clarinet', 'contrabass', 'flute', 'guitar', 'harp', 'oboe', 'orchestra', 'piano', 'percussion', 'saxophone', 'trombone', 'trumpet', 'tuba/euphonium', 'viola', 'violin']
+export default function MusiciansPage({ isMenuOpen, musicians, instruments, setMusicians, getFilteredData, updateDetails, loginStatus }) {
 
     return (
         <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} text-stone-400 font-poppins min-h-[100vh]`}>

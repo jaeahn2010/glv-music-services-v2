@@ -27,6 +27,12 @@ const authMiddleware = (req, res, next) => {
 }
 
 // routes
+// display all clients associated with GLVMS
+router.get('/', function (req, res) {
+    db.Client.find()
+        .then(clients => res.json(clients))
+})
+
 // create client (signup route)
 router.post('/signup', (req, res) => {
     db.Client.create(req.body)
