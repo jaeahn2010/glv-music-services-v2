@@ -47,18 +47,18 @@ export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instrum
     })
     const btnStyle = 'border border-stone-200 rounded-xl p-2 mx-auto my-4 hover:scale-110 hover:bg-gradient-to-r from-green-700 via-green-500 to-green-700'
     const divStyle = 'border border-stone-200 w-1/2 flex flex-col justify-center p-1 m-2 rounded-xl'
-    const labelStyle = 'w-1/3 lg:w-1/2 text-right m-2'
-    const inputStyle = 'w-2/3 lg:w-1/2 text-left m-2 p-1 bg-stone-200 text-stone-800 rounded-lg'
+    const labelStyle = 'w-1/4 text-right m-2'
+    const inputStyle = 'w-3/4 text-left m-2 p-1 bg-stone-200 text-stone-800 rounded-lg'
 
     let addFields
     let editFields = []
-    let tempInstrumentationList = []
     let movementsModal = <section className={showMovementsModal ? 'absolute left-1/4 z-40 border border-stone-200 w-1/2 flex flex-col justify-center items-center p-4 bg-stone-600' : 'hidden'}>
         <div className={divStyle + ' w-11/12'}>
             <label htmlFor="movementNumber" className={labelStyle}>Movement Number:</label>
             <input
                 name='movementNumber'
                 id='movementNumber'
+                type='number'
                 className={inputStyle}
                 placeholder='movementNumber'
                 onChange={handleMovementChange}
@@ -78,6 +78,7 @@ export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instrum
             <label htmlFor="movementPrice" className={labelStyle}>Movement Price:</label>
             <input
                 name='movementPrice'
+                type='number'
                 id='movementPrice'
                 className={inputStyle}
                 placeholder='movementPrice'
@@ -132,16 +133,30 @@ export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instrum
         console.log(evt.target.id, crudItem)
     }
 
-    function handleSubmit(evt) {
+    console.log()
+
+    async function handleSubmit(evt) {
         evt.preventDefault()
         console.log(opusFormData)
+        if (confirm(`Are you sure you would like to add this new ${crudItem}?`)) {
+            try {
+                const newOpus = await postOpus(opusFormData)
+                if (newOpus) {
+                    console.log(newOpus)
+                    alert(`Successfully created new ${crudItem}.`)
+                }
+            } catch(err) {
+                alert(`Could not add new ${crudItem}: ${err}`)
+                console.error(err)
+            }
+        }
     }
 
     switch(crudItem) {
         case 'opus':
             editFields = allOpuses
-            addFields = <form onSubmit={handleSubmit}>
-                <div className={''}>
+            addFields = <form onSubmit={handleSubmit} className="flex flex-col">
+                <div className={'mx-auto w-11/12 flex justify-center items-center p-1 m-2 rounded-xl'}>
                     <label htmlFor="title" className={labelStyle}>Title:</label>
                     <input
                         name='title'
@@ -152,7 +167,7 @@ export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instrum
                         onChange={handleChange}
                     />
                 </div>
-                <div className={''}>
+                <div className={'mx-auto w-11/12 flex justify-center items-center p-1 m-2 rounded-xl'}>
                     <label htmlFor="composer" className={labelStyle}>Composer:</label>
                     <input
                         name='composer'
@@ -163,9 +178,20 @@ export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instrum
                         onChange={handleChange}
                     />
                 </div>
-                <button onClick={() => setShowMovementsModal(true)} className={btnStyle}>Add movement</button>
+                <button onClick={(evt) => {
+                    evt.preventDefault()
+                    setShowMovementsModal(true)
+                }} className={btnStyle + ' text-center'}>Add movement</button>
+                {opusFormData.movements.length
+                ? opusFormData.movements.map(mvmt => <div key={mvmt.movementNumber} className="border border-stone-200 rounded-xl w-3/4 mx-auto p-2 my-3">
+                    <p className="border-b border-stone-200 font-bold text-center">{mvmt.movementNumber}</p>
+                    <p>{mvmt.movementTitle}</p>
+                    <p>${mvmt.movementPrice}</p>
+                </div>)
+                : ''}
                 {showMovementsModal ? movementsModal : ''}
-                <div className={''}>
+                <p className="underline text-center my-2">INSTRUMENTATION</p>
+                <div className={'mx-auto my-3 w-1/3'}>
                     {instruments.map(instrument => 
                         <div key={instrument}>
                             <input
@@ -179,9 +205,9 @@ export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instrum
                         </div>
                     )}
                 </div>
-                <div className={''}>
+                <div className={'mx-auto w-11/12 flex justify-center items-center p-1 m-2 rounded-xl'}>
                     <label htmlFor="price" className={labelStyle}>Price:</label>
-                    <input
+                    $<input
                         type='number'
                         name='price'
                         id='price'
@@ -191,7 +217,7 @@ export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instrum
                         onChange={handleChange}
                     />
                 </div>
-                <input type="submit" value='Submit'/>
+                <input type="submit" value='Submit' className={btnStyle}/>
             </form>
             break
         case 'musician':
@@ -216,20 +242,19 @@ export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instrum
 
     return adminLogin
     ? <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} text-xl min-h-[100vh]`}>
-        <h1>This is the GLVMS admin page. Use it to CRUD sensitive data (opuses, musicians, clients).</h1>
+        <h1 className="text-center my-6">This is the GLVMS admin page. Use it to CRUD sensitive data (opuses, musicians, clients).</h1>
         <section className="flex items-center justify-around my-12">
             <button className={btnStyle} onClick={() => setCrudItem('opus')}>ADD/EDIT OPUS</button>
             <button className={btnStyle} onClick={() => setCrudItem('musician')}>ADD/EDIT MUSICIAN</button>
             <button className={btnStyle} onClick={() => setCrudItem('client')}>ADD/EDIT CLIENT</button>
         </section>
-        <section className="flex my-12">
+        <section className={crudItem ? 'flex my-12' : 'hidden'}>
             <div className={divStyle}>
-                <p className="text-center my-3 underline">ADD</p>
-                <button onClick={handleCRUD} id='add' className={btnStyle + ' text-sm w-1/3'}>Add new {crudItem}</button>
+            <p className="text-center my-3 underline">Add {crudItem}</p>
                 {addFields}
             </div>
             <div className={divStyle}>
-                <p className="text-center my-3 underline">EDIT/DELETE</p>
+                <p className="text-center my-3 underline">Edit / Delete {crudItem}</p>
                 {crudItem
                 ? crudItem !== 'opus'
                     ? <select className="text-stone-900" defaultValue={0}>

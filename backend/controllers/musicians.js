@@ -14,10 +14,10 @@ const config = require('../../jwt.config.js')
 
 // jwt middleware
 const authMiddleware = (req, res, next) => {
-    const token = req.headers.authorization;
+    const token = req.cookies.token
     if (token) {
         try {
-            const decodedToken = jwt.decode(token, config.jwtSecret);
+            const decodedToken = jwt.decode(token, config.jwtSecret)
             req.user = decodedToken;
             next();
         } catch (err) {
@@ -95,7 +95,7 @@ router.delete('/:clientId', authMiddleware, async (req, res) => {
         const deletedMusician = await db.Musician.findByIdAndDelete(req.params.musicianId)
         res.send('You deleted musician ' + deletedMusician._id)
     } else {
-        res.status(401).json({ message: 'Invalid user or token' });
+        res.status(401).json({ message: 'Invalid user or token' })
     }
 })
 

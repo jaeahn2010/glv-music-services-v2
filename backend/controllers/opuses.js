@@ -1,40 +1,33 @@
-/* 
-`localhost:3000/api/opuses`
------------------------------------------------------------ */
+// `localhost:3000/api/opuses`
 
-/* require modules
----------------------------------------------------------- */
+// req modules
 const jwt = require('jwt-simple')
 const express = require('express')
 const router = express.Router()
 
-/* db connection, models
----------------------------------------------------------- */
+// db connection, models
 const db = require('../models')
 
-/* require jwt config
---------------------------------------------------------------- */
+// req jwt config
 const config = require('../../jwt.config.js')
 
-/* jwt middleware
---------------------------------------------------------------- */
+// jwt middleware
 const authMiddleware = (req, res, next) => {
-    const token = req.headers.authorization;
+    const token = req.cookies.token
     if (token) {
         try {
-            const decodedToken = jwt.decode(token, config.jwtSecret);
-            req.user = decodedToken;
-            next();
+            const decodedToken = jwt.decode(token, config.jwtSecret)
+            req.user = decodedToken
+            next()
         } catch (err) {
-            res.status(401).json({ message: 'Invalid token' });
+            res.status(401).json({ message: 'Invalid token' })
         }
     } else {
-        res.status(401).json({ message: 'Missing or invalid Authorization header' });
+        res.status(401).json({ message: 'Missing or invalid Authorization header' })
     }
-};
+}
 
-/* routes
----------------------------------------------------------- */
+// routes
 // display all available opuses of all musicians
 router.get('/', function (req, res) {
     db.Opus.find()
@@ -55,13 +48,14 @@ router.get('/opus/:opusId', function (req, res) {
 
 // create opus (admin access only)
 router.post('/', authMiddleware, (req, res) => {
-    if (req.user.isAdmin) {
-        db.Opus.create(req.body)
-            .then(opus => res.json(opus))
-    } else {
-        res.status(401).json({ message: 'Invalid user or token' })
-    }
-    
+    db.Opus.create(req.body)
+        .then(opus => res.json(opus))
+    // if (req.user.isAdmin) {
+    //     db.Opus.create(req.body)
+    //         .then(opus => res.json(opus))
+    // } else {
+    //     res.status(401).json({ message: 'Invalid user or token' })
+    // }
 })
 
 // edit opus (admin access only)
@@ -84,10 +78,9 @@ router.delete('/:opusId', authMiddleware, async (req, res) => {
         const deletedOpus = await db.Opus.findByIdAndDelete(req.params.opusId)
         res.send('You deleted opus ' + deletedOpus._id)
     } else {
-        res.status(401).json({ message: 'Invalid user or token' });
+        res.status(401).json({ message: 'Invalid user or token' })
     }
 })
 
-/* export to server.js
----------------------------------------------------------- */
+// export to server.js
 module.exports = router
