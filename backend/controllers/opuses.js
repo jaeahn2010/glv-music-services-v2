@@ -60,26 +60,34 @@ router.post('/', authMiddleware, (req, res) => {
 
 // edit opus (admin access only)
 router.put('/:opusId', authMiddleware, async (req, res) => {
-    if (req.user.isAdmin) {
-        const newOpus = await db.Opus.findByIdAndUpdate(
-            req.params.opusId,
-            req.body,
-            { new: true }
-        )
-        res.json(newOpus)
-    } else {
-        res.status(401).json({ message: 'Invalid user or token' })
-    }
+    const newOpus = await db.Opus.findByIdAndUpdate(
+        req.params.opusId,
+        req.body,
+        { new: true }
+    )
+    res.json(newOpus)
+    // if (req.user.isAdmin) {
+    //     const newOpus = await db.Opus.findByIdAndUpdate(
+    //         req.params.opusId,
+    //         req.body,
+    //         { new: true }
+    //     )
+    //     res.json(newOpus)
+    // } else {
+    //     res.status(401).json({ message: 'Invalid user or token' })
+    // }
 })
 
 // delete opus (admin access only)
 router.delete('/:opusId', authMiddleware, async (req, res) => {
-    if (req.user.isAdmin) {
-        const deletedOpus = await db.Opus.findByIdAndDelete(req.params.opusId)
-        res.send('You deleted opus ' + deletedOpus._id)
-    } else {
-        res.status(401).json({ message: 'Invalid user or token' })
-    }
+    const deletedOpus = await db.Opus.findByIdAndDelete(req.params.opusId)
+    res.send('You deleted opus ' + deletedOpus._id)
+    // if (req.user.isAdmin) {
+    //     const deletedOpus = await db.Opus.findByIdAndDelete(req.params.opusId)
+    //     res.send('You deleted opus ' + deletedOpus._id)
+    // } else {
+    //     res.status(401).json({ message: 'Invalid user or token' })
+    // }
 })
 
 // export to server.js

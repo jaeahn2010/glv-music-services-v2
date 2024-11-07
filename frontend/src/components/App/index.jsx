@@ -57,8 +57,10 @@ export default function App() {
 
 	function sortObjects(objs) {
 		return objs.sort((a, b) => {
-			const titleA = a.title.toUpperCase().replace(/[^a-zA-Z]/g, '')
-			const titleB = b.title.toUpperCase().replace(/[^a-zA-Z]/g, '')
+			// const titleA = a.title.toUpperCase().replace(/[^a-zA-Z]/g, '')
+			// const titleB = b.title.toUpperCase().replace(/[^a-zA-Z]/g, '')
+			const titleA = a.title.toUpperCase()
+			const titleB = b.title.toUpperCase()
 			if (titleA < titleB) return -1
 			if (titleA > titleB) return 1
 			return 0

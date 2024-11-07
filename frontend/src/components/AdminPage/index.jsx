@@ -49,6 +49,8 @@ export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instrum
     const divStyle = 'border border-stone-200 w-1/2 flex flex-col justify-center p-1 m-2 rounded-xl'
     const labelStyle = 'w-1/4 text-right m-2'
     const inputStyle = 'w-3/4 text-left m-2 p-1 bg-stone-200 text-stone-800 rounded-lg'
+    const pStyle = 'text-center my-3 underline'
+    const selectStyle = 'text-stone-900 my-3 w-3/4 mx-auto'
 
     let addFields
     let editFields = []
@@ -129,22 +131,32 @@ export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instrum
         }
     }
 
-    function handleCRUD(evt) {
-        console.log(evt.target.id, crudItem)
+    async function handleCRUD(evt) {
+        if (evt.target.id === 'edit') {
+            console.log('editing ' + crudItem)
+        } else {
+            if (confirm(`Are you sure you would like to delete this ${crudItem}?`)) {
+                switch(crudItem) {
+                    case 'opus':
+                        const deletedOpus = await deleteOpus(currentOpus._id)
+                        console.log(deletedOpus)
+                        alert('Successfully deleted this opus.')
+                        break
+                    case 'musician':
+                        break
+                    case 'client':
+                        break
+                }
+            }
+        }
     }
-
-    console.log()
 
     async function handleSubmit(evt) {
         evt.preventDefault()
-        console.log(opusFormData)
         if (confirm(`Are you sure you would like to add this new ${crudItem}?`)) {
             try {
                 const newOpus = await postOpus(opusFormData)
-                if (newOpus) {
-                    console.log(newOpus)
-                    alert(`Successfully created new ${crudItem}.`)
-                }
+                if (newOpus) alert(`Successfully created new ${crudItem}.`)
             } catch(err) {
                 alert(`Could not add new ${crudItem}: ${err}`)
                 console.error(err)
@@ -237,7 +249,7 @@ export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instrum
         for (let opus of allOpuses) {
             if (!tempComposers.includes(opus.composer)) tempComposers.push(opus.composer)
         }
-        setAllComposers(tempComposers.sort())
+        setAllComposers(tempComposers.map(composer => composer.toUpperCase()).sort())
     }, [allOpuses])
 
     return adminLogin
@@ -250,26 +262,44 @@ export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instrum
         </section>
         <section className={crudItem ? 'flex my-12' : 'hidden'}>
             <div className={divStyle}>
-            <p className="text-center my-3 underline">Add {crudItem}</p>
+            <p className={pStyle}>Add {crudItem}</p>
                 {addFields}
             </div>
             <div className={divStyle}>
-                <p className="text-center my-3 underline">Edit / Delete {crudItem}</p>
+                <p className={pStyle}>Edit / Delete {crudItem}</p>
                 {crudItem
                 ? crudItem !== 'opus'
-                    ? <select className="text-stone-900" defaultValue={0}>
+                    ? <select className={selectStyle} defaultValue={0}>
                         <option value={0} disabled>Select {crudItem}</option>
                         {editFields.map(item => <option key={item._id} value={item._id}>{item.lastName}, {item.firstName}</option>)}
                     </select>
                     : <>
-                        <select className="text-stone-900" defaultValue={0} onChange={(evt) => setCurrentComposer(evt.target.value)}>
+                        <select className={selectStyle} defaultValue={0} onChange={(evt) => setCurrentComposer(evt.target.value)}>
                             <option value={0} disabled>Select composer</option>
                             {allComposers.map(composer => <option key={composer}>{composer}</option>)}
                         </select>
-                        <select className="text-stone-900" defaultValue={0}>
+                        <select className={selectStyle} defaultValue={0} onChange={(evt) => setCurrentOpus(allOpuses.find(opus => opus._id === evt.target.value))}>
                             <option value={0} disabled>Select opus</option>
-                            {sortObjects(editFields.filter(opus => opus.composer === currentComposer)).map(opus => <option key={opus._id} value={opus._id}>{opus.title}</option>)}
+                            {sortObjects(editFields.filter(opus => opus.composer.toUpperCase() === currentComposer)).map(opus => <option key={opus._id} value={opus._id}>{opus.title}</option>)}
                         </select>
+                        {currentOpus.title
+                        ? <section>
+                            <p className="underline text-center my-3">Details of the currently selected opus</p>
+                            <p>Title: {currentOpus.title}</p>
+                            <p>Composer: {currentOpus.composer}</p>
+                            <div>{currentOpus.movements.length ? 'Available ' : ''}Movements: {currentOpus.movements.length
+                                ? currentOpus.movements.map(mvmt => 
+                                    <div key={mvmt.movementNumber} className="flex">
+                                        <p className="ml-10">{mvmt.movementTitle}</p>
+                                        <p className="ml-3">(${mvmt.movementPrice})</p>
+                                    </div>
+                                )
+                                : 'None'}
+                            </div>
+                            <p>Instrumentation: {currentOpus.instrumentation.map((instrument, index) => <span key={index}>{index === 0 ? instrument : `, ${instrument}`}</span>)}</p>
+                            <p>{currentOpus.movements.length ? 'Bulk ' : ''}Price: {currentOpus.price ? `$${currentOpus.price}` : 'Not available in bulk'}</p>
+                        </section>
+                        : ''}
                     </>
                 : ''}
                 <div className="flex justify-around items-center">
