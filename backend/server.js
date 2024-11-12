@@ -16,6 +16,7 @@ const opusesCtrl = require('./controllers/opuses')
 const requestsCtrl = require('./controllers/requests')
 const reviewsCtrl = require('./controllers/reviews')
 const adminsCtrl = require('./controllers/admins')
+const performancesCtrl = require('./controllers/performances')
 
 // create express app
 const app = express()
@@ -36,6 +37,7 @@ app.use('/api/opuses', opusesCtrl)
 app.use('/api/requests', requestsCtrl)
 app.use('/api/reviews', reviewsCtrl)
 app.use('/api/admins', adminsCtrl)
+app.use('/api/performances', performancesCtrl)
 
 // seed with initial opuses set - do this locally before deployment - localhost:3000/seed
 // app.get('/seed', function (req, res) {

@@ -18,4 +18,5 @@ module.exports = {
     Request: require('./request'),
     Review: require('./review'),
     Admin: require('./admin'),
+    Performance: require('./performance')
 }

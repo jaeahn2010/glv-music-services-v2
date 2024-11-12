@@ -26,7 +26,7 @@ const authMiddleware = (req, res, next) => {
     } else {
         res.status(401).json({ message: 'Missing or invalid Authorization header' })
     }
-};
+}
 
 // routes
 // display all musicians associated with GLVMS

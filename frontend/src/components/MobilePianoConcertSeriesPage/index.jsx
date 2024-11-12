@@ -46,6 +46,7 @@ import kanto1 from '../../assets/mpcs-pokemon-kanto.jpeg'
 import kanto2 from '../../assets/mpcs-pokemon-kanto-2.jpeg'
 import heroesVillains from '../../assets/mpcs-heroes-villains.png'
 import goodbye from '../../assets/mpcs-goodbye.png'
+import winter from '../../assets/mpcs-winter.png'
 
 class Concert {
     constructor(pianist, title, description, program = [], duration, basePrice, poster) {
@@ -487,11 +488,12 @@ const jeuxDeau = ['Jeux d\'eau', ravel]
 const kabalevskyPreludes = ['24 Preludes, Op. 38', kabalevsky]
 const kabalevskySonata2 = ['Sonata No. 2 in E-flat major, Op. 45', kabalevsky]
 const kapustin3 = ['Concert Etude No. 3 in E minor "Toccatina"', kapustin]
-const kapustin6 = ['Cocnert Etude No. 6 in B-flat major "Pastorale"', kapustin]
+const kapustin6 = ['Concert Etude No. 6 in B-flat major "Pastorale"', kapustin]
 const kitschMusyka = ['Kitsch-Musyka', silvestrov]
 const kosenkoSonata2 = ['Sonata No. 2 in C-sharp minor', kosenko]
 const kosenkoSonata3 = ['Sonata No. 3 in B minor', kosenko]
 const lark = ['The Lark (arr. Balakirev)', glinka]
+const letItGo = ['"Let It Go" from "Frozen" (arr. Ahn-Benton)', lopezes]
 const libertango = ['Libertango (arr. Ahn-Benton)', piazzolla]
 const liebestraum = ['Liebestraum No. 3', liszt]
 const lilacs = ['Lilacs', rachmaninov]
@@ -564,6 +566,7 @@ const mozartVariations = ['12 Variations on "Ah vous dirai-je, Maman"', mozart]
 const nachtMusik = ['Eine kleine Nachtmusik', mozart]
 const novelettes = ['3 Novelettes', poulenc]
 const nuagesGris = ['Nuages gris', liszt]
+const nutcracker = ['The Nutcraker Suite, Op. 71a', tchaikovsky]
 const oblivion = ['Oblivion (arr. Ahn-Benton)', piazzolla]
 const organFantasy = ['Orgel-Phantasie und Fuge in G minor (arr. Liszt)', bachJS]
 const pasDeDeux = ['"Pas de deux" from "The Nutcracker"', 'Piotr Tchaikovsky']
@@ -757,7 +760,7 @@ const availableConcerts = [
     ['Remembrance', 'Honor the dearly departed with a musical journey through remembrance, reverence, and nostalgia, filled with many relatable moments of inner suffering, displays of outcry, and eventual tranquility.', [faurePavane, mozartSonata8, rachmaninovElegy, ravelPavane, bachChaconne, chopinFuneral, lisztBallade2, babadjanianElegy], 80, 125, remembrance],
     ['Rockin\' with Rachmaninov', 'Enter the incredibly complex world of Sergei Rachmaninov, where endless depth of emotion meets extreme pianistic dexterity to create an unforgettable musical experience.', [etudeTableau39_1, etudeTableau39_5, etudeTableau39_6, rachmaninovElegy, rachmaninovMusical16_3, rachmaninovMusical16_4, rachmaninovPrelude23_5, rachmaninovPrelude32_10, etudeTableau33_5, vocalise, rachmaninovSonata2], 75, 200, rachmaninovPortrait],
     ['Saying Goodbye', 'Farewells are difficult, whether they are a separation from a loved one or a departure from a hometown. Ease the heartache and express the nostalgia with some of the best depictions in classical music of this uniquely human emotion.', [ahnbenton6_1, haydnSymphony45, chopinEtude10_3, adiosNonino, ahnbenton87, chopinWaltzes69, beethovenSonata26], 80, 175, goodbye],
-    ['The Seasons: Winter Wonderland', '', [chopinEtude25_11, snowman, childrensCorner4, sugarPlumFairy, ahnbenton11_2_4, drummer, etudeTableau33_5, frosty, vivaldiWinter, rudolf, ahnbenton101], 0, 0, ''],
+    ['The Seasons: Winter Wonderland', 'Turn your fireplace on and get cozy for the fantasy land of classical music\'s best depiction of snowy winter, freezing wind, and holiday spirit.', [vivaldiWinter, childrensCorner4, nutcracker, chopinEtude25_11, letItGo, beethovenSonata17], 70, 150, winter],
     ['Shadow of Shostakovich', 'Learn how the genius of Dmitri Shostakovich prevailed over political oppression and heavy tragedy and was still able to find hope, humor, and humanity in the dark times of the 20th century.', [shostakovichPreludeFugue24, fantasticDances, shostakovichSonata2, shostakovichPreludes34, shostakovichSymphony5_4], 80, 200, shostakovichPortrait],
     ['Traveling Musician', 'Take a tour of the world with the colorful imaginations and impressions of different parts of the world by different creative minds.', [wanderersFantasy, pilgrimage3_4, dvorakSymphony9Finale, islamey, ahnbenton76, americanInParis], 70, 175, traveling],
     ['Ukrainian Resistance 1', 'Stand with the brave people of Ukraine by immersing yourself in this program of composers of Ukraine: from the father of Ukrainian music to currently living composers, to those who were impacted by Ukrainian culture.', [tarasBulbaOverture, kitschMusyka, revutskyPreludes7, ahnbenton99, skorykBurleska, lyatoshynskyPreludes, kosenkoSonata2], 75, 175, ukraineResistance1],
@@ -1022,7 +1025,7 @@ export default function MobilePianoConcertSeriesPage({ isMenuOpen, musicians, lo
                         />
                     </div>
                     <input type="hidden" name="status" value="pending"/>
-                    <input type="submit" value="SUBMIT REQUEST" className={btnStyle} onClick={() => setShowScheduleModal(false)}/>
+                    <input type="submit" value="SUBMIT REQUEST" className={btnStyle + ' cursor-pointer'} onClick={() => setShowScheduleModal(false)}/>
                     <button className={btnStyle} onClick={() => setShowScheduleModal(false)}>CLOSE</button>
                 </form>
             </section>

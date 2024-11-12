@@ -196,6 +196,41 @@ export async function sendEmail(email) {
     }
 }
 
+//performances CRUD
+export async function getMusicians() {
+    const { data } = await axios.get(`/api/performances`)
+    return data
+}
+
+export async function postPerformance(performance) {
+    try {
+        const { data } = await axios.post('/api/performances', performance, { withCredentials: true })
+        return data
+    } catch (err) {
+        console.error('Error creating performance: ', err)
+        throw err
+    }
+}
+export async function updatePerformance(performance, performanceId) {
+    try {
+        const { data } = await axios.put(`/api/performances/${performanceId}`, performance, { withCredentials: true })
+        return data
+    } catch (err) {
+        console.error('Error updating performance: ', err)
+        throw err
+    }   
+}
+
+export async function deletePerformance(performanceId) {
+    try {
+        const { data } = await axios.delete(`/api/performances/${performanceId}`, { withCredentials: true })
+        return data
+    } catch (err) {
+        console.error('Error deleting performance: ', err)
+        throw err
+    }
+}
+
 //reviews CRUD
 export async function getReviewsByClient(clientId) {
     try {

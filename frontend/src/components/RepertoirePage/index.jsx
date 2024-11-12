@@ -22,7 +22,7 @@ export default function RepertoirePage({ isMenuOpen, opuses, allComposers, getFi
                             defaultValue='none'
                             onChange={evt => getFilteredOpusData('composer', evt.target.value)}>
                             <option key='0' value='none' disabled>Select a composer</option>
-                            {allComposers.map(composer => <option key={composer} value={composer}>{composer}</option>)}
+                            {allComposers.sort().map(composer => <option key={composer} value={composer}>{composer}</option>)}
                         </select>
                     </div>
                     <div className={filterDivStyle}>

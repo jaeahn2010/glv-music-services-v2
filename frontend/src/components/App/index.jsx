@@ -44,9 +44,11 @@ export default function App() {
         if (!allComposers.includes(opus.composer)) allComposers.push(opus.composer)
     }
 
+	console.log(userCart)
+
 	for (let item of userCart) {
         let fullOpus = opuses.find(opus => opus._id === item._id)
-        if (fullOpus.movements.length === item.movements.length) {
+        if (fullOpus.movements.length && fullOpus.movements.length === item.movements.length) {
             totalPrice += fullOpus.price
         } else {
             for (let mvmt of item.movements) {
