@@ -1,28 +1,30 @@
 import { useState, useEffect } from "react"
-import { getOpuses, getClients, getMusicians, postOpus, postMusician, updateOpus, updateMusician, updateClient, deleteOpus, deleteClient, deleteMusician } from "../../../utils/backend"
+import { getOpuses, getClients, getMusicians, getPerformances, postOpus, postMusician, postPerformance, updateOpus, updateMusician, updateClient, updatePerformance, deleteOpus, deleteClient, deleteMusician, deletePerformance } from "../../../utils/backend"
 
-/*
-opus: title, composer, movements [{movementNumber, movementTitle, movementPrice}], instrumentation [], price,
-client: firstName, lastName, instrument, email, password,
-musician: firstName, lastName, instruments [], email, availableRepertoire [Opus ref],
-*/
-
-
-export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instruments }) {
+export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instruments, states }) {
     const [crudItem, setCrudItem] = useState('')
     const [allOpuses, setAllOpuses] = useState([])
     const [allMusicians, setAllMusicians] = useState([])
     const [allClients, setAllClients] = useState([])
+    const [allPerformances, setAllPerformances] = useState([])
     const [allComposers, setAllComposers] = useState([])
     const [currentOpus, setCurrentOpus] = useState({})
     const [currentMusician, setCurrentMusician] = useState({})    
     const [currentClient, setCurrentClient] = useState({})
+    const [currentPerformance, setCurrentPerformance] = useState({})
     const [currentComposer, setCurrentComposer] = useState('')
+    const [currentCollaborator, setCurrentCollaborator] = useState('')
     const [showMovementsModal, setShowMovementsModal] = useState(false)
+    const [showCollaboratorModal, setShowCollaboratorModal] = useState(false)
     const [movementToBeAdded, setMovementToBeAdded] = useState({
         movementNumber: 0,
         movementTitle: '',
         movementPrice: 0,
+    })
+    const [collaboratorToBeAdded, setCollaboratorToBeAdded] = useState({
+        lastName: '',
+        firstName: '',
+        instrument: '',
     })
     const [opusFormData, setOpusFormData] = useState({
         title: '',
@@ -44,6 +46,21 @@ export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instrum
         instrument: '',
         email: '',
         password: '',
+    })
+    const [performanceFormData, setPerformanceFormData] = useState({
+        title: '',
+        location: {
+            locationName: '',
+            address: '',
+            city: '',
+            state: '',
+            zipCode: '',
+        },
+        date: new Date(),
+        time: '',
+        featuredGLVMSMusicians: [],
+        collaborators: [],
+        description: '',
     })
     const btnStyle = 'border border-stone-200 rounded-xl p-2 mx-auto my-4 hover:scale-110 hover:bg-gradient-to-r from-green-700 via-green-500 to-green-700'
     const divStyle = 'border border-stone-200 w-1/2 flex flex-col justify-center p-1 m-2 rounded-xl'
@@ -107,9 +124,11 @@ export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instrum
             const opusData = await getOpuses()
             const musiciansData = await getMusicians()
             const clientsData = await getClients()
+            const performancesData = await getPerformances()
             setAllOpuses(opusData[0])
             setAllMusicians(musiciansData)
             setAllClients(clientsData)
+            setAllPerformances(performancesData)
         } catch {
             alert('Cannot load necessary data at this time. Please check your internet connection and/or the source code.')
         }
@@ -134,19 +153,26 @@ export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instrum
     async function handleCRUD(evt) {
         if (evt.target.id === 'edit') {
             console.log('editing ' + crudItem)
+            console.log('under construction')
         } else {
             if (confirm(`Are you sure you would like to delete this ${crudItem}?`)) {
+                let deletedItem
                 switch(crudItem) {
                     case 'opus':
-                        const deletedOpus = await deleteOpus(currentOpus._id)
-                        console.log(deletedOpus)
-                        alert('Successfully deleted this opus.')
+                        deletedItem = await deleteOpus(currentOpus._id)
                         break
                     case 'musician':
+                        deletedItem = await deleteMusician(currentMusician._id)
                         break
                     case 'client':
+                        deletedItem = await deleteClient(currentClient._id)
+                        break
+                    case 'performance':
+                        deletedItem = await deletePerformance(currentPerformance._id)
                         break
                 }
+                console.log('Successfully deleted: ', deletedItem)
+                alert(`Successfully deleted this ${crudItem}`)
             }
         }
     }
@@ -155,8 +181,20 @@ export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instrum
         evt.preventDefault()
         if (confirm(`Are you sure you would like to add this new ${crudItem}?`)) {
             try {
-                const newOpus = await postOpus(opusFormData)
-                if (newOpus) alert(`Successfully created new ${crudItem}.`)
+                switch(crudItem) {
+                    case 'opus':
+                        const newOpus = await postOpus(opusFormData)
+                        if (newOpus) alert(`Successfully created new ${crudItem}.`)
+                        break
+                    case 'musician':
+                        break
+                    case 'client':
+                        break
+                    case 'performance':
+                        const newPerformance = await postPerformance(performanceFormData)
+                        if (newPerformance) alert(`Successfully created new performance.`)
+                        break
+                }
             } catch(err) {
                 alert(`Could not add new ${crudItem}: ${err}`)
                 console.error(err)
@@ -238,6 +276,108 @@ export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instrum
         case 'client':
             editFields = allClients
             break
+        case 'performance':
+            editFields = allPerformances
+            addFields = <form onSubmit={handleSubmit} className="flex flex-col">
+                <div className={'mx-auto w-11/12 flex justify-center items-center p-1 m-2 rounded-xl'}>
+                    <label htmlFor="title" className={labelStyle}>Title:</label>
+                    <input
+                        name='title'
+                        id='title'
+                        className={inputStyle}
+                        defaultValue={performanceFormData.title}
+                        placeholder='Title'
+                        onChange={handleChange}
+                    />
+                </div>
+                <p className="text-center underline">Location information</p>
+                <div className={'mx-auto w-11/12 flex justify-center items-center p-1 m-2 rounded-xl'}>
+                    <label htmlFor="locationName" className={labelStyle}>Name:</label>
+                    <input
+                        name='locationName'
+                        id='locationName'
+                        className={inputStyle}
+                        defaultValue={performanceFormData.location.locationName}
+                        placeholder='Location Name'
+                        onChange={handleChange}
+                    />
+                </div>
+                <div className={'mx-auto w-11/12 flex justify-center items-center p-1 m-2 rounded-xl'}>
+                    <label htmlFor="city" className={labelStyle}>City:</label>
+                    <input
+                        name='city'
+                        id='city'
+                        className={inputStyle}
+                        defaultValue={performanceFormData.location.city}
+                        placeholder='City'
+                        onChange={handleChange}
+                    />
+                </div>
+                <div className={'mx-auto w-11/12 flex justify-center items-center p-1 m-2 rounded-xl'}>
+                    <label htmlFor="state" className={labelStyle}>State:</label>
+                    <select
+                        name='state'
+                        id='state'
+                        className={inputStyle}
+                        defaultValue={0}
+                        onChange={handleChange}
+                    >
+                        <option value={0} disabled>Select a state</option>
+                        {states.map(state => <option key={state} value={state}>{state}</option>)}
+                    </select>
+                </div>
+                <div className={'mx-auto w-11/12 flex justify-center items-center p-1 m-2 rounded-xl'}>
+                    <label htmlFor="zipCode" className={labelStyle}>Zip Code:</label>
+                    <input
+                        type='number'
+                        name='zipCode'
+                        id='zipCode'
+                        className={inputStyle}
+                        defaultValue={performanceFormData.location.zipCode}
+                        placeholder={0}
+                        onChange={handleChange}
+                    />
+                </div>
+                <div className={'mx-auto w-11/12 flex justify-center items-center p-1 m-2 rounded-xl'}>
+                    <label htmlFor="date" className={labelStyle}>Date:</label>
+                    <input
+                        type='date'
+                        name='date'
+                        id='date'
+                        className={inputStyle}
+                        defaultValue={performanceFormData.date}
+                        placeholder={new Date()}
+                        onChange={handleChange}
+                    />
+                </div>
+                <div className={'mx-auto w-11/12 flex justify-center items-center p-1 m-2 rounded-xl'}>
+                    <label htmlFor="time" className={labelStyle}>Time:</label>
+                    <input
+                        type='time'
+                        name='time'
+                        id='time'
+                        className={inputStyle}
+                        defaultValue={performanceFormData.time}
+                        placeholder='12:00'
+                        onChange={handleChange}
+                    />
+                </div>
+                <div className={'mx-auto w-11/12 flex justify-center items-center p-1 m-2 rounded-xl'}>
+                    <label htmlFor="featuredGLVMSMusician" className={labelStyle}>Featured GLVMS Musician:</label>
+                    <select
+                        name='featuredGLVMSMusician'
+                        id='featuredGLVMSMusician'
+                        className={inputStyle}
+                        defaultValue={0}
+                        onChange={handleChange}
+                    >
+                        <option value={0} disabled>Select a musician</option>
+                        {allMusicians.map(musician => <option key={musician._id} value={musician._id}>{musician.lastName}, {musician.firstName}</option>)}
+                    </select>
+                </div>
+                <input type="submit" value='Submit' className={btnStyle}/>
+            </form>
+            break
     }
 
     useEffect(() => {
@@ -254,11 +394,12 @@ export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instrum
 
     return adminLogin
     ? <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} text-xl min-h-[100vh]`}>
-        <h1 className="text-center my-6">This is the GLVMS admin page. Use it to CRUD sensitive data (opuses, musicians, clients).</h1>
+        <h1 className="text-center my-6">This is the GLVMS admin page. Use it to CRUD sensitive data (opuses, musicians, clients, performances).</h1>
         <section className="flex items-center justify-around my-12">
             <button className={btnStyle} onClick={() => setCrudItem('opus')}>ADD/EDIT OPUS</button>
             <button className={btnStyle} onClick={() => setCrudItem('musician')}>ADD/EDIT MUSICIAN</button>
             <button className={btnStyle} onClick={() => setCrudItem('client')}>ADD/EDIT CLIENT</button>
+            <button className={btnStyle} onClick={() => setCrudItem('performance')}>ADD/EDIT PERFORMANCE</button>
         </section>
         <section className={crudItem ? 'flex my-12' : 'hidden'}>
             <div className={divStyle}>

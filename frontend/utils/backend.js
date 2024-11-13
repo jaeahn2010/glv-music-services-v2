@@ -197,7 +197,7 @@ export async function sendEmail(email) {
 }
 
 //performances CRUD
-export async function getMusicians() {
+export async function getPerformances() {
     const { data } = await axios.get(`/api/performances`)
     return data
 }

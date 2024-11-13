@@ -300,6 +300,7 @@ export default function App() {
 						adminLogin={adminLogin}
 						sortObjects={sortObjects}
 						instruments={instruments}
+						states={states}
 					/>}
 				/>
 				<Route path="/*" element={<NotFoundPage/>} />
