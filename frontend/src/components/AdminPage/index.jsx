@@ -22,9 +22,9 @@ export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instrum
         movementPrice: 0,
     })
     const [collaboratorToBeAdded, setCollaboratorToBeAdded] = useState({
-        lastName: '',
-        firstName: '',
-        instrument: '',
+        collaboratorLastName: '',
+        collaboratorFirstName: '',
+        collaboratorInstrument: '',
     })
     const [opusFormData, setOpusFormData] = useState({
         title: '',
@@ -118,6 +118,54 @@ export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instrum
         }}>ADD</button>
         <button className={btnStyle} onClick={() => setShowMovementsModal(false)}>CLOSE</button>
     </section>
+    let collaboratorsModal = <section className={showCollaboratorModal ? 'absolute left-1/4 z-40 border border-stone-200 w-1/2 flex flex-col justify-center items-center p-4 bg-stone-600' : 'hidden'}>
+        <div className={divStyle + ' w-11/12'}>
+            <label htmlFor="collaboratorLastName" className={labelStyle}>Collaborator last name:</label>
+            <input
+                name='collaboratorLastName'
+                id='collaboratorLastName'
+                className={inputStyle}
+                placeholder='Collaborator last name'
+                onChange={handleCollaboratorChange}
+            />
+        </div>
+        <div className={divStyle + ' w-11/12'}>
+            <label htmlFor="collaboratorFirstName" className={labelStyle}>Collaborator first name:</label>
+            <input
+                name='collaboratorFirstName'
+                id='collaboratorFirstName'
+                className={inputStyle}
+                placeholder='Collaborator first name'
+                onChange={handleCollaboratorChange}
+            />
+        </div>
+        <div className={divStyle + ' w-11/12'}>
+            <label htmlFor="collaboratorInstrument" className={labelStyle}>Collaborator instrument:</label>
+            <select
+                name='collaboratorInstrument'
+                id='collaboratorInstrument'
+                className={inputStyle}
+                defaultValue={0}
+                onChange={handleCollaboratorChange}
+            >
+                <option value={0} disabled>Select an instrument</option>
+                {instruments.map(instrument => <option key={instrument} value={instrument}>{instrument}</option>)}
+            </select>
+        </div>
+        <button className={btnStyle} onClick={() => {
+            setPerformanceFormData({
+                ...performanceFormData,
+                collaborators: performanceFormData.collaborators.concat(collaboratorToBeAdded)
+            })
+            setCollaboratorToBeAdded({
+                collaboratorLastName: '',
+                collaboratorFirstName: '',
+                collaboratorInstrument: '',
+            })
+            setShowCollaboratorModal(false)
+        }}>ADD</button>
+        <button className={btnStyle} onClick={() => setShowMovementsModal(false)}>CLOSE</button>
+    </section>
 
     async function getAllData() {
         try {
@@ -136,6 +184,10 @@ export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instrum
 
     function handleMovementChange(evt) {
         setMovementToBeAdded({...movementToBeAdded, [evt.target.name]: evt.target.value})
+    }
+
+    function handleCollaboratorChange(evt) {
+        setCollaboratorToBeAdded({...collaboratorToBeAdded, [evt.target.name]: evt.target.value})
     }
 
     function handleChange(evt) {
@@ -374,6 +426,27 @@ export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instrum
                         <option value={0} disabled>Select a musician</option>
                         {allMusicians.map(musician => <option key={musician._id} value={musician._id}>{musician.lastName}, {musician.firstName}</option>)}
                     </select>
+                </div>
+                <button onClick={(evt) => {
+                    evt.preventDefault()
+                    setShowCollaboratorModal(true)
+                }} className={btnStyle + ' text-center'}>Add collaborator</button>
+                {performanceFormData.collaborators.length
+                ? performanceFormData.collaborators.map((collaborator, index) => <div key={index} className="border border-stone-200 rounded-xl w-3/4 mx-auto p-2 my-3">
+                    <p className="border-b border-stone-200 font-bold text-center">{collaborator.collaboratorLastName}, {collaborator.collaboratorFirstName} ({collaborator.collaboratorInstrument})</p>
+                </div>)
+                : ''}
+                {showCollaboratorModal ? collaboratorsModal : ''}
+                <div className={'mx-auto w-11/12 flex justify-center items-center p-1 m-2 rounded-xl'}>
+                    <label htmlFor="description" className={labelStyle}>Description:</label>
+                    <textarea
+                        name='description'
+                        id='description'
+                        className={inputStyle}
+                        defaultValue={performanceFormData.description}
+                        placeholder='Description'
+                        onChange={handleChange}
+                    />
                 </div>
                 <input type="submit" value='Submit' className={btnStyle}/>
             </form>
