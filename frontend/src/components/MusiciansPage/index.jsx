@@ -2,6 +2,7 @@ import { useState } from 'react'
 import MusiciansGallery from '../MusiciansGallery'
 
 export default function MusiciansPage({ isMenuOpen, musicians, instruments, setMusicians, getFilteredData, updateDetails, loginStatus, categories, instrumentsExtended }) {
+    const [showForm, setShowForm] = useState(false)
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -13,6 +14,7 @@ export default function MusiciansPage({ isMenuOpen, musicians, instruments, setM
     const pStyle = 'my-3'
     const labelStyle = 'w-1/3 mx-2 text-right'
     const inputStyle = 'w-2/3 mx-2 p-1 rounded-xl text-stone-800'
+    const btnStyle = 'border border-stone-200 px-2 py-1 my-6 rounded-xl hover:bg-green-600 hover:cursor-pointer'
 
     function handleChange(evt) {
         if (['firstName', 'lastName'].includes(evt.target.name)) {
@@ -27,8 +29,6 @@ export default function MusiciansPage({ isMenuOpen, musicians, instruments, setM
             console.log(evt.target, evt.target.name, evt.target.value, evt.target.checked)
         }
     }
-
-    console.log(formData)
 
     function handleSubmit(evt) {
         evt.preventDefault()
@@ -56,10 +56,10 @@ export default function MusiciansPage({ isMenuOpen, musicians, instruments, setM
                 updateDetails={updateDetails}
                 loginStatus={loginStatus}
             />
-            <section className='border-t border-stone-200 my-12 py-12 mx-auto w-3/4'>
+            <section className='border-t border-stone-200 my-12 py-12 mx-auto w-3/4 flex flex-col justify-center'>
                 <h2 className='text-2xl text-center my-4'>JOIN THE GLVMS TEAM</h2>
                 <p>Are you a music performer, teacher, composer, or arranger based in Las Vegas, NV? Are you looking to grow your studio, clientele, or sell more of your works? Join our team! Fill out the form below, and we will contact you for a phone interview. If we resonate well with each other, we will then schedule an in-person interview in a semi-formal audition setting, where we will further assess how we fit each other's needs.</p>
-                <form onSubmit={handleSubmit} className='w-5/6 mx-auto py-10 border border-stone-200 flex flex-col justify-center items-center'>
+                <form onSubmit={handleSubmit} className={showForm ? 'w-5/6 mx-auto my-6 py-10 flex flex-col justify-center items-center border border-stone-200 rounded-xl' : 'hidden'}>
                     <div className={divStyle}>
                         <label htmlFor="firstName" className={labelStyle}>First Name:</label>
                         <input
@@ -124,8 +124,9 @@ export default function MusiciansPage({ isMenuOpen, musicians, instruments, setM
                             onChange={handleChange}
                         />
                     </div>
-                    <input type="submit" value='Submit' className='border border-stone-200 px-2 py-1 my-3 rounded-xl hover:bg-green-600 hover:cursor-pointer'/>
+                    <input type="submit" value='Submit' className={btnStyle}/>
                 </form>
+                <button className={btnStyle + ' w-1/6 mx-auto'} onClick={() => setShowForm(!showForm)}>{showForm ? 'CLOSE FORM' : 'OPEN FORM'}</button>
             </section>
         </main>
     )

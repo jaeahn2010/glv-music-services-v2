@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import placeholder from '../../assets/musicians-placeholder.jpeg'
-import jaeHeadshot from '../../assets/jae-9.jpg'
-import mariaHeadshot from '../../assets/maria-9.jpg'
+import jaeHeadshot from '../../assets/jae-head.jpg'
+import mariaHeadshot from '../../assets/maria-head.jpg'
 
 export default function Card({ musician, getFilteredData, updateDetails, loginStatus }) {
     const [showDetails, setShowDetails] = useState(false)
