@@ -205,6 +205,7 @@ export async function getPerformances() {
 export async function postPerformance(performance) {
     try {
         const { data } = await axios.post('/api/performances', performance, { withCredentials: true })
+        console.log(data)
         return data
     } catch (err) {
         console.error('Error creating performance: ', err)

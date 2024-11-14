@@ -9,7 +9,11 @@ const performanceSchema = new mongoose.Schema(
         date: { type: Date, required: true },
         time: { type: String, required: true },
         featuredGLVMSMusicians: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Musician'}],
-        collaborators: [{ type: String }],
+        collaborators: [{
+            collaboratorLastName: { type: String, required: true },
+            collaboratorFirstName: { type: String, required: true },
+            collaboratorInstrument: { type: String, required: true },
+        }],
         description: { type: String },
     },
 )

@@ -17,7 +17,7 @@ const authMiddleware = (req, res, next) => {
     if (token) {
         try {
             const decodedToken = jwt.decode(token, config.jwtSecret)
-            req.user = decodedToken;
+            req.user = decodedToken
             next()
         } catch (err) {
             res.status(401).json({ message: 'Invalid token' })
@@ -35,10 +35,12 @@ router.get('/', function (req, res) {
 })
 
 // create performance
-router.post('/', (req, res) => {
+router.post('/', authMiddleware, (req, res) => {
+    console.log(req.body)
     db.Performance.create(req.body)
         .then(performance => {
-            const token = jwt.encode({ id: musician.id }, config.jwtSecret)
+            // console.log(performance)
+            // const token = jwt.encode({ id: performance.id }, config.jwtSecret)
             res.json(performance)
         })
         .catch(() => {

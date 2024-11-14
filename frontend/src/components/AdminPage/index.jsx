@@ -115,8 +115,9 @@ export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instrum
         <button className={btnStyle} onClick={() => setShowMovementsModal(false)}>CLOSE</button>
     </section>
     let collaboratorsModal = <section className={showCollaboratorModal ? 'absolute left-1/4 z-40 border border-stone-200 w-1/2 flex flex-col justify-center items-center p-4 bg-stone-600' : 'hidden'}>
-        <div className={divStyle + ' w-11/12'}>
-            <label htmlFor="collaboratorLastName" className={labelStyle}>Collaborator last name:</label>
+        <p className="text-center underline">Collaborator information</p>
+        <div className='w-11/12 flex justify-center items-center p-1 m-2 rounded-xl'>
+            <label htmlFor="collaboratorLastName" className={labelStyle}>Last name:</label>
             <input
                 name='collaboratorLastName'
                 id='collaboratorLastName'
@@ -125,8 +126,8 @@ export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instrum
                 onChange={handleCollaboratorChange}
             />
         </div>
-        <div className={divStyle + ' w-11/12'}>
-            <label htmlFor="collaboratorFirstName" className={labelStyle}>Collaborator first name:</label>
+        <div className='w-11/12 flex justify-center items-center p-1 m-2 rounded-xl'>
+            <label htmlFor="collaboratorFirstName" className={labelStyle}>First name:</label>
             <input
                 name='collaboratorFirstName'
                 id='collaboratorFirstName'
@@ -135,8 +136,8 @@ export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instrum
                 onChange={handleCollaboratorChange}
             />
         </div>
-        <div className={divStyle + ' w-11/12'}>
-            <label htmlFor="collaboratorInstrument" className={labelStyle}>Collaborator instrument:</label>
+        <div className='w-11/12 flex justify-center items-center p-1 m-2 rounded-xl'>
+            <label htmlFor="collaboratorInstrument" className={labelStyle}>Instrument:</label>
             <select
                 name='collaboratorInstrument'
                 id='collaboratorInstrument'
@@ -204,7 +205,6 @@ export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instrum
             case 'client':
                 break
             case 'performance':
-                console.log(evt.target.name, evt.target.value, evt.target.checked)
                 if (evt.target.name !== 'featuredGLVMSMusicians') {
                     setPerformanceFormData({...performanceFormData, [evt.target.name]: evt.target.value})
                 } else {
@@ -438,9 +438,9 @@ export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instrum
                     setShowCollaboratorModal(true)
                 }} className={btnStyle + ' text-center'}>Add collaborator</button>
                 {performanceFormData.collaborators.length
-                ? performanceFormData.collaborators.map((collaborator, index) => <ul key={index} className="list-decimal list-inside border border-stone-200 rounded-xl p-2 my-3 w-3/4 mx-auto">
-                    <li className="">{collaborator.collaboratorLastName}, {collaborator.collaboratorFirstName} ({collaborator.collaboratorInstrument})</li>
-                </ul>)
+                ? <ul className="list-decimal list-inside border border-stone-200 rounded-xl p-2 my-3 w-3/4 mx-auto"> {performanceFormData.collaborators.map((collaborator, index) => 
+                    <li key={index} className="">{collaborator.collaboratorLastName}, {collaborator.collaboratorFirstName} ({collaborator.collaboratorInstrument})</li>
+                )}</ul>
                 : ''}
                 {showCollaboratorModal ? collaboratorsModal : ''}
                 <div className={'mx-auto w-11/12 flex justify-center items-center p-1 m-2 rounded-xl'}>

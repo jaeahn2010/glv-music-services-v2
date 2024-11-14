@@ -18,7 +18,7 @@ import './styles.css'
 import cartIcon from '../../assets/cart-icon.jpeg'
 
 let allComposers = []
-const instruments = ['bassoon', 'cello', 'clarinet', 'contrabass', 'flute', 'guitar', 'harp', 'oboe', 'orchestra', 'piano', 'percussion', 'saxophone', 'trombone', 'trumpet', 'tuba/euphonium', 'viola', 'violin', 'voice']
+const instruments = ['bassoon', 'cello', 'clarinet', 'composer', 'conductor', 'contrabass', 'flute', 'guitar', 'harp', 'oboe', 'orchestra/band', 'piano', 'percussion', 'saxophone', 'trombone', 'trumpet', 'tuba/euphonium', 'viola', 'violin', 'voice']
 const states = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VA', 'WA', 'WV', 'WI', 'WY']
 
 const scrollToTop = () => 
@@ -43,8 +43,6 @@ export default function App() {
     for (let opus of opuses) {
         if (!allComposers.includes(opus.composer)) allComposers.push(opus.composer)
     }
-
-	console.log(userCart)
 
 	for (let item of userCart) {
         let fullOpus = opuses.find(opus => opus._id === item._id)
