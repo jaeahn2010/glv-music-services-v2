@@ -49,13 +49,9 @@ export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instrum
     })
     const [performanceFormData, setPerformanceFormData] = useState({
         title: '',
-        location: {
-            locationName: '',
-            address: '',
-            city: '',
-            state: '',
-            zipCode: '',
-        },
+        locationName: '',
+        city: '',
+        state: '',
         date: new Date(),
         time: '',
         featuredGLVMSMusicians: [],
@@ -191,14 +187,34 @@ export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instrum
     }
 
     function handleChange(evt) {
-        if (evt.target.name !== 'instruments') {
-            setOpusFormData({...opusFormData, [evt.target.name]: evt.target.value})
-        } else {
-            if (evt.target.checked && !opusFormData.instrumentation.includes(evt.target.id)) {
-                setOpusFormData({...opusFormData, instrumentation: opusFormData.instrumentation.concat(evt.target.id)})
-            } else if (!evt.target.checked && opusFormData.instrumentation.includes(evt.target.id)) {
-                setOpusFormData({...opusFormData, instrumentation: opusFormData.instrumentation.filter(instrument => instrument !== evt.target.id)})
-            }
+        switch(crudItem) {
+            case 'opus':
+                if (evt.target.name !== 'instruments') {
+                    setOpusFormData({...opusFormData, [evt.target.name]: evt.target.value})
+                } else {
+                    if (evt.target.checked && !opusFormData.instrumentation.includes(evt.target.id)) {
+                        setOpusFormData({...opusFormData, instrumentation: opusFormData.instrumentation.concat(evt.target.id)})
+                    } else if (!evt.target.checked && opusFormData.instrumentation.includes(evt.target.id)) {
+                        setOpusFormData({...opusFormData, instrumentation: opusFormData.instrumentation.filter(instrument => instrument !== evt.target.id)})
+                    }
+                }
+                break
+            case 'musician':
+                break
+            case 'client':
+                break
+            case 'performance':
+                console.log(evt.target.name, evt.target.value, evt.target.checked)
+                if (evt.target.name !== 'featuredGLVMSMusicians') {
+                    setPerformanceFormData({...performanceFormData, [evt.target.name]: evt.target.value})
+                } else {
+                    if (evt.target.checked && !performanceFormData.featuredGLVMSMusicians.includes(evt.target.value)) {
+                        setPerformanceFormData({...performanceFormData, featuredGLVMSMusicians: performanceFormData.featuredGLVMSMusicians.concat(evt.target.value)})
+                    } else if (!evt.target.checked && performanceFormData.featuredGLVMSMusicians.includes(evt.target.value)) {
+                        setPerformanceFormData({...performanceFormData, featuredGLVMSMusicians: performanceFormData.featuredGLVMSMusicians.filter(musicianId => musicianId !== evt.target.value)})
+                    }
+                }
+                break
         }
     }
 
@@ -233,20 +249,19 @@ export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instrum
         evt.preventDefault()
         if (confirm(`Are you sure you would like to add this new ${crudItem}?`)) {
             try {
+                let newItem
                 switch(crudItem) {
                     case 'opus':
-                        const newOpus = await postOpus(opusFormData)
-                        if (newOpus) alert(`Successfully created new ${crudItem}.`)
+                        newItem = await postOpus(opusFormData)
                         break
                     case 'musician':
-                        break
-                    case 'client':
+                        newItem = await postMusician(musicianFormData)
                         break
                     case 'performance':
-                        const newPerformance = await postPerformance(performanceFormData)
-                        if (newPerformance) alert(`Successfully created new performance.`)
+                        newItem = await postPerformance(performanceFormData)
                         break
                 }
+                if (newItem) alert(`Successfully created new ${crudItem}.`)
             } catch(err) {
                 alert(`Could not add new ${crudItem}: ${err}`)
                 console.error(err)
@@ -342,14 +357,13 @@ export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instrum
                         onChange={handleChange}
                     />
                 </div>
-                <p className="text-center underline">Location information</p>
                 <div className={'mx-auto w-11/12 flex justify-center items-center p-1 m-2 rounded-xl'}>
-                    <label htmlFor="locationName" className={labelStyle}>Name:</label>
+                    <label htmlFor="locationName" className={labelStyle}>Location Name:</label>
                     <input
                         name='locationName'
                         id='locationName'
                         className={inputStyle}
-                        defaultValue={performanceFormData.location.locationName}
+                        defaultValue={performanceFormData.locationName}
                         placeholder='Location Name'
                         onChange={handleChange}
                     />
@@ -360,7 +374,7 @@ export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instrum
                         name='city'
                         id='city'
                         className={inputStyle}
-                        defaultValue={performanceFormData.location.city}
+                        defaultValue={performanceFormData.city}
                         placeholder='City'
                         onChange={handleChange}
                     />
@@ -377,18 +391,6 @@ export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instrum
                         <option value={0} disabled>Select a state</option>
                         {states.map(state => <option key={state} value={state}>{state}</option>)}
                     </select>
-                </div>
-                <div className={'mx-auto w-11/12 flex justify-center items-center p-1 m-2 rounded-xl'}>
-                    <label htmlFor="zipCode" className={labelStyle}>Zip Code:</label>
-                    <input
-                        type='number'
-                        name='zipCode'
-                        id='zipCode'
-                        className={inputStyle}
-                        defaultValue={performanceFormData.location.zipCode}
-                        placeholder={0}
-                        onChange={handleChange}
-                    />
                 </div>
                 <div className={'mx-auto w-11/12 flex justify-center items-center p-1 m-2 rounded-xl'}>
                     <label htmlFor="date" className={labelStyle}>Date:</label>
@@ -414,27 +416,31 @@ export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instrum
                         onChange={handleChange}
                     />
                 </div>
-                <div className={'mx-auto w-11/12 flex justify-center items-center p-1 m-2 rounded-xl'}>
-                    <label htmlFor="featuredGLVMSMusician" className={labelStyle}>Featured GLVMS Musician:</label>
-                    <select
-                        name='featuredGLVMSMusician'
-                        id='featuredGLVMSMusician'
-                        className={inputStyle}
-                        defaultValue={0}
-                        onChange={handleChange}
-                    >
-                        <option value={0} disabled>Select a musician</option>
-                        {allMusicians.map(musician => <option key={musician._id} value={musician._id}>{musician.lastName}, {musician.firstName}</option>)}
-                    </select>
+                <div className={'mx-auto w-11/12 p-1 m-2'}>
+                    <p className="text-center underline">Featured GLVMS Musicians</p>
+                    {allMusicians.map(musician => 
+                        <div key={musician._id} className="flex justify-start items-center mx-auto w-1/2">
+                            <input
+                                type='checkbox'
+                                id={musician._id}
+                                name='featuredGLVMSMusicians'
+                                value={musician._id}
+                                className='m-2 p-1 bg-stone-200 text-stone-800 rounded-lg'
+                                onChange={handleChange}
+                            />
+                            <label htmlFor={musician._id} className='text-right m-2'>{musician.lastName}, {musician.firstName}</label>
+                        </div>
+                    )}
                 </div>
+                <p className="text-center underline">Collaborators</p>
                 <button onClick={(evt) => {
                     evt.preventDefault()
                     setShowCollaboratorModal(true)
                 }} className={btnStyle + ' text-center'}>Add collaborator</button>
                 {performanceFormData.collaborators.length
-                ? performanceFormData.collaborators.map((collaborator, index) => <div key={index} className="border border-stone-200 rounded-xl w-3/4 mx-auto p-2 my-3">
-                    <p className="border-b border-stone-200 font-bold text-center">{collaborator.collaboratorLastName}, {collaborator.collaboratorFirstName} ({collaborator.collaboratorInstrument})</p>
-                </div>)
+                ? performanceFormData.collaborators.map((collaborator, index) => <ul key={index} className="list-decimal list-inside border border-stone-200 rounded-xl p-2 my-3 w-3/4 mx-auto">
+                    <li className="">{collaborator.collaboratorLastName}, {collaborator.collaboratorFirstName} ({collaborator.collaboratorInstrument})</li>
+                </ul>)
                 : ''}
                 {showCollaboratorModal ? collaboratorsModal : ''}
                 <div className={'mx-auto w-11/12 flex justify-center items-center p-1 m-2 rounded-xl'}>
