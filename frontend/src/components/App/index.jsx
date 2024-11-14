@@ -18,7 +18,9 @@ import './styles.css'
 import cartIcon from '../../assets/cart-icon.jpeg'
 
 let allComposers = []
-const instruments = ['bassoon', 'cello', 'clarinet', 'composer', 'conductor', 'contrabass', 'flute', 'guitar', 'harp', 'oboe', 'orchestra/band', 'piano', 'percussion', 'saxophone', 'trombone', 'trumpet', 'tuba/euphonium', 'viola', 'violin', 'voice']
+const categories = ['accompanist', 'arranger', 'audio / sound engineer', 'baroque music specialist', 'composer', 'conductor',  'diction & language specialist', 'ear training specialist', 'instructor (private institution or studio)', 'instructor (public institution)', 'jazz specialist', 'music director', 'music history specialist', 'music theory specialist', 'performer - brass',  'performer - keyboard', 'performer - percussion', 'performer - string', 'performer - woodwind', 'performer - voice', 'piano tuner', 'vocal coach', 'other']
+const instruments = ['bassoon', 'cello', 'clarinet', 'composer', 'conductor', 'contrabass', 'flute', 'guitar', 'harmonica', 'harp', 'horn', 'oboe', 'orchestra/band', 'piano', 'percussion', 'saxophone', 'trombone', 'trumpet', 'tuba/euphonium', 'viola', 'violin', 'voice']
+const instrumentsExtended = ['accordion', 'alto flute', 'alto saxophone', 'bandoneon', 'banjo', 'baritone (voice)', 'baritone saxophone', 'bass (voice)', 'bass clarinet', 'bass drum', 'bass flute', 'bassoon', 'bass trombone', 'beatboxing', 'bongo', 'bugle', 'cannon', 'castanets', 'celeste', 'cello', 'chimes', 'chime tree', 'clarinet (A)', 'clarinet (B-flat)', 'contrabassoon', 'contralto (voice)', 'cornet', 'cymbals', 'double bass', 'drum set', 'electric bass', 'electric guitar', 'English horn', 'euphonium', 'flugelhorn', 'flute', 'French horn', 'glockenspiel', 'guitar', 'handbell', 'harmonica', 'harmonium', 'harp', 'harpsichord', 'keytar', 'mandolin', 'maracas', 'marimba', 'mezzo-soprano (voice)', 'oboe', 'organ', 'piano', 'piccolo', 'snare drum', 'soprano (voice)', 'soprano saxophone', 'synthesizer', 'tambourine', 'tam-tam', 'tenor (voice)', 'tenor saxophone', 'timpani', 'triangle', 'trombone', 'trumpet (B-flat)', 'trumpet (C)', 'trumpet (D)', 'tuba (B-flat)', 'tuba (C)', 'tuba (E-flat)', 'tuba (F)', 'ukelele', 'viola', 'violin', 'woodblocks', 'vibraphone', 'xylophone', 'other']
 const states = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VA', 'WA', 'WV', 'WI', 'WY']
 
 const scrollToTop = () => 
@@ -57,8 +59,6 @@ export default function App() {
 
 	function sortObjects(objs) {
 		return objs.sort((a, b) => {
-			// const titleA = a.title.toUpperCase().replace(/[^a-zA-Z]/g, '')
-			// const titleB = b.title.toUpperCase().replace(/[^a-zA-Z]/g, '')
 			const titleA = a.title.toUpperCase()
 			const titleB = b.title.toUpperCase()
 			if (titleA < titleB) return -1
@@ -231,6 +231,8 @@ export default function App() {
 						updateDetails={setDetailsData}
 						loginStatus={loginStatus}
 						instruments={instruments}
+						categories={categories}
+						instrumentsExtended={instrumentsExtended}
 					/>}
 				/>
 				<Route path="/clientProfile" element={

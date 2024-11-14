@@ -1,15 +1,47 @@
 import { useState } from 'react'
 import MusiciansGallery from '../MusiciansGallery'
 
-export default function MusiciansPage({ isMenuOpen, musicians, instruments, setMusicians, getFilteredData, updateDetails, loginStatus }) {
+export default function MusiciansPage({ isMenuOpen, musicians, instruments, setMusicians, getFilteredData, updateDetails, loginStatus, categories, instrumentsExtended }) {
+    const [formData, setFormData] = useState({
+        firstName: '',
+        lastName: '',
+        categories: [],
+        instruments: [],
+        resume: null
+    })
+    const divStyle = 'my-2'
+    const pStyle = 'my-3'
+    const labelStyle = 'w-1/3 mx-2 text-right'
+    const inputStyle = 'w-2/3 mx-2 p-1 rounded-xl text-stone-800'
+
+    function handleChange(evt) {
+        if (['firstName', 'lastName'].includes(evt.target.name)) {
+            setFormData({...formData, [evt.target.name]: evt.target.value})
+        } else if (['categories', 'instruments'].includes(evt.target.name)) {
+            if (evt.target.checked && !formData[evt.target.name].includes(evt.target.value)) {
+                setFormData({...formData, [evt.target.name]: formData[evt.target.name].concat(evt.target.value)})
+            } else if (!evt.target.checked && formData[evt.target.name].includes(evt.target.value)) {
+                setFormData({...formData, [evt.target.name]: formData[evt.target.name].filter(item => item !== evt.target.value)})
+            }
+        } else { // resume
+            console.log(evt.target, evt.target.name, evt.target.value, evt.target.checked)
+        }
+    }
+
+    console.log(formData)
+
+    function handleSubmit(evt) {
+        evt.preventDefault()
+
+    }
 
     return (
-        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} text-stone-400 font-poppins min-h-[100vh]`}>
+        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} font-poppins min-h-[125vh]`}>
             <h1 className="mt-5 text-center md:text-3xl text-2xl font-bold">Our Musicians</h1>
             <section className="flex flex-col justify-center items-center my-2 py-2">
                 <label htmlFor='instrumentFilter'>FILTER BY INSTRUMENT</label>
                 <select
-                    className='mt-2'
+                    className='mt-2 text-stone-800'
                     name="instrumentFilter"
                     id="instrumentFilter"
                     defaultValue='none'
@@ -24,6 +56,77 @@ export default function MusiciansPage({ isMenuOpen, musicians, instruments, setM
                 updateDetails={updateDetails}
                 loginStatus={loginStatus}
             />
+            <section className='border-t border-stone-200 my-12 py-12 mx-auto w-3/4'>
+                <h2 className='text-2xl text-center my-4'>JOIN THE GLVMS TEAM</h2>
+                <p>Are you a music performer, teacher, composer, or arranger based in Las Vegas, NV? Are you looking to grow your studio, clientele, or sell more of your works? Join our team! Fill out the form below, and we will contact you for a phone interview. If we resonate well with each other, we will then schedule an in-person interview in a semi-formal audition setting, where we will further assess how we fit each other's needs.</p>
+                <form onSubmit={handleSubmit} className='w-5/6 mx-auto py-10 border border-stone-200 flex flex-col justify-center items-center'>
+                    <div className={divStyle}>
+                        <label htmlFor="firstName" className={labelStyle}>First Name:</label>
+                        <input
+                            className={inputStyle}
+                            name='firstName'
+                            id='firstName'
+                            defaultValue={formData.firstName}
+                            placeholder='First Name'
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className={divStyle}>
+                        <label htmlFor="lastName" className={labelStyle}>Last Name:</label>
+                        <input
+                            className={inputStyle}
+                            name='lastName'
+                            id='lastName'
+                            defaultValue={formData.lastName}
+                            placeholder='Last Name'
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <p className={pStyle}>Please check as many of the following categories as it applies to you:</p>
+                    <div className={divStyle + ' columns-2'}>
+                        {categories.map(category => 
+                            <div key={category} className='flex items-center mx-auto'>
+                                <input
+                                    type="checkbox"
+                                    className='mr-2'
+                                    name='categories'
+                                    id={category}
+                                    value={category}
+                                    onChange={handleChange}
+                                />
+                                <label htmlFor={category}>{category}</label>
+                            </div>
+                        )}
+                    </div>
+                    <p className={pStyle}>Please check all instruments you can play professionally:</p>
+                    <div className={divStyle + ' columns-3'}>
+                        {instrumentsExtended.map(instrument => 
+                            <div key={instrument} className='flex items-center mx-auto'>
+                                <input
+                                    type="checkbox"
+                                    className='mr-2'
+                                    name='instruments'
+                                    id={instrument}
+                                    value={instrument}
+                                    onChange={handleChange}
+                                />
+                                <label htmlFor={instrument}>{instrument}</label>
+                            </div>
+                        )}
+                    </div>
+                    <p className={pStyle}>Please upload your latest resume:</p>
+                    <div className={divStyle}>
+                        <input
+                            type="file"
+                            className='text-sm border border-stone-200 p-3'
+                            name='resume'
+                            id='resume'
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <input type="submit" value='Submit' className='border border-stone-200 px-2 py-1 my-3 rounded-xl hover:bg-green-600 hover:cursor-pointer'/>
+                </form>
+            </section>
         </main>
     )
 }
