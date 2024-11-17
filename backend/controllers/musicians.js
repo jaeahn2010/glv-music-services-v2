@@ -1,6 +1,5 @@
 // `localhost:3000/api/musicians`
 
-
 // req modules
 const jwt = require('jwt-simple')
 const express = require('express')
@@ -33,6 +32,12 @@ const authMiddleware = (req, res, next) => {
 router.get('/', function (req, res) {
     db.Musician.find()
         .then(musicians => res.json(musicians))
+})
+
+// get musician by id
+router.get('/musician/:musicianId', function (req, res) {
+    db.Musician.findById(req.params.musicianId)
+        .then(musician => res.json(musician))
 })
 
 // create musician (signup route)

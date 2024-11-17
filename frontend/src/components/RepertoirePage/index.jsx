@@ -1,6 +1,6 @@
 import Gallery from '../Gallery'
 
-export default function RepertoirePage({ isMenuOpen, opuses, allComposers, getFilteredOpusData, updateDetails, loginStatus }) {
+export default function RepertoirePage({ isMenuOpen, opuses, allComposers, getFilteredOpusData, setOpusDetails, loginStatus }) {
     let instruments = ['bassoon', 'cello', 'clarinet', 'contrabass', 'flute', 'guitar', 'harp', 'oboe', 'orchestra', 'piano', 'percussion', 'saxophone', 'trombone', 'trumpet', 'tuba/euphonium', 'viola', 'violin']
     let filterDivStyle = 'flex justify-center items-center w-11/12 mx-auto my-2'
     let filterLabelStyle = 'w-1/2 text-right mr-2 text-sm'
@@ -8,8 +8,7 @@ export default function RepertoirePage({ isMenuOpen, opuses, allComposers, getFi
 
     return (
         <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} text-stone-200 font-poppins min-h-[125vh]`}>
-            <h1 className="mt-5 text-center text-2xl font-bold">Available Repertoire</h1>
-            <h2 className="text-center font-semibold italic my-5">See all available repertoire below, or use the filters to find your desired repertoire.</h2>
+            <h1 className="text-xl text-center my-10 lg:text-3xl">Available Repertoire</h1>
             <section className="border border-stone-400 rounded-xl my-2 py-2 w-11/12 lg:w-1/2 mx-auto">
                 <p className="text-center underline">FILTERS</p>
                 <div className="w-full flex flex-col">
@@ -52,7 +51,7 @@ export default function RepertoirePage({ isMenuOpen, opuses, allComposers, getFi
             </section>
             <Gallery
                 opuses={opuses}
-                updateDetails={updateDetails}
+                setOpusDetails={setOpusDetails}
             />
         </main>
     )

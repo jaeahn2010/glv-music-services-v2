@@ -2,8 +2,8 @@ import { useEffect, useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { getOpusById } from '../../../utils/backend'
 
-export default function DetailsPage({isMenuOpen, thisOpus, loginStatus, userCart, setUserCart}) {
-    const [opus, setOpus] = useState({ ...thisOpus })
+export default function DetailsPage({isMenuOpen, opusDetails, loginStatus, userCart, setUserCart}) {
+    const [opus, setOpus] = useState({ ...opusDetails })
     const params = useParams()
     const navigate = useNavigate()
     let opusIdList = userCart.map(opusInCart => opusInCart._id)
@@ -139,7 +139,6 @@ export default function DetailsPage({isMenuOpen, thisOpus, loginStatus, userCart
                 </div>
                 <button onClick={() => navigate('/repertoire')} className="border border-stone-200 p-2 rounded-xl my-6 mx-auto hover:bg-amber-400 hover:text-stone-800 hover:scale-105 duration-500">CHOOSE MORE REPERTOIRE</button>
             </section>
-
         )
     }
 }

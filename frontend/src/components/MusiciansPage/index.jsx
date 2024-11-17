@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import MusiciansGallery from '../MusiciansGallery'
 
-export default function MusiciansPage({ isMenuOpen, musicians, instruments, setMusicians, getFilteredData, updateDetails, loginStatus, categories, instrumentsExtended }) {
+export default function MusiciansPage({ isMenuOpen, musicians, instruments, setMusicians, getFilteredMusiciansData, setMusicianDetails, loginStatus, categories, instrumentsExtended }) {
     const [showForm, setShowForm] = useState(false)
     const [formData, setFormData] = useState({
         firstName: '',
@@ -37,8 +37,8 @@ export default function MusiciansPage({ isMenuOpen, musicians, instruments, setM
 
     return (
         <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} font-poppins min-h-[125vh]`}>
-            <h1 className="mt-5 text-center md:text-3xl text-2xl font-bold">Our Musicians</h1>
-            <section className="flex flex-col justify-center items-center my-2 py-2">
+            <h1 className="text-xl text-center my-10 lg:text-3xl">Our Musicians</h1>
+            {/* <section className="flex flex-col justify-center items-center my-2 py-2">
                 <label htmlFor='instrumentFilter'>FILTER BY INSTRUMENT</label>
                 <select
                     className='mt-2 text-stone-800'
@@ -49,11 +49,11 @@ export default function MusiciansPage({ isMenuOpen, musicians, instruments, setM
                     <option key='0' value='none' disabled>Select an instrument</option>
                     {instruments.map(instrument => <option key={instrument} value={instrument}>{instrument}</option>)}
                 </select>
-            </section>
+            </section> */}
             <MusiciansGallery
                 musicians={musicians}
-                getFilteredData={getFilteredData}
-                updateDetails={updateDetails}
+                getFilteredMusiciansData={getFilteredMusiciansData}
+                setMusicianDetails={setMusicianDetails}
                 loginStatus={loginStatus}
             />
             <section className='border-t border-stone-200 my-12 py-12 mx-auto w-3/4 flex flex-col justify-center'>

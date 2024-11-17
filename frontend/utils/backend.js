@@ -51,6 +51,11 @@ export async function getMusicians() {
     return data
 }
 
+export async function getMusicianById(musicianId) {
+    const { data } = await axios.get(`/api/musicians/musician/${musicianId}`)
+    return data
+}
+
 export async function postMusician(musician) {
     try {
         const { data } = await axios.post('/api/musicians', musician, { withCredentials: true })

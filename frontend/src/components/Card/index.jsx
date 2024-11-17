@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-export default function Card({ opus, updateDetails }) {
+export default function Card({ opus, setOpusDetails }) {
     let bulkPrice = opus.price ? `$${opus.price}` : "Not available in bulk"
     let instrumentation = ''
     for (let instrument of opus.instrumentation) {
@@ -8,7 +8,7 @@ export default function Card({ opus, updateDetails }) {
     }
 
     return (
-        <Link to={"/details/" + opus._id} onClick={() => updateDetails(opus)}>
+        <Link to={"/opus/details/" + opus._id} onClick={() => setOpusDetails(opus)}>
             <figure className="flex my-5 p-2 text-stone-400 border-2 border-stone-400 rounded-xl bg-stone-800 shadow-lg hover:scale-105 hover:cursor-pointer hover:bg-amber-400 hover:text-stone-900 hover:duration-500 font-poppins">
                 <figcaption className="py-2 px-2 w-full">
                     <h1 className="p-2 bg-stone-600 text-stone-200 font-bold">{opus.title.toUpperCase()}</h1>

@@ -1,9 +1,10 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import placeholder from '../../assets/musicians-placeholder.jpeg'
 import jaeHeadshot from '../../assets/jae-head.jpg'
 import mariaHeadshot from '../../assets/maria-head.jpg'
 
-export default function Card({ musician, getFilteredData, updateDetails, loginStatus }) {
+export default function MusiciansCard({ musician, getFilteredMusiciansData, setMusicianDetails, loginStatus }) {
     const [showDetails, setShowDetails] = useState(false)
     let instruments = ''
     for (let instrument of musician.instruments) {
@@ -31,19 +32,21 @@ export default function Card({ musician, getFilteredData, updateDetails, loginSt
     }
 
     return (
-        <figure className={`relative my-12 w-full lg:w-1/2 min-h-[75vh] mx-auto p-2 text-stone-400 border-2 border-stone-200 rounded-xl bg-stone-700 font-poppins flex justify-center items-center`}>
-            <div className={`h-[90%] ${showDetails ? 'hidden' : 'block'}`}>
-                <img src={headshot} className="rounded-xl mx-auto lg:w-2/3 lg:mt-6"/>
-                <figcaption className="p-2 w-full text-stone-200 flex flex-col items-center justify-center">
-                    <h1 className="mt-2 font-bold text-center">{`${musician.firstName} ${musician.lastName}`}</h1>
-                    <p className='text-center'>{instruments}</p>
-                    <button onClick={() => setShowDetails(true)} className='border border-stone-200 text-stone-200 p-2 rounded-xl w-1/2 mx-auto my-5 hover:bg-amber-400'>BIOGRAPHY</button>
-                </figcaption>
-            </div>
-            <div className={`overflow-y-auto text-sm p-2 flex flex-col justify-center items-center ${showDetails ? 'block' : 'hidden'}`}>
-                <p>{bio}</p>
-                <button onClick={() => setShowDetails(false)} className='border border-stone-200 text-stone-200 p-2 rounded-xl w-1/2 mx-auto my-5 hover:bg-amber-400'>CLOSE</button>
-            </div>  
-        </figure>
+        <Link to={"/musician/details/" + musician._id} onClick={() => setMusicianDetails(musician)}>
+            <figure className={`relative my-12 w-full lg:w-1/2 min-h-[75vh] mx-auto p-2 text-stone-400 border-2 border-stone-200 rounded-xl bg-stone-700 font-poppins flex justify-center items-center`}>
+                <div className={`h-[90%] ${showDetails ? 'hidden' : 'block'}`}>
+                    <img src={headshot} className="rounded-xl mx-auto lg:w-2/3 lg:mt-6"/>
+                    <figcaption className="p-2 w-full text-stone-200 flex flex-col items-center justify-center">
+                        <h1 className="mt-2 font-bold text-center">{`${musician.firstName} ${musician.lastName}`}</h1>
+                        <p className='text-center'>{instruments}</p>
+                        <button onClick={() => setShowDetails(true)} className='border border-stone-200 text-stone-200 p-2 rounded-xl w-1/2 mx-auto my-5 hover:bg-amber-400'>BIOGRAPHY</button>
+                    </figcaption>
+                </div>
+                <div className={`overflow-y-auto text-sm p-2 flex flex-col justify-center items-center ${showDetails ? 'block' : 'hidden'}`}>
+                    <p>{bio}</p>
+                    <button onClick={() => setShowDetails(false)} className='border border-stone-200 text-stone-200 p-2 rounded-xl w-1/2 mx-auto my-5 hover:bg-amber-400'>CLOSE</button>
+                </div>  
+            </figure>
+        </Link>
     )
 }

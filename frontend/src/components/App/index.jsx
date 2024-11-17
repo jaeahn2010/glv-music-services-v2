@@ -33,14 +33,17 @@ export default function App() {
 	const [opuses, setOpuses] = useState([])
 	const [musicians, setMusicians] = useState([])
 	const [userCart, setUserCart] = useState([])
-	const [detailsData, setDetailsData] = useState({})
+	const [opusDetails, setOpusDetails] = useState({})
+	const [musicianDetails, setMusicianDetails] = useState({})
+	const [clientDetails, setClientDetails] = useState({})
 	const [loginStatus, setLoginStatus] = useState(false)
 	const [adminLogin, setAdminLogin] = useState(false)
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
 	const [isMobile, setIsMobile] = useState(false)
 	const navigate = useNavigate()
 	let totalPrice = 0
-	let pCategoryStyle = 'underline font-bold text-2xl p-2'
+	const h2Style = "text-stone-200 my-5 hover:scale-110 duration-500"
+	const pCategoryStyle = 'underline font-bold text-2xl p-2'
 
     for (let opus of opuses) {
         if (!allComposers.includes(opus.composer)) allComposers.push(opus.composer)
@@ -108,11 +111,13 @@ export default function App() {
 		}
 	}
 
+	// get initial data
 	useEffect(() => {
 		getOpusData("none", "none")
 		getMusiciansData("none")
 	}, [])
 
+	// for responsive design
 	useEffect(() => {
 		const handleResize = () => {
 			setIsMobile(window.innerWidth <= 768)
@@ -124,7 +129,6 @@ export default function App() {
 		}
 	}, [])
 
-	let h2Style = "text-stone-200 my-5 hover:scale-110 duration-500"
 	let authLink =
 		<div className='border-t border-stone-200 pt-3 lg:w-1/2 mx-auto'>
 			<p className={pCategoryStyle}>ACCOUNT</p>
@@ -201,6 +205,19 @@ export default function App() {
 						isMobile={isMobile}
 					/>
 				}/>
+				<Route path="/about" element={
+					<AboutPage
+						isMenuOpen={isMenuOpen}
+					/>}
+				/>
+				<Route path="/auth/:formType" element={
+					<AuthFormPage
+						isMenuOpen={isMenuOpen}
+						setLoginStatus={setLoginStatus}
+						adminLogin={adminLogin}
+						setAdminLogin={setAdminLogin}
+					/>}
+				/>
 				<Route path="/repertoire" element={
 					<RepertoirePage
 						isMenuOpen={isMenuOpen}
@@ -208,8 +225,28 @@ export default function App() {
 						setOpuses={setOpuses}
 						allComposers={allComposers}
 						getFilteredOpusData={getOpusData}
-						updateDetails={setDetailsData}
+						setOpusDetails={setOpusDetails}
 						loginStatus={loginStatus}
+					/>}
+				/>
+				<Route path="/opus/details/:opusId" element={
+					<DetailsPage
+						isMenuOpen={isMenuOpen}
+						opusDetails={opusDetails}
+						loginStatus={loginStatus}
+						userCart={userCart}
+						setUserCart={setUserCart}
+					/>}
+				/>
+				<Route path="/cart" element={
+					<CurrentCart
+						isMenuOpen={isMenuOpen}
+						opuses={opuses}
+						loginStatus={loginStatus}
+						userCart={userCart}
+						setUserCart={setUserCart}
+						getOpusData={getOpusData}
+						totalPrice={totalPrice}
 					/>}
 				/>
 				<Route path="/request" element={
@@ -227,12 +264,21 @@ export default function App() {
 						isMenuOpen={isMenuOpen}
 						musicians={musicians}
 						setMusicians={setMusicians}
-						getFilteredData={getMusiciansData}
-						updateDetails={setDetailsData}
+						getFilteredMusiciansData={getMusiciansData}
+						setMusicianDetails={setMusicianDetails}
 						loginStatus={loginStatus}
 						instruments={instruments}
 						categories={categories}
 						instrumentsExtended={instrumentsExtended}
+					/>}
+				/>
+				<Route path="/musician/details/:musicianId" element={
+					<DetailsPage
+						isMenuOpen={isMenuOpen}
+						musicianDetails={musicianDetails}
+						loginStatus={loginStatus}
+						userCart={userCart}
+						setUserCart={setUserCart}
 					/>}
 				/>
 				<Route path="/clientProfile" element={
@@ -242,20 +288,7 @@ export default function App() {
 						opuses={opuses}
 						setOpuses={setOpuses}
 						getFilteredData={getOpusData}
-						updateDetails={setDetailsData}
-					/>}
-				/>
-				<Route path="/auth/:formType" element={
-					<AuthFormPage
-						isMenuOpen={isMenuOpen}
-						setLoginStatus={setLoginStatus}
-						adminLogin={adminLogin}
-						setAdminLogin={setAdminLogin}
-					/>}
-				/>
-				<Route path="/about" element={
-					<AboutPage
-						isMenuOpen={isMenuOpen}
+						setClientDetails={setClientDetails}
 					/>}
 				/>
 				<Route path="/ncs" element={
@@ -272,26 +305,6 @@ export default function App() {
 						loginStatus={loginStatus}
 						states={states}
 						scrollToTop={scrollToTop}
-					/>}
-				/>
-				<Route path="/details/:opusId" element={
-					<DetailsPage
-						isMenuOpen={isMenuOpen}
-						thisOpus={detailsData}
-						loginStatus={loginStatus}
-						userCart={userCart}
-						setUserCart={setUserCart}
-					/>}
-				/>
-				<Route path="/cart" element={
-					<CurrentCart
-						isMenuOpen={isMenuOpen}
-						opuses={opuses}
-						loginStatus={loginStatus}
-						userCart={userCart}
-						setUserCart={setUserCart}
-						getOpusData={getOpusData}
-						totalPrice={totalPrice}
 					/>}
 				/>
 				<Route path='/admin' element={

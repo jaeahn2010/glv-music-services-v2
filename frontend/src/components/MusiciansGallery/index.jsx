@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import MusiciansCard from '../MusiciansCard'
 
-export default function MusiciansGallery({ musicians, getFilteredData, updateDetails, loginStatus }) {
+export default function MusiciansGallery({ musicians, getFilteredMusiciansData, setMusicianDetails, loginStatus }) {
     const [endDisplayIndex, setEndDisplayIndex] = useState(10)
     let galleryContent = musicians.length > 0
     ? musicians
@@ -9,11 +9,11 @@ export default function MusiciansGallery({ musicians, getFilteredData, updateDet
         .map(musician => <MusiciansCard
             key={musician._id}
             musician={musician}
-            getFilteredData={getFilteredData}
-            updateDetails={updateDetails}
+            getFilteredMusiciansData={getFilteredMusiciansData}
+            setMusicianDetails={setMusicianDetails}
             loginStatus={loginStatus}
         />)
-    : <p className='text-center my-10'>No musicians found. Please check your internect connection. If the problem persists, please contact the site administrator.</p>
+    : <p className='text-center my-10'>No musicians found. Please check your internet connection. If the problem persists, please contact the site administrator.</p>
     window.onscroll = () => {
         if (window.innerHeight + window.scrollY >= document.body.offsetHeight && endDisplayIndex < musicians.length) setEndDisplayIndex(endDisplayIndex + 10)
     }

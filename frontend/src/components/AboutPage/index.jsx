@@ -14,6 +14,7 @@ for (const [path, importFunction] of Object.entries(musicPhotos)) {
 export default function AboutPage({isMenuOpen}) {
     const [carouselIndex, setCarouselIndex] = useState(0)
     const [loadedImages, setLoadedImages] = useState([])
+    const svgStyle = 'hover:cursor-pointer hover:scale-110 duration-500'
 
     function handleCarouselIndex(evt) {
         if (evt.target.id === 'left-arrow') {
@@ -37,7 +38,7 @@ export default function AboutPage({isMenuOpen}) {
     
     return (
         <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} flex flex-col items-center justify-center text-stone-200 font-poppins`}>
-            <h1 className="text-xl text-center my-10 lg:text-3xl">About the Greater Las Vegas Music Services</h1>
+            <h1 className="text-xl text-center my-10 lg:text-3xl">About Us</h1>
             <article className='relative w-11/12 lg:w-1/2 mx-auto lg:text-xl'>
                 <img className='rounded-xl mr-2 my-1 w-1/2 lg:w-1/3 float-left' src={mariaHead} alt="maria-headshot" />
                 <p>The <span className="font-bold">Greater Las Vegas Music Services (GLVMS)</span> is an all-encompassing music business owned by a husband-and-wife team of classically trained pianists: <span className='font-bold'>Jae Ahn-Benton</span> and <span className='font-bold'>Maria Kolesnyk</span>. Jae (from South Korea) and Maria (from Ukraine) met while studying music in college in Las Vegas, NV. Jae had started his music business in 2010, mainly focusing on collaboration with opera singers, composing/arranging, and providing music for weddings. Maria had started her music business in 2013, mainly focusing on building her private piano studio, as well as collaboration with violinists, violists, cellists, double bassists, flutists, and trumpeters.</p>
@@ -46,18 +47,17 @@ export default function AboutPage({isMenuOpen}) {
             </article>
             <div className='w-11/12 lg:w-1/2 mx-auto my-10 flex justify-center items-center'>
                 <div className='flex justify-center items-center'>
-                    <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" className='hover:cursor-pointer' id='left-arrow' onClick={handleCarouselIndex}>
-                        <polygon points='30,20 20,25 30,30' fill='white'/>
+                    <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" className={svgStyle + ' mr-3'
+                    } id='left-arrow' onClick={handleCarouselIndex}>
+                        <polygon points='40,15 20,25 40,35 33,25' fill='white'/>
                     </svg>
                 </div>
-                {loadedImages.map((photo, index) => (
-                    <div key={index}>
-                        <img src={photo} className={`${index !== carouselIndex ? 'hidden' : ''} mx-auto rounded-xl`}/>
-                    </div>
-                ))}
+                <div className='h-[50vh] w-[50vw]'>
+                    {loadedImages.map((photo, index) => <img key={index} src={photo} className={`${index !== carouselIndex ? 'hidden' : ''} mx-auto rounded-xl h-full w-auto`}/>)}
+                </div>
                 <div className='flex justify-center items-center'>
-                    <svg width="50" height="50" className='hover:cursor-pointer' id='right-arrow' onClick={handleCarouselIndex}>
-                        <polygon points='20,20 30,25 20,30' fill='white'/>
+                    <svg width="50" height="50" className={svgStyle + ' ml-3'} id='right-arrow' onClick={handleCarouselIndex}>
+                        <polygon points='10,15 30,25 10,35 17,25' fill='white'/>
                     </svg>
                 </div>
             </div>
