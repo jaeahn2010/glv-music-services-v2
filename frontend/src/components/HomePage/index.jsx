@@ -31,10 +31,10 @@ export default function HomePage({isMenuOpen, isMobile}) {
         ['VOCAL & FOREIGN LANGUAGE COACHING', 'Are you a current or an aspiring opera singer who is in need of role study or general coaching? Our coaches offer expertise in a variety of operatic styles, art songs, and diction. Language coaching offered in English, Spanish, Italian, French, German, Russian, Ukrainian, and Korean.', 'hourly'],
         ['WEDDING & PARTY MUSIC', 'We provide fully customized sets of music for any special occasion, from weddings to private home parties. We offer traditional classical tunes, popular songs, and everything in between, whether you need full-pledged performances, intermittent ceremonial musical inserts, or continuous atmospheric background music.', 'repertoire'],
     ]
-    let imgStyle = 'w-[350px] rounded-xl hover:scale-110 duration-500'
-    let pStyle = 'text-center text-lg mt-6 hover:text-green-300'
-    let contactDivStyle = 'text-center mx-auto py-3 lg:w-1/2 lg:mx-10'
-    let aStyle = 'fill-container flex justify-center items-center w-2/3 lg:w-1/2 mx-auto my-5 p-2 border-stone-200 border rounded-3xl'
+    const imgStyle = 'w-[350px] rounded-xl hover:scale-110 duration-500'
+    const pStyle = 'text-center text-lg mt-6 hover:text-green-300'
+    const contactDivStyle = 'text-center mx-auto py-3 lg:w-1/2 lg:mx-10'
+    const aStyle = 'fill-container flex justify-center items-center w-2/3 lg:w-1/2 mx-auto my-5 p-2 border-stone-200 border rounded-3xl'
 
     useEffect(() => {
         const observers = domRefs.map((domRef, index) => {

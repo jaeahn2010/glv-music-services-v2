@@ -11,6 +11,7 @@ import RequestPage from '../RequestPage'
 import MusiciansPage from '../MusiciansPage'
 import AdminPage from '../AdminPage'
 import DetailsPage from '../DetailsPage'
+import MusiciansDetailsPage from '../MusiciansDetailsPage'
 import ClientProfilePage from '../ClientProfilePage'
 import CurrentCart from '../CurrentCart'
 import { getOpuses, getMusicians } from '../../../utils/backend'
@@ -273,7 +274,7 @@ export default function App() {
 					/>}
 				/>
 				<Route path="/musician/details/:musicianId" element={
-					<DetailsPage
+					<MusiciansDetailsPage
 						isMenuOpen={isMenuOpen}
 						musicianDetails={musicianDetails}
 						loginStatus={loginStatus}
