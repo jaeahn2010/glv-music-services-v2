@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { getOpuses, getClients, getMusicians, getPerformances, postOpus, postMusician, postPerformance, updateOpus, updateMusician, updateClient, updatePerformance, deleteOpus, deleteClient, deleteMusician, deletePerformance } from "../../../utils/backend"
 
-export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instruments, states }) {
+export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instruments, states, scrollToTop }) {
     const [crudItem, setCrudItem] = useState('')
     const [allOpuses, setAllOpuses] = useState([])
     const [allMusicians, setAllMusicians] = useState([])
@@ -149,19 +149,22 @@ export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instrum
                 {instruments.map(instrument => <option key={instrument} value={instrument}>{instrument}</option>)}
             </select>
         </div>
-        <button className={btnStyle} onClick={() => {
-            setPerformanceFormData({
-                ...performanceFormData,
-                collaborators: performanceFormData.collaborators.concat(collaboratorToBeAdded)
-            })
-            setCollaboratorToBeAdded({
-                collaboratorLastName: '',
-                collaboratorFirstName: '',
-                collaboratorInstrument: '',
-            })
-            setShowCollaboratorModal(false)
-        }}>ADD</button>
-        <button className={btnStyle} onClick={() => setShowMovementsModal(false)}>CLOSE</button>
+        <div className="flex justify-around items-center w-full">
+            <button className={btnStyle} onClick={() => {
+                setPerformanceFormData({
+                    ...performanceFormData,
+                    collaborators: performanceFormData.collaborators.concat(collaboratorToBeAdded)
+                })
+                setCollaboratorToBeAdded({
+                    collaboratorLastName: '',
+                    collaboratorFirstName: '',
+                    collaboratorInstrument: '',
+                })
+                setShowCollaboratorModal(false)
+            }}>ADD</button>
+            <button className={btnStyle} onClick={() => setShowMovementsModal(false)}>CLOSE</button>
+        </div>
+
     </section>
 
     async function getAllData() {
@@ -253,12 +256,37 @@ export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instrum
                 switch(crudItem) {
                     case 'opus':
                         newItem = await postOpus(opusFormData)
+                        setOpusFormData({
+                            title: '',
+                            composer: '',
+                            movements: [],
+                            instrumentation: [],
+                            price: 0,
+                        })
                         break
                     case 'musician':
                         newItem = await postMusician(musicianFormData)
+                        setMusicianFormData({
+                            firstName: '',
+                            lastName: '',
+                            instruments: [],
+                            email: '',
+                            availableRepertoire: [],
+                        })
                         break
                     case 'performance':
                         newItem = await postPerformance(performanceFormData)
+                        setPerformanceFormData({
+                            title: '',
+                            locationName: '',
+                            city: '',
+                            state: '',
+                            date: new Date(),
+                            time: '',
+                            featuredGLVMSMusicians: [],
+                            collaborators: [],
+                            description: '',
+                        })
                         break
                 }
                 if (newItem) alert(`Successfully created new ${crudItem}.`)
@@ -436,10 +464,25 @@ export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instrum
                 <button onClick={(evt) => {
                     evt.preventDefault()
                     setShowCollaboratorModal(true)
+                    scrollToTop()
                 }} className={btnStyle + ' text-center'}>Add collaborator</button>
                 {performanceFormData.collaborators.length
-                ? <ul className="list-decimal list-inside border border-stone-200 rounded-xl p-2 my-3 w-3/4 mx-auto"> {performanceFormData.collaborators.map((collaborator, index) => 
-                    <li key={index} className="">{collaborator.collaboratorLastName}, {collaborator.collaboratorFirstName} ({collaborator.collaboratorInstrument})</li>
+                ? <ul className="list-decimal list-inside p-2 my-3 w-3/4 mx-auto"> {performanceFormData.collaborators.map((collaborator, index) => 
+                    <div key={index} className="flex justify-between items-center border-b border-stone-200">
+                        <li>{collaborator.collaboratorLastName}, {collaborator.collaboratorFirstName} ({collaborator.collaboratorInstrument})</li>
+                        <button className='my-1 text-sm hover:text-red-300' onClick={(evt) => {
+                            evt.preventDefault()
+                            setPerformanceFormData({
+                                ...performanceFormData,
+                                collaborators: performanceFormData.collaborators.filter(collaboratorToBeDeleted => collaboratorToBeDeleted.collaboratorLastName !== collaborator.collaboratorLastName || collaboratorToBeDeleted.collaboratorFirstName !== collaborator.collaboratorFirstName || collaboratorToBeDeleted.collaboratorInstrument !== collaborator.collaboratorInstrument)
+                            })
+                            setCollaboratorToBeAdded({
+                                collaboratorLastName: '',
+                                collaboratorFirstName: '',
+                                collaboratorInstrument: '',
+                            })
+                        }}>DELETE</button>
+                    </div>
                 )}</ul>
                 : ''}
                 {showCollaboratorModal ? collaboratorsModal : ''}

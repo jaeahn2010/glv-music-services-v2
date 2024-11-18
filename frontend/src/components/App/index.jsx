@@ -162,9 +162,10 @@ export default function App() {
 			<h1 className="bg-stone-700 z-10 text-white text-right text-sm sticky top-0">{`Hello, ${localStorage.getItem("firstName")} ${localStorage.getItem("lastName")}!`}</h1>
 		  	profileLink =
 			<div className="border-t border-stone-200 lg:w-1/2 mx-auto">
-				<Link onClick={() => setIsMenuOpen(false)} to={"/clientProfile"}>
-					<h2 className={h2Style}>My Account</h2>
-				</Link>
+				{adminLogin
+				? <Link to='/admin' onClick={() => setIsMenuOpen(false)}><h1 className={h2Style}>Admin Page</h1></Link>
+				: <Link onClick={() => setIsMenuOpen(false)} to={"/clientProfile"}><h2 className={h2Style}>My Account</h2></Link>
+				}	
 			</div>
 	} else if (localStorage.userToken) {
 		setLoginStatus(true)
@@ -323,6 +324,7 @@ export default function App() {
 						sortObjects={sortObjects}
 						instruments={instruments}
 						states={states}
+						scrollToTop={scrollToTop}
 					/>}
 				/>
 				<Route path="/*" element={<NotFoundPage/>} />
