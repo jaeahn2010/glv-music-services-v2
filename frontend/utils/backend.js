@@ -207,6 +207,11 @@ export async function getPerformances() {
     return data
 }
 
+export async function getPerformancesByMusician(musicianId) {
+    const { data } = await axios.get(`/api/performances/${musicianId}`)
+    return data
+}
+
 export async function postPerformance(performance) {
     try {
         const { data } = await axios.post('/api/performances', performance, { withCredentials: true })

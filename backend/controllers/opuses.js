@@ -31,7 +31,7 @@ const authMiddleware = (req, res, next) => {
 // display all available opuses of all musicians
 router.get('/', function (req, res) {
     db.Opus.find()
-        .then(opuses => res.json([opuses]))
+        .then(opuses => res.json([opuses])) // check
 })
 
 // display all available opuses of musician

@@ -26,7 +26,7 @@ export default function MusiciansPage({ isMenuOpen, musicians, instruments, setM
                 setFormData({...formData, [evt.target.name]: formData[evt.target.name].filter(item => item !== evt.target.value)})
             }
         } else { // resume
-            console.log(evt.target, evt.target.name, evt.target.value, evt.target.checked)
+            console.log(evt.target.files[0])
         }
     }
 
@@ -56,7 +56,7 @@ export default function MusiciansPage({ isMenuOpen, musicians, instruments, setM
                 setMusicianDetails={setMusicianDetails}
                 loginStatus={loginStatus}
             />
-            <section className='border-t border-stone-200 my-12 py-12 mx-auto w-3/4 flex flex-col justify-center'>
+            <section className='border-t border-stone-200 my-12 py-12 mx-auto w-5/6 flex flex-col justify-center'>
                 <h2 className='text-2xl text-center my-4'>JOIN THE GLVMS TEAM</h2>
                 <p>Are you a music performer, teacher, composer, or arranger based in Las Vegas, NV? Are you looking to grow your studio, clientele, or sell more of your works? Join our team! Fill out the form below, and we will contact you for a phone interview. If we resonate well with each other, we will then schedule an in-person interview in a semi-formal audition setting, where we will further assess how we fit each other's needs.</p>
                 <form onSubmit={handleSubmit} className={showForm ? 'w-5/6 mx-auto my-6 py-10 flex flex-col justify-center items-center border border-stone-200 rounded-xl' : 'hidden'}>
@@ -88,7 +88,7 @@ export default function MusiciansPage({ isMenuOpen, musicians, instruments, setM
                             <div key={category} className='flex items-center mx-auto'>
                                 <input
                                     type="checkbox"
-                                    className='mr-2'
+                                    className='mx-2'
                                     name='categories'
                                     id={category}
                                     value={category}
@@ -104,7 +104,7 @@ export default function MusiciansPage({ isMenuOpen, musicians, instruments, setM
                             <div key={instrument} className='flex items-center mx-auto'>
                                 <input
                                     type="checkbox"
-                                    className='mr-2'
+                                    className='mx-2'
                                     name='instruments'
                                     id={instrument}
                                     value={instrument}

@@ -1,0 +1,30 @@
+.career-items {
+    perspective: 1000px;
+}
+
+.card-flip {
+    transition: transform 0.5s ease-in-out;
+    transform-style: preserve-3d;
+}
+
+.card-front {
+    backface-visibility: hidden;
+}
+
+.card-back {
+    backface-visibility: hidden;
+    display: none;
+    transform: rotateX(180deg);
+}
+
+.card-flip:hover {
+    transform: rotateX(180deg);
+}
+
+.card-flip:hover .card-front {
+    display: none;
+}
+
+.card-flip:hover .card-back {
+    display: flex;
+}

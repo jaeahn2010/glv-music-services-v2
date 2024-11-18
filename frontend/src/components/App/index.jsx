@@ -12,6 +12,7 @@ import MusiciansPage from '../MusiciansPage'
 import AdminPage from '../AdminPage'
 import DetailsPage from '../DetailsPage'
 import MusiciansDetailsPage from '../MusiciansDetailsPage'
+import PerformancesPage from '../PerformancesPage'
 import ClientProfilePage from '../ClientProfilePage'
 import CurrentCart from '../CurrentCart'
 import { getOpuses, getMusicians } from '../../../utils/backend'
@@ -19,9 +20,9 @@ import './styles.css'
 import cartIcon from '../../assets/cart-icon.jpeg'
 
 let allComposers = []
-const categories = ['accompanist', 'arranger', 'audio / sound engineer', 'baroque music specialist', 'composer', 'conductor',  'diction & language specialist', 'ear training specialist', 'instructor (private institution or studio)', 'instructor (public institution)', 'jazz specialist', 'music director', 'music history specialist', 'music theory specialist', 'performer - brass',  'performer - keyboard', 'performer - percussion', 'performer - string', 'performer - woodwind', 'performer - voice', 'piano tuner', 'vocal coach', 'other']
+const categories = ['accompanist', 'arranger', 'audio / sound engineer', 'baroque music specialist', 'composer', 'conductor',  'diction & language specialist', 'ear training specialist', 'instructor (private institution or studio)', 'instructor (public institution)', 'instrument repairperson', 'jazz specialist', 'music director', 'music history specialist', 'music theory specialist', 'performer - brass',  'performer - keyboard', 'performer - percussion', 'performer - string', 'performer - woodwind', 'performer - voice', 'piano tuner', 'vocal coach', 'other']
 const instruments = ['bassoon', 'cello', 'clarinet', 'composer', 'conductor', 'contrabass', 'flute', 'guitar', 'harmonica', 'harp', 'horn', 'oboe', 'orchestra/band', 'piano', 'percussion', 'saxophone', 'trombone', 'trumpet', 'tuba/euphonium', 'viola', 'violin', 'voice']
-const instrumentsExtended = ['accordion', 'alto flute', 'alto saxophone', 'bandoneon', 'banjo', 'baritone (voice)', 'baritone saxophone', 'bass (voice)', 'bass clarinet', 'bass drum', 'bass flute', 'bassoon', 'bass trombone', 'beatboxing', 'bongo', 'bugle', 'cannon', 'castanets', 'celeste', 'cello', 'chimes', 'chime tree', 'clarinet (A)', 'clarinet (B-flat)', 'contrabassoon', 'contralto (voice)', 'cornet', 'cymbals', 'double bass', 'drum set', 'electric bass', 'electric guitar', 'English horn', 'euphonium', 'flugelhorn', 'flute', 'French horn', 'glockenspiel', 'guitar', 'handbell', 'harmonica', 'harmonium', 'harp', 'harpsichord', 'keytar', 'mandolin', 'maracas', 'marimba', 'mezzo-soprano (voice)', 'oboe', 'organ', 'piano', 'piccolo', 'snare drum', 'soprano (voice)', 'soprano saxophone', 'synthesizer', 'tambourine', 'tam-tam', 'tenor (voice)', 'tenor saxophone', 'timpani', 'triangle', 'trombone', 'trumpet (B-flat)', 'trumpet (C)', 'trumpet (D)', 'tuba (B-flat)', 'tuba (C)', 'tuba (E-flat)', 'tuba (F)', 'ukelele', 'viola', 'violin', 'woodblocks', 'vibraphone', 'xylophone', 'other']
+const instrumentsExtended = ['accordion', 'bandoneon', 'banjo', 'bass clarinet', 'bass drum', 'bassoon', 'beatboxing', 'bongo', 'bugle', 'cannon', 'castanets', 'celeste', 'cello', 'chimes', 'chime tree', 'clarinet (A)', 'clarinet (B-flat)', 'contrabassoon', 'cornet', 'cymbals', 'double bass', 'drum set', 'electric bass', 'electric guitar', 'English horn', 'euphonium', 'flugelhorn', 'flute', 'flute (alto)', 'flute (bass)', 'French horn', 'glockenspiel', 'guitar', 'handbell', 'harmonica', 'harmonium', 'harp', 'harpsichord', 'keytar', 'mandolin', 'maracas', 'marimba', 'oboe', 'organ', 'piano', 'piccolo', 'saxophone (soprano)', 'saxophone (alto)', 'saxophone (tenor)', 'saxophone (baritone)', 'snare drum', 'synthesizer', 'tambourine', 'tam-tam', 'timpani', 'triangle', 'trombone (tenor)', 'trombone (bass)', 'trumpet (B-flat)', 'trumpet (C)', 'trumpet (D)', 'tuba (B-flat)', 'tuba (C)', 'tuba (E-flat)', 'tuba (F)', 'ukelele', 'viola', 'violin', 'woodblocks', 'vibraphone', 'voice (soprano)', 'voice (mezzo-soprano)', 'voice (contralto)', 'voice (countertenor)', 'voice (tenor)', 'voice (baritone)', 'voice (bass-baritone)', 'voice (bass)', 'xylophone', 'other']
 const states = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VA', 'WA', 'WV', 'WI', 'WY']
 
 const scrollToTop = () => 
@@ -186,6 +187,7 @@ export default function App() {
 				<Link to='/about' onClick={() => setIsMenuOpen(false)}><h1 className={h2Style}>About GLVMS</h1></Link>
 				<Link to='/repertoire' onClick={() => setIsMenuOpen(false)}><h1 className={h2Style}>Repertoire List</h1></Link>
 				<Link to='/musicians' onClick={() => setIsMenuOpen(false)}><h1 className={h2Style}>Our Musicians</h1></Link>
+				<Link to='/performances' onClick={() => setIsMenuOpen(false)}><h1 className={h2Style}>Our Performances</h1></Link>
 				<div className='border-t pt-3 border-stone-200 lg:w-1/2 mx-auto'>
 					<p className={pCategoryStyle}>STORES</p>
 					<Link onClick={() => setIsMenuOpen(false)} to="/ncs">
@@ -280,6 +282,12 @@ export default function App() {
 						loginStatus={loginStatus}
 						userCart={userCart}
 						setUserCart={setUserCart}
+					/>}
+				/>
+				<Route path="/performances" element={
+					<PerformancesPage
+						isMenuOpen={isMenuOpen}
+						loginStatus={loginStatus}
 					/>}
 				/>
 				<Route path="/clientProfile" element={

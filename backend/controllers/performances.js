@@ -34,6 +34,12 @@ router.get('/', function (req, res) {
         .then(performances => res.json(performances))
 })
 
+// display all performances associated with musician
+router.get('/:musicianId', function (req, res) {
+    db.Performance.find({ musicianId: req.params.musicianId })
+        .then(performances => res.json(performances))
+})
+
 // create performance
 router.post('/', authMiddleware, (req, res) => {
     console.log(req.body)
