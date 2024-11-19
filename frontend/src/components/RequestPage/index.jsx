@@ -2,7 +2,7 @@ import { useState } from "react"
 import { sendEmail } from "../../../utils/backend"
 import { useNavigate } from "react-router-dom"
 
-export default function RequestPage({ isMenuOpen, musicians, loginStatus, userCart, totalPrice, states }) {
+export default function RequestPage({ isMenuOpen, allMusicians, loginStatus, userCart, totalPrice, states }) {
     const [requestData, setRequestData] = useState({
         clientEmail: '',
         musicianEmail: '',
@@ -22,10 +22,10 @@ export default function RequestPage({ isMenuOpen, musicians, loginStatus, userCa
         status: 'pending',
     })
     const navigate = useNavigate()
-    let divStyle = 'w-full lg:w-1/2 mx-auto flex'
-    let labelStyle = 'w-1/3 m-2 flex justify-end items-center text-right'
-    let inputStyle = 'w-2/3 text-left m-2 p-1 bg-stone-200 text-stone-800 rounded-lg'
-    let btnStyle = 'w-1/2 lg:w-1/3 my-5 border border-stone-200 rounded-xl hover:bg-amber-400 hover:text-stone-800 hover:cursor-pointer'
+    const divStyle = 'w-full lg:w-1/2 mx-auto flex'
+    const labelStyle = 'w-1/3 m-2 flex justify-end items-center text-right'
+    const inputStyle = 'w-2/3 text-left m-2 p-1 bg-stone-200 text-stone-800 rounded-lg'
+    const btnStyle = 'w-1/2 lg:w-1/3 my-5 border border-stone-200 rounded-xl hover:bg-amber-400 hover:text-stone-800 hover:cursor-pointer'
 
     function handleChange(evt) {
         setRequestData({
@@ -94,7 +94,7 @@ export default function RequestPage({ isMenuOpen, musicians, loginStatus, userCa
                             onChange={handleChange}
                         >
                             <option value="0" disabled>Choose a musician</option>
-                            {musicians.map(musician => <option key={musician._id} value={musician.email}>{musician.lastName}, {musician.firstName}</option>)}
+                            {allMusicians.map(musician => <option key={musician._id} value={musician.email}>{musician.lastName}, {musician.firstName}</option>)}
                         </select>
                     </div>
                     <div className={divStyle}>

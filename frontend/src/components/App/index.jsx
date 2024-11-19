@@ -21,7 +21,7 @@ import cartIcon from '../../assets/cart-icon.jpeg'
 
 let allComposers = []
 const categories = ['accompanist', 'arranger', 'audio / sound engineer', 'baroque music specialist', 'composer', 'conductor',  'diction & language specialist', 'ear training specialist', 'instructor (private institution or studio)', 'instructor (public institution)', 'instrument repairperson', 'jazz specialist', 'music director', 'music history specialist', 'music theory specialist', 'performer - brass',  'performer - keyboard', 'performer - percussion', 'performer - string', 'performer - woodwind', 'performer - voice', 'piano tuner', 'vocal coach', 'other']
-const instruments = ['bassoon', 'cello', 'clarinet', 'composer', 'conductor', 'contrabass', 'flute', 'guitar', 'harmonica', 'harp', 'horn', 'oboe', 'orchestra/band', 'piano', 'percussion', 'saxophone', 'trombone', 'trumpet', 'tuba/euphonium', 'viola', 'violin', 'voice']
+const instruments = ['bassoon', 'cello', 'clarinet', 'composer', 'conductor', 'contrabass', 'flute', 'guitar', 'harmonica', 'harp', 'horn', 'oboe', 'orchestra', 'piano', 'percussion', 'saxophone', 'trombone', 'trumpet', 'tuba/euphonium', 'viola', 'violin', 'voice']
 const instrumentsExtended = ['accordion', 'bandoneon', 'banjo', 'bass clarinet', 'bass drum', 'bassoon', 'beatboxing', 'bongo', 'bugle', 'cannon', 'castanets', 'celeste', 'cello', 'chimes', 'chime tree', 'clarinet (A)', 'clarinet (B-flat)', 'contrabassoon', 'cornet', 'cymbals', 'double bass', 'drum set', 'electric bass', 'electric guitar', 'English horn', 'euphonium', 'flugelhorn', 'flute', 'flute (alto)', 'flute (bass)', 'French horn', 'glockenspiel', 'guitar', 'handbell', 'harmonica', 'harmonium', 'harp', 'harpsichord', 'keytar', 'mandolin', 'maracas', 'marimba', 'oboe', 'organ', 'piano', 'piccolo', 'saxophone (soprano)', 'saxophone (alto)', 'saxophone (tenor)', 'saxophone (baritone)', 'snare drum', 'synthesizer', 'tambourine', 'tam-tam', 'timpani', 'triangle', 'trombone (tenor)', 'trombone (bass)', 'trumpet (B-flat)', 'trumpet (C)', 'trumpet (D)', 'tuba (B-flat)', 'tuba (C)', 'tuba (E-flat)', 'tuba (F)', 'ukelele', 'viola', 'violin', 'woodblocks', 'vibraphone', 'voice (soprano)', 'voice (mezzo-soprano)', 'voice (contralto)', 'voice (countertenor)', 'voice (tenor)', 'voice (baritone)', 'voice (bass-baritone)', 'voice (bass)', 'xylophone', 'other']
 const states = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VA', 'WA', 'WV', 'WI', 'WY']
 
@@ -32,8 +32,8 @@ const scrollToTop = () =>
 	})
 
 export default function App() {
-	const [opuses, setOpuses] = useState([])
-	const [musicians, setMusicians] = useState([])
+	const [allOpuses, setAllOpuses] = useState([])
+	const [allMusicians, setAllMusicians] = useState([])
 	const [userCart, setUserCart] = useState([])
 	const [opusDetails, setOpusDetails] = useState({})
 	const [musicianDetails, setMusicianDetails] = useState({})
@@ -47,12 +47,12 @@ export default function App() {
 	const h2Style = "text-stone-200 my-5 hover:scale-110 duration-500"
 	const pCategoryStyle = 'underline font-bold text-2xl p-2'
 
-    for (let opus of opuses) {
-        if (!allComposers.includes(opus.composer)) allComposers.push(opus.composer)
-    }
+	for (let opus of allOpuses) {
+		if (!allComposers.includes(opus.composer)) allComposers.push(opus.composer)
+	}
 
 	for (let item of userCart) {
-        let fullOpus = opuses.find(opus => opus._id === item._id)
+        let fullOpus = allOpuses.find(opus => opus._id === item._id)
         if (fullOpus.movements.length && fullOpus.movements.length === item.movements.length) {
             totalPrice += fullOpus.price
         } else {
@@ -72,51 +72,21 @@ export default function App() {
 		})
 	}
 
-	//get full list of available opuses, or filter by musician / composer / instrumentation / price range
-	async function getOpusData(category, filter) {
+	// get full data for opus, musicians
+	async function getInitialData() {
 		try {
-			const opusData = await getOpuses()
-			let allOpusData = opusData[0]
-			let filteredOpusData = []
-			switch(category) {
-				case 'none':
-					if (filter === 'none') filteredOpusData = allOpusData
-					break
-				case 'composer':
-					filteredOpusData = allOpusData.filter(opus => opus.composer === filter)
-					break
-				case 'instrumentation':
-					filteredOpusData = allOpusData.filter(opus => opus.instrumentation.includes(filter))
-					break
-				case 'price':
-					filteredOpusData = allOpusData.filter(opus => opus.price <= filter && opus.price !== null)
-					break
-				case 'keyword':
-					filteredOpusData = allOpusData.filter(opus => opus.title.includes(filter))
-					break
-			}
-			setOpuses(sortObjects(filteredOpusData))
-		} catch {
-			alert('Cannot load repertoire data at this time. Please check your internet connection. If the problem persists, please contact the site administrator.')
-		}
-	}
-
-	//get full list of musicians, or filter by instrument
-	async function getMusiciansData(filter) {
-		try {
-			const musiciansData = await getMusicians()
-			let filteredMusiciansData = []
-			filter === 'none' ? filteredMusiciansData = musiciansData : filteredMusiciansData = musiciansData.filter(musician => musician.instrumentation.includes(filter))
-			setMusicians(filteredMusiciansData)
-		} catch {
-			alert('Cannot load musicians data at this time. Please check your internet connection. If the problem persists, please contact the site administrator.')
+			const allOpusData = await getOpuses()
+			const allMusiciansData = await getMusicians()
+			setAllOpuses(sortObjects(allOpusData))
+			setAllMusicians(allMusiciansData)
+		} catch(err) {
+			alert('Cannot load data at this time. Please check your internet connection. If the problem persists, please contact the site administrator.')
 		}
 	}
 
 	// get initial data
 	useEffect(() => {
-		getOpusData("none", "none")
-		getMusiciansData("none")
+		getInitialData()
 	}, [])
 
 	// for responsive design
@@ -220,17 +190,19 @@ export default function App() {
 						setLoginStatus={setLoginStatus}
 						adminLogin={adminLogin}
 						setAdminLogin={setAdminLogin}
+						scrollToTop={scrollToTop}
 					/>}
 				/>
 				<Route path="/repertoire" element={
 					<RepertoirePage
 						isMenuOpen={isMenuOpen}
-						opuses={opuses}
-						setOpuses={setOpuses}
+						allOpuses={allOpuses}
 						allComposers={allComposers}
-						getFilteredOpusData={getOpusData}
 						setOpusDetails={setOpusDetails}
 						loginStatus={loginStatus}
+						instruments={instruments}
+						scrollToTop={scrollToTop}
+						sortObjects={sortObjects}
 					/>}
 				/>
 				<Route path="/opus/details/:opusId" element={
@@ -240,23 +212,24 @@ export default function App() {
 						loginStatus={loginStatus}
 						userCart={userCart}
 						setUserCart={setUserCart}
+						scrollToTop={scrollToTop}
 					/>}
 				/>
 				<Route path="/cart" element={
 					<CurrentCart
 						isMenuOpen={isMenuOpen}
-						opuses={opuses}
+						allOpuses={allOpuses}
 						loginStatus={loginStatus}
 						userCart={userCart}
 						setUserCart={setUserCart}
-						getOpusData={getOpusData}
 						totalPrice={totalPrice}
+						scrollToTop={scrollToTop}
 					/>}
 				/>
 				<Route path="/request" element={
 					<RequestPage
 						isMenuOpen={isMenuOpen}
-						musicians={musicians}
+						allMusicians={allMusicians}
 						loginStatus={loginStatus}
 						userCart={userCart}
 						totalPrice={totalPrice}
@@ -266,12 +239,9 @@ export default function App() {
 				<Route path="/musicians" element={
 					<MusiciansPage
 						isMenuOpen={isMenuOpen}
-						musicians={musicians}
-						setMusicians={setMusicians}
-						getFilteredMusiciansData={getMusiciansData}
+						allMusicians={allMusicians}
 						setMusicianDetails={setMusicianDetails}
 						loginStatus={loginStatus}
-						instruments={instruments}
 						categories={categories}
 						instrumentsExtended={instrumentsExtended}
 					/>}
@@ -295,9 +265,6 @@ export default function App() {
 					<ClientProfilePage
 						isMenuOpen={isMenuOpen}
 						loginStatus={loginStatus}
-						opuses={opuses}
-						setOpuses={setOpuses}
-						getFilteredData={getOpusData}
 						setClientDetails={setClientDetails}
 					/>}
 				/>
@@ -311,7 +278,7 @@ export default function App() {
 				<Route path="/mpcs" element={
 					<MobilePianoConcertSeriesPage
 						isMenuOpen={isMenuOpen}
-						musicians={musicians}
+						allMusicians={allMusicians}
 						loginStatus={loginStatus}
 						states={states}
 						scrollToTop={scrollToTop}
@@ -332,9 +299,7 @@ export default function App() {
 			{loginStatus
 			? <>
 				<div className='fixed bottom-5 right-5 w-[50px] h-[50px] bg-amber-400 text-white rounded-full flex align-center justify-center cursor-pointer hover:animate-bounce z-10'>
-					<Link to="/cart">
-						<img src={cartIcon} className="rounded-full p-1 cursor-pointer"/>
-					</Link>
+					<Link to="/cart"><img src={cartIcon} className="rounded-full p-1 cursor-pointer"/></Link>
 				</div>
 				<p className="fixed bottom-4 right-4 bg-red-500 rounded-full w-[20px] h-[20px] z-10 text-center pb-6">{userCart.length}</p>
 			</>

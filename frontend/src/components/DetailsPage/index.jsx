@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { getOpusById } from '../../../utils/backend'
 
-export default function DetailsPage({isMenuOpen, opusDetails, loginStatus, userCart, setUserCart}) {
+export default function DetailsPage({isMenuOpen, opusDetails, loginStatus, userCart, setUserCart, scrollToTop }) {
     const [opus, setOpus] = useState({ ...opusDetails })
     const params = useParams()
     const navigate = useNavigate()
@@ -15,6 +15,7 @@ export default function DetailsPage({isMenuOpen, opusDetails, loginStatus, userC
 
     useEffect(() => {
         getOpusData()
+        scrollToTop()
     }, [])
 
     function handleClick(evt) {

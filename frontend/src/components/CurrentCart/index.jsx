@@ -1,11 +1,11 @@
 import trashIcon from '../../assets/trash-icon.jpeg'
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
-export default function CurrentCart({ isMenuOpen, opuses, loginStatus, userCart, setUserCart, getOpusData, totalPrice }) {
+export default function CurrentCart({ isMenuOpen, allOpuses, loginStatus, userCart, setUserCart, totalPrice, scrollToTop }) {
     let cartText = userCart.length > 0 ? 'Your cart' : 'Your cart is empty.'
-    let btnStyle = 'border-stone-200 border rounded-xl px-3 py-1 my-2 w-full hover:scale-110 hover:cursor-pointer hover:bg-amber-400 hover:text-stone-900 hover:duration-500'
-
     let priceText = userCart.length > 0 ? `Your total: $${totalPrice}` : ''
+    const btnStyle = 'border-stone-200 border rounded-xl px-3 py-1 my-2 w-full hover:scale-110 hover:cursor-pointer hover:bg-amber-400 hover:text-stone-900 hover:duration-500'
 
     function handleClick(evt) {
         evt.preventDefault()
@@ -24,16 +24,14 @@ export default function CurrentCart({ isMenuOpen, opuses, loginStatus, userCart,
     }
 
     let nextStepLinks = 
-    [<Link key='link1' to="/repertoire" onClick={(evt) => {
-        getOpusData("none", "none")
-    }}>
-        <button className={btnStyle}>SELECT MORE REPERTOIRE</button>
-    </Link>]
+    [<Link key='link1' to="/repertoire"><button className={btnStyle}>SELECT MORE REPERTOIRE</button></Link>]
     userCart.length > 0 ? nextStepLinks.push(
-        <Link key='link2' to="/request">
-            <button className={btnStyle}>MAKE EVENT REQUEST WITH SELECTED REPERTOIRE</button>
-        </Link>
+        <Link key='link2' to="/request"><button className={btnStyle}>MAKE EVENT REQUEST WITH SELECTED REPERTOIRE</button></Link>
     ) : ''
+
+    useEffect(() => {
+        scrollToTop()
+    }, [])
     
     return loginStatus
     ? (
@@ -80,7 +78,7 @@ export default function CurrentCart({ isMenuOpen, opuses, loginStatus, userCart,
                             <div className="flex justify-between">
                                 <div>
                                     <p className="underline">BULK PRICE</p>
-                                    {opuses.filter(opus => opus._id === item._id).map(opus => <p key={opus._id}>{opus.movements.length === item.movements.length && opus.price !== null ? `$${opus.price}` : 'DOES NOT APPLY'}</p>)}
+                                    {allOpuses.filter(opus => opus._id === item._id).map(opus => <p key={opus._id}>{opus.movements.length === item.movements.length && opus.price !== null ? `$${opus.price}` : 'DOES NOT APPLY'}</p>)}
                                 </div>
                             </div>
                             <br/>

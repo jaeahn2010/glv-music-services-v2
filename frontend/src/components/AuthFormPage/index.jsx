@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { signUp, clientLogIn, adminLogIn } from "../../../utils/backend"
 
-export default function AuthFormPage({ isMenuOpen, setLoginStatus, adminLogin, setAdminLogin }) {
+export default function AuthFormPage({ isMenuOpen, setLoginStatus, adminLogin, setAdminLogin, scrollToTop }) {
     const { formType } = useParams()
     const navigate = useNavigate()
     const [isAdmin, setIsAdmin] = useState(false)
@@ -140,6 +140,10 @@ export default function AuthFormPage({ isMenuOpen, setLoginStatus, adminLogin, s
         <label htmlFor="adminCheckbox">Click here if logging in as admin</label>
     </section>
     : ''
+
+    useEffect(() => {
+        scrollToTop()
+    }, [])
 
     return (
         <section className={`${isMenuOpen ? 'z-0 opacity-5' : ''} bg-stone-800 rounded-xl border border-stone-200 p-8 lg:w-1/3 mx-auto mt-24 mb-48 font-poppins`}>

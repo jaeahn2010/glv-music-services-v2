@@ -1,10 +1,36 @@
+import { useState, useEffect } from 'react'
 import Gallery from '../Gallery'
 
-export default function RepertoirePage({ isMenuOpen, opuses, allComposers, getFilteredOpusData, setOpusDetails, loginStatus }) {
-    let instruments = ['bassoon', 'cello', 'clarinet', 'contrabass', 'flute', 'guitar', 'harp', 'oboe', 'orchestra', 'piano', 'percussion', 'saxophone', 'trombone', 'trumpet', 'tuba/euphonium', 'viola', 'violin']
-    let filterDivStyle = 'flex justify-center items-center w-11/12 mx-auto my-2'
-    let filterLabelStyle = 'w-1/2 text-right mr-2 text-sm'
-    let filterInputStyle = 'w-1/2 text-stone-800 text-sm'
+export default function RepertoirePage({ isMenuOpen, allOpuses, allComposers, setOpusDetails, loginStatus, instruments, scrollToTop, sortObjects }) {
+    const [filteredOpuses, setFilteredOpuses] = useState([])
+    const filterDivStyle = 'flex justify-center items-center w-11/12 mx-auto my-2'
+    const filterLabelStyle = 'w-1/2 text-right mr-2 text-sm'
+    const filterInputStyle = 'w-1/2 text-stone-800 text-sm'
+    
+    // get filtered opus data
+	function getFilteredOpusData(category, filter) {
+        let filteredOpusData = []
+        switch(category) {
+            case 'composer':
+                filteredOpusData = allOpuses.filter(opus => opus.composer === filter)
+                break
+            case 'instrumentation':
+                filteredOpusData = allOpuses.filter(opus => opus.instrumentation.includes(filter))
+                break
+            case 'price':
+                filteredOpusData = allOpuses.filter(opus => opus.price <= filter && opus.price !== null)
+                break
+            case 'keyword':
+                filteredOpusData = allOpuses.filter(opus => opus.title.includes(filter))
+                break
+        }
+        setFilteredOpuses(sortObjects(filteredOpusData))
+	}
+
+    useEffect(() => {
+        setFilteredOpuses(allOpuses)
+        scrollToTop()
+    }, [])
 
     return (
         <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} text-stone-200 font-poppins min-h-[125vh]`}>
@@ -18,9 +44,9 @@ export default function RepertoirePage({ isMenuOpen, opuses, allComposers, getFi
                             className={filterInputStyle}
                             name="composerFilter"
                             id="composerFilter"
-                            defaultValue='none'
+                            defaultValue={0}
                             onChange={evt => getFilteredOpusData('composer', evt.target.value)}>
-                            <option key='0' value='none' disabled>Select a composer</option>
+                            <option key={0} value={0} disabled>Select a composer</option>
                             {allComposers.sort().map(composer => <option key={composer} value={composer}>{composer}</option>)}
                         </select>
                     </div>
@@ -30,9 +56,9 @@ export default function RepertoirePage({ isMenuOpen, opuses, allComposers, getFi
                             className={filterInputStyle}
                             name="instrumentationFilter"
                             id="instrumentationFilter"
-                            defaultValue='none'
+                            defaultValue={0}
                             onChange={evt => getFilteredOpusData('instrumentation', evt.target.value)}>
-                            <option key='0' value='none' disabled>Select an instrument</option>
+                            <option key={0} value={0} disabled>Select an instrument</option>
                             {instruments.map(instrument => <option key={instrument} value={instrument}>{instrument}</option>)}
                         </select>
                     </div>
@@ -46,11 +72,11 @@ export default function RepertoirePage({ isMenuOpen, opuses, allComposers, getFi
                             onChange={evt => getFilteredOpusData('price', evt.target.value)}
                         />
                     </div>
-                    <button className='mx-auto my-5 p-2 border border-stone-200 rounded-xl hover:bg-amber-400 hover:text-stone-800 bg:scale-105' onClick={evt => getFilteredOpusData('none', 'none')}>CLEAR</button>
+                    <button className='mx-auto my-5 p-2 border border-stone-200 rounded-xl hover:bg-amber-400 hover:text-stone-800 bg:scale-105' onClick={() => setFilteredOpuses(allOpuses)}>CLEAR</button>
                 </div>
             </section>
             <Gallery
-                opuses={opuses}
+                filteredOpuses={filteredOpuses}
                 setOpusDetails={setOpusDetails}
             />
         </main>

@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import MusiciansGallery from '../MusiciansGallery'
 
-export default function MusiciansPage({ isMenuOpen, musicians, instruments, setMusicians, getFilteredMusiciansData, setMusicianDetails, loginStatus, categories, instrumentsExtended }) {
+export default function MusiciansPage({ isMenuOpen, allMusicians, setMusicianDetails, loginStatus, categories, instrumentsExtended }) {
     const [showForm, setShowForm] = useState(false)
+    const [filteredMusicians, setFilteredMusicians] = useState([])
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -15,6 +16,17 @@ export default function MusiciansPage({ isMenuOpen, musicians, instruments, setM
     const labelStyle = 'w-1/3 mx-2 text-right'
     const inputStyle = 'w-2/3 mx-2 p-1 rounded-xl text-stone-800'
     const btnStyle = 'border border-stone-200 px-2 py-1 my-6 rounded-xl hover:bg-green-600 hover:cursor-pointer'
+
+    //get full list of musicians, or filter by instrument
+	function getFilteredMusiciansData(filter) {
+		try {
+			let filteredMusiciansData = []
+			filter === 'none' ? filteredMusiciansData = musiciansData : filteredMusiciansData = musiciansData.filter(musician => musician.instrumentation.includes(filter))
+			setFilteredMusicians(filteredMusiciansData)
+		} catch {
+			alert('Cannot load musicians data at this time. Please check your internet connection. If the problem persists, please contact the site administrator.')
+		}
+	}
 
     function handleChange(evt) {
         if (['firstName', 'lastName'].includes(evt.target.name)) {
@@ -51,7 +63,7 @@ export default function MusiciansPage({ isMenuOpen, musicians, instruments, setM
                 </select>
             </section> */}
             <MusiciansGallery
-                musicians={musicians}
+                allMusicians={allMusicians}
                 getFilteredMusiciansData={getFilteredMusiciansData}
                 setMusicianDetails={setMusicianDetails}
                 loginStatus={loginStatus}

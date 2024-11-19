@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import Card from '../Card'
 
-export default function Gallery({ opuses, setOpusDetails }) {
+export default function Gallery({ filteredOpuses, setOpusDetails }) {
     const [endDisplayIndex, setEndDisplayIndex] = useState(20)
     let galleryContent = <p className='text-center my-10'>No repertoire found. Please check your internect connection. If the problem persists, please contact the site administrator.</p>
-    if (opuses.length > 0) {
-        galleryContent = opuses
+
+    if (filteredOpuses.length > 0) {
+        galleryContent = filteredOpuses
             .slice(0, endDisplayIndex)
             .map(opus => <Card
                 key={opus._id}
@@ -13,8 +14,9 @@ export default function Gallery({ opuses, setOpusDetails }) {
                 setOpusDetails={setOpusDetails}
             />)
     }
+    
     window.onscroll = () => {
-        if (window.innerHeight + window.scrollY >= document.body.offsetHeight && endDisplayIndex < opuses.length) setEndDisplayIndex(endDisplayIndex + 20)
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight && endDisplayIndex < filteredOpuses.length) setEndDisplayIndex(endDisplayIndex + 20)
     }
 
     return (
