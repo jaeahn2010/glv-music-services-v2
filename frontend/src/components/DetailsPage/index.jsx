@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { getOpusById } from '../../../utils/backend'
 
+// price & cart length doesn't update when new repertoire chosen from details page or when cart clicked
+
 export default function DetailsPage({isMenuOpen, opusDetails, loginStatus, userCart, setUserCart, scrollToTop }) {
     const [opus, setOpus] = useState({ ...opusDetails })
     const params = useParams()
@@ -25,8 +27,7 @@ export default function DetailsPage({isMenuOpen, opusDetails, loginStatus, userC
         } else {
             if (evt.target.value === 'bulkPrice') { //if client chooses bulk price
                 if (!opusIdList.includes(opus._id)) { //if chosen opus not on id list, put in cart & update id list
-                    userCart.push(opus)
-                    setUserCart(userCart)
+                    setUserCart(userCart => userCart.concat(opus))
                     localStorage.setItem("userCart", JSON.stringify(userCart))
                     opusIdList.push(opus._id)
                     alert('Item has been added to the cart.')
@@ -36,8 +37,7 @@ export default function DetailsPage({isMenuOpen, opusDetails, loginStatus, userC
                     } else { //if opus has mvmts,
                         let opusIndex = opusIdList.findIndex(id => id === opus._id)
                         if (opusIndex !== -1) { //if matching opus found, replace any partial mvmts w/ whole opus
-                            userCart[opusIndex] = opus
-                            setUserCart(userCart)
+                            setUserCart(userCart => userCart[opusIndex] = opus)
                             localStorage.setItem("userCart", JSON.stringify(userCart))
                             alert("There are some or all movements already in cart, and they have been replaced by the bulk price.")
                         }

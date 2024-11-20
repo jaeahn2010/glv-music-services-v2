@@ -31,18 +31,24 @@ export default function AuthFormPage({ isMenuOpen, setLoginStatus, adminLogin, s
                     setLoginStatus(true)
                     navigate('/')
                 } catch (err) {
-                    alert(err)
+                    console.log(err)
+                    alert('Incorrect email or password.')
                     navigate('/auth/login')
                 }
             } else { // if logging in as admin
-                const adminCredentials = await adminLogIn(formData)
-                localStorage.setItem('email', adminCredentials.email)
-                localStorage.setItem('firstName', 'Site')
-                localStorage.setItem('lastName', 'Admin')
-                localStorage.setItem('instrument', 'N/A')
-                setAdminLogin(true)
-                setLoginStatus(true)
-                navigate('/admin')
+                try {
+                    const adminCredentials = await adminLogIn(formData)
+                    localStorage.setItem('email', adminCredentials.email)
+                    localStorage.setItem('firstName', 'Site')
+                    localStorage.setItem('lastName', 'Admin')
+                    localStorage.setItem('instrument', 'N/A')
+                    setAdminLogin(true)
+                    setLoginStatus(true)
+                    navigate('/admin')
+                } catch(err) {
+                    console.log(err)
+                    alert('Incorrect email or password.')
+                }
             }
         } else { //if signing up
             if (formData.password !== formData.passwordRetype) {

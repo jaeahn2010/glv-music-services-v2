@@ -42,8 +42,8 @@ export default function App() {
 	const [adminLogin, setAdminLogin] = useState(false)
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
 	const [isMobile, setIsMobile] = useState(false)
+	const [totalPrice, setTotalPrice] = useState(0)
 	const navigate = useNavigate()
-	let totalPrice = 0
 	const h2Style = "text-stone-200 my-5 hover:scale-110 duration-500"
 	const pCategoryStyle = 'underline font-bold text-2xl p-2'
 
@@ -51,16 +51,19 @@ export default function App() {
 		if (!allComposers.includes(opus.composer)) allComposers.push(opus.composer)
 	}
 
-	for (let item of userCart) {
-        let fullOpus = allOpuses.find(opus => opus._id === item._id)
-        if (fullOpus.movements.length && fullOpus.movements.length === item.movements.length) {
-            totalPrice += fullOpus.price
-        } else {
-            for (let mvmt of item.movements) {
-                totalPrice += mvmt.movementPrice
-            }
-        }
-    }
+	useEffect(() => {
+		setTotalPrice(0)
+		for (let item of userCart) {
+			let fullOpus = allOpuses.find(opus => opus._id === item._id)
+			if (!item.price || fullOpus.movements.length !== item.movements.length) {
+				for (let mvmt of item.movements) {
+					setTotalPrice(totalPrice => totalPrice += mvmt.movementPrice)
+				} 
+			} else {
+				setTotalPrice(totalPrice => totalPrice += fullOpus.price)
+			}
+		}
+	}, [userCart])
 
 	function sortObjects(objs) {
 		return objs.sort((a, b) => {
