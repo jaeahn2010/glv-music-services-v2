@@ -5,35 +5,17 @@ const jwt = require('jwt-simple')
 const express = require('express')
 const router = express.Router()
 const nodemailer = require('nodemailer')
-const { google } = require('googleapis')
-
-const OAuth2 = google.auth.OAuth2
-const oauth2Client = new OAuth2 (
-    process.env.CLIENT_ID,
-    process.env.CLIENT_SECRET,
-    process.env.REDIRECT_URI,
-)
-
-oauth2Client.setCredentials({
-    refresh_token: process.env.REFRESH_TOKEN,
-})
 
 const sendEmail = async (formData) => {
     try {
-        const accessToken = await oauth2Client.getAccessToken()
-        if (!accessToken.token) {
-            throw new Error('No access token returned')
-        }
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                type: 'OAuth2',
                 user: process.env.GMAIL_USER,
-                clientId: process.env.CLIENT_ID,
-                clientSecret: process.env.CLIENT_SECRET,
-                refreshToken: process.env.REFRESH_TOKEN,
-                accessToken: accessToken.token,
-            }
+                pass: process.env.GMAIL_APP_PASS,
+            },
+            logger: true,
+            debug: true,
         })
         const mailOptions = {
             from: formData.clientEmail,
@@ -105,6 +87,7 @@ router.post('/', authMiddleware, (req, res) => {
 
 router.post('/send-email', authMiddleware, async (req, res) => {
     const formData = req.body
+    console.log(formData)
     try {
         const result = await sendEmail(formData)
         console.log('Email sent:', result)

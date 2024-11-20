@@ -173,7 +173,7 @@ export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instrum
             const musiciansData = await getMusicians()
             const clientsData = await getClients()
             const performancesData = await getPerformances()
-            setAllOpuses(opusData[0])
+            setAllOpuses(opusData)
             setAllMusicians(musiciansData)
             setAllClients(clientsData)
             setAllPerformances(performancesData)

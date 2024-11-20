@@ -54,9 +54,10 @@ export default function PerformancesPage({ isMenuOpen }) {
 
     return (
         <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} font-poppins min-h-[125vh]`}>
+            <h1 className="text-xl text-center my-10 lg:text-3xl">Our performances</h1>
+            <p className='w-3/4 mx-auto my-10'>Come check out our fantastic musicians in action! Hover over each card to see other featured musicians and a short description of each performance. Performance dates in red indicate past events, whereas those in green indicate upcoming performances.</p>
             {performances.length
             ? <section className="career-items my-24 min-h-[25rem]">
-                <h1 className="text-xl text-center my-10 lg:text-3xl">Our performances</h1>
                 {performances.map((performance, index) => 
                     <div key={index} className='card-flip flex my-10 w-11/12 md:w-3/4 h-[5rem] md:h-[12.5rem] mx-auto border border-stone-200 rounded-xl bg-gradient-to-r from-stone-800 via-stone-500 to-stone-800'>
                         <div className="card-front flex w-full">
@@ -64,7 +65,7 @@ export default function PerformancesPage({ isMenuOpen }) {
                                 <p className="text-sm md:text-2xl underline">{performance.title}</p>
                                 <div className='flex justify-between items-center w-5/6 my-8 text-lg'>
                                     <p>{performance.locationName} ({performance.city}, {performance.state})</p>
-                                    <p className={performance.date > new Date() ? 'text-green-300' : 'text-red-300'}>{new Date(new Date(performance.date).getTime() + 8 * 60 * 60 * 1000).toLocaleDateString()}, {nonMilitaryTime(performance.time)}</p>
+                                    <p className={new Date(performance.date) > new Date() ? 'text-green-300' : 'text-red-300'}>{new Date(new Date(performance.date).getTime() + 8 * 60 * 60 * 1000).toLocaleDateString()}, {nonMilitaryTime(performance.time)}</p>
                                 </div>
                                 <p>Featured GLVMS Musician(s): {performance.featuredGLVMSMusicians.map((musicianId, index) => {
                                     let musician = musicians.find(musician => musician._id === musicianId)
@@ -79,9 +80,11 @@ export default function PerformancesPage({ isMenuOpen }) {
                                 {performance.collaborators.length
                                 ? <>
                                     <p className='text-center underline'>Also featuring:</p>
-                                    {performance.collaborators.map(collaborator =>
-                                        <p key={collaborator.collaboratorLastName + collaborator.collaboratorFirstName} className='text-center'>{collaborator.collaboratorFirstName} {collaborator.collaboratorLastName} ({collaborator.collaboratorInstrument})</p>
-                                    )}
+                                    <div className={`${performance.collaborators.length > 5 ? 'columns-2' : ''}`}>
+                                        {performance.collaborators.map(collaborator =>
+                                            <p key={collaborator.collaboratorLastName + collaborator.collaboratorFirstName} className='text-center'>{collaborator.collaboratorFirstName} {collaborator.collaboratorLastName} ({collaborator.collaboratorInstrument})</p>
+                                        )}
+                                    </div>              
                                     <p className='my-3'>{performance.description}</p>
                                 </>
                                 : ''}

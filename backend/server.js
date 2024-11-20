@@ -4,6 +4,8 @@ const express = require('express')
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
 const path = require('path')
+const nodemailer = require('nodemailer')
+const bodyParser = require('body-parser')
 
 // db connection, models, seed data
 const db = require('./models')
@@ -29,6 +31,7 @@ app.use(cors({
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
 app.use(cookieParser())
+app.use(bodyParser.json())
 
 // mount routes
 app.use('/api/clients', clientsCtrl)

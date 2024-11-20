@@ -301,10 +301,10 @@ export default function App() {
 			</Routes>
 			{loginStatus
 			? <>
-				<div className='fixed bottom-5 right-5 w-[50px] h-[50px] bg-amber-400 text-white rounded-full flex align-center justify-center cursor-pointer hover:animate-bounce z-10'>
+				<div className='fixed bottom-5 right-5 w-[50px] h-[50px] bg-gradient-to-r from-green-600 via-green-400 to-green-600 rounded-full flex align-center justify-center cursor-pointer hover:animate-bounce z-10'>
 					<Link to="/cart"><img src={cartIcon} className="rounded-full p-1 cursor-pointer"/></Link>
 				</div>
-				<p className="fixed bottom-4 right-4 bg-red-500 rounded-full w-[20px] h-[20px] z-10 text-center pb-6">{userCart.length}</p>
+				<p className="fixed bottom-4 right-4 bg-red-500 rounded-full w-[22.5px] h-[20px] z-10 text-center pb-6">{userCart.length}</p>
 			</>
 			: ''
 			}
