@@ -45,31 +45,30 @@ export default function DetailsPage({isMenuOpen, opusDetails, loginStatus, userC
                 }
             } else { //if client chooses mvmt
                 if (!opusIdList.includes(opus._id)) { //if chosen opus not on id list, destructure opus & put in cart only selected mvmt
-                    userCart.push({...opus, movements: [{
+                    setUserCart(userCart => userCart.concat({...opus, movements: [{
                         movementNumber: Number(evt.target.parentElement.id),
                         movementTitle: evt.target.parentElement.innerText.split('$')[0].slice(0, evt.target.parentElement.innerText.split('$')[0].length - 1),
                         movementPrice: Number(evt.target.parentElement.innerText.split('$')[1]),
-                    }]})
-                    setUserCart(userCart)
+                    }]}))
                     localStorage.setItem("userCart", JSON.stringify(userCart))
                     opusIdList.push(opus._id)
                     alert("This movement has been added to the cart.")
                 } else { //if chosen opus on id list
-                    outerLoop: for (let opusInCart of userCart) { //iterate through cart to find the opus to be checked
+                    outerLoop:
+                    for (let opusInCart of userCart) { //iterate through cart to find the opus to be checked
                         if (opusInCart._id === opus._id) { //if ids match, check if mvmt already exists
                             for (let mvmt of opusInCart.movements) { //iterate through mvmts
                                 if (mvmt.movementTitle === evt.target.parentElement.innerText.split('$')[0].slice(0, evt.target.parentElement.innerText.split('$')[0].length - 1)) { //if mvmt title is same as one client chose, do nothing & break outer loop
                                     alert('This movement has already been added to your cart.')
-                                    break outerLoop;
+                                    break outerLoop
                                 }
                             } // if above loop finishes w/o match, update w/ newly selected mvmt & break loop
-                            userCart[userCart.indexOf(opusInCart)].movements.push({
+                            setUserCart(userCart => userCart[userCart.indexOf(opusInCart)].movements.push({
                                 movementNumber: Number(evt.target.parentElement.id),
                                 movementTitle: evt.target.parentElement.innerText.split('$')[0].slice(0, evt.target.parentElement.innerText.split('$')[0].length - 1),
                                 movementPrice: Number(evt.target.parentElement.innerText.split('$')[1]),
-                            })
+                            }))
                             alert("This opus is already in the cart, and has been updated with the new movement.")
-                            setUserCart(userCart)
                             localStorage.setItem("userCart", JSON.stringify(userCart))
                             break
                         }

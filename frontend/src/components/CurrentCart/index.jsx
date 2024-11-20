@@ -95,5 +95,5 @@ export default function CurrentCart({ isMenuOpen, allOpuses, loginStatus, userCa
             </div>
         </main>
     )
-    : <h1 className={`${isMenuOpen ? 'z-0 opacity-5' : ''} text-3xl text-center min-h-[75vh] mt-24`}>Please sign up or log in to access this part of the site.</h1>
+    : <h1 className={`${isMenuOpen ? 'z-0 opacity-5' : ''} text-3xl text-center min-h-[100vh] mt-24`}>Please sign up or log in to access this part of the site.</h1>
 }
