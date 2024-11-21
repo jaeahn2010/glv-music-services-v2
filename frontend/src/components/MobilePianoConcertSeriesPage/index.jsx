@@ -810,7 +810,7 @@ let divStyle = 'w-full lg:w-11/12 mx-auto flex'
 let labelStyle = 'w-1/3 lg:w-1/2 text-right m-2'
 let inputStyle = 'w-2/3 lg:w-1/2 text-left m-2 p-1 bg-stone-200 text-stone-800 rounded-lg'
 
-export default function MobilePianoConcertSeriesPage({ isMenuOpen, musicians, loginStatus, states, scrollToTop }) {
+export default function MobilePianoConcertSeriesPage({ isMenuOpen, allMusicians, loginStatus, states, scrollToTop }) {
     const [showDetails, setShowDetails] = useState(false)
     const [showScheduleModal, setShowScheduleModal] = useState(false)
     const [currentConcert, setCurrentConcert] = useState(concertObjs[0])
@@ -842,44 +842,50 @@ export default function MobilePianoConcertSeriesPage({ isMenuOpen, musicians, lo
 
     function handleSubmit(evt) {
         evt.preventDefault()
-        let [musicianLastName, musicianFirstName] = currentConcert.pianist.split(', ')
-        sendEmail({
-            mainRequest: false,
-            clientEmail: localStorage.getItem('email'),
-            musicianEmail: musicians.find(musician => musician.lastName === musicianLastName && musician.firstName === musicianFirstName).email,
-            eventName: concertRequestData.eventName,
-            eventLocation: {
-                locationName: concertRequestData.locationName,
-                address: concertRequestData.address,
-                city: concertRequestData.city,
-                state: concertRequestData.state,
-                zipCode: concertRequestData.zipCode,
-            },
-            eventDate: concertRequestData.eventDate,
-            eventStartTime: concertRequestData.eventStartTime,
-            eventEndTime: concertRequestData.eventEndTime,
-            requestedRepertoire: currentConcert.program,
-            additionalComments: concertRequestData.additionalComments,
-            status: 'pending',
-        })
-        setConcertRequestData({
-            clientEmail: '',
-            musicianEmail: '',
-            eventName: '',
-            eventLocation: {
-                locationName: '',
-                address: '',
-                city: '',
-                state: '',
-                zipCode: 0,
-            },
-            eventDate: new Date(),
-            eventStartTime: '',
-            eventEndTime: '',
-            requestedRepertoire: [],
-            additionalComments: '',
-            status: 'pending',
-        })
+        try {
+            let [musicianLastName, musicianFirstName] = currentConcert.pianist.split(', ')
+            sendEmail({
+                mainRequest: false,
+                clientEmail: localStorage.getItem('email'),
+                musicianEmail: allMusicians.find(musician => musician.lastName === musicianLastName && musician.firstName === musicianFirstName).email,
+                eventName: currentConcert.title,
+                eventLocation: {
+                    locationName: concertRequestData.locationName,
+                    address: concertRequestData.address,
+                    city: concertRequestData.city,
+                    state: concertRequestData.state,
+                    zipCode: concertRequestData.zipCode,
+                },
+                eventDate: concertRequestData.eventDate,
+                eventStartTime: concertRequestData.eventStartTime,
+                eventEndTime: concertRequestData.eventEndTime,
+                requestedRepertoire: currentConcert.program,
+                additionalComments: concertRequestData.additionalComments,
+                status: 'pending',
+            })
+            setConcertRequestData({
+                clientEmail: '',
+                musicianEmail: '',
+                eventName: '',
+                eventLocation: {
+                    locationName: '',
+                    address: '',
+                    city: '',
+                    state: '',
+                    zipCode: 0,
+                },
+                eventDate: new Date(),
+                eventStartTime: '',
+                eventEndTime: '',
+                requestedRepertoire: [],
+                additionalComments: '',
+                status: 'pending',
+            })
+            alert('Successfully sent concert request! The musician will contact you directly regarding this concert.')
+        } catch(err) {
+            console.log(err)
+            alert('Failed to send concert request. Please try again later.')
+        }
     }
 
     return (
