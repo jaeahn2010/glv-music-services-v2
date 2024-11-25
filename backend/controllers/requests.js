@@ -5,6 +5,35 @@ const jwt = require('jwt-simple')
 const express = require('express')
 const router = express.Router()
 const nodemailer = require('nodemailer')
+const multer = require('multer')
+const path = require('path')
+const fs = require('fs')
+
+const uploadDir = path.join(__dirname, 'backend/uploads')
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true })
+}
+
+// multer config
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => cb(null, 'backend/uploads/'),
+    filename: (req, file, cb) => cb(null, Date.now() + '-' + file.originalname),
+})
+
+const fileFilter = (req, file, cb) => {
+    const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document']
+    if (allowedTypes.includes(file.mimetype)) {
+        cb(null, true)
+    } else {
+        cb(new Error('Invalid file type. Only PDF, DOC, and DOCX are allowed.'))
+    }
+}
+
+const upload = multer({
+    storage: storage,
+    fileFilter: fileFilter,
+    limits: { fileSize: 5 * 1024 * 1024 }
+})
 
 const sendEmail = async (formData) => {
     try {
@@ -17,22 +46,45 @@ const sendEmail = async (formData) => {
             logger: true,
             debug: true,
         })
-        const mailOptions = {
-            from: formData.clientEmail,
-            to: 'glvmusicservices@gmail.com',
-            subject: `Performance Request from ${formData.clientEmail}`, // change to fname/lname later
-            text: `eventName: ${formData.eventName},
-            locationName: ${formData.eventLocation.locationName},
-            address: ${formData.eventLocation.address},
-            city: ${formData.eventLocation.city},
-            state: ${formData.eventLocation.state},
-            zipCode: ${formData.eventLocation.zipCode},
-            eventDate: ${formData.eventDate},
-            eventStartTime: ${formData.eventStartTime},
-            eventEndTime: ${formData.eventEndTime},
-            requestedRepertoire: ${formData.mainRequest ? formData.requestedRepertoire.map(rep => `${rep.composer}: ${rep.title} (${rep.movements})`) : formData.requestedRepertoire.map(rep => `${rep[1]}: ${rep[0]}`)},
-            additionalComments: ${formData.additionalComments},
-            status: pending,`
+
+        let mailOptions 
+        switch(formData.requestType) {
+            case 'main':
+            case 'MPCS':
+            mailOptions = {
+                from: formData.clientEmail,
+                to: 'glvmusicservices@gmail.com',
+                subject: `Performance Request from ${formData.clientEmail}`, // change to fname/lname later
+                text: `eventName: ${formData.eventName},
+                locationName: ${formData.eventLocation.locationName},
+                address: ${formData.eventLocation.address},
+                city: ${formData.eventLocation.city},
+                state: ${formData.eventLocation.state},
+                zipCode: ${formData.eventLocation.zipCode},
+                eventDate: ${formData.eventDate},
+                eventStartTime: ${formData.eventStartTime},
+                eventEndTime: ${formData.eventEndTime},
+                requestedRepertoire: ${formData.mainRequest ? formData.requestedRepertoire.map(rep => `${rep.composer}: ${rep.title} (${rep.movements})`) : formData.requestedRepertoire.map(rep => `${rep[1]}: ${rep[0]}`)},
+                additionalComments: ${formData.additionalComments},
+                status: pending,`
+            }
+            break
+            case 'joinGLVMS':
+                mailOptions = {
+                    from: formData.email,
+                    to: 'glvmusicservices@gmail.com',
+                    subject: `Interview Request from ${formData.firstName} ${formData.lastName}`,
+                    text: `categories: ${formData.categories},
+                    instruments: ${formData.instruments},
+                    resume: ${formData.resume}`,
+                    attachments: [
+                        {
+                            filename: formData.file.originalname,
+                            path: formData.file.path,
+                        },
+                    ],
+                }
+            break
         }
         const result = await transporter.sendMail(mailOptions)
         return result
@@ -85,9 +137,10 @@ router.post('/', authMiddleware, (req, res) => {
         .then(review => res.json(review))
 })
 
-router.post('/send-email', authMiddleware, async (req, res) => {
-    const formData = req.body
-    console.log(formData)
+// email sender
+router.post('/send-email', authMiddleware, upload.single('resume'), async (req, res) => {
+    if (!req.file) return res.status(400).send('No resume uploaded.')
+    const formData = {...req.body, file: req.file}
     try {
         const result = await sendEmail(formData)
         console.log('Email sent:', result)
