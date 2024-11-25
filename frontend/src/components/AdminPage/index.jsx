@@ -56,6 +56,9 @@ export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instrum
         time: '',
         featuredGLVMSMusicians: [],
         collaborators: [],
+        openToPublic: true,
+        minPrice: 0,
+        maxPrice: 0,
         description: '',
     })
     const btnStyle = 'border border-stone-200 rounded-xl p-2 mx-auto my-4 hover:scale-110 hover:bg-gradient-to-r from-green-700 via-green-500 to-green-700'
@@ -486,6 +489,46 @@ export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instrum
                 )}</ul>
                 : ''}
                 {showCollaboratorModal ? collaboratorsModal : ''}
+                <div className={'mx-auto w-11/12 p-1 m-2'}>
+                    <p className="text-center underline">Open to Public</p>
+                    {[true, false].map(bool => 
+                        <div key={bool} className="flex justify-start items-center mx-auto w-1/2">
+                            <input
+                                type='radio'
+                                id={'openToPublic-' + bool}
+                                name='openToPublic'
+                                value={bool}
+                                className='m-2 p-1 bg-stone-200 text-stone-800 rounded-lg'
+                                onChange={handleChange}
+                            />
+                            <label htmlFor={bool} className='text-right m-2'>{bool ? 'Yes' : 'No'}</label>
+                        </div>
+                    )}
+                </div>
+                <div className={'mx-auto w-11/12 flex justify-center items-center p-1 m-2 rounded-xl'}>
+                    <label htmlFor="minPrice" className={labelStyle}>Minimum ticket price:</label>
+                    <input
+                        type='number'
+                        name='minPrice'
+                        id='minPrice'
+                        className={inputStyle}
+                        defaultValue={performanceFormData.minPrice}
+                        placeholder={0}
+                        onChange={handleChange}
+                    />
+                </div>
+                <div className={'mx-auto w-11/12 flex justify-center items-center p-1 m-2 rounded-xl'}>
+                    <label htmlFor="maxPrice" className={labelStyle}>Maximum ticket price:</label>
+                    <input
+                        type='number'
+                        name='maxPrice'
+                        id='maxPrice'
+                        className={inputStyle}
+                        defaultValue={performanceFormData.maxPrice}
+                        placeholder={0}
+                        onChange={handleChange}
+                    />
+                </div>
                 <div className={'mx-auto w-11/12 flex justify-center items-center p-1 m-2 rounded-xl'}>
                     <label htmlFor="description" className={labelStyle}>Description:</label>
                     <textarea
