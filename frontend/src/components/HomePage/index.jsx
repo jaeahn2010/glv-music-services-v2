@@ -14,13 +14,13 @@ export default function HomePage({isMenuOpen, isMobile}) {
     const [feeModalDisplay, setFeeModalDisplay] = useState(false)
     const [visibilities, setVisibilities] = useState([false, false, false, false])
     const domRefs = [useRef(), useRef(), useRef(), useRef()]
-    let divElements = [
+    const divElements = [
         ['AVAILABLE FOR HIRE FOR ANY EVENT', anyEvent],
         ['VERSATILE, CLASSICALLY TRAINED MUSICIANS', classicallyTrained],
         ['TRANSPARENT FEES, NO HIDDEN COSTS', noHiddenFees],
-        ['HASSLE-FREE, DIRECT SCHEDULING', hassleFreeScheduling]
+        ['HASSLE-FREE, DIRECT CONTACT WITH MUSICIANS', hassleFreeScheduling]
     ]
-    let services = [ // service, description, fee type, musicians who offer the service
+    const services = [ // [service, description, fee type]
         ['AUDITIONS, COMPETITIONS, JURIES, & EXAMS', 'Increase your chances of success by hiring our collaborative pianists. They are highly experienced in representing your best musical interests in a high-importance and/or high-stress settings, such as a college audition, state or national level competition, or a music school examinations or jury.', 'flat'],
         ['COMPOSING & ARRANGING', 'Commission a composition with a composer on our team. Our composers are versatile and creative - they can customize it to perfectly fit your vision, in terms of style, instrumentation, duration, theme, and/or atmosphere. Already found the perfect music or song, but not quite the right instrumentation? No problem! Our composers can expertly arrange the original for your desired instrumentation.', 'repertoire'],
         ['FORMAL RECITALS & CONCERTS', 'Need an accompanist for your academic recital or formal concert? We have a vast amount of repertoire under our belts, ready to go at a moment\'s notice. Available for all instruments (piano, strings, woodwinds, brass, percussion, and voice), as well as for conductors and composers.', 'repertoire'],
@@ -30,6 +30,10 @@ export default function HomePage({isMenuOpen, isMobile}) {
         ['REHEARSALS, LESSONS, & CLASSES', 'Hire a pianist to accompany you at a rehearsal, a lesson with your private instructor, a studio class of all of your private students, or a public masterclass. Both individual one-time sessions and repeating sessions (weekly, biweekly, monthly, etc.) are available.', 'hourly'],
         ['VOCAL & FOREIGN LANGUAGE COACHING', 'Are you a current or an aspiring opera singer who is in need of role study or general coaching? Our coaches offer expertise in a variety of operatic styles, art songs, and diction. Language coaching offered in English, Spanish, Italian, French, German, Russian, Ukrainian, and Korean.', 'hourly'],
         ['WEDDING & PARTY MUSIC', 'We provide fully customized sets of music for any special occasion, from weddings to private home parties. We offer traditional classical tunes, popular songs, and everything in between, whether you need full-pledged performances, intermittent ceremonial musical inserts, or continuous atmospheric background music.', 'repertoire'],
+    ]
+    const FAQs = [ // [question, answer, tags]
+        ['Can you explain the different fee types, with some examples?', `Fee types describe how an event is charged. A ${<span className='font-bold'>flat</span>} fee is a smaller one-time fee that covers a small performance usually with a time limit, such as an audition or a competition. For example, one of our collaborative pianists might charge a flat $50 fee for their performance alongside a student at Solo and Ensemble, regardless of the complexity of the repertoire being performed. A ${<span className='font-bold'>repertoire</span>} fee is a larger, custom-quoted fee that covers a full performance that depends on a variety of factors such as difficulty of the repertoire, duration of the performance, distance traveled, amount of time given to prepare the music, and equipment setup. For example, if a cellist asks one of our pianists to prepare the first movement of Beethoven's Cello Sonata No. 2 ($120) and the entire Elgar Cello Concerto ($175 bulk fee), the total fee charged to the cellist for the pianist to prepare the above repertoire would be $295. An ${<span className='font-bold'>hourly</span>} fee is solely dependent on the duration of the event that would have a designated time frame, such as a rehearsal, lesson, or a class. For example, if one of our musicians who charges $60/hr is asked to be in a recording session for 1.5 hours, the resulting fee would be $90, regardless of the complexity of the repertoire. It is important to remember that each musician has the right to make variations, exceptions, or discounts to these fees as they see fit on a case-by-case basis.`, 'fees'],
+        ['']
     ]
     const imgStyle = 'w-[350px] rounded-xl hover:scale-110 duration-500'
     const pStyle = 'text-center text-lg mt-6 hover:text-green-300'
@@ -100,6 +104,9 @@ export default function HomePage({isMenuOpen, isMobile}) {
                     </div>
                     : ''}
                 </div>
+            </section>
+            <section className='w-full font-poppins flex flex-col border border-white'>
+
             </section>
             <section className="w-[vw-100] py-2 mt-12 font-poppins flex flex-col">
                 <p className='w-full mx-auto text-center my-5 text-xl'>CONTACT US</p>
