@@ -721,6 +721,7 @@ function titleExpander(composer, opusTypeAmount, opusType, opusTypeNo, key, nick
         case liszt: catalog = 'S.'; break
         case mozart: catalog = 'K.'; break
         case poulenc: catalog = 'FP'; break
+        case purcell: catalog = 'Z'; break
         case ravel: catalog = 'M.'; break
         case schubert: catalog = 'D.'; break
         case vivaldi: catalog = 'Rv.'; break
@@ -2640,7 +2641,94 @@ const availablePianoChamberList = [
     [chamber, price, 1, 'Songs from the weary blues', 0, '', '', 0, 0, '', '', '', [
         [2, 'Songs to the dark virgin', [ahnbenton]],
     ], [pno, voc], [ahnbenton]],
-
+    [chamber, prokofiev, 1, 'Overture on Hebrew themes', 0, '', '', 34, 0, '', '', '', [], [cl, vln, vln, vla, vlc, pno], [ahnbenton]],
+    [chamber, prokofiev, 5, 'mel', 0, '', '', 35, 0, '', '', '', [
+        [1, 'Andante', [ahnbenton]],
+        [2, 'Lento, ma non troppo', [ahnbenton]],
+        [3, 'Animato, ma non allegro', [ahnbenton]],
+        [4, 'Andantino leggiero e scherzando', [ahnbenton]],
+        [5, 'Andante non troppo', [ahnbenton]],
+    ], [pno, vln], [ahnbenton]],
+    [chamber, prokofiev, 1, 's', 0, 'd+', '', 94, 0, '', '', '', [
+        [1, 'Moderato', [ahnbenton]],
+        [2, 'Presto', [ahnbenton]],
+        [3, 'Andante', [ahnbenton]],
+        [4, 'Allegro con brio', [ahnbenton, kolesnyk]],
+    ], [pno, fl], [ahnbenton, kolesnyk]],
+    [chamber, prokofiev, 1, 's', 0, 'c+', '', 119, 0, '', '', '', [
+        [1, 'Andante grave', [ahnbenton]],
+        [2, 'Moderato', [ahnbenton]],
+        [3, 'Allegro, ma non troppo', [ahnbenton]],
+    ], [pno, vlc], [ahnbenton]],
+    [chamber, puccini, 1, 'Sole e amore', 0, '', '', 0, 0, '', '', '', [], [pno, voc], [ahnbenton]],
+    [chamber, puccini, 1, 'Storiella d\'amore', 0, '', '', 0, 0, '', '', '', [], [pno, voc], [ahnbenton]],
+    [chamber, puccini, 1, 'Avanti Urania!', 0, '', '', 0, 0, '', '', '', [], [pno, voc], [ahnbenton]],
+    [chamber, puccini, 1, 'È l\'uccellino', 0, '', '', 0, 0, '', '', '', [], [pno, voc], [ahnbenton]],
+    [chamber, puccini, 1, 'Terra e mare', 0, '', '', 0, 0, '', '', '', [], [pno, voc], [ahnbenton]],
+    [chamber, puccini, 1, 'Sogno d\'or', 0, '', '', 0, 0, '', '', '', [], [pno, voc], [ahnbenton]],
+    [chamber, puccini, 1, 'Morire?', 0, '', '', 0, 0, '', '', '', [], [pno, voc], [ahnbenton]],
+    [chamber, purcell, 1, 'If music be the food of love', 0, '', '', 379, 0, '', '', '', [], [pno, voc], [ahnbenton]],
+    [chamber, purcell, 1, 'Trip it, trip it in a ring', 0, '', '', 515, 0, '', '', '', [], [pno, voc], [ahnbenton]],
+    [chamber, quilter, 1, 'Songs of the sea', 0, '', '', 1, 0, '', '', '', [
+        [1, 'I have a friend', [ahnbenton]],
+        [2, 'The sea-bird', [ahnbenton]],
+        [3, 'Moonlight', [ahnbenton]],
+        [4, 'By the sea', [ahnbenton]],
+    ], [pno, voc], [ahnbenton]],
+    [chamber, quilter, 3, 'sg', 0, '', '', 3, 0, '', '', '', [
+        [1, 'Love\'s philosophy', [ahnbenton]],
+        [2, 'Now sleeps the crimson petal', [ahnbenton]],
+    ], [pno, voc], [ahnbenton]],
+    [chamber, quilter, 1, 'Shakespeare songs', 0, '', '', 6, 0, '', '', '', [
+        [1, 'Come away, death', [ahnbenton]],
+        [2, 'O mistress mine', [ahnbenton]],
+        [3, 'Blow, blow thou winter wind', [ahnbenton]],
+    ], [pno, voc], [ahnbenton]],
+    [chamber, quilter, 1, 'Elizabethan lyrics', 0, '', '', 12, 0, '', '', '', [
+        [1, 'Weep no more', [ahnbenton]],
+        [2, 'My life\'s delight', [ahnbenton]],
+        [3, 'Damask roses', [ahnbenton]],
+        [7, 'Fair house of joy', [ahnbenton]],
+    ], [pno, voc], [ahnbenton]],
+    [chamber, quilter, 1, 'Songs of William Blake', 0, '', '', 20, 0, '', '', '', [
+        [1, 'Drema valley', [ahnbenton]],
+        [3, 'Daybreak', [ahnbenton]],
+    ], [pno, voc], [ahnbenton]],
+    [chamber, quilter, 1, 'English love lyrics', 0, '', '', 24, 0, '', '', '', [
+        [3, 'Go, lovely rose', [ahnbenton]],
+    ], [pno, voc], [ahnbenton]],
+    [chamber, quilter, 6, 'sg', 0, '', '', 25, 0, '', '', '', [
+        [5, 'Music, when soft voices die', [ahnbenton]],
+    ], [pno, voc], [ahnbenton]],
+    [chamber, quilter, 1, 'Come back!', 0, '', '', 0, 0, '', '', '', [], [pno, voc], [ahnbenton]],
+    [chamber, rabaud, 1, 'Solo de concours', 0, '', '', 0, 0, '', '', '', [], [pno, cl], [ahnbenton]],
+    [chamber, rachmaninov, 1, 'Trio élégiaque', 1, 'g-', '', 0, 0, '', '', '', [], [pno, vln, vlc], [ahnbenton]],
+    [chamber, rachmaninov, 6, 'sg', 0, '', '', 4, 0, '', '', '', [
+        [3, 'В молчаньи ночи тайной (In the silence of the secret night)', [ahnbenton, kolesnyk]],
+        [4, 'Не пой, красавица, при мне (Sing not, o lovely one)', [ahnbenton, kolesnyk]],
+        [6, 'Уж ты, нива моя (The harvest of sorrow)', [ahnbenton]],
+    ], [pno, voc], [ahnbenton, kolesnyk]],
+    [chamber, rachmaninov, 6, 'sg', 0, '', '', 8, 0, '', '', '', [
+        [2, 'Дитя! Как цветок, ты прекрасна (Child! Thou Art as Beautiful as a Flower)', [ahnbenton]],
+    ], [pno, voc], [ahnbenton]],
+    [chamber, rachmaninov, 12, 'sg', 0, '', '', 14, 0, '', '', '', [
+        [11, 'Весенние воды (Spring waters)', [ahnbenton]],
+    ], [pno, voc], [ahnbenton]],
+    [chamber, rachmaninov, 1, 's', 0, 'g-', '', 19, 0, '', '', '', [
+        [1, 'Lento - Allegro moderato', [ahnbenton]],
+        [2, 'Allegro scherzando', [ahnbenton]],
+        [3, 'Andante', [ahnbenton]],
+        [4, 'Allegro mosso', [ahnbenton]],
+    ], [pno, vlc], [ahnbenton]],
+    [chamber, rachmaninov, 12, 'sg', 0, '', '', 21, 0, '', '', '', [
+        [7, 'Здесь хорошо (How fair this spot)', [ahnbenton, kolesnyk]],
+    ], [pno, voc], [ahnbenton, kolesnyk]],
+    [chamber, rachmaninov, 15, 'sg', 0, '', '', 26, 0, '', '', '', [
+        [13, 'Вчера мы встретились (When yesterday we met)', [ahnbenton]],
+    ], [pno, voc], [ahnbenton]],
+    [chamber, rachmaninov, 14, 'sg', 0, '', '', 34, 0, '', '', '', [
+        [14, 'Вокализ (Vocalise)', [ahnbenton, kolesnyk]],
+    ], [pno, voc], [ahnbenton, kolesnyk]],
     [chamber, scarlattiA, 1, 'Già il sole dal Gange', 0, '', '', 0, 0, '', '', '', [], [pno, voc], [ahnbenton, kolesnyk]],
     [chamber, scarlattiA, 1, 'O cessate di piagarmi', 0, '', '', 0, 0, '', '', '', [], [pno, voc], [ahnbenton, kolesnyk]],
     [chamber, scarlattiA, 1, 'Se Florindo è fedele', 0, '', '', 0, 0, '', '', '', [], [pno, voc], [ahnbenton]],
