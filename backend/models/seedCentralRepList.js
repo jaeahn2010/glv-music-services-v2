@@ -347,7 +347,7 @@ const offenbach = 'Jacques Offenbach'
 const orff = 'Carl Orff'
 const pachelbel = 'Johann Pachelbel'
 const paderewski = 'Ignacy Jan Paderewski'
-const paganini = 'Niccolo Paganini'
+const paganini = 'Niccolò Paganini'
 const paisiello = 'Giovanni Paisiello'
 const palestrina = 'Giovanni Pierluigi da Palestrina'
 const parisotti = 'Alessandro Parisotti'
@@ -360,7 +360,7 @@ const pergolesi = 'Giovanni Battista Pergolesi'
 const perri = 'Christina Perri'
 const pfizner = 'Hans Pfizner'
 const phillips = 'Burrill Phillips'
-const piazzolla = 'Astor Piazzolla'
+const piazzolla = 'Ástor Piazzolla'
 const pierne = 'Gabriel Pierné'
 const pixis = 'Johann Peter Pixis'
 const ponce = 'Manuel Ponce'
@@ -432,6 +432,7 @@ const skoryk = 'Myroslav Skoryk'
 const smetana = 'Bedřich Smetana'
 const sneed = 'Damien Sneed'
 const soler = 'Antonio Soler'
+const sondheim = 'Stephen Sondheim'
 const sorozabal = 'Pablo Sorozábal'
 const sousa = 'John Philip Sousa'
 const sparke = 'Philip Sparke'
@@ -814,6 +815,7 @@ const availablePianoSoloList = [
     ], [pno], [ahnbenton]],
     [solo, ahnbenton, 0, 'v', 0, 'f-', 'Dream Variations', 77, 0, 'Lara Turello', '', '', [], [pno, orch], [ahnbenton]],
     [solo, ahnbenton, 1, 'rom', 0, 'e+', 'Reminiscence', 87, 0, '', '', '', [], [pno], [ahnbenton]],
+    [solo, ahnbenton, 1, 'v', 0, 'e-', 'God rest ye merry, gentlemen', 101, 0, '', '', '', [], [pno], [ahnbenton]],
     [solo, ahnbenton, 1, 'trn', 1, 'c+', '', 0, 0, '', 'Chopsticks', '', [], [pno], [ahnbenton]],
     [solo, ahnbenton, 1, 'trn', 2, 'f-', '', 0, 0, vivaldi, 'Winter (Seasons)', '', [
         [1, 'Allegro non molto', [ahnbenton]],
@@ -2566,7 +2568,7 @@ const availablePianoChamberList = [
         [3, 'Primavera Porteña', [ahnbenton]],
         [4, 'Otoño Porteño', [ahnbenton]],
     ], [vln, orch], [ahnbenton]],
-    [chamber, piazzolla, 1, 'Adios Nonino', 0, '', '', 0, 0, '', '', piazzolla, [], [pno, aSax], [ahnbenton]],
+    [chamber, piazzolla, 1, 'Adiós Nonino', 0, '', '', 0, 0, '', '', piazzolla, [], [pno, aSax], [ahnbenton]],
     [chamber, piazzolla, 1, 'Histoire du tango', 0, '', '', 0, 0, '', '', isoda, [
         [1, 'Bordel 1900', [ahnbenton]],
         [2, 'Café 1930', [ahnbenton]],
@@ -3033,6 +3035,7 @@ const availablePianoChamberList = [
     [chamber, sibelius, 5, 'sg', 0, '', '', 37, 0, '', '', '', [
         [1, 'Den första kyssen', [ahnbenton]],
     ], [pno, voc], [ahnbenton]],
+    [chamber, silvestrov, 0, 'Epitaph L.B.', 0, '', '', 0, 0, '', '', '', [], [pno, vla], [ahnbenton]],
     [chamber, singelee, 1, 'Fantaisie brillante', 0, 'ef+', '', 86, 0, '', '', '', [], [pno, aSax], [ahnbenton]],
     [chamber, skoryk, 1, 'Carpathian rhapsody', 0, '', '', 0, 0, '', '', '', [], [pno, vln], [ahnbenton]],
     [chamber, skoryk, 1, 'Melodia', 0, 'a-', '', 0, 0, '', '', '', [], [pno, vln], [ahnbenton, kolesnyk]],
@@ -3181,6 +3184,11 @@ const availablePianoChamberList = [
         [2, 'Andante con moto', [ahnbenton, kolesnyk]],
         [3, 'Rondo: Allegro', [ahnbenton, kolesnyk]],
     ], [pno, cl], [ahnbenton, kolesnyk]],
+    [chamber, weill, 1, 'Complainte de la Seine', 0, '', '', 0, 0, '', '', '', [], [pno, voc], [ahnbenton]],
+    [chamber, weill, 1, 'Es regnet', 0, '', '', 0, 0, '', '', '', [], [pno, voc], [ahnbenton]],
+    [chamber, weill, 1, 'Je ne t\'aime pas', 0, '', '', 0, 0, '', '', '', [], [pno, voc], [ahnbenton]],
+    [chamber, weill, 1, 'Wie lange noch?', 0, '', '', 0, 0, '', '', '', [], [pno, voc], [ahnbenton]],
+    [chamber, weill, 1, 'Youkali', 0, '', '', 0, 0, '', '', '', [], [pno, voc], [ahnbenton]],
     [chamber, widor, 1, 'su', 0, '', '', 34, 0, '', '', '', [
         [1, 'Moderato', [ahnbenton]],
         [2, 'Scherzo: Allegro vivace', [ahnbenton]],
@@ -3989,6 +3997,661 @@ const availablePianoReductionList = [
         [4.1, 'Offertorium', [ahnbenton]],
         [7, 'Agnus Dei', [ahnbenton]],
     ], [voc, orch], [ahnbenton]],
+    [reduction, neruda, 1, 'con', 0, 'ef+', '', 0, 0, '', '', '', [
+        [1, 'Allegro', [ahnbenton]],
+        [2, 'Largo', [ahnbenton]],
+        [3, 'Vivace', [ahnbenton]],
+    ], [tpt, orch], [ahnbenton]],
+    [reduction, nicolai, 1, 'Die lustigen Weiber von Windsor', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Verführer! Warum stellt ihr so der tugendsamen Gattin nach?', [ahnbenton]],
+        [0, 'Horch, die Lerche singt im Hain', [ahnbenton]],
+        [0, 'Vom Jäger Herne die Mär ist alt', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, nielsen, 1, 'con', 0, '', '', 0, 0, '', '', '', [
+        [1, 'Allegro moderato', [ahnbenton]],
+        [2, 'Allegretto un poco', [ahnbenton]],
+    ], [fl, orch], [ahnbenton]],
+    [reduction, novacek, 1, 'Perpetuum mobile', 0, '', '', 0, 0, '', '', '', [], [vln, orch], [ahnbenton]],
+    [reduction, offenbach, 1, 'Les contes d\'Hoffmann', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Il était une fois a la cour d\'Eisenach!', [ahnbenton]],
+        [0, 'Les oiseaux dans la charmille (Doll song)', [ahnbenton]],
+        [0, 'Belle nuit, ô nuit d\'amour', [ahnbenton]],
+        [0, 'Scintille diamant', [ahnbenton]],
+        [0, 'O Dieu de quelle ivresse embrasestu mon âme', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, paganini, 1, 'con', 2, 'b-', '', 7, 0, '', '', '', [
+        [3, 'Rondo: Andantino allegretto moderato (La campanella)', [ahnbenton]],
+    ], [vln, orch], [ahnbenton]],
+    [reduction, pergolesi, 1, 'La serva padrona', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Stizzoso, mio stizzoso', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, ponchielli, 1, 'La gioconda', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Voce di donna o d\'angelo', [ahnbenton]],
+        [0, 'Les oiseaux dans la charmille (Doll song)', [ahnbenton]],
+        [0, 'Belle nuit, ô nuit d\'amour', [ahnbenton]],
+        [0, 'Scintille diamant', [ahnbenton]],
+        [0, 'O Dieu de quelle ivresse embrasestu mon âme', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, popper, 1, 'req', 0, '', '', 66, 0, '', '', '', [], [vlc, vlc, vlc, orch], [ahnbenton]],
+    [reduction, previn, 1, 'A streetcar named Desire', 0, '', '', 0, 0, '', '', '', [
+        [0, 'I want magic', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, prokofiev, 1, 'con', 2, 'g-', '', 63, 0, '', '', '', [
+        [1, 'Allegro moderato', [ahnbenton]],
+        [2, 'Andante assai', [ahnbenton]],
+        [3, 'Allegro, ben marcato', [ahnbenton]],
+    ], [vln, orch], [ahnbenton]],
+    [reduction, puccini, 1, 'La Bohème', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Che gelida manina', [ahnbenton, kolesnyk]],
+        [0, 'Sì, mi chiamano Mimì', [ahnbenton]],
+        [0, 'Quando m\'en vo', [ahnbenton, kolesnyk]],
+        [0, 'Donde lieta uscì', [ahnbenton]],
+        [0, 'Vecchia zimarra, senti', [ahnbenton, kolesnyk]],
+    ], [voc, orch], [ahnbenton, kolesnyk]],
+    [reduction, puccini, 1, 'Edgar', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Questo amor vergogna mia', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, puccini, 1, 'Gianni Schicchi', 0, '', '', 0, 0, '', '', '', [
+        [0, 'In testa la capellina', [ahnbenton, kolesnyk]],
+        [0, 'Avete torto!', [ahnbenton]],
+        [0, 'O mio babbino caro', [ahnbenton, kolesnyk]],
+    ], [voc, orch], [ahnbenton, kolesnyk]],
+    [reduction, puccini, 1, 'La fanciulla del West', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Ch\'ella mi creda libero e lontano', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, puccini, 1, 'Madama Butterfly', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Dovunque al mondo lo Yankee', [ahnbenton]],
+        [0, 'Un bel dì vedremo', [ahnbenton]],
+        [0, 'Addio fiorito asil', [ahnbenton]],
+        [0, 'Tu? Tu? Piccolo Iddio', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, puccini, 1, 'Manon Lescaut', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Donna non vidi mai', [ahnbenton]],
+        [0, 'In quelle trine morbide', [ahnbenton]],
+        [0, 'Sola, perduta, abbandonata', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, puccini, 1, '', 0, 'La rondine', '', 0, 0, '', '', '', [
+        [0, 'Chi il bel sogno di Doretta', [ahnbenton, kolesnyk]],
+    ], [voc, orch], [ahnbenton, kolesnyk]],
+    [reduction, puccini, 1, '', 0, 'Suor Angelica', '', 0, 0, '', '', '', [
+        [0, 'Nel silenzio di quei raccoglimenti', [ahnbenton]],
+        [0, 'Senza mamma, o bimbo, tu sei morto', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, puccini, 1, '', 0, 'Il tabarro', '', 0, 0, '', '', '', [
+        [0, 'Nulla! Silenzio!', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, puccini, 1, 'Tosca', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Recondita armonia', [ahnbenton, kolesnyk]],
+        [0, 'Tre sbirre, una carrozza (Te Deum)', [ahnbenton]],
+        [0, 'Vissi d\'arte, vissi d\'amore', [ahnbenton, kolesnyk]],
+        [0, 'E lucevan le stelle', [ahnbenton, kolesnyk]],
+    ], [voc, orch], [ahnbenton, kolesnyk]],
+    [reduction, puccini, 1, 'Turandot', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Signore ascolta!', [ahnbenton]],
+        [0, 'Non piangere Liù', [ahnbenton]],
+        [0, 'In questa reggia', [ahnbenton]],
+        [0, 'Nessun dorma', [ahnbenton, kolesnyk]],
+        [0, 'Tu, che di gel sei cinta', [ahnbenton, kolesnyk]],
+    ], [voc, orch], [ahnbenton, kolesnyk]],
+    [reduction, puccini, 1, 'Le villi', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Se come voi piccina io fossi', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, purcell, 1, 'Dido and Aeneas', 0, '', '', 0, 0, '', '', '', [
+        [0, 'When I am laid in earth (Dido\'s lament)', [ahnbenton, kolesnyk]],
+    ], [voc, orch], [ahnbenton, kolesnyk]],
+    [reduction, purcell, 1, 'The fairy queen', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Come, come let us leave the town', [ahnbenton]],
+        [0, 'Fill up the bowl', [ahnbenton]],
+        [0, 'Come all ye songsters of the sky', [ahnbenton]],
+        [0, 'See, see, even night herself is here', [ahnbenton]],
+        [0, 'I am come to lock all fast', [ahnbenton]],
+        [0, 'One charming night gives more delight', [ahnbenton]],
+        [0, 'Hush, no more', [ahnbenton]],
+        [0, 'If love\'s a sweet passion, why does it torment', [ahnbenton]],
+        [0, 'Ye gentle spirits of the air', [ahnbenton]],
+        [0, 'When I have often heard', [ahnbenton]],
+        [0, 'No kissing at all', [ahnbenton]],
+        [0, 'Hark! The ech\'ing air', [ahnbenton]],
+        [0, 'They shall be as happy', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, quantz, 1, 'con', 0, 'g+', '', 0, 0, '', '', '', [
+        [1, 'Allegro', [ahnbenton, kolesnyk]],
+        [2, 'Arioso: Mesto', [ahnbenton, kolesnyk]],
+        [3, 'Allegro vivace', [ahnbenton, kolesnyk]],
+    ], [fl, orch], [ahnbenton, kolesnyk]],
+    [reduction, rachmaninov, 1, 'Алеко (Aleko)', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Весь табор спит (Aleko\'s cavatina)', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, ravel, 1, 'Shéhérazade', 0, '', '', 41, 0, '', '', '', [
+        [1, 'Asie', [ahnbenton]],
+        [2, 'La flûte enchantée', [ahnbenton]],
+        [3, 'L\'indifférent', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, reinecke, 1, 'con', 0, 'd+', '', 0, 0, '', '', '', [
+        [1, 'Allegro molto moderato', [ahnbenton]],
+        [2, 'Lento e mesto', [ahnbenton]],
+        [3, 'Moderato', [ahnbenton]],
+    ], [fl, orch], [ahnbenton]],
+    [reduction, rossini, 1, 'Il barbiere di Siviglia', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Ecco ridente in cielo', [ahnbenton]],
+        [0, 'Largo al factotum della città', [ahnbenton]],
+        [0, 'Se il mio nome saper', [ahnbenton]],
+        [0, 'Una voce poco fa', [ahnbenton]],
+        [0, 'La calunnia e un venticello', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, rossini, 1, 'La Cenerentola', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Miei rampolli femminini', [ahnbenton]],
+        [0, 'Non più mesta', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, rossini, 1, 'Guillaume Tell', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Sois immobile', [ahnbenton]],
+        [0, 'Asile héréditaire', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, rossini, 1, 'Introduzione, tema, e variazioni', 0, 'b+', '', 0, 0, '', '', '', [], [cl, orch], [ahnbenton]],
+    [reduction, rossini, 1, 'L\'italiana in Algeri', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Languir per una bella', [ahnbenton]],
+        [0, 'Cruda sorte! Amor tiranno', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, saintSaens, 1, 'Introduction and Rondo capriccioso', 0, '', '', 28, 0, '', '', '', [], [vln, orch], [ahnbenton, kolesnyk]],
+    [reduction, saintSaens, 1, 'con', 1, 'a-', '', 33, 0, '', '', '', [
+        [1, 'Allegro non troppo', [ahnbenton, kolesnyk]],
+        [2, 'Allegretto con moto', [ahnbenton, kolesnyk]],
+        [3, 'Molto allegro', [ahnbenton, kolesnyk]],
+    ], [vlc, orch], [ahnbenton, kolesnyk]],
+    [reduction, saintSaens, 1, 'Samson et Dalila', 0, '', '', 47, 0, '', '', '', [
+        [0, 'Printemps qui commence', [ahnbenton]],
+        [0, 'Amour viens aider ma faiblesse', [ahnbenton]],
+        [0, 'Mon coeur s\'ouvre à ta voix', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, saintSaens, 1, 'con', 3, 'b-', '', 61, 0, '', '', '', [
+        [1, 'Allegro non troppo', [ahnbenton, kolesnyk]],
+        [2, 'Andantino quasi allegretto', [ahnbenton]],
+        [3, 'Molto moderato e maestoso', [ahnbenton]],
+    ], [vln, orch], [ahnbenton, kolesnyk]],
+    [reduction, saintSaens, 1, 'Allegro appassionato', 0, '', '', 70, 0, '', '', '', [], [vlc, orch], [ahnbenton, kolesnyk]],
+    [reduction, saintSaens, 1, 'Havanaise', 0, '', '', 83, 0, '', '', '', [], [vln, orch], [ahnbenton]],
+    [reduction, saintSaens, 1, 'Le cygne (The swan)', 0, '', '', 0, 0, '', '', '', [], [vlc, orch], [ahnbenton, kolesnyk]],
+    [reduction, sarasate, 1, 'Zigeunerweisen', 0, '', '', 20, 0, '', '', '', [], [vln, orch], [ahnbenton, kolesnyk]],
+    [reduction, sarasate, 1, 'Carmen fantasy', 0, '', '', 25, 0, '', '', '', [], [vln, orch], [ahnbenton]],
+    [reduction, sarasate, 1, 'Navarra', 0, '', '', 33, 0, '', '', '', [], [vln, vln, orch], [ahnbenton]],
+    [reduction, sarasate, 1, 'Introduction et tarantelle', 0, '', '', 43, 0, '', '', '', [], [vln, orch], [ahnbenton, kolesnyk]],
+    [reduction, schonberg, 1, 'Les misérables', 0, '', '', 0, 0, '', '', '', [
+        [0, 'I dreamed a dream', [ahnbenton]],
+        [0, 'Master of the house', [ahnbenton]],
+        [0, 'Stars', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, schumannR, 1, 'con', 0, 'a-', '', 129, 0, '', '', '', [
+        [1, 'Nicht zu schnell', [ahnbenton]],
+        [2, 'Langsam', [ahnbenton]],
+        [3, 'Sehr lebhaft', [ahnbenton]],
+    ], [vlc, orch], [ahnbenton]],
+    [reduction, seitz, 1, 'con', 2, 'g+', '', 13, 0, '', '', '', [
+        [1, 'Allegro non troppo', [ahnbenton, kolesnyk]],
+        [2, 'Adagio', [ahnbenton, kolesnyk]],
+        [3, 'Allegretto moderato', [ahnbenton, kolesnyk]],
+    ], [vln, orch], [ahnbenton, kolesnyk]],
+    [reduction, seitz, 1, 'con', 5, 'd+', '', 22, 0, '', '', '', [
+        [1, 'Allegro moderato', [ahnbenton, kolesnyk]],
+        [2, 'Andante cantabile', [ahnbenton, kolesnyk]],
+        [3, 'Rondo: Allegretto', [ahnbenton, kolesnyk]],
+    ], [vln, orch], [ahnbenton, kolesnyk]],
+    [reduction, shostakovich, 1, 'con', 1, 'a-', '', 77, 0, '', '', '', [
+        [1, 'Nocturne: Moderato', [ahnbenton]],
+        [2, 'Scherzo: Allegro', [ahnbenton]],
+        [3, 'Passacaglia: Andante', [ahnbenton]],
+        [4, 'Burlesque: Allegro con brio', [ahnbenton]],
+    ], [vln, orch], [ahnbenton]],
+    [reduction, shostakovich, 1, 'con', 1, 'ef+', '', 107, 0, '', '', '', [
+        [1, 'Allegretto', [ahnbenton, kolesnyk]],
+        [2, 'Moderato', [ahnbenton]],
+        [3, 'Cadenza', [ahnbenton]],
+        [4, 'Allegro con moto', [ahnbenton]],
+    ], [vln, orch], [ahnbenton, kolesnyk]],
+    [reduction, sibelius, 1, 'con', 0, 'd-', '', 47, 0, '', '', '', [
+        [1, 'Allegro moderato', [ahnbenton, kolesnyk]],
+        [2, 'Adagio di molto', [ahnbenton]],
+        [3, 'Allegro, ma non tanto', [ahnbenton]],
+    ], [vln, orch], [ahnbenton, kolesnyk]],
+    [reduction, sondheim, 1, 'Company', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Getting married today', [ahnbenton]],
+        [0, 'The ladies who lunch', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, sondheim, 1, 'Into the woods', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Hello, little girl', [ahnbenton]],
+        [0, 'I know things now', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, sondheim, 1, 'Sweeney Todd: The Demon Barber of Fleet Street', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Johanna', [ahnbenton]],
+        [0, 'The ballad of Sweeney Todd', [ahnbenton]],
+        [0, 'A little priest', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, sorozabal, 1, 'La tabernera del puerto', 0, '', '', 0, 0, '', '', '', [
+        [0, 'No puede ser', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, spohr, 1, 'con', 1, 'c-', '', 26, 0, '', '', '', [
+        [1, 'Adagio - Allegro', [ahnbenton]],
+        [2, 'Adagio', [ahnbenton]],
+        [3, 'Rondo: Vivace', [ahnbenton]],
+    ], [cl, orch], [ahnbenton]],
+    [reduction, spohr, 1, 'con', 4, 'e-', '', 0, 0, '', '', '', [
+        [1, 'Allegro vivace', [ahnbenton]],
+        [2, 'Larghetto', [ahnbenton]],
+        [3, 'Rondo al espagnol', [ahnbenton]],
+    ], [cl, orch], [ahnbenton]],
+    [reduction, stamitz, 1, 'con', 0, 'd+', '', 1, 0, '', '', '', [
+        [1, 'Allegro', [ahnbenton, kolesnyk]],
+        [2, 'Andante moderato', [ahnbenton]],
+        [3, 'Rondo', [ahnbenton]],
+    ], [vla, orch], [ahnbenton, kolesnyk]],
+    [reduction, stamitz, 1, 'con', 3, 'bf+', '', 0, 0, '', '', '', [
+        [1, 'Allegro moderato', [ahnbenton, kolesnyk]],
+        [2, 'Romanze', [ahnbenton]],
+        [3, 'Rondo', [ahnbenton]],
+    ], [vla, orch], [ahnbenton, kolesnyk]],
+    [reduction, straussJ2, 1, 'Die Fledermaus', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Täubchen, das entflattert ist', [ahnbenton]],
+        [0, 'Nein, mit solchen Advocaten ist verkauft man und verrathen!', [ahnbenton]],
+        [0, 'Komm mit mir zum Souper', [ahnbenton]],
+        [0, 'So muss allein ich bleiben', [ahnbenton]],
+        [0, 'Trinke, Liebchen, trinke schnell', [ahnbenton]],
+        [0, 'Ein Souper heut uns winkt', [ahnbenton]],
+        [0, 'Ich lade gern mir Gäste ein (Chacun à son gout)', [ahnbenton]],
+        [0, 'Mein Herr Marquis', [ahnbenton]],
+        [0, 'Dieser Anstand', [ahnbenton]],
+        [0, 'Klänge der Heimat (Csárdás)', [ahnbenton]],
+        [0, 'Im Feuerstrom der Reben', [ahnbenton]],
+        [0, 'Genug damit, genug!', [ahnbenton]],
+        [0, 'Spiel\' ich die Unschuld vom Laude', [ahnbenton]],
+        [0, 'Ich stehe voll Zagen', [ahnbenton]],
+        [0, 'O Fledermaus, lass endlich jetzt dein Opfer aus', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, straussR, 1, 'con', 1, 'ef+', '', 11, 0, '', '', '', [
+        [1, 'Allegro', [ahnbenton]],
+        [2, 'Andante', [ahnbenton]],
+        [3, 'Rondo: Allegro', [ahnbenton]],
+    ], [hn, orch], [ahnbenton]],
+    [reduction, straussR, 1, 'Salome', 0, '', '', 54, 0, '', '', '', [
+        [0, 'Wo ist er, dessen Sündenbecher jetzt voll ist?', [ahnbenton]],
+        [0, 'Wird dir nicht bange', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, straussR, 1, 'Elektra', 0, '', '', 58, 0, '', '', '', [
+        [0, 'Ich kann niht sitzen und ins Dunkel starren', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, straussR, 1, 'Der Rosenkavalier', 0, '', '', 59, 0, '', '', '', [
+        [0, 'Wie du warst', [ahnbenton]],
+        [0, 'Di rigori armato il seno', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, straussR, 1, 'Ariadne auf Naxos', 0, '', '', 60, 0, '', '', '', [
+        [0, 'Im Gegenteil', [ahnbenton]],
+        [0, 'Sein wir wider gut (Composer\'s aria)', [ahnbenton]],
+        [0, 'Ein schönes war', [ahnbenton]],
+        [0, 'Lieben, Hassen, Hoffen, Zagen', [ahnbenton]],
+        [0, 'Es gibt ein Reich', [ahnbenton]],
+        [0, 'Großmächtige Prinzessin', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, straussR, 1, 'con', 2, 'ef+', '', 0, 0, '', '', '', [
+        [1, 'Allegro', [ahnbenton]],
+        [2, 'Andante con moto', [ahnbenton]],
+        [3, 'Allegro molto', [ahnbenton]],
+    ], [hn, orch], [ahnbenton]],
+    [reduction, straussR, 1, 'con', 0, 'd+', '', 0, 0, '', '', '', [
+        [1, 'Allegro moderato', [ahnbenton]],
+        [2, 'Andante', [ahnbenton]],
+        [3, 'Vivace', [ahnbenton]],
+    ], [ob, orch], [ahnbenton]],
+    [reduction, stravinsky, 1, 'Suite italienne', 1, '', '', 0, 0, '', '', '', [
+        [1, 'Introduzione', [ahnbenton]],
+        [2, 'Serenata', [ahnbenton]],
+        [3, 'Tarantella', [ahnbenton]],
+        [4, 'Gavotta', [ahnbenton]],
+        [5, 'Scherzino', [ahnbenton]],
+        [6, 'Minuetto e Finale', [ahnbenton]],
+    ], [vln, orch], [ahnbenton]],
+    [reduction, stravinsky, 1, 'con', 1, 'd+', '', 0, 0, '', '', '', [
+        [1, 'Toccata', [ahnbenton]],
+        [2, 'Aria I', [ahnbenton]],
+        [3, 'Aria II', [ahnbenton]],
+        [4, 'Capriccio', [ahnbenton]],
+    ], [vln, orch], [ahnbenton]],
+    [reduction, tamberg, 1, 'con', 1, '', '', 42, 0, '', '', '', [
+        [1, 'Andante - Allegro', [ahnbenton]],
+        [2, 'Lento', [ahnbenton]],
+        [3, 'Allegro molto', [ahnbenton]],
+    ], [tpt, orch], [ahnbenton]],
+    [reduction, tchaikovsky, 1, 'Евгений Онегин (Eugene Onegin)', 0, '', '', 24, 0, '', '', '', [
+        [0, 'Ах, Таня, Таня! (Ah, Tanya, Tanya!)', [ahnbenton]],
+        [0, 'Сцена письма (Letter scene)', [ahnbenton]],
+        [0, 'Куда, куда вы удалились (Lensky\'s aria)', [ahnbenton]],
+        [0, 'Любви все возрасты покорны (All ages are submissive to love)', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, tchaikovsky, 1, 'Sérénade mélancolique', 0, 'bf-', '', 26, 0, '', '', '', [], [vln, orch], [ahnbenton]],
+    [reduction, tchaikovsky, 1, 'Variations on a Rococo theme', 0, 'a+', '', 33, 0, '', '', '', [], [vlc, orch], [ahnbenton, kolesnyk]],
+    [reduction, tchaikovsky, 1, 'con', 1, 'd+', '', 35, 0, '', '', '', [
+        [1, 'Allegro moderato', [ahnbenton]],
+        [2, 'Canzonetta: Andante', [ahnbenton]],
+        [3, 'Finale: Allegro vivacissimo', [ahnbenton]],
+    ], [vln, orch], [ahnbenton]],
+    [reduction, tchaikovsky, 1, 'Pezzo capriccioso', 0, 'b-', '', 62, 0, '', '', '', [], [vlc, orch], [ahnbenton, kolesnyk]],
+    [reduction, tchaikovsky, 1, 'Пиковая дама (The queen of spades)', 0, '', '', 68, 0, '', '', '', [
+        [0, 'Я вас люблю (I love you)', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, tchaikovsky, 1, 'Орлеанская дева (The maid of Orleans)', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Да, час настал (Joan\'s aria)', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, telemann, 1, 'con', 1, 'g+', '', 51, 0, '', '', '', [
+        [1, 'Largo', [ahnbenton]],
+        [2, 'Allegro', [ahnbenton]],
+        [3, 'Andante', [ahnbenton]],
+        [4, 'Presto', [ahnbenton]],
+    ], [vla, orch], [ahnbenton]],
+    [reduction, thomas, 1, 'Hamlet', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Spectre infernal!', [ahnbenton]],
+        [0, 'Ô vin, dissipe la tristesse', [ahnbenton]],
+        [0, 'Mais quelle est cette belle (Ophelia\'s mad scene)', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, tomasi, 1, 'b', 0, '', '', 0, 0, '', '', '', [], [aSax, orch], [ahnbenton]],
+    [reduction, tomasi, 1, 'con', 0, '', '', 0, 0, '', '', '', [
+        [1, 'Andante et Allegro', [ahnbenton]],
+        [2, 'Final: Giration', [ahnbenton]],
+    ], [aSax, orch], [ahnbenton]],
+    [reduction, verdi, 1, 'Aïda', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Celeste Aïda', [ahnbenton]],
+        [0, 'Ritorna vincitor', [ahnbenton]],
+        [0, 'O patria mia', [ahnbenton]],
+        [0, 'Ciel! Mio padre!', [ahnbenton]],
+        [0, 'Già i sacerdoti adunansi', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, verdi, 1, 'Attila', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Mentre gonfiarsi l\'anima', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, verdi, 1, 'Un ballo in maschera', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Re dell\'abisso affrettati', [ahnbenton]],
+        [0, 'Ecco l\'orrido campo ove', [ahnbenton]],
+        [0, 'Morrò, ma prima in grazia', [ahnbenton]],
+        [0, 'Eri tu che macchiavi quell\'anima', [ahnbenton]],
+        [0, 'Saper vorreste di che si veste', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, verdi, 1, 'Il corsaro', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Non so le tetre immagini', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, verdi, 1, 'Don Carlo', 0, '', '', 0, 0, '', '', '', [
+        [0, 'O don fatale, o don crudel', [ahnbenton]],
+        [0, 'Per me giunto e il di supremo', [ahnbenton]],
+        [0, 'Ella giammai m\'amò', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, verdi, 1, 'Ernani', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Ernani involami', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, verdi, 1, 'Falstaff', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Sul fil d\'un soffio etesio', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, verdi, 1, 'La forza del destino', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Pace, pace mio Dio', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, verdi, 1, 'Luisa Miller', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Sacra la scelta e d\'un consorte', [ahnbenton]],
+        [0, 'Quando le sere al placido', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, verdi, 1, 'Macbeth', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Vieni t\'affretta', [ahnbenton]],
+        [0, 'La luce langue', [ahnbenton]],
+        [0, 'Come dal ciel precipita', [ahnbenton]],
+        [0, 'Ah! La paterna mano', [ahnbenton]],
+        [0, 'Pietà, rispetto, amore', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, verdi, 1, 'Otello', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Credo in un Dio crudel', [ahnbenton]],
+        [0, 'Dio! Mi potevi scagliar tutti i mali della miseria', [ahnbenton]],
+        [0, 'Ave Maria piena di grazia', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, verdi, 1, 'Rigoletto', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Questa o quella', [ahnbenton]],
+        [0, 'Pari siamo', [ahnbenton]],
+        [0, 'Caro nome che il mio cor', [ahnbenton]],
+        [0, 'Ella mi fu rapita', [ahnbenton]],
+        [0, 'Possente amor mi chiama', [ahnbenton]],
+        [0, 'Cortigiani vil razza donnata', [ahnbenton]],
+        [0, 'La donna è mobile', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, verdi, 1, 'Simon Boccanegra', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Il lacerato spirito', [ahnbenton]],
+        [0, 'Come in quest\'ora bruna', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, verdi, 1, 'La traviata', 0, '', '', 0, 0, '', '', '', [
+        [0, 'È strano (Sempre libera)', [ahnbenton]],
+        [0, 'De\' miei bollenti spiriti', [ahnbenton]],
+        [0, 'Di Provenza il mar il suol', [ahnbenton]],
+        [0, 'Addio del passato', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, verdi, 1, 'Il trovatore', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Tacea la notte placida', [ahnbenton]],
+        [0, 'Stride la vampa', [ahnbenton]],
+        [0, 'Condotta ell\'era in ceppi', [ahnbenton]],
+        [0, 'Il balen del suo sorriso', [ahnbenton]],
+        [0, 'Di quella pira', [ahnbenton]],
+        [0, 'D\'amor sull\'ali rosee', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, vieuxtemps, 1, 'con', 5, 'a-', '', 37, 0, '', '', '', [
+        [1, 'Allegro non troppo', [ahnbenton, kolesnyk]],
+        [2, 'Adagio', [ahnbenton]],
+        [3, 'Allegro con fuoco', [ahnbenton]],
+    ], [vln, orch], [ahnbenton, kolesnyk]],
+    [reduction, villaLobos, 1, 'f', 5, '', '', 0, 0, '', '', '', [
+        [1, 'Animé', [ahnbenton]],
+        [2, 'Lent', [ahnbenton]],
+        [3, 'Très animé', [ahnbenton]],
+    ], [aSax, orch], [ahnbenton]],
+    [reduction, viotti, 1, 'con', 22, 'a-', '', 0, 0, '', '', '', [
+        [1, 'Moderato', [ahnbenton]],
+        [2, 'Adagio', [ahnbenton]],
+        [3, 'Agitato assai', [ahnbenton]],
+    ], [vln, orch], [ahnbenton]],
+    [reduction, viotti, 1, 'con', 23, 'g+', '', 0, 0, '', '', '', [
+        [1, 'Allegro', [ahnbenton, kolesnyk]],
+        [2, 'Andante', [ahnbenton]],
+        [3, 'Allegro', [ahnbenton]],
+    ], [vln, orch], [ahnbenton, kolesnyk]],
+    [reduction, vivaldi, 1, 'con', 0, 'e+', 'La primavera (Spring)', 269, 0, '', '', '', [
+        [1, 'Allegro', [ahnbenton, kolesnyk]],
+        [2, 'Largo e pianissimo sempre', [ahnbenton, kolesnyk]],
+        [3, 'Allegro pastorale', [ahnbenton, kolesnyk]],
+    ], [vln, orch], [ahnbenton, kolesnyk]],
+    [reduction, vivaldi, 1, 'con', 0, 'f+', 'L\'autunno (Autumn)', 293, 0, '', '', '', [
+        [1, 'Allegro', [ahnbenton]],
+        [2, 'Adagio molto', [ahnbenton]],
+        [3, 'Allegro', [ahnbenton]],
+    ], [vln, orch], [ahnbenton]],
+    [reduction, vivaldi, 1, 'con', 0, 'f-', 'L\'inverno (Winter)', 297, 0, '', '', '', [
+        [1, 'Allegro non molto', [ahnbenton]],
+        [2, 'Largo', [ahnbenton]],
+        [3, 'Allegro', [ahnbenton]],
+    ], [vln, orch], [ahnbenton]],
+    [reduction, vivaldi, 1, 'con', 0, 'g-', 'L\'estate (Summer)', 315, 0, '', '', '', [
+        [1, 'Allegro non molto', [ahnbenton, kolesnyk]],
+        [2, 'Adagio e piano - Presto e forte', [ahnbenton], kolesnyk],
+        [3, 'Presto', [ahnbenton, kolesnyk]],
+    ], [vln, orch], [ahnbenton, kolesnyk]],
+    [reduction, vivaldi, 1, 'con', 0, 'g-', '', 317, 0, '', '', '', [
+        [1, 'Allegro', [ahnbenton, kolesnyk]],
+        [2, 'Largo', [ahnbenton]],
+        [3, 'Allegro', [ahnbenton, kolesnyk]],
+    ], [vln, orch], [ahnbenton, kolesnyk]],
+    [reduction, vivaldi, 1, 'con', 0, 'e-', '', 356, 0, '', '', '', [
+        [1, 'Allegro', [ahnbenton, kolesnyk]],
+        [2, 'Largo', [ahnbenton, kolesnyk]],
+        [3, 'Presto', [ahnbenton, kolesnyk]],
+    ], [vln, orch], [ahnbenton, kolesnyk]],
+    [reduction, vivaldi, 1, 'con', 0, 'e-', '', 461, 0, '', '', '', [
+        [1, 'Allegro', [ahnbenton]],
+        [2, 'Larghetto', [ahnbenton]],
+        [3, 'Allegro', [ahnbenton]],
+    ], [ob, orch], [ahnbenton]],
+    [reduction, vivaldi, 1, 'con', 0, 'e-', '', 484, 0, '', '', '', [
+        [1, 'Allegro poco', [ahnbenton]],
+        [2, 'Andante', [ahnbenton]],
+        [3, 'Allegro', [ahnbenton]],
+    ], [bsn, orch], [ahnbenton]],
+    [reduction, vivaldi, 1, 'con', 0, 'a-', '', 497, 0, '', '', '', [
+        [1, 'Allegro molto', [ahnbenton]],
+        [2, 'Andante molto', [ahnbenton]],
+        [3, 'Allegro', [ahnbenton]],
+    ], [bsn, orch], [ahnbenton]],
+    [reduction, vivaldi, 1, 'con', 0, 'a-', '', 522, 0, '', '', '', [
+        [1, 'Allegro', [ahnbenton]],
+        [2, 'Larghetto e spiritoso', [ahnbenton]],
+        [3, 'Allegro', [ahnbenton]],
+    ], [vln, vln, orch], [ahnbenton]],
+    [reduction, wagner, 1, 'Der Fliegende Holländer', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Die Frist ist um', [ahnbenton]],
+        [0, 'Johohoe! Johohohoe! (Senta\'s ballad)', [ahnbenton]],
+        [0, 'Bleib\', Senta', [ahnbenton]],
+        [0, 'Mögst du, mein Kind', [ahnbenton]],
+        [0, 'Wie aus der Ferne', [ahnbenton]],
+        [0, 'Willst jenes Tags du micht dich mehr entsinnen (Erik\'s cavatina)', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, wagner, 1, 'Götterdämmerung', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Höre mit Sinn', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, wagner, 1, 'Lohengrin', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Einsam in trüben Tagen (Elsa\'s dream)', [ahnbenton]],
+        [0, 'Nun sei bedankt, mein lieber Schwan!', [ahnbenton]],
+        [0, 'O Herr und Gott, nun ruf\' ich dich', [ahnbenton]],
+        [0, 'Euch Lüften', [ahnbenton]],
+        [0, 'Entweihte Götter!', [ahnbenton]],
+        [0, 'Ortrud! Wo bist du?', [ahnbenton]],
+        [0, 'Treulich geführt siehet dahin (Bridal march)', [ahnbenton]],
+        [0, 'Das süsse Lied verhallt', [ahnbenton]],
+        [0, 'In fernem Land', [ahnbenton]],
+        [0, 'Mein lieber Schwan!', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, wagner, 1, 'Die Meistersinger von Nürnberg', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Was duftet doch der Flieder so mild', [ahnbenton]],
+        [0, 'Jerum! Jerum!', [ahnbenton]],
+        [0, 'Wahn! Wahn!', [ahnbenton]],
+        [0, 'Morgenlich leuchtend im rosigen Schein (Preislied)', [ahnbenton]],
+        [0, 'Verachtet mir die Meister nicht', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, wagner, 1, 'Parsifal', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Recht so!', [ahnbenton]],
+        [0, 'Nein! Lasst ihn unenthüllt!', [ahnbenton]],
+        [0, 'Ich sah das Kind', [ahnbenton]],
+        [0, 'Amfortas!', [ahnbenton]],
+        [0, 'Ja, Wehe!', [ahnbenton]],
+        [0, 'Nur eine Waffe taugt', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, wagner, 1, 'Das Rheingold', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Weiche, Wotan, weiche!', [ahnbenton]],
+        [0, 'Abendlich strahlt der Sonne Auge', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, wagner, 1, 'Siegfried', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Nothung! Nothung! (Schmiedelied)', [ahnbenton]],
+        [0, 'Dass der mein Vater nicht ist', [ahnbenton]],
+        [0, 'Wache, Wala', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, wagner, 1, 'Tannhäuser', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Geliebter, komm!', [ahnbenton]],
+        [0, 'Dich, teure Halle', [ahnbenton]],
+        [0, 'Der Sänger klugen Weisen lauscht', [ahnbenton]],
+        [0, 'Allmächt\'ge Jungfrau', [ahnbenton]],
+        [0, 'O, du mein holder Abendstern', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, wagner, 1, 'Tristan und Isolde', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Weh! Ach wehe! Dies zu dulden!', [ahnbenton]],
+        [0, 'Einsam wachend in der Nacht (Brangænas Ruf)', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, wagner, 1, 'Die Walküre', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Ein Schwert verhieß mir der Vater', [ahnbenton]],
+        [0, 'Der Männer Sippe saas hier im Saal', [ahnbenton]],
+        [0, 'Winterstürme wichen dem Winnemond', [ahnbenton]],
+        [0, 'Du bist der Lenz', [ahnbenton]],
+        [0, 'Siegmund heiss\' ich', [ahnbenton]],
+        [0, 'So ist es denn aus mit den ewigen Göttern', [ahnbenton]],
+        [0, 'Schlimm, fürcht\' ich', [ahnbenton]],
+        [0, 'Hojotoho! (The ride of the Valkyries)', [ahnbenton]],
+        [0, 'War es so schmählich', [ahnbenton]],
+        [0, 'Leb\' wohl', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, walton, 1, 'con', 0, 'a-', '', 0, 0, '', '', '', [
+        [1, 'Andante comodo', [ahnbenton, kolesnyk]],
+        [2, 'Scherzo', [ahnbenton, kolesnyk]],
+        [3, 'Finale: Allegro moderato', [ahnbenton, kolesnyk]],
+    ], [vla, orch], [ahnbenton, kolesnyk]],
+    [reduction, webber, 1, 'Jesus Christ superstar', 0, '', '', 0, 0, '', '', '', [
+        [0, 'King Herod\'s song', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, webber, 1, 'The phantom of the opera', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Think of me', [ahnbenton]],
+        [0, 'The phantom of the opera', [ahnbenton]],
+        [0, 'All I ask of you', [ahnbenton]],
+        [0, 'Wishing you were somehow here again', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, webber, 1, 'Starlight express', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Starlight express', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, weber, 1, 'cono', 0, 'c-', '', 26, 0, '', '', '', [], [cl, orch], [ahnbenton, kolesnyk]],
+    [reduction, weber, 1, 'con', 2, 'f-', '', 73, 0, '', '', '', [
+        [1, 'Allegro', [ahnbenton]],
+        [2, 'Adagio ma non troppo', [ahnbenton]],
+        [3, 'Rondo: Allegretto', [ahnbenton]],
+    ], [cl, orch], [ahnbenton]],
+    [reduction, weber, 1, 'con', 2, 'ef+', '', 74, 0, '', '', '', [
+        [1, 'Allegro', [ahnbenton]],
+        [2, 'Romanze: Andante con moto', [ahnbenton]],
+        [3, 'Polacca', [ahnbenton]],
+    ], [cl, orch], [ahnbenton]],
+    [reduction, weber, 1, 'con', 2, 'f+', '', 75, 0, '', '', '', [
+        [1, 'Allegro ma non troppo', [ahnbenton]],
+        [2, 'Adagio', [ahnbenton]],
+        [3, 'Rondo: Allegro', [ahnbenton]],
+    ], [bsn, orch], [ahnbenton]],
+    [reduction, weber, 1, 'Der Freischütz', 0, '', '', 77, 0, '', '', '', [
+        [0, 'Durch die Wälder, durch die Auen', [ahnbenton]],
+        [0, 'Leise, leise, fromme Weise', [ahnbenton]],
+        [0, 'Und ob die Wolke sie verhülle', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, weill, 1, 'Lady in the dark', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Tchaikovsky (and other Russians)', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, weill, 1, 'Street scene', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Lonely house', [ahnbenton]],
+        [0, 'What good would the moon be?', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, wieniawski, 1, 'Polonaise de concert', 0, 'd+', '', 4, 0, '', '', '', [], [vln, orch], [ahnbenton, kolesnyk]],
+    [reduction, wieniawski, 1, 'con', 1, 'fs-', '', 14, 0, '', '', '', [
+        [1, 'Allegro moderato', [ahnbenton]],
+        [2, 'Preghiera: Larghetto', [ahnbenton]],
+        [3, 'Rondo: Allegro giocoso', [ahnbenton]],
+    ], [vln, orch], [ahnbenton]],
+    [reduction, wieniawski, 1, 'Légende', 0, 'g-', '', 17, 0, '', '', '', [], [vln, orch], [ahnbenton]],
+    [reduction, wieniawski, 1, 'Fantasia on themes from "Faust"', 0, gounod, 'Faust', 20, 0, '', '', '', [], [vln, orch], [ahnbenton]],
+    [reduction, wieniawski, 1, 'con', 2, 'd-', '', 22, 0, '', '', '', [
+        [1, 'Allegro moderato', [ahnbenton]],
+        [2, 'Romance: Andante non troppo', [ahnbenton]],
+        [3, 'Allegro con fuoco', [ahnbenton]],
+    ], [vln, orch], [ahnbenton]],
+    [reduction, williamsJ, 1, 'Five Sacred Trees', 0, '', '', 0, 0, '', '', '', [
+        [1, 'Eó Mugna', [ahnbenton]],
+        [2, 'Tortan', [ahnbenton]],
+        [3, 'Eó Rossa', [ahnbenton]],
+        [4, 'Craeb Uisnig', [ahnbenton]],
+        [5, 'Dathi', [ahnbenton]],
+    ], [bsn, orch], [ahnbenton]],
+    [reduction, williamsR, 1, 'con', 2, 'a-', '', 0, 0, '', '', '', [
+        [1, 'Rondo pastorale', [ahnbenton]],
+        [2, 'Minuet and musette', [ahnbenton]],
+        [3, 'Scherzo', [ahnbenton]],
+    ], [ob, orch], [ahnbenton]],
+    [reduction, williamsR, 1, 'con', 2, 'f-', '', 0, 0, '', '', '', [
+        [1, 'Prelude: Allegro moderato', [ahnbenton]],
+        [2, 'Romanza: Andante sostenuto', [ahnbenton]],
+        [3, 'Finale: Rondo alla tedesca', [ahnbenton]],
+    ], [tba, orch], [ahnbenton]],
+    [reduction, williamsR, 1, 'The lark ascending', 0, '', '', 0, 0, '', '', '', [], [vln, orch], [ahnbenton]],
+    [reduction, wieniawski, 1, 'su', 1, '', '', 0, 0, '', '', '', [
+        [1, 'Prelude', [ahnbenton]],
+        [2, 'Carol', [ahnbenton]],
+        [3, 'Christmas dance', [ahnbenton]],
+    ], [vla, orch], [ahnbenton]],
 ]
 // const pianoRepMasterListObjs = pianoRepMasterList.map(concert => new PianoRepBuilder (concert[0], concert[1], concert[2], concert[3], concert[4], concert[5]))
 
