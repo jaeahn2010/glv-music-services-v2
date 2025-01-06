@@ -9,7 +9,7 @@ const bodyParser = require('body-parser')
 
 // db connection, models, seed data
 const db = require('./models')
-const seedOpus = require('./models/seedOpus')
+const seedOpus = require('./models/seedCentralRepList')
 
 // rts in ctrl folder
 const clientsCtrl = require('./controllers/clients')

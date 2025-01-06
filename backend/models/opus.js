@@ -2,17 +2,17 @@ const mongoose = require('mongoose')
 
 const opusSchema = new mongoose.Schema(
     {
-        title: { type: String, required: true },
+        repType: { type: String, required: true },
         composer: { type: String, required: true },
+        title: { type: String, required: true },
         movements: [
             {
-                movementNumber: { type: Number },
                 movementTitle: { type: String },
-                movementPrice: { type: Number },
+                movementOfferingMusicians: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Musician'}],
             }
         ],
         instrumentation: [{ type: String, required: true }],
-        price: { type: Number },
+        offeringMusicians: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Musician'}],
     },
 )
 

@@ -779,11 +779,21 @@ class PianoRepBuilder {
         this.composer = composer
         this.title = titleExpander(composer, opusTypeAmount, opusType, opusTypeNo, key, nickname, opusNo, opusPartNo, originalComposer, originalWork, arranger)
         this.movements = movements.length > 0
-        // Group into mvmts only: concertos/concertinos/partitas/quartets/quintets/sonatas/sonatinas/septets/sextets/suites/symphonies/trios
-            ? movements.map(([mvmtNo, mvmtTitle, mvmtOfferingMusicians]) => !['+', '-'].includes(mvmtTitle.slice(-1)) // if there is a title (song name, tempo marking, nickname, etc), rather than just the keycode
-                ? [`${romanConversion(mvmtNo)}${mvmtTitle}`, mvmtOfferingMusicians.slice(0, -1).join(', ') + (mvmtOfferingMusicians.length > 1 ? ', ' : '') + mvmtOfferingMusicians[mvmtOfferingMusicians.length - 1]] // use the title
-                : [`${romanConversion(mvmtNo)}${opusTypeExpander(composer, opusType, originalComposer, originalWork)[0]}${keyExpander(mvmtTitle)}`, mvmtOfferingMusicians.slice(0, -1).join(', ') + (mvmtOfferingMusicians.length > 1 ? ', ' : '') + mvmtOfferingMusicians[mvmtOfferingMusicians.length - 1]] // otherwise, generic name w/ key
-            ) : movements
+            // if there are movement(s):
+            ? movements.map(([mvmtNo, mvmtTitle, mvmtOfferingMusicians]) => !['+', '-'].includes(mvmtTitle.slice(-1))
+                // if there's a custom title (song name, tempo marking, nickname, etc), then use that title
+                ? {
+                    movementTitle: `${romanConversion(mvmtNo)}${mvmtTitle}`,
+                    movementOfferingMusicians: mvmtOfferingMusicians
+                }
+                // if there is only keycode, use generic name & key
+                : {
+                    movementTitle: `${romanConversion(mvmtNo)}${opusTypeExpander(composer, opusType, originalComposer, originalWork)[0]}${keyExpander(mvmtTitle)}`,
+                    movementOfferingMusicians: mvmtOfferingMusicians
+                }
+            )
+            // if there are no movements:
+            : movements
         this.instrumentation = instrumentation
         this.offeringMusicians = offeringMusicians
     }
@@ -1443,6 +1453,7 @@ const availablePianoSoloList = [
     // (type, comp, typeAmt, opType, opType#, key, nick, op#, opPart#, origComp, origWork, arr, mvmts, instr, glvmsMus)
 ]
 
+// GLVMS master piano chamber/orchestral list
 const availablePianoChamberList = [
     [chamber, adamsHL, 5, 'Millay songs', 0, '', '', 0, 0, '', '', '', [
         [3, 'For you there is no song', [ahnbenton, kolesnyk]],
@@ -3312,6 +3323,7 @@ const availablePianoChamberList = [
     // (type, comp, typeAmt (totalMvmts in opus), opType, opType#, key, nick, op#, opPart#, origComp, origWork, arr, mvmts, instr, glvmsMus)
 ]
 
+// GLVMS master piano reduction list
 const availablePianoReductionList = [
     [reduction, bachJS, 1, 'con', 1, 'a-', '', 1041, 0, '', '', '', [
         [1, 'Allegro non tanto', [ahnbenton]],
@@ -4692,11 +4704,16 @@ const availablePianoReductionList = [
     ], [vla, orch], [ahnbenton]],
 ]
 
-//testing
-for (let i = 275; i < 303; i++) {
-    let rep = availablePianoReductionList[i]
-    let testPianoRepObj = new PianoRepBuilder(rep[0], rep[1], rep[2], rep[3], rep[4], rep[5], rep[6], rep[7], rep[8], rep[9], rep[10], rep[11], rep[12], rep[13], rep[14], rep[15])
-    console.log(testPianoRepObj)
-}
+// testing
+// for (let i = 275; i < 303; i++) {
+//     let rep = availablePianoReductionList[i]
+//     let testPianoRepObj = new PianoRepBuilder(rep[0], rep[1], rep[2], rep[3], rep[4], rep[5], rep[6], rep[7], rep[8], rep[9], rep[10], rep[11], rep[12], rep[13], rep[14], rep[15])
+// }
+// console.log(centralRepertoire[5].movements[5])
 
-// const pianoRepMasterListObjs = pianoRepMasterList.map(concert => new PianoRepBuilder (concert[0], concert[1], concert[2], concert[3], concert[4], concert[5]))
+let soloObjs = availablePianoSoloList.map(rep => new PianoRepBuilder(rep[0], rep[1], rep[2], rep[3], rep[4], rep[5], rep[6], rep[7], rep[8], rep[9], rep[10], rep[11], rep[12], rep[13], rep[14], rep[15]))
+let chamberObjs = availablePianoChamberList.map(rep => new PianoRepBuilder(rep[0], rep[1], rep[2], rep[3], rep[4], rep[5], rep[6], rep[7], rep[8], rep[9], rep[10], rep[11], rep[12], rep[13], rep[14], rep[15]))
+let reductionObjs = availablePianoReductionList.map(rep => new PianoRepBuilder(rep[0], rep[1], rep[2], rep[3], rep[4], rep[5], rep[6], rep[7], rep[8], rep[9], rep[10], rep[11], rep[12], rep[13], rep[14], rep[15]))
+
+let centralRepertoire = soloObjs.concat(chamberObjs, reductionObjs)
+module.exports = centralRepertoire
