@@ -544,6 +544,7 @@ const bnd = 'Band'
 const chr = 'Chorus'
 
 function romanConversion(num) {
+    if (num === 0) return ''
     const romanNumerals = [
         { value: 1000, numeral: "M" },
         { value: 900, numeral: "CM" },
@@ -560,14 +561,23 @@ function romanConversion(num) {
         { value: 1, numeral: "I" }
     ]
     
+    let mainNum, partNum
+    if (Number.isInteger(num)) {
+        mainNum = num
+        partNum = 0
+    } else {
+        mainNum = Math.floor(num)
+        partNum = Math.round((num - mainNum) * 10)
+    }
+
     let result = ''
     for (const { value, numeral } of romanNumerals) {
-        while (num >= value) {
+        while (mainNum >= value) {
             result += numeral
-            num -= value
+            mainNum -= value
         }
     }
-    return result
+    return !partNum ? `${result}. ` : `${result} (Pt. ${Math.floor(partNum)}). `
 }
 
 function keyExpander(keyCode) {
@@ -771,8 +781,8 @@ class PianoRepBuilder {
         this.movements = movements.length > 0
         // Group into mvmts only: concertos/concertinos/partitas/quartets/quintets/sonatas/sonatinas/septets/sextets/suites/symphonies/trios
             ? movements.map(([mvmtNo, mvmtTitle, mvmtOfferingMusicians]) => !['+', '-'].includes(mvmtTitle.slice(-1)) // if there is a title (song name, tempo marking, nickname, etc), rather than just the keycode
-                ? [`${romanConversion(mvmtNo)}. ${mvmtTitle}`, mvmtOfferingMusicians.slice(0, -1).join(', ') + (mvmtOfferingMusicians.length > 1 ? ', ' : '') + mvmtOfferingMusicians[mvmtOfferingMusicians.length - 1]] // use the title
-                : [`${romanConversion(mvmtNo)}. ${opusTypeExpander(composer, opusType, originalComposer, originalWork)[0]}${keyExpander(mvmtTitle)}`, mvmtOfferingMusicians.slice(0, -1).join(', ') + (mvmtOfferingMusicians.length > 1 ? ', ' : '') + mvmtOfferingMusicians[mvmtOfferingMusicians.length - 1]] // otherwise, generic name w/ key
+                ? [`${romanConversion(mvmtNo)}${mvmtTitle}`, mvmtOfferingMusicians.slice(0, -1).join(', ') + (mvmtOfferingMusicians.length > 1 ? ', ' : '') + mvmtOfferingMusicians[mvmtOfferingMusicians.length - 1]] // use the title
+                : [`${romanConversion(mvmtNo)}${opusTypeExpander(composer, opusType, originalComposer, originalWork)[0]}${keyExpander(mvmtTitle)}`, mvmtOfferingMusicians.slice(0, -1).join(', ') + (mvmtOfferingMusicians.length > 1 ? ', ' : '') + mvmtOfferingMusicians[mvmtOfferingMusicians.length - 1]] // otherwise, generic name w/ key
             ) : movements
         this.instrumentation = instrumentation
         this.offeringMusicians = offeringMusicians
@@ -3329,9 +3339,9 @@ const availablePianoReductionList = [
         [3, 'Presto in moto perpetuo', [ahnbenton]],
     ], [vln, orch], [ahnbenton, kolesnyk]],
     [reduction, barber, 1, 'Knoxville: Summer of 1915', 0, '', '', 24, 0, '', '', '', [], [voc, orch], [ahnbenton]],
-    [reduction, beethoven, 1, 'rom', 2, 'f+', 50, 0, '', '', '', [], [vln, orch], [ahnbenton]],
-    [reduction, beethoven, 1, 'Ah! Perfido', 0, '', 65, 0, '', '', '', [], [voc, orch], [ahnbenton]],
-    [reduction, beethoven, 1, 'Fidelio', 0, '', 72, 0, '', '', '', [
+    [reduction, beethoven, 1, 'rom', 2, 'f+', '', 50, 0, '', '', '', [], [vln, orch], [ahnbenton]],
+    [reduction, beethoven, 1, 'Ah! Perfido', 0, '', '', 65, 0, '', '', '', [], [voc, orch], [ahnbenton]],
+    [reduction, beethoven, 1, 'Fidelio', 0, '', '', 72, 0, '', '', '', [
         [0, 'O wär ich schon mit dir vereint', [ahnbenton]],
         [0, 'Hat man nicht auch Gold beineben', [ahnbenton]],
         [0, 'Abscheulicher', [ahnbenton]],
@@ -3384,7 +3394,7 @@ const availablePianoReductionList = [
         [0, 'Je crois entendre encore', [ahnbenton]],
     ], [voc, orch], [ahnbenton]],
     [reduction, bloch, 1, 'Schelomo', 0, '', '', 0, 0, '', '', '', [], [vlc, orch], [ahnbenton]],
-    [reduction, bolcom, 1, 'A view from the bridge', 0, '', 0, 0, '', '', '', [
+    [reduction, bolcom, 1, 'A view from the bridge', 0, '', '', 0, 0, '', '', '', [
         [0, 'New York lights', [ahnbenton, kolesnyk]],
     ], [voc, orch], [ahnbenton, kolesnyk]],
     [reduction, brahms, 1, 'con', 0, 'd+', '', 77, 0, '', '', '', [
@@ -3431,12 +3441,12 @@ const availablePianoReductionList = [
         [2, 'Adagio', [ahnbenton]],
         [3, 'Rondo alla marcia', [ahnbenton]],
     ], [aSax, orch], [ahnbenton]],
-    [reduction, david, 1, 'con', 0, '', '', 0, 0, '', '', '', [
+    [reduction, david, 1, 'con', 0, 'ef+', '', 4, 0, '', '', '', [
         [1, 'Allegro maestoso', [ahnbenton]],
         [2, 'Marcia funebre', [ahnbenton]],
         [3, 'Allegro maestoso', [ahnbenton]],
     ], [tbn, orch], [ahnbenton]],
-    [reduction, davidov, 1, 'con', 0, '', '', 0, 0, '', '', '', [
+    [reduction, davidov, 1, 'con', 0, 'b-', '', 5, 0, '', '', '', [
         [1, 'Allegro moderato', [ahnbenton]],
         [2, 'Cantabile', [ahnbenton]],
         [3, 'Allegretto', [ahnbenton]],
@@ -3697,12 +3707,12 @@ const availablePianoReductionList = [
         [2, 'Adagio molto', [ahnbenton]],
         [3, 'Allegro con spirito, quasi presto', [ahnbenton]],
     ], [hn, orch], [ahnbenton]],
-    [reduction, kabalevsky, 1, 'con', 0, 'c+', '', 0, 0, '', '', '', [
+    [reduction, kabalevsky, 1, 'con', 0, 'c+', '', 48, 0, '', '', '', [
         [1, 'Allegro molto e con brio', [ahnbenton, kolesnyk]],
         [2, 'Andantino cantabile', [ahnbenton]],
         [3, 'Vivace giocoso', [ahnbenton, kolesnyk]],
     ], [vln, orch], [ahnbenton, kolesnyk]],
-    [reduction, khachaturian, 1, 'con', 0, '', '', 0, 0, '', '', '', [
+    [reduction, khachaturian, 1, 'con', 0, 'd-', '', 0, 0, '', '', '', [
         [1, 'Allegro con moto', [ahnbenton]],
         [2, 'Larghetto', [ahnbenton]],
         [3, 'Animato molto', [ahnbenton]],
@@ -3817,7 +3827,7 @@ const availablePianoReductionList = [
     [reduction, menotti, 1, 'The consul', 0, '', '', 0, 0, '', '', '', [
         [0, 'To this we\'ve come', [ahnbenton]],
     ], [voc, orch], [ahnbenton]],
-    [reduction, menotti, 1, '', 0, 'The medium', '', 0, 0, '', '', '', [
+    [reduction, menotti, 1, 'The medium', 0, '', '', 0, 0, '', '', '', [
         [0, 'The black swan', [ahnbenton]],
         [0, 'Monica\'s waltz', [ahnbenton]],
     ], [voc, orch], [ahnbenton]],
@@ -3842,7 +3852,7 @@ const availablePianoReductionList = [
     [reduction, mozart, 1, 'Bastien und Bastienne', 0, '', '', 50, 0, '', '', '', [
         [0, 'Diggi, daggi, schurry, murry', [ahnbenton]],
     ], [voc, orch], [ahnbenton]],
-    [reduction, mozart, 1, 'Ascanio in Alba', 0, '', '', 50, 0, '', '', '', [
+    [reduction, mozart, 1, 'Ascanio in Alba', 0, '', '', 111, 0, '', '', '', [
         [0, 'Sì, ma d\'un altro amore', [ahnbenton]],
     ], [voc, orch], [ahnbenton]],
     [reduction, mozart, 1, 'Lucio Silla', 0, '', '', 135, 0, '', '', '', [
@@ -3998,7 +4008,7 @@ const availablePianoReductionList = [
         [0, 'Per pietà, ben mio perdona', [ahnbenton]],
         [0, 'Donne mie la fate a tanti', [ahnbenton]],
     ], [voc, orch], [ahnbenton, kolesnyk]],
-    [reduction, mozart, 1, '', 0, 'Die Zauberflöte', '', 620, 0, '', '', '', [
+    [reduction, mozart, 1, 'Die Zauberflöte', 0, '', '', 620, 0, '', '', '', [
         [0, 'Der Vogelfänger bin ich ja', [ahnbenton]],
         [0, 'Dies Bildnis ist bezaubernd schön', [ahnbenton]],
         [0, 'O zittre nicht mein lieber Sohn', [ahnbenton]],
@@ -4098,14 +4108,14 @@ const availablePianoReductionList = [
         [0, 'In quelle trine morbide', [ahnbenton]],
         [0, 'Sola, perduta, abbandonata', [ahnbenton]],
     ], [voc, orch], [ahnbenton]],
-    [reduction, puccini, 1, '', 0, 'La rondine', '', 0, 0, '', '', '', [
+    [reduction, puccini, 1, 'La rondine', 0, '', '', 0, 0, '', '', '', [
         [0, 'Chi il bel sogno di Doretta', [ahnbenton, kolesnyk]],
     ], [voc, orch], [ahnbenton, kolesnyk]],
-    [reduction, puccini, 1, '', 0, 'Suor Angelica', '', 0, 0, '', '', '', [
+    [reduction, puccini, 1, 'Suor Angelica', 0, '', '', 0, 0, '', '', '', [
         [0, 'Nel silenzio di quei raccoglimenti', [ahnbenton]],
         [0, 'Senza mamma, o bimbo, tu sei morto', [ahnbenton, kolesnyk]],
     ], [voc, orch], [ahnbenton, kolesnyk]],
-    [reduction, puccini, 1, '', 0, 'Il tabarro', '', 0, 0, '', '', '', [
+    [reduction, puccini, 1, 'Il tabarro', 0, '', '', 0, 0, '', '', '', [
         [0, 'Nulla! Silenzio!', [ahnbenton]],
     ], [voc, orch], [ahnbenton]],
     [reduction, puccini, 1, 'Tosca', 0, '', '', 0, 0, '', '', '', [
@@ -4155,7 +4165,7 @@ const availablePianoReductionList = [
         [2, 'La flûte enchantée', [ahnbenton]],
         [3, 'L\'indifférent', [ahnbenton]],
     ], [voc, orch], [ahnbenton]],
-    [reduction, reinecke, 1, 'con', 0, 'd+', '', 0, 0, '', '', '', [
+    [reduction, reinecke, 1, 'con', 0, 'd+', '', 283, 0, '', '', '', [
         [1, 'Allegro molto moderato', [ahnbenton]],
         [2, 'Lento e mesto', [ahnbenton]],
         [3, 'Moderato', [ahnbenton]],
@@ -4327,7 +4337,7 @@ const availablePianoReductionList = [
         [2, 'Andante', [ahnbenton]],
         [3, 'Vivace', [ahnbenton]],
     ], [ob, orch], [ahnbenton]],
-    [reduction, stravinsky, 1, 'Suite italienne', 1, '', '', 0, 0, '', '', '', [
+    [reduction, stravinsky, 1, 'Suite italienne', 0, '', '', 0, 0, '', '', '', [
         [1, 'Introduzione', [ahnbenton]],
         [2, 'Serenata', [ahnbenton]],
         [3, 'Tarantella', [ahnbenton]],
@@ -4335,13 +4345,13 @@ const availablePianoReductionList = [
         [5, 'Scherzino', [ahnbenton]],
         [6, 'Minuetto e Finale', [ahnbenton]],
     ], [vln, orch], [ahnbenton]],
-    [reduction, stravinsky, 1, 'con', 1, 'd+', '', 0, 0, '', '', '', [
+    [reduction, stravinsky, 1, 'con', 0, 'd+', '', 0, 0, '', '', '', [
         [1, 'Toccata', [ahnbenton]],
         [2, 'Aria I', [ahnbenton]],
         [3, 'Aria II', [ahnbenton]],
         [4, 'Capriccio', [ahnbenton]],
     ], [vln, orch], [ahnbenton]],
-    [reduction, tamberg, 1, 'con', 1, '', '', 42, 0, '', '', '', [
+    [reduction, tamberg, 1, 'con', 0, '', '', 42, 0, '', '', '', [
         [1, 'Andante - Allegro', [ahnbenton]],
         [2, 'Lento', [ahnbenton]],
         [3, 'Allegro molto', [ahnbenton]],
@@ -4464,7 +4474,7 @@ const availablePianoReductionList = [
         [2, 'Adagio', [ahnbenton]],
         [3, 'Allegro con fuoco', [ahnbenton]],
     ], [vln, orch], [ahnbenton, kolesnyk]],
-    [reduction, villaLobos, 1, 'f', 5, '', '', 0, 0, '', '', '', [
+    [reduction, villaLobos, 1, 'f', 0, '', '', 0, 0, '', '', '', [
         [1, 'Animé', [ahnbenton]],
         [2, 'Lent', [ahnbenton]],
         [3, 'Très animé', [ahnbenton]],
@@ -4504,12 +4514,12 @@ const availablePianoReductionList = [
         [2, 'Largo', [ahnbenton]],
         [3, 'Allegro', [ahnbenton, kolesnyk]],
     ], [vln, orch], [ahnbenton, kolesnyk]],
-    [reduction, vivaldi, 1, 'con', 0, 'e-', '', 356, 0, '', '', '', [
+    [reduction, vivaldi, 1, 'con', 0, 'a-', '', 356, 0, '', '', '', [
         [1, 'Allegro', [ahnbenton, kolesnyk]],
         [2, 'Largo', [ahnbenton, kolesnyk]],
         [3, 'Presto', [ahnbenton, kolesnyk]],
     ], [vln, orch], [ahnbenton, kolesnyk]],
-    [reduction, vivaldi, 1, 'con', 0, 'e-', '', 461, 0, '', '', '', [
+    [reduction, vivaldi, 1, 'con', 0, 'a-', '', 461, 0, '', '', '', [
         [1, 'Allegro', [ahnbenton]],
         [2, 'Larghetto', [ahnbenton]],
         [3, 'Allegro', [ahnbenton]],
@@ -4617,7 +4627,7 @@ const availablePianoReductionList = [
         [0, 'Starlight express', [ahnbenton]],
     ], [voc, orch], [ahnbenton]],
     [reduction, weber, 1, 'cono', 0, 'c-', '', 26, 0, '', '', '', [], [cl, orch], [ahnbenton, kolesnyk]],
-    [reduction, weber, 1, 'con', 2, 'f-', '', 73, 0, '', '', '', [
+    [reduction, weber, 1, 'con', 1, 'f-', '', 73, 0, '', '', '', [
         [1, 'Allegro', [ahnbenton]],
         [2, 'Adagio ma non troppo', [ahnbenton]],
         [3, 'Rondo: Allegretto', [ahnbenton]],
@@ -4627,7 +4637,7 @@ const availablePianoReductionList = [
         [2, 'Romanze: Andante con moto', [ahnbenton]],
         [3, 'Polacca', [ahnbenton]],
     ], [cl, orch], [ahnbenton]],
-    [reduction, weber, 1, 'con', 2, 'f+', '', 75, 0, '', '', '', [
+    [reduction, weber, 1, 'con', 0, 'f+', '', 75, 0, '', '', '', [
         [1, 'Allegro ma non troppo', [ahnbenton]],
         [2, 'Adagio', [ahnbenton]],
         [3, 'Rondo: Allegro', [ahnbenton]],
@@ -4651,7 +4661,7 @@ const availablePianoReductionList = [
         [3, 'Rondo: Allegro giocoso', [ahnbenton]],
     ], [vln, orch], [ahnbenton]],
     [reduction, wieniawski, 1, 'Légende', 0, 'g-', '', 17, 0, '', '', '', [], [vln, orch], [ahnbenton]],
-    [reduction, wieniawski, 1, 'Fantasia on themes from "Faust"', 0, gounod, 'Faust', 20, 0, '', '', '', [], [vln, orch], [ahnbenton]],
+    [reduction, wieniawski, 1, 'Fantasia on themes from "Faust"', 0, '', '', 20, 0, gounod, '', '', [], [vln, orch], [ahnbenton]],
     [reduction, wieniawski, 1, 'con', 2, 'd-', '', 22, 0, '', '', '', [
         [1, 'Allegro moderato', [ahnbenton]],
         [2, 'Romance: Andante non troppo', [ahnbenton]],
@@ -4664,12 +4674,12 @@ const availablePianoReductionList = [
         [4, 'Craeb Uisnig', [ahnbenton]],
         [5, 'Dathi', [ahnbenton]],
     ], [bsn, orch], [ahnbenton]],
-    [reduction, williamsR, 1, 'con', 2, 'a-', '', 0, 0, '', '', '', [
+    [reduction, williamsR, 1, 'con', 0, 'a-', '', 0, 0, '', '', '', [
         [1, 'Rondo pastorale', [ahnbenton]],
         [2, 'Minuet and musette', [ahnbenton]],
         [3, 'Scherzo', [ahnbenton]],
     ], [ob, orch], [ahnbenton]],
-    [reduction, williamsR, 1, 'con', 2, 'f-', '', 0, 0, '', '', '', [
+    [reduction, williamsR, 1, 'con', 0, 'f-', '', 0, 0, '', '', '', [
         [1, 'Prelude: Allegro moderato', [ahnbenton]],
         [2, 'Romanza: Andante sostenuto', [ahnbenton]],
         [3, 'Finale: Rondo alla tedesca', [ahnbenton]],
@@ -4683,8 +4693,8 @@ const availablePianoReductionList = [
 ]
 
 //testing
-for (let i = 600; i < 608; i++) {
-    let rep = availablePianoChamberList[i]
+for (let i = 275; i < 303; i++) {
+    let rep = availablePianoReductionList[i]
     let testPianoRepObj = new PianoRepBuilder(rep[0], rep[1], rep[2], rep[3], rep[4], rep[5], rep[6], rep[7], rep[8], rep[9], rep[10], rep[11], rep[12], rep[13], rep[14], rep[15])
     console.log(testPianoRepObj)
 }
