@@ -17,6 +17,7 @@ const arban = 'Jean-Baptiste Arban'
 const arensky = 'Anton Arensky'
 const argento = 'Dominick Argento'
 const arlen = 'Harold Arlen'
+const arne = 'Thomas Arne'
 const arnold = 'Malcolm Arnold'
 const arutiunian = 'Alexander Arutiunian'
 const auerbach = 'Lera Auerbach'
@@ -56,6 +57,7 @@ const bolling = 'Claude Bolling'
 const bonds = 'Margaret Bonds'
 const bonis = 'Mel Bonis'
 const bononcini = 'Giovanni Battista Bononcini'
+const borne = 'François Borne'
 const bortkevych = 'Sergei Bortkevych'
 const bottesini = 'Giovanni Bottesini'
 const boulangerL = 'Lili Boulanger'
@@ -96,6 +98,7 @@ const catozzi = 'Andrea Catozzi'
 const chabrier = 'Emmanuel Chabrier'
 const chaminade = 'Cécile Chaminade'
 const chang = 'Dorothy Chang'
+const charles = 'Ernest Charles'
 const charlierD = 'David Charlier'
 const charlierL = 'Leopold Charlier'
 const charpentier = 'Gustave Charpentier'
@@ -197,6 +200,7 @@ const grondahl = 'Launy Grøndahl'
 const guastavino = 'Carlos Guastavino'
 const guilmant = 'Alexandre Guilmant'
 const gurney = 'Ivor Gurney'
+const hageman = 'Richard Hageman'
 const hahn = 'Reynaldo Hahn'
 const halevy = 'Fromental Halévy'
 const hailstork = 'Adolphus Hailstork'
@@ -217,6 +221,7 @@ const hindemith = 'Paul Hindemith'
 const hoffmeister = 'Anton Hoffmeister'
 const hogan = 'Moses Hogan'
 const hoiby = 'Lee Hoiby'
+const holmes = 'Rupert Holmes'
 const holst = 'Gustav Holst'
 const honegger = 'Arthur Honegger'
 const horovitz = 'Joseph Horovitz'
@@ -326,6 +331,7 @@ const meyerbeer = 'Giacomo Meyerbeer'
 const milhaud = 'Darius Milhaud'
 const mitchell = 'Joni Mitchell'
 const monteverdi = 'Claudio Monteverdi'
+const monti = 'Vittorio Monti'
 const montsalvatge = 'Xavier Montsalvatge'
 const mooreD = 'Douglas Moore'
 const mooreUS = 'Undine Smith Moore'
@@ -539,6 +545,7 @@ const hp = 'Harp'
 const gui = 'Guitar'
 const mar = 'Marimba'
 const perc = 'Percussion'
+const vib = 'Vibraphone'
 const orch = 'Orchestra'
 const bnd = 'Band'
 const chr = 'Chorus'
@@ -902,6 +909,7 @@ const availablePianoSoloList = [
         [2, 'Air', [ahnbenton]],
     ], [pno], [ahnbenton]],
     [solo, badarzewska, 1, 'A Maiden\'s Prayer', 0, 'ef+', '', 0, 0, '', '', '', [], [pno], [ahnbenton]],
+    [solo, balakirev, 1, 'Islamey', 0, '', '', 0, 0, '', '', '', [], [pno], [kolesnyk]],
     [solo, barber, 1, 'Excursions', 0, '', '', 20, 0, '', '', '', [
         [1, 'Un poco allegro', [ahnbenton]],
         [2, 'In slow blues tempo', [ahnbenton]],
@@ -1504,6 +1512,7 @@ const availablePianoChamberList = [
         [5, 'Diaphenia', [ahnbenton]],
         [6, 'Hymn', [ahnbenton]],
     ], [pno, voc], [ahnbenton]],
+    [chamber, arne, 1, 'When daisies pied', 0, '', '', 0, 0, '', '', '', [], [pno, voc], [ahnbenton]],
     [chamber, arnold, 1, 'sa', 0, '', '', 0, 0, '', '', '', [
         [1, 'Allegro con brio', [ahnbenton]],
         [2, 'Andantino', [ahnbenton]],
@@ -1733,6 +1742,7 @@ const availablePianoChamberList = [
     [chamber, bonds, 1, 'He\'s got the whole world in his hands', 0, '', '', 0, 0, '', '', '', [], [pno, voc], [ahnbenton]],
     [chamber, bonds, 1, 'Hyacinth', 0, '', '', 0, 0, '', '', '', [], [pno, voc], [ahnbenton]],
     [chamber, bononcini, 1, 'Per la gloria d\'adorarvi', 0, '', '', 0, 0, '', '', '', [], [pno, voc], [ahnbenton]],
+    [chamber, borne, 1, 'Fantaisie brillante sur des airs de "Carmen"', 0, '', '', 0, 0, '', '', '', [], [pno, aSax], [ahnbenton]],
     [chamber, boulangerL, 1, 'Clairières dans le ciel', 0, '', '', 0, 0, '', '', '', [
         [1, 'Elle était descendue au bas de la prairie', [ahnbenton]],
         [2, 'Elle est gravement gaie', [ahnbenton]],
@@ -1848,6 +1858,8 @@ const availablePianoChamberList = [
         [4, 'A charm', [ahnbenton]],
         [5, 'The nurse\'s song', [ahnbenton]],
     ], [pno, voc], [ahnbenton]],
+    [chamber, britten, 1, 'O Waly, Waly', 0, '', '', 0, 0, '', '', '', [], [pno, voc], [ahnbenton]],
+    [chamber, britten, 1, 'The Salley gardens', 0, '', '', 0, 0, '', '', '', [], [pno, voc], [ahnbenton, kolesnyk]],
     [chamber, britten, 1, 'Insect Pieces', 0, '', '', 0, 0, '', '', '', [
         [1, 'The grasshopper', [ahnbenton]],
         [2, 'The wasp', [ahnbenton]],
@@ -1915,6 +1927,7 @@ const availablePianoChamberList = [
         [1, 'Adagio ed espressivo', [ahnbenton]],
         [2, 'Prestissimo', [ahnbenton]],
     ], [pno, aSax]],
+    [chamber, charles, 1, 'When I have sung my songs', 0, '', '', 0, 0, '', '', '', [], [pno, voc], [ahnbenton]],
     [chamber, chausson, 7, 'mel', 0, '', '', 2, 0, '', '', '', [
         [2, 'Le charme', [ahnbenton]],
         [3, 'Les papillons', [ahnbenton]],
@@ -2037,6 +2050,7 @@ const availablePianoChamberList = [
     [chamber, donizetti, 1, 'Berceuse', 0, '', '', 0, 0, '', '', '', [], [pno, voc], [ahnbenton]],
     [chamber, doppler, 1, 'Fantaisie pastorale hongroise', 0, 'd-', '', 26, 0, '', '', '', [], [pno, fl], [ahnbenton, kolesnyk]],
     [chamber, doppler, 1, 'Duettino americain', 0, 'bf+', '', 37, 0, '', '', '', [], [pno, vln, fl], [ahnbenton]],
+    [chamber, drigo, 1, 'Valse bluette (Air de ballet)', 0, '', '', 0, 0, '', '', heifetz, [], [pno, vln], [ahnbenton]],
     [chamber, duke, 1, 'A piper', 0, '', '', 0, 0, '', '', '', [], [pno, voc], [ahnbenton, kolesnyk]],
     [chamber, duke, 1, 'The bird', 0, '', '', 0, 0, '', '', '', [], [pno, voc], [ahnbenton]],
     [chamber, duke, 1, 'I carry your heart', 0, '', '', 0, 0, '', '', '', [], [pno, voc], [ahnbenton, kolesnyk]],
@@ -2102,6 +2116,15 @@ const availablePianoChamberList = [
         [3, 'Allegro con fuoco', [ahnbenton]],
     ], [pno, tpt], [ahnbenton]],
     [chamber, ewazen, 1, 'tr', 0, '', '', 0, 0, '', '', '', [], [pno, vlc, tpt], [ahnbenton]],
+    [chamber, falla, 7, 'Canciones populares españolas', 1, '', '', 0, 0, '', '', '', [
+        [1, 'El paño moruno', [ahnbenton]],
+        [2, 'Seguidilla murciana', [ahnbenton]],
+        [3, 'Asturiana', [ahnbenton, kolesnyk]],
+        [4, 'Jota', [ahnbenton]],
+        [5, 'Nana', [ahnbenton]],
+        [6, 'Canción', [ahnbenton]],
+        [7, 'Polo', [ahnbenton]],
+    ], [pno, voc], [ahnbenton, kolesnyk]],
     [chamber, falla, 1, 'El sombrero de tres picos', 1, '', '', 0, 0, '', '', '', [
         [1, 'Melodia', [ahnbenton]],
         [2, 'Danza de la molinera', [ahnbenton]],
@@ -2174,6 +2197,7 @@ const availablePianoChamberList = [
     [chamber, finzi, 1, 'Let us garlands bring', 0, '', '', 18, 0, '', '', '', [
         [1, 'Come away death', [ahnbenton]],
     ], [pno, voc], [ahnbenton]],
+    [chamber, flaherty, 1, 'I eat (Gluttony)', 0, '', '', 0, 0, '', '', '', [], [pno, voc, fl, ob, cl, vlc, vib]],
     [chamber, foster, 1, 'Beautiful dreamer', 0, '', '', 0, 0, '', '', '', [], [pno, voc], [ahnbenton, kolesnyk]],
     [chamber, francaix, 5, 'Dansces exotiques', 0, '', '', 0, 0, '', '', '', [
         [1, 'Pambiche', [ahnbenton]],
@@ -2275,6 +2299,7 @@ const availablePianoChamberList = [
         [3, 'Rondo: Allegro spiritoso', [ahnbenton]],
     ], [pno, cl], [ahnbenton]],
     [chamber, guilmant, 1, 'Morceau symphonique', 0, '', '', 88, 0, '', '', '', [], [pno, tbn], [ahnbenton]],
+    [chamber, hageman, 1, 'Do not go, my love', 0, '', '', 0, 0, '', '', '', [], [pno, voc], [ahnbenton]],
     [chamber, hahn, 7, 'Chansons grises', 0, '', '', 0, 0, '', '', '', [
         [5, 'L\'heure exquise', [ahnbenton, kolesnyk]],
     ], [pno, voc], [ahnbenton, kolesnyk]],
@@ -2310,6 +2335,16 @@ const availablePianoChamberList = [
     [chamber, heggie, 1, 'At the statue of Venus', 0, '', '', 0, 0, '', '', '', [], [pno, voc], [ahnbenton]],
     [chamber, heggie, 1, 'Natural selection', 0, '', '', 0, 0, '', '', '', [
         [2, 'Animal passion', [ahnbenton]],
+    ], [pno, voc], [ahnbenton]],
+    [chamber, heggie, 8, 'Songs for murdered sisters', 0, '', '', 0, 0, '', '', '', [
+        [1, 'Empty chair', [ahnbenton]],
+        [2, 'Enchantment', [ahnbenton]],
+        [3, 'Anger', [ahnbenton]],
+        [4, 'Dream', [ahnbenton]],
+        [5, 'Bird soul', [ahnbenton]],
+        [6, 'Lost', [ahnbenton]],
+        [7, 'Rage', [ahnbenton]],
+        [8, 'Coda: Song', [ahnbenton]],
     ], [pno, voc], [ahnbenton]],
     [chamber, heggie, 1, 'Vanity (Blah blah me)', 0, '', '', 0, 0, '', '', '', [], [pno, voc], [ahnbenton]],
     [chamber, heiden, 1, 's', 0, '', '', 0, 0, '', '', '', [
@@ -3260,6 +3295,7 @@ const availablePianoChamberList = [
     ], [pno, voc], [ahnbenton]],
     [chamber, verdi, 1, 'L\'esule', 0, '', '', 0, 0, '', '', '', [], [pno, voc], [ahnbenton]],
     [chamber, verdi, 1, 'Stornello', 0, '', '', 0, 0, '', '', '', [], [pno, voc], [ahnbenton]],
+    [chamber, viardot, 1, 'Les deux roses', 0, '', '', 0, 0, '', '', '', [], [pno, voc], [ahnbenton, kolesnyk]],
     [chamber, vieuxtemps, 1, 'el', 0, 'f-', '', 30, 0, '', '', '', [], [pno, vla], [ahnbenton]],
     [chamber, vitali, 1, 'Chaconne', 0, 'g-', '', 0, 0, '', '', charlierL, [], [pno, vln], [ahnbenton]],
     [chamber, wagner, 1, 'Wesendonck Lieder', 0, '', '', 91, 0, '', '', '', [
@@ -3394,6 +3430,9 @@ const availablePianoReductionList = [
         [3, 'Presto in moto perpetuo', [ahnbenton]],
     ], [vln, orch], [ahnbenton, kolesnyk]],
     [reduction, barber, 1, 'Knoxville: Summer of 1915', 0, '', '', 24, 0, '', '', '', [], [voc, orch], [ahnbenton]],
+    [reduction, barber, 1, 'Vanessa', 0, '', '', 32, 0, '', '', '', [
+        [0, 'Must the winter come so soon?', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
     [reduction, beethoven, 1, 'rom', 2, 'f+', '', 50, 0, '', '', '', [], [vln, orch], [ahnbenton]],
     [reduction, beethoven, 1, 'Ah! Perfido', 0, '', '', 65, 0, '', '', '', [], [voc, orch], [ahnbenton]],
     [reduction, beethoven, 1, 'Fidelio', 0, '', '', 72, 0, '', '', '', [
@@ -3760,6 +3799,9 @@ const availablePianoReductionList = [
         [2, 'Adagio', [ahnbenton]],
         [3, 'Rondo', [ahnbenton]],
     ], [vla, orch], [ahnbenton, kolesnyk]],
+    [reduction, holmes, 1, 'The mystery of Edwin Drood', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Moonfall', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
     [reduction, hummel, 1, 'con', 0, 'ef+', '', 0, 0, '', '', '', [
         [1, 'Allegro con spirito', [ahnbenton]],
         [2, 'Andante', [ahnbenton]],
@@ -3930,6 +3972,7 @@ const availablePianoReductionList = [
         [0, 'Robert, toi que j\'aime', [ahnbenton]],
     ], [voc, orch], [ahnbenton]],
     [reduction, milhaud, 1, 'Les malheurs d\'Orphée', 0, '', '', 85, 0, '', '', '', [], [voc, orch], [ahnbenton]],
+    [reduction, monti, 1, 'Czardas', 0, '', '', 0, 0, '', '', '', [], [vln, orch], [ahnbenton, kolesnyk]],
     [reduction, mooreD, 1, 'The ballad of baby doe', 0, '', '', 0, 0, '', '', '', [
         [0, 'Willow song', [ahnbenton]],
         [0, 'The silver aria', [ahnbenton]],
@@ -4255,6 +4298,10 @@ const availablePianoReductionList = [
         [2, 'Lento e mesto', [ahnbenton]],
         [3, 'Moderato', [ahnbenton]],
     ], [fl, orch], [ahnbenton]],
+    [reduction, rodgersHammerstein, 1, 'South pacific', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Some enchanted evening', [ahnbenton]],
+        [0, 'This nearly was mine', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
     [reduction, rossini, 1, 'Il barbiere di Siviglia', 0, '', '', 0, 0, '', '', '', [
         [0, 'Ecco ridente in cielo', [ahnbenton]],
         [0, 'Largo al factotum della città', [ahnbenton]],
@@ -4302,6 +4349,9 @@ const availablePianoReductionList = [
         [0, 'I dreamed a dream', [ahnbenton]],
         [0, 'Master of the house', [ahnbenton]],
         [0, 'Stars', [ahnbenton]],
+    ], [voc, orch], [ahnbenton]],
+    [reduction, schuman, 1, 'The mighty Casey', 0, '', '', 0, 0, '', '', '', [
+        [0, 'Kiss me not goodbye', [ahnbenton]],
     ], [voc, orch], [ahnbenton]],
     [reduction, schumannR, 1, 'con', 0, 'a-', '', 129, 0, '', '', '', [
         [1, 'Nicht zu schnell', [ahnbenton, kolesnyk]],
