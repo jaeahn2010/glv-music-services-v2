@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Card from '../Card'
 
-export default function Gallery({ filteredOpuses, setOpusDetails }) {
+export default function Gallery({ filteredOpuses, setOpusDetails, allMusicians }) {
     const [endDisplayIndex, setEndDisplayIndex] = useState(20)
     let galleryContent = <p className='text-center my-10'>No repertoire found. Please check your internect connection. If the problem persists, please contact the site administrator.</p>
 
@@ -12,6 +12,7 @@ export default function Gallery({ filteredOpuses, setOpusDetails }) {
                 key={opus._id}
                 opus={opus}
                 setOpusDetails={setOpusDetails}
+                allMusicians={allMusicians}
             />)
     }
     

@@ -35,6 +35,7 @@ const bartok = 'Béla Bartók'
 const bates = 'Mason Bates'
 const bazzini = 'Antonio Bazzini'
 const beach = 'Amy Beach'
+const bedard = 'Denis Bédard'
 const beethoven = 'Ludwig van Beethoven'
 const bellini = 'Vincenzo Bellini'
 const bellor = 'Jennifer Bellor'
@@ -543,8 +544,8 @@ const tba = 'Tuba'
 const voc = 'Voice'
 const hp = 'Harp'
 const gui = 'Guitar'
-const mar = 'Marimba'
 const perc = 'Percussion'
+const mar = 'Marimba'
 const vib = 'Vibraphone'
 const orch = 'Orchestra'
 const bnd = 'Band'
@@ -1572,6 +1573,7 @@ const availablePianoChamberList = [
         [2, 'Ah, love but a day', [ahnbenton, kolesnyk]],
         [3, 'I send my heart up to thee', [ahnbenton, kolesnyk]],
     ], [pno, voc], [ahnbenton, kolesnyk]],
+    [chamber, bedard, 1, 'Fantaisie', 0, '', '', 0, 0, '', '', '', [], [pno, sSax], [ahnbenton]],
     [chamber, beethoven, 1, 'tr', 2, 'g+', '', 1, 2, '', '', '', [
         [1, 'Allegro vivace', [kolesnyk]],
         [2, 'Largo con espressione', [kolesnyk]],

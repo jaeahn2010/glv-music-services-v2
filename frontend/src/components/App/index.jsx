@@ -201,6 +201,7 @@ export default function App() {
 						isMenuOpen={isMenuOpen}
 						allOpuses={allOpuses}
 						allComposers={allComposers}
+						allMusicians={allMusicians}
 						setOpusDetails={setOpusDetails}
 						loginStatus={loginStatus}
 						instruments={instruments}

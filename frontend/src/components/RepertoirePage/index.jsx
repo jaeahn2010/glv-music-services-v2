@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import Gallery from '../Gallery'
 
-export default function RepertoirePage({ isMenuOpen, allOpuses, allComposers, setOpusDetails, loginStatus, instruments, scrollToTop, sortObjects }) {
+export default function RepertoirePage({ isMenuOpen, allOpuses, allComposers, allMusicians, setOpusDetails, loginStatus, instruments, scrollToTop, sortObjects }) {
     const [showFilters, setShowFilters] = useState(false)
     const [filterSwitch, setFilterSwitch] = useState({
         composer: [false, ''],
@@ -119,6 +119,7 @@ export default function RepertoirePage({ isMenuOpen, allOpuses, allComposers, se
             <Gallery
                 filteredOpuses={filteredOpuses}
                 setOpusDetails={setOpusDetails}
+                allMusicians={allMusicians}
             />
         </main>
     )
