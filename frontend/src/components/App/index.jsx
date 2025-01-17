@@ -42,7 +42,6 @@ export default function App() {
 	const [adminLogin, setAdminLogin] = useState(false)
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
 	const [isMobile, setIsMobile] = useState(false)
-	const [totalPrice, setTotalPrice] = useState(0)
 	const navigate = useNavigate()
 	const h2Style = "text-stone-200 my-5 hover:scale-110 duration-500"
 	const pCategoryStyle = 'underline font-bold text-2xl p-2'
@@ -50,20 +49,6 @@ export default function App() {
 	for (let opus of allOpuses) {
 		if (!allComposers.includes(opus.composer)) allComposers.push(opus.composer)
 	}
-
-	useEffect(() => {
-		setTotalPrice(0)
-		for (let item of userCart) {
-			let fullOpus = allOpuses.find(opus => opus._id === item._id)
-			if (!item.price || fullOpus.movements.length !== item.movements.length) {
-				for (let mvmt of item.movements) {
-					setTotalPrice(totalPrice => totalPrice += mvmt.movementPrice)
-				} 
-			} else {
-				setTotalPrice(totalPrice => totalPrice += fullOpus.price)
-			}
-		}
-	}, [userCart])
 
 	function sortObjects(objs) {
 		return objs.sort((a, b) => {
@@ -226,7 +211,6 @@ export default function App() {
 						loginStatus={loginStatus}
 						userCart={userCart}
 						setUserCart={setUserCart}
-						totalPrice={totalPrice}
 						scrollToTop={scrollToTop}
 					/>}
 				/>
@@ -236,7 +220,6 @@ export default function App() {
 						allMusicians={allMusicians}
 						loginStatus={loginStatus}
 						userCart={userCart}
-						totalPrice={totalPrice}
 						states={states}
 					/>}
 				/>
