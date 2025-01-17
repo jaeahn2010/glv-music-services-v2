@@ -139,8 +139,11 @@ router.post('/', authMiddleware, (req, res) => {
 
 // email sender
 router.post('/send-email', authMiddleware, upload.single('resume'), async (req, res) => {
-    if (!req.file) return res.status(400).send('No resume uploaded.')
-    const formData = {...req.body, file: req.file}
+    let formData = req.body
+    if (req.body.requestType === 'joinGLVMS') {
+        if (!req.file) res.status(400).send('No resume uploaded.')
+        formData = {...req.body, file: req.file}
+    }
     try {
         const result = await sendEmail(formData)
         console.log('Email sent:', result)

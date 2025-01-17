@@ -2,7 +2,7 @@ import { useState } from "react"
 import { sendEmail } from "../../../utils/backend"
 import { useNavigate } from "react-router-dom"
 
-export default function RequestPage({ isMenuOpen, allMusicians, loginStatus, userCart, totalPrice, states }) {
+export default function RequestPage({ isMenuOpen, allMusicians, loginStatus, userCart, states }) {
     const [requestData, setRequestData] = useState({
         clientEmail: '',
         musicianEmail: '',
@@ -36,25 +36,30 @@ export default function RequestPage({ isMenuOpen, allMusicians, loginStatus, use
 
     function handleSubmit(evt) {
         evt.preventDefault()
-        sendEmail({
-            requestType: 'main',
-            clientEmail: localStorage.getItem('email'),
-            musicianEmail: requestData.musicianEmail,
-            eventName: requestData.eventName,
-            eventLocation: {
-                locationName: requestData.locationName,
-                address: requestData.address,
-                city: requestData.city,
-                state: requestData.state,
-                zipCode: requestData.zipCode,
-            },
-            eventDate: requestData.eventDate,
-            eventStartTime: requestData.eventStartTime,
-            eventEndTime: requestData.eventEndTime,
-            requestedRepertoire: userCart,
-            additionalComments: requestData.additionalComments,
-            status: 'pending',
-        })
+        try {
+            sendEmail({
+                requestType: 'main',
+                clientEmail: localStorage.getItem('email'),
+                musicianEmail: requestData.musicianEmail,
+                eventName: requestData.eventName,
+                eventLocation: {
+                    locationName: requestData.locationName,
+                    address: requestData.address,
+                    city: requestData.city,
+                    state: requestData.state,
+                    zipCode: requestData.zipCode,
+                },
+                eventDate: requestData.eventDate,
+                eventStartTime: requestData.eventStartTime,
+                eventEndTime: requestData.eventEndTime,
+                requestedRepertoire: userCart,
+                additionalComments: requestData.additionalComments,
+                status: 'pending',
+            })
+            alert('Request sent successfully!')
+        } catch (err) {
+            alert('Failed to send request: ', err)
+        }
         setRequestData({
             clientEmail: '',
             musicianEmail: '',
@@ -206,11 +211,10 @@ export default function RequestPage({ isMenuOpen, allMusicians, loginStatus, use
                         <div className="w-2/3">
                             {userCart.map(opusInCart => <div key={opusInCart._id} className="border border-stone-200 p-2 rounded-xl bg-stone-700 my-2">
                                 <p className="underline">{opusInCart.composer}: {opusInCart.title}</p>
-                                {opusInCart.movements.map(movement => <p key={movement.movementTitle}>{movement.movementTitle}</p>)}
+                                {opusInCart.movements.map(movement => <p key={movement._id}>{movement.movementTitle}</p>)}
                             </div>)}
                         </div>
                     </div>
-                    <p className="text-center my-5">Total price: ${totalPrice}</p>
                     <div className={divStyle}>
                         <label htmlFor="additionalComments" className={labelStyle + ' min-h-[30vh]'}>Additional Comments:</label>
                         <textarea

@@ -2,9 +2,8 @@ import trashIcon from '../../assets/trash-icon.jpeg'
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
-export default function CurrentCart({ isMenuOpen, allOpuses, loginStatus, userCart, setUserCart, totalPrice, scrollToTop }) {
+export default function CurrentCart({ isMenuOpen, allOpuses, loginStatus, userCart, setUserCart, allMusicians, scrollToTop }) {
     let cartText = userCart.length > 0 ? 'Your cart' : 'Your cart is empty.'
-    let priceText = userCart.length > 0 ? `Your total: $${totalPrice}` : ''
     const btnStyle = 'border-stone-200 border rounded-xl px-3 py-1 my-2 w-full hover:scale-110 hover:cursor-pointer hover:bg-amber-400 hover:text-stone-900 hover:duration-500'
 
     function handleClick(evt) {
@@ -43,7 +42,6 @@ export default function CurrentCart({ isMenuOpen, allOpuses, loginStatus, userCa
                     <tbody>
                         {item.movements.map(movement => <tr key={movement.movementTitle} className="border-b-2 border-white">
                             <td>{movement.movementTitle}</td>
-                            <td>${movement.movementPrice}</td>
                             <td>
                                 <img src={trashIcon} className="w-[25px] hover:bg-red-600 hover:opacity-50 hover:cursor-pointer" id={`${item._id}-movement-${movement.movementNumber}`} onClick={handleClick}/>
                             </td>
@@ -74,13 +72,6 @@ export default function CurrentCart({ isMenuOpen, allOpuses, loginStatus, userCa
                                 <p className="underline">MOVEMENTS</p>
                                 {mvmts}
                             </div>
-                                <br/>
-                            <div className="flex justify-between">
-                                <div>
-                                    <p className="underline">BULK PRICE</p>
-                                    {allOpuses.filter(opus => opus._id === item._id).map(opus => <p key={opus._id}>{opus.movements.length === item.movements.length && opus.price !== null ? `$${opus.price}` : 'DOES NOT APPLY'}</p>)}
-                                </div>
-                            </div>
                             <br/>
                         </section>
                         <section className="flex flex-col items-center justify-center mx-auto text-center">
@@ -89,7 +80,6 @@ export default function CurrentCart({ isMenuOpen, allOpuses, loginStatus, userCa
                     </div>
                 )})
             }
-            <p className='text-center text-3xl'>{priceText}</p>
             <div className="flex flex-col my-12 w-2/3 min-h-[75vh]">
                 {nextStepLinks}
             </div>

@@ -208,6 +208,7 @@ export default function App() {
 					<CurrentCart
 						isMenuOpen={isMenuOpen}
 						allOpuses={allOpuses}
+						allMusicians={allMusicians}
 						loginStatus={loginStatus}
 						userCart={userCart}
 						setUserCart={setUserCart}

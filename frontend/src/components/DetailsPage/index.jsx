@@ -23,7 +23,7 @@ export default function DetailsPage({ isMenuOpen, opusDetails, loginStatus, user
 
     function handleClick(evt) {
         evt.preventDefault()
-        if (loginStatus) { // change this back to !
+        if (!loginStatus) {
             alert('Please sign up or log in to put repertoire in your cart.')
         } else {
             if (evt.target.value === 'allMvmts') { // if client chooses all mvmts
