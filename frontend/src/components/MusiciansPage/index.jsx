@@ -99,7 +99,7 @@ export default function MusiciansPage({ isMenuOpen, allMusicians, setMusicianDet
             <section className='border-t border-stone-200 my-12 py-12 mx-auto w-5/6 flex flex-col justify-center'>
                 <h2 className='text-2xl text-center my-4'>JOIN THE GLVMS TEAM</h2>
                 <p>Are you a music performer, teacher, composer, or arranger based in Las Vegas, NV? Are you looking to grow your studio, clientele, or sell more of your works? Join our team! Fill out the form below, and we will contact you for a phone interview. If we resonate well with each other, we will then schedule an in-person interview in a semi-formal audition setting, where we will further assess how we fit each other's needs.</p>
-                <form onSubmit={handleSubmit} className={showForm ? 'w-5/6 mx-auto my-6 py-10 flex flex-col items-center border border-stone-200 rounded-xl' : 'hidden'} enctype="multipart/form-data">
+                <form onSubmit={handleSubmit} className={showForm ? 'w-5/6 mx-auto my-6 py-10 flex flex-col items-center border border-stone-200 rounded-xl' : 'hidden'} encType="multipart/form-data">
                         <div className={divStyle2}>
                             <label htmlFor="email" className={labelStyle}>Email:</label>
                             <input

@@ -12,16 +12,12 @@ export async function signUp(user) {
 }
 
 export async function clientLogIn(user) {
-    const { data } = await axios.post('/api/clients/login', user, {
-        withCredentials: true
-    })
+    const { data } = await axios.post('/api/clients/login', user, { withCredentials: true })
     return data
 }
 
 export async function adminLogIn(user) {
-    const { data } = await axios.post('/api/admins/login', user, {
-        withCredentials: true
-    })
+    const { data } = await axios.post('/api/admins/login', user, { withCredentials: true })
     return data
 }
 
@@ -133,7 +129,7 @@ export async function deleteOpus(opusId) {
 //requests CRUD
 export async function getRequests() {
     try {
-        const { data } = await axios.get(`/api/requests`, authHeader)
+        const { data } = await axios.get(`/api/requests`, { withCredentials: true })
         return data
     } catch (err) {
         console.error('Error getting requests: ', err)
@@ -143,7 +139,7 @@ export async function getRequests() {
 
 export async function getRequestsByClient(clientId) {
     try {
-        const { data } = await axios.get(`/api/requests/${clientId}`, authHeader)
+        const { data } = await axios.get(`/api/requests/${clientId}`, { withCredentials: true })
         return data
     } catch (err) {
         console.error('Error getting requests by client: ', err)
@@ -153,7 +149,7 @@ export async function getRequestsByClient(clientId) {
 
 export async function getRequestsByMusician(musicianId) {
     try {
-        const { data } = await axios.get(`/api/requests/${musicianId}`, authHeader)
+        const { data } = await axios.get(`/api/requests/${musicianId}`, { withCredentials: true })
         return data
     } catch (err) {
         console.error('Error getting requests by musician: ', err)
