@@ -19,10 +19,10 @@ const authMiddleware = (req, res, next) => {
             req.user = decodedToken
             next()
         } catch (err) {
-            res.status(401).json({ message: 'Invalid token' })
+            res.status(401).json({ message: 'Invalid or expired token' })
         }
     } else {
-        res.status(401).json({ message: 'Missing or invalid authentication token' })
+        res.status(401).json({ message: 'Missing or invalid token' })
     }
 }
 

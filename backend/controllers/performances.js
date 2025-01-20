@@ -16,14 +16,14 @@ const authMiddleware = (req, res, next) => {
     const token = req.cookies.token
     if (token) {
         try {
-            const decodedToken = jwt.decode(token, config.jwtSecret)
+            const decodedToken = jwt.verify(token, config.jwtSecret)
             req.user = decodedToken
             next()
         } catch (err) {
-            res.status(401).json({ message: 'Invalid token' })
+            res.status(401).json({ message: 'Invalid or expired token' })
         }
     } else {
-        res.status(401).json({ message: 'Missing or invalid Authorization header' })
+        res.status(401).json({ message: 'Missing or invalid token' })
     }
 }
 
@@ -42,16 +42,11 @@ router.get('/:musicianId', function (req, res) {
 
 // create performance
 router.post('/', authMiddleware, (req, res) => {
-    console.log(req.body)
     db.Performance.create(req.body)
-        .then(performance => {
-            // console.log(performance)
-            // const token = jwt.encode({ id: performance.id }, config.jwtSecret)
-            res.json(performance)
-        })
-        .catch(() => {
-            res.status(401)
-                .json({ message: 'Could not create a new performance. Try again.' })
+        .then(performance => res.json(performance))
+        .catch(err => {
+            console.error('Error creating performance:', err)
+            res.status(500).json({ message: 'Error creating performance', error: err.message })
         })
 })
 

@@ -32,7 +32,8 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({
     storage: storage,
     fileFilter: fileFilter,
-    limits: { fileSize: 5 * 1024 * 1024 }
+    limits: { fileSize: 5 * 1024 * 1024 },
+    dest: path.join(__dirname, '../uploads/')
 })
 
 const sendEmail = async (formData) => {
@@ -77,14 +78,14 @@ const sendEmail = async (formData) => {
                     text: `categories: ${formData.categories},
                     instruments: ${formData.instruments},
                     resume: ${formData.resume}`,
-                    attachments: [
-                        {
+                    attachments: formData.file ? [{
                             filename: formData.file.originalname,
                             path: formData.file.path,
-                        },
-                    ],
+                        }] : [],
                 }
             break
+            default:
+                throw new Error('Invalid request type')
         }
         const result = await transporter.sendMail(mailOptions)
         return result
@@ -104,14 +105,14 @@ const authMiddleware = (req, res, next) => {
     const token = req.cookies.token
     if (token) {
         try {
-            const decodedToken = jwt.decode(token, config.jwtSecret)
+            const decodedToken = jwt.verify(token, config.jwtSecret)
             req.user = decodedToken
             next()
         } catch (err) {
-            res.status(401).json({ message: 'Invalid token' })
+            res.status(401).json({ message: 'Invalid or expired token' })
         }
     } else {
-        res.status(401).json({ message: 'Missing or invalid Authorization header' })
+        res.status(401).json({ message: 'Missing or invalid token' })
     }
 }
 
@@ -135,6 +136,10 @@ router.post('/', authMiddleware, (req, res) => {
         senderId: req.user.id
     })
         .then(review => res.json(review))
+        .catch(err => {
+            console.error('Error creating request:', err)
+            res.status(500).json({ message: 'Error creating request', error: err.message })
+        })
 })
 
 // email sender

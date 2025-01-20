@@ -16,14 +16,14 @@ const authMiddleware = (req, res, next) => {
     const token = req.cookies.token
     if (token) {
         try {
-            const decodedToken = jwt.decode(token, config.jwtSecret)
-            req.user = decodedToken;
-            next();
+            const decodedToken = jwt.verify(token, config.jwtSecret)
+            req.user = decodedToken
+            next()
         } catch (err) {
-            res.status(401).json({ message: 'Invalid token' })
+            res.status(401).json({ message: 'Invalid or expired token' })
         }
     } else {
-        res.status(401).json({ message: 'Missing or invalid Authorization header' })
+        res.status(401).json({ message: 'Missing or invalid token' })
     }
 }
 
