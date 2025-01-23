@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import ahnbentonVenmo from '../../assets/venmo-qr-ahnbenton.jpg'
 const csSampleImages = import.meta.glob('../../assets/cs-sample-*.{png,jpg,jpeg}')
 
 class Composition {
@@ -168,6 +169,7 @@ export default function NewCompositionsPage({ isMenuOpen, loginStatus, scrollToT
     const [showDetails, setShowDetails] = useState(false)
     const [currentComposition, setCurrentComposition] = useState({})
     const [currentSamplePage, setCurrentSamplePage] = useState('')
+    const [showPaymentInfo, setShowPaymentInfo] = useState(false)
     
     useEffect(() => {
         if (currentComposition.opusNo) {
@@ -205,11 +207,21 @@ export default function NewCompositionsPage({ isMenuOpen, loginStatus, scrollToT
                     : 'None'}</div>
                 <p className="my-6">Year composed: {currentComposition.yearComposed}</p>
                 <div>
-                    <button className={btnStyle}>BUY THIS COMPOSITION</button>
+                    <button className={btnStyle} onClick={() => {
+                        setShowPaymentInfo(true)
+                    }}>BUY THIS COMPOSITION</button>
                     <button className={btnStyle} onClick={() => {
                         setShowDetails(false)
+                        setShowPaymentInfo(false)
                     }}>CLOSE</button>
                 </div>
+                {showPaymentInfo
+                ? <section className="flex flex-col justify-center items-center border border-stone-200 rounded-xl mx-4 my-6 p-2">
+                    <p>The official payment portal is still under construction. We are sorry for the inconvenience. For now, please use the QR code below to be connected to the GLVMS Venmo account. Please write the below "Order Shortcode" for the Venmo description. Once the correct payment is confirmed, we will send you the PDF as soon as possible, no later than within 24 hours.</p>
+                    <img src={ahnbentonVenmo} alt="GLVMS Venmo QR code" className="w-1/2 m-5"/>
+                    <p>Order shortcode: {currentComposition.composer.toLowerCase().slice(0, 3) + currentComposition.opusNo + currentComposition.title.toLowerCase().slice(0, 3) + currentComposition.instrumentation.toLowerCase().slice(0, 3)}</p>
+                </section>
+                : ''}
             </div>
             : ''}
             <h1 className="text-center text-3xl my-24">GLVMS New Compositions Store</h1>
