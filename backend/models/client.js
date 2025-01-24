@@ -7,6 +7,7 @@ const clientSchema = new mongoose.Schema(
         instrument: { type: String },
         email: { type: String, required: true, unique: true },
         password: { type: String, required: true, minLength: 8 },
+        role: { type: String, default: 'client' },
     },
 )
 

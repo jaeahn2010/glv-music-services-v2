@@ -12,7 +12,7 @@ export default defineConfig({
 			'/api': {
 				target: `http://localhost:${process.env.PORT}`,
                 changeOrigin: true,
-                secure: false,
+                secure: process.env.NODE_ENV === 'production',
                 ws: true,
             }
 		}

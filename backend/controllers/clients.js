@@ -11,38 +11,42 @@ const db = require('../models')
 const config = require('../../jwt.config.js')
 
 // jwt middleware
-const authMiddleware = (req, res, next) => {
-    const token = req.cookies.token
-    if (token) {
+const authMiddleware = (allowedRoles = []) => {
+    return (req, res, next) => {
+        const token = req.cookies.token
+        if (!token) {
+            return res.status(401).json({ message: 'Missing or invalid authentication token' })
+        }
         try {
             const decodedToken = jwt.verify(token, config.jwtSecret)
             req.user = decodedToken
+            if (allowedRoles.length && !allowedRoles.includes(req.user.role)) {
+                return res.status(403).json({ message: 'Forbidden: Insufficient permissions' })
+            }
             next()
         } catch (err) {
             res.status(401).json({ message: 'Invalid or expired token' })
         }
-    } else {
-        res.status(401).json({ message: 'Missing or invalid token' })
     }
 }
 
 // routes
-// display all clients associated with GLVMS
+// display all clients associated with GLVMS (no access restriction)
 router.get('/', function (req, res) {
     db.Client.find()
         .then(clients => res.json(clients))
 })
 
-// create client (signup route)
+// create client (signup route) (no access restriction)
 router.post('/signup', (req, res) => {
     db.Client.create(req.body)
         .then(client => {
-            const token = jwt.encode({ id: client.id }, config.jwtSecret)
+            const token = jwt.encode({ id: client.id, role: 'client' }, config.jwtSecret)
             res.cookie('token', token, {
                 httpOnly: true,
-                secure: process.env.NODE_ENV === 'production',
+                secure: process.env.NODE_ENV === 'production', // use 'secure' in production
                 sameSite: 'Strict',
-                maxAge: 24 * 60 * 60 * 1000
+                maxAge: 24 * 60 * 60 * 1000,
             })
             res.json({
                 firstName: client.firstName,
@@ -57,15 +61,15 @@ router.post('/signup', (req, res) => {
         })
 })
 
-// login route
+// client login route (no access restriction)
 router.post('/login', async (req, res) => {
     const foundClient = await db.Client.findOne({ email: req.body.email })
     if (foundClient && foundClient.password === req.body.password) {
-        const payload = { id: foundClient.id }
+        const payload = { id: foundClient.id, role: 'client' }
         const token = jwt.encode(payload, config.jwtSecret)
         res.cookie('token', token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production', //use 'secure' in production
+            secure: process.env.NODE_ENV === 'production', // use 'secure' in production
             sameSite: 'Strict',
             maxAge: 24 * 60 * 60 * 1000,
         })
@@ -82,7 +86,7 @@ router.post('/login', async (req, res) => {
 })
 
 // edit client (client & admin access only)
-router.put('/:clientId', authMiddleware, async (req, res) => {
+router.put('/:clientId', authMiddleware(['client', 'admin']), async (req, res) => {
     const currentClient = await db.Client.findById(req.params.clientId)
     if (currentClient.clientId == req.user.id) {
         const newClient = await db.Client.findByIdAndUpdate(
@@ -97,7 +101,7 @@ router.put('/:clientId', authMiddleware, async (req, res) => {
 })
 
 // delete client (client & admin access only)
-router.delete('/:clientId', authMiddleware, async (req, res) => {
+router.delete('/:clientId', authMiddleware(['client', 'admin']), async (req, res) => {
     const currentClient = await db.Client.findById(req.params.clientId)
     if (currentClient.clientId == req.user.id) {
         const deletedClient = await db.Client.findByIdAndDelete(req.params.clientId)

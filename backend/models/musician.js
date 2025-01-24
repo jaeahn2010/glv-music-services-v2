@@ -7,6 +7,7 @@ const musicianSchema = new mongoose.Schema(
         instruments: [{ type: String }],
         email: { type: String, required: true, unique: true },
         availableRepertoire: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Opus'}],
+        role: { type: String, default: 'musician' },
     },
 )
 

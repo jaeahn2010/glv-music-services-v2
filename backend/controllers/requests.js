@@ -101,36 +101,46 @@ const db = require('../models')
 const config = require('../../jwt.config.js')
 
 // jwt middlewawre
-const authMiddleware = (req, res, next) => {
-    const token = req.cookies.token
-    if (token) {
+const authMiddleware = (allowedRoles = []) => {
+    return (req, res, next) => {
+        const token = req.cookies.token
+        if (!token) {
+            return res.status(401).json({ message: 'Missing or invalid authentication token' })
+        }
         try {
             const decodedToken = jwt.verify(token, config.jwtSecret)
             req.user = decodedToken
+            if (allowedRoles.length && !allowedRoles.includes(req.user.role)) {
+                return res.status(403).json({ message: 'Forbidden: Insufficient permissions' })
+            }
             next()
         } catch (err) {
             res.status(401).json({ message: 'Invalid or expired token' })
         }
-    } else {
-        res.status(401).json({ message: 'Missing or invalid token' })
     }
 }
 
 // routes
-// display all requests made by client
-router.get('/:clientId', function (req, res) {
+// display all requests made by client (specific client access only)
+router.get('/clientRequests/:clientId', authMiddleware(['client']), function (req, res) {
+    if (req.user.id !== req.params.clientId) {
+        return res.status(403).json({ message: 'Forbidden: You can only access your own requests' }) 
+    }
     db.Request.find({ clientId: req.params.clientId })
         .then(requests => res.json(requests))
 })
 
-// display all requests made to musician
-router.get('/:musicianId', function (req, res) {
+// display all requests made to musician (specific musician access only)
+router.get('/musicianRequests/:musicianId', authMiddleware(['musician']), function (req, res) {
+    if (req.user.id !== req.params.musicianId) {
+        return res.status(403).json({ message: 'Forbidden: You can only access your own requests' })
+    }
     db.Request.find({ musicianId: req.params.musicianId })
         .then(requests => res.json(requests))
 })
 
 // create request (client & admin access only)
-router.post('/', authMiddleware, (req, res) => {
+router.post('/', authMiddleware(['client', 'admin']), (req, res) => {
     db.Request.create({
         ...req.body,
         senderId: req.user.id
@@ -142,8 +152,8 @@ router.post('/', authMiddleware, (req, res) => {
         })
 })
 
-// email sender
-router.post('/send-email', authMiddleware, upload.single('resume'), async (req, res) => {
+// email sender (client & admin access only)
+router.post('/send-email', authMiddleware(['client', 'admin']), upload.single('resume'), async (req, res) => {
     let formData = req.body
     if (req.body.requestType === 'joinGLVMS') {
         if (!req.file) res.status(400).send('No resume uploaded.')
@@ -160,7 +170,7 @@ router.post('/send-email', authMiddleware, upload.single('resume'), async (req, 
 })
 
 // edit request (client & admin access only)
-router.put('/:requestId', authMiddleware, async (req, res) => {
+router.put('/:requestId', authMiddleware(['client', 'admin']), async (req, res) => {
     const userRequest = await db.Request.findById(req.params.requestId)
     if (userRequest.senderId == req.user.id) {
         const newReview = await db.Request.findByIdAndUpdate(
@@ -175,7 +185,7 @@ router.put('/:requestId', authMiddleware, async (req, res) => {
 })
 
 // delete request (client & admin access only)
-router.delete('/:requestId', authMiddleware, async (req, res) => {
+router.delete('/:requestId', authMiddleware(['client', 'admin']), async (req, res) => {
     const userRequest = await db.Request.findById(req.params.requestId)
     if (userRequest.senderId == req.user.id) {
         const deletedRequest = await db.Request.findByIdAndDelete(req.params.requestId)

@@ -12,42 +12,46 @@ const db = require('../models')
 const config = require('../../jwt.config.js')
 
 // jwt middleware
-const authMiddleware = (req, res, next) => {
-    const token = req.cookies.token
-    if (token) {
+const authMiddleware = (allowedRoles = []) => {
+    return (req, res, next) => {
+        const token = req.cookies.token
+        if (!token) {
+            return res.status(401).json({ message: 'Missing or invalid authentication token' })
+        }
         try {
             const decodedToken = jwt.verify(token, config.jwtSecret)
             req.user = decodedToken
+            if (allowedRoles.length && !allowedRoles.includes(req.user.role)) {
+                return res.status(403).json({ message: 'Forbidden: Insufficient permissions' })
+            }
             next()
         } catch (err) {
             res.status(401).json({ message: 'Invalid or expired token' })
         }
-    } else {
-        res.status(401).json({ message: 'Missing or invalid token' })
     }
 }
 
 // routes
-// display all available opuses of all musicians
+// display all available opuses of all musicians (no access restrictions)
 router.get('/', function (req, res) {
     db.Opus.find()
         .then(opuses => res.json(opuses)) // check
 })
 
-// display all available opuses of musician
+// display all available opuses of musician (no access restrictions)
 router.get('/musician/:musicianId', function (req, res) {
     db.Opus.find({ musicianId: req.params.musicianId })
         .then(opuses => res.json(opuses))
 })
 
-// display specific opus
+// display specific opus (no access restrictions)
 router.get('/opus/:opusId', function (req, res) {
     db.Opus.findById(req.params.opusId)
         .then(opus => res.json(opus))
 })
 
 // create opus (admin access only)
-router.post('/', authMiddleware, (req, res) => {
+router.post('/', authMiddleware(['admin']), (req, res) => {
     db.Opus.create(req.body)
         .then(opus => res.json(opus))
         .catch(err => {
@@ -57,7 +61,7 @@ router.post('/', authMiddleware, (req, res) => {
 })
 
 // edit opus (admin access only)
-router.put('/:opusId', authMiddleware, async (req, res) => {
+router.put('/:opusId', authMiddleware(['admin']), async (req, res) => {
     const newOpus = await db.Opus.findByIdAndUpdate(
         req.params.opusId,
         req.body,
@@ -67,7 +71,7 @@ router.put('/:opusId', authMiddleware, async (req, res) => {
 })
 
 // delete opus (admin access only)
-router.delete('/:opusId', authMiddleware, async (req, res) => {
+router.delete('/:opusId', authMiddleware(['admin']), async (req, res) => {
     const deletedOpus = await db.Opus.findByIdAndDelete(req.params.opusId)
     res.send('You deleted opus ' + deletedOpus._id)
 })

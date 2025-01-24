@@ -18,16 +18,12 @@ export default function AuthFormPage({ isMenuOpen, setLoginStatus, adminLogin, s
     let labelStyle = 'block font-bold mt-4 mb-2'
     let inputStyle = 'text-stone-800 w-full p-2 rounded-md focus:outline-none focus:ring focus:border-blue-600'
 
-    async function handleSubmit(event) {
-        event.preventDefault()
+    async function handleSubmit(evt) {
+        evt.preventDefault()
         if (formType === 'login') { // if logging in
             if (!isAdmin) { // if logging in as client
                 try {
                     const userCredentials = await clientLogIn(formData)
-                    localStorage.setItem('email', userCredentials.email)
-                    localStorage.setItem('firstName', userCredentials.firstName)
-                    localStorage.setItem('lastName', userCredentials.lastName)
-                    localStorage.setItem('instrument', userCredentials.instrument)
                     setLoginStatus(true)
                     navigate('/')
                 } catch (err) {
@@ -38,10 +34,7 @@ export default function AuthFormPage({ isMenuOpen, setLoginStatus, adminLogin, s
             } else { // if logging in as admin
                 try {
                     const adminCredentials = await adminLogIn(formData)
-                    localStorage.setItem('email', adminCredentials.email)
-                    localStorage.setItem('firstName', 'Site')
-                    localStorage.setItem('lastName', 'Admin')
-                    localStorage.setItem('instrument', 'N/A')
+                    console.log(adminCredentials)
                     setAdminLogin(true)
                     setLoginStatus(true)
                     navigate('/admin')

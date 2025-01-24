@@ -12,18 +12,22 @@ const db = require('../models')
 const config = require('../../jwt.config.js')
 
 // jwt middleware
-const authMiddleware = (req, res, next) => {
-    const token = req.cookies.token
-    if (token) {
+const authMiddleware = (allowedRoles = []) => {
+    return (req, res, next) => {
+        const token = req.cookies.token
+        if (!token) {
+            return res.status(401).json({ message: 'Missing or invalid authentication token' })
+        }
         try {
             const decodedToken = jwt.verify(token, config.jwtSecret)
             req.user = decodedToken
+            if (allowedRoles.length && !allowedRoles.includes(req.user.role)) {
+                return res.status(403).json({ message: 'Forbidden: Insufficient permissions' })
+            }
             next()
         } catch (err) {
             res.status(401).json({ message: 'Invalid or expired token' })
         }
-    } else {
-        res.status(401).json({ message: 'Missing or invalid token' })
     }
 }
 
@@ -34,17 +38,23 @@ router.get('/', function (req, res) {
         .then(musicians => res.json(musicians))
 })
 
-// get musician by id
+// get musician by id (no access restriction)
 router.get('/musician/:musicianId', function (req, res) {
     db.Musician.findById(req.params.musicianId)
         .then(musician => res.json(musician))
 })
 
-// create musician (signup route)
+// create musician (signup route) (no access restriction)
 router.post('/signup', (req, res) => {
     db.Musician.create(req.body)
         .then(musician => {
-            const token = jwt.encode({ id: musician.id }, config.jwtSecret)
+            const token = jwt.encode({ id: musician.id, role: 'musician' }, config.jwtSecret)
+            res.cookie('token', token, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production', // use 'secure' in production
+                sameSite: 'Strict',
+                maxAge: 24 * 60 * 60 * 1000,
+            })
             res.json({             
                 firstName: musician.firstName,
                 lastName: musician.lastName,
@@ -59,12 +69,18 @@ router.post('/signup', (req, res) => {
         })
 })
 
-// login route
+// musician login route (no access restriction)
 router.post('/login', async (req, res) => {
     const foundMusician = await db.Musician.findOne({ email: req.body.email })
     if (foundMusician && foundMusician.password === req.body.password) {
-        const payload = { id: foundMusician.id }
+        const payload = { id: foundMusician.id, role: 'musician' }
         const token = jwt.encode(payload, config.jwtSecret)
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production', // use 'secure' in production
+            sameSite: 'Strict',
+            maxAge: 24 * 60 * 60 * 1000,
+        })
         res.json({
             firstName: foundMusician.firstName,
             lastName: foundMusician.lastName,
@@ -78,8 +94,8 @@ router.post('/login', async (req, res) => {
     }
 })
 
-// edit musician (admin access only)
-router.put('/:musicianId', authMiddleware, async (req, res) => {
+// edit musician (admin & musician access only)
+router.put('/:musicianId', authMiddleware(['admin', 'musician']), async (req, res) => {
     const currentMusician = await db.Musician.findById(req.params.musicianId)
     if (currentMusician.musicianId == req.user.id) {
         const newMusician = await db.Musician.findByIdAndUpdate(
@@ -93,8 +109,8 @@ router.put('/:musicianId', authMiddleware, async (req, res) => {
     }
 })
 
-// delete musician (admin access only)
-router.delete('/:clientId', authMiddleware, async (req, res) => {
+// delete musician (admin & musician access only)
+router.delete('/:clientId', authMiddleware(['admin', 'musician']), async (req, res) => {
     const currentMusician = await db.Musician.findById(req.params.musicianId)
     if (currentMusician.musicianId == req.user.id) {
         const deletedMusician = await db.Musician.findByIdAndDelete(req.params.musicianId)

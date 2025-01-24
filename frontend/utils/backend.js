@@ -139,7 +139,7 @@ export async function getRequests() {
 
 export async function getRequestsByClient(clientId) {
     try {
-        const { data } = await axios.get(`/api/requests/${clientId}`, { withCredentials: true })
+        const { data } = await axios.get(`/api/requests/clientRequests/${clientId}`, { withCredentials: true })
         return data
     } catch (err) {
         console.error('Error getting requests by client: ', err)
@@ -149,7 +149,7 @@ export async function getRequestsByClient(clientId) {
 
 export async function getRequestsByMusician(musicianId) {
     try {
-        const { data } = await axios.get(`/api/requests/${musicianId}`, { withCredentials: true })
+        const { data } = await axios.get(`/api/requests/musicianRequests/${musicianId}`, { withCredentials: true })
         return data
     } catch (err) {
         console.error('Error getting requests by musician: ', err)
@@ -242,7 +242,7 @@ export async function deletePerformance(performanceId) {
 //reviews CRUD
 export async function getReviewsByClient(clientId) {
     try {
-        const { data } = await axios.get(`/api/reviews/${clientId}`, { withCredentials: true })
+        const { data } = await axios.get(`/api/reviews/clientReviews/${clientId}`, { withCredentials: true })
         return data
     } catch (err) {
         console.error('Error getting reviews by client: ', err)
@@ -252,7 +252,7 @@ export async function getReviewsByClient(clientId) {
 
 export async function getReviewsByMusician(musicianId) {
     try {
-        const { data } = await axios.get(`/api/reviews/${musicianId}`, { withCredentials: true })
+        const { data } = await axios.get(`/api/reviews/musicianReviews/${musicianId}`, { withCredentials: true })
         return data
     } catch (err) {
         console.error('Error getting reviews by musician: ', err)
