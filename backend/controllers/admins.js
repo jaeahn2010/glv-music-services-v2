@@ -25,6 +25,8 @@ router.post('/login', async (req, res) => {
         })
         res.json({
             email: foundAdmin.email,
+            role: foundAdmin.role,
+            token: token,
         })
     } else {
         res.status(401)

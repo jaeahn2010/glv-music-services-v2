@@ -49,10 +49,9 @@ router.post('/signup', (req, res) => {
                 maxAge: 24 * 60 * 60 * 1000,
             })
             res.json({
-                firstName: client.firstName,
-                lastName: client.lastName,
-                instrument: client.instrument,
                 email: client.email,
+                role: 'client',
+                token: token,
             })
         })
         .catch(() => {
@@ -74,10 +73,9 @@ router.post('/login', async (req, res) => {
             maxAge: 24 * 60 * 60 * 1000,
         })
         res.json({
-            firstName: foundClient.firstName,
-            lastName: foundClient.lastName,
-            instrument: foundClient.instrument,
             email: foundClient.email,
+            role: foundClient.role,
+            token: token,
         })
     } else {
         res.status(401)

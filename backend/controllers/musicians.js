@@ -56,10 +56,8 @@ router.post('/signup', (req, res) => {
                 maxAge: 24 * 60 * 60 * 1000,
             })
             res.json({             
-                firstName: musician.firstName,
-                lastName: musician.lastName,
-                instruments: musician.instruments,
                 email: musician.email,
+                role: 'musician',
                 token: token
             })
         })
@@ -82,11 +80,9 @@ router.post('/login', async (req, res) => {
             maxAge: 24 * 60 * 60 * 1000,
         })
         res.json({
-            firstName: foundMusician.firstName,
-            lastName: foundMusician.lastName,
-            instruments: foundMusician.instruments,
             email: foundMusician.email,
-            token: token
+            role: foundMusician.role,
+            token: token,
         })
     } else {
         res.status(401)

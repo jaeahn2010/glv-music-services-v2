@@ -1,7 +1,8 @@
-export default function ClientProfilePage({ isMenuOpen, opuses, setOpuses, loginStatus, getFilteredData, updateDetails }){
+export default function ClientProfilePage({ isMenuOpen, loginStatus, setCliensDetails, userType }){
     let trStyle = 'h-12 border-stone-400 border-y-2'
 
-    return (
+    return loginStatus && userType === 'client' 
+    ? (
         <section className={`${isMenuOpen ? 'z-0 opacity-5' : ''} w-11/12 mx-auto font-poppins h-[200vh]`}>
             <h1 className="text-3xl text-center my-24">Your Account Information</h1>
             <p className="text-2xl"></p>
@@ -23,4 +24,5 @@ export default function ClientProfilePage({ isMenuOpen, opuses, setOpuses, login
             </table>
         </section>
     )
+    : <h1 className={`${isMenuOpen ? 'z-0 opacity-5' : ''} text-3xl text-center min-h-[100vh] mt-24`}>Please sign up or log in to access this part of the site.</h1>
 }

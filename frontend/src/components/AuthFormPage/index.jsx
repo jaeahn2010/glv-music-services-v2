@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { signUp, clientLogIn, adminLogIn } from "../../../utils/backend"
 
-export default function AuthFormPage({ isMenuOpen, setLoginStatus, adminLogin, setAdminLogin, scrollToTop }) {
+export default function AuthFormPage({ isMenuOpen, setLoginStatus, scrollToTop, userType, setUserType }) {
     const { formType } = useParams()
     const navigate = useNavigate()
     const [isAdmin, setIsAdmin] = useState(false)
@@ -24,7 +24,10 @@ export default function AuthFormPage({ isMenuOpen, setLoginStatus, adminLogin, s
             if (!isAdmin) { // if logging in as client
                 try {
                     const userCredentials = await clientLogIn(formData)
-                    setLoginStatus(true)
+                    localStorage.setItem('email', userCredentials.email)
+                    localStorage.setItem('role', userCredentials.role)
+                    localStorage.setItem('token', userCredentials.token)
+                    setUserType(userCredentials.role)
                     navigate('/')
                 } catch (err) {
                     console.log(err)
@@ -34,9 +37,10 @@ export default function AuthFormPage({ isMenuOpen, setLoginStatus, adminLogin, s
             } else { // if logging in as admin
                 try {
                     const adminCredentials = await adminLogIn(formData)
-                    console.log(adminCredentials)
-                    setAdminLogin(true)
-                    setLoginStatus(true)
+                    localStorage.setItem('email', adminCredentials.email)
+                    localStorage.setItem('role', adminCredentials.role)
+                    localStorage.setItem('token', adminCredentials.token)
+                    setUserType('admin')
                     navigate('/admin')
                 } catch(err) {
                     console.log(err)
@@ -51,10 +55,9 @@ export default function AuthFormPage({ isMenuOpen, setLoginStatus, adminLogin, s
                 try {
                     const userCredentials = await signUp(formData)
                     localStorage.setItem('email', userCredentials.email)
-                    localStorage.setItem('firstName', userCredentials.firstName)
-                    localStorage.setItem('lastName', userCredentials.lastName)
-                    localStorage.setItem('instrument', userCredentials.instrument)
-                    setLoginStatus(true)
+                    localStorage.setItem('role', userCredentials.role)
+                    localStorage.setItem('token', userCredentials.token)
+                    setUserType(userCredentials.role)
                     navigate('/')
                 } catch (err) {
                     alert(err) 

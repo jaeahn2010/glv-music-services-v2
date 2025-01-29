@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { getOpuses, getClients, getMusicians, getPerformances, postOpus, postMusician, postPerformance, updateOpus, updateMusician, updateClient, updatePerformance, deleteOpus, deleteClient, deleteMusician, deletePerformance } from "../../../utils/backend"
 
-export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instruments, states, scrollToTop }) {
+export default function AdminPage({ isMenuOpen, sortObjects, instruments, states, scrollToTop, userType }) {
     const [crudItem, setCrudItem] = useState('')
     const [allOpuses, setAllOpuses] = useState([])
     const [allMusicians, setAllMusicians] = useState([])
@@ -546,7 +546,7 @@ export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instrum
     }
 
     useEffect(() => {
-        if (adminLogin) getAllData()
+        if (userType === 'admin') getAllData()
     }, [])
 
     useEffect(() => {
@@ -557,7 +557,7 @@ export default function AdminPage({ isMenuOpen, adminLogin, sortObjects, instrum
         setAllComposers(tempComposers.map(composer => composer.toUpperCase()).sort())
     }, [allOpuses])
 
-    return adminLogin
+    return userType === 'admin'
     ? <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} text-xl min-h-[100vh]`}>
         <h1 className="text-center my-6">This is the GLVMS admin page. Use it to CRUD sensitive data (opuses, musicians, clients, performances).</h1>
         <section className="flex items-center justify-around my-12">

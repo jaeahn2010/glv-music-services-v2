@@ -42,14 +42,19 @@ export default function App() {
 	const [adminLogin, setAdminLogin] = useState(false)
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
 	const [isMobile, setIsMobile] = useState(false)
+	const [userType, setUserType] = useState('')
 	const navigate = useNavigate()
 	const h2Style = "text-stone-200 my-5 hover:scale-110 duration-500"
+	const linkStyle = "border-t border-stone-200 lg:w-1/2 mx-auto"
 	const pCategoryStyle = 'underline font-bold text-2xl p-2'
+	const hamburgerMenuBaseStyle = "border-stone-200 border-y-2 w-[5vw] lg:w-[30px] min-w-[30px] my-1.5 rounded-3xl duration-500"
 
+	// composers list
 	for (let opus of allOpuses) {
 		if (!allComposers.includes(opus.composer)) allComposers.push(opus.composer)
 	}
 
+	// sort opuses by title
 	function sortObjects(objs) {
 		return objs.sort((a, b) => {
 			const titleA = a.title.toUpperCase()
@@ -89,6 +94,16 @@ export default function App() {
 		}
 	}, [])
 
+	// for user auth & role
+	useEffect(() => {
+		const token = localStorage.getItem('token')
+		console.log(token)
+		if (token) {
+			setUserType(localStorage.getItem('role'))
+			setLoginStatus(true)
+		}
+	}, [userType])
+
 	let authLink =
 		<div className='border-t border-stone-200 pt-3 lg:w-1/2 mx-auto'>
 			<p className={pCategoryStyle}>ACCOUNT</p>
@@ -100,33 +115,30 @@ export default function App() {
 			</Link>
 		</div>
 	let profileLink = ''
-	let userGreeting = ''
 
 	if (loginStatus) {
 		authLink =
-			<div className="border-t border-stone-200 lg:w-1/2 mx-auto">
+			<div className={linkStyle}>
 				<button
 					className={h2Style}
 					onClick={() => {
 						if (confirm("Are you sure you would like to log out?")) {
 							localStorage.clear()
+							setUserType('')
 							setLoginStatus(false)
 							setIsMenuOpen(false)
 							navigate('/')
 						}
 					}}>Log Out</button>
 			</div>
-		userGreeting =
-			<h1 className="bg-stone-700 z-10 text-white text-right text-sm sticky top-0">{`Hello, ${localStorage.getItem("firstName")} ${localStorage.getItem("lastName")}!`}</h1>
-		  	profileLink =
-			<div className="border-t border-stone-200 lg:w-1/2 mx-auto">
-				{adminLogin
+		profileLink =
+			<div className={linkStyle}>
+				{userType === 'admin'
 				? <Link to='/admin' onClick={() => setIsMenuOpen(false)}><h1 className={h2Style}>Admin Page</h1></Link>
 				: <Link onClick={() => setIsMenuOpen(false)} to={"/clientProfile"}><h2 className={h2Style}>My Account</h2></Link>
 				}	
+				{/* include musician profile page later */}
 			</div>
-	} else if (localStorage.userToken) {
-		setLoginStatus(true)
 	}
 	
 	return (
@@ -136,9 +148,9 @@ export default function App() {
 					<h2 onClick={() => setIsMenuOpen(false)} className="text-white font-bold md:text-2xl sm:text-xl">Greater Las Vegas Music Services</h2>
 				</Link>
 				<div className="text-3xl hover:cursor-pointer" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-					<div className={`border-stone-200 border-y-2 w-[5vw] lg:w-[30px] min-w-[30px] my-1.5 rounded-3xl duration-500 ${isMenuOpen ? '-rotate-45 translate-y-[10px]' : ''}`}></div>
-					<div className={`border-stone-200 border-y-2 w-[5vw] lg:w-[30px] min-w-[30px] my-1.5 rounded-3xl duration-500 ${isMenuOpen ? 'rotate-45' : ''}`}></div>
-					<div className={`border-stone-200 border-y-2 w-[5vw] lg:w-[30px] min-w-[30px] my-1.5 rounded-3xl duration-500 ${isMenuOpen ? '-rotate-45 -translate-y-[10px]' : ''}`}></div>
+					<div className={`${hamburgerMenuBaseStyle} ${isMenuOpen ? '-rotate-45 translate-y-[10px]' : ''}`}></div>
+					<div className={`${hamburgerMenuBaseStyle} ${isMenuOpen ? 'rotate-45' : ''}`}></div>
+					<div className={`${hamburgerMenuBaseStyle} ${isMenuOpen ? '-rotate-45 -translate-y-[10px]' : ''}`}></div>
 				</div>
 			</nav>
 			<div className={`${isMenuOpen ? 'opacity-100 z-50' : 'hidden'} duration-500 absolute left-[12.5%] top-1/4 w-3/4 text-xl text-center font-poppins`}>
@@ -159,7 +171,6 @@ export default function App() {
 				{profileLink}
 				{authLink}
 			</div>
-			{userGreeting}
 			<Routes>
 				<Route path="/" element={
 					<HomePage
@@ -179,6 +190,7 @@ export default function App() {
 						adminLogin={adminLogin}
 						setAdminLogin={setAdminLogin}
 						scrollToTop={scrollToTop}
+						setUserType={setUserType}
 					/>}
 				/>
 				<Route path="/repertoire" element={
@@ -188,10 +200,8 @@ export default function App() {
 						allComposers={allComposers}
 						allMusicians={allMusicians}
 						setOpusDetails={setOpusDetails}
-						loginStatus={loginStatus}
 						instruments={instruments}
 						scrollToTop={scrollToTop}
-						sortObjects={sortObjects}
 					/>}
 				/>
 				<Route path="/opus/details/:opusId" element={
@@ -213,6 +223,7 @@ export default function App() {
 						userCart={userCart}
 						setUserCart={setUserCart}
 						scrollToTop={scrollToTop}
+						userType={userType}
 					/>}
 				/>
 				<Route path="/request" element={
@@ -222,6 +233,7 @@ export default function App() {
 						loginStatus={loginStatus}
 						userCart={userCart}
 						states={states}
+						userType={userType}
 					/>}
 				/>
 				<Route path="/musicians" element={
@@ -254,6 +266,7 @@ export default function App() {
 						isMenuOpen={isMenuOpen}
 						loginStatus={loginStatus}
 						setClientDetails={setClientDetails}
+						userType={userType}
 					/>}
 				/>
 				<Route path="/ncs" element={
@@ -270,21 +283,22 @@ export default function App() {
 						loginStatus={loginStatus}
 						states={states}
 						scrollToTop={scrollToTop}
+						userType={userType}
 					/>}
 				/>
 				<Route path='/admin' element={
 					<AdminPage
 						isMenuOpen={isMenuOpen}
-						adminLogin={adminLogin}
 						sortObjects={sortObjects}
 						instruments={instruments}
 						states={states}
 						scrollToTop={scrollToTop}
+						userType={userType}
 					/>}
 				/>
 				<Route path="/*" element={<NotFoundPage/>} />
 			</Routes>
-			{loginStatus
+			{userType === 'client'
 			? <>
 				<div className='fixed bottom-5 right-5 w-[50px] h-[50px] bg-gradient-to-r from-green-600 via-green-400 to-green-600 rounded-full flex align-center justify-center cursor-pointer hover:animate-bounce z-10'>
 					<Link to="/cart"><img src={cartIcon} className="rounded-full p-1 cursor-pointer"/></Link>

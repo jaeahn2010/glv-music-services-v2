@@ -2,7 +2,7 @@ import trashIcon from '../../assets/trash-icon.jpeg'
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
-export default function CurrentCart({ isMenuOpen, allOpuses, loginStatus, userCart, setUserCart, allMusicians, scrollToTop }) {
+export default function CurrentCart({ isMenuOpen, allOpuses, loginStatus, userCart, setUserCart, allMusicians, scrollToTop, userType }) {
     let cartText = userCart.length > 0 ? 'Your cart' : 'Your cart is empty.'
     const btnStyle = 'border-stone-200 border rounded-xl px-3 py-1 my-2 w-full hover:scale-110 hover:cursor-pointer hover:bg-amber-400 hover:text-stone-900 hover:duration-500'
 
@@ -32,7 +32,7 @@ export default function CurrentCart({ isMenuOpen, allOpuses, loginStatus, userCa
         scrollToTop()
     }, [])
     
-    return loginStatus
+    return loginStatus && userType === 'client'
     ? (
         <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} flex flex-col justify-center items-center font-poppins mx-auto lg:w-1/2`}>
             <p className="text-center my-12">{cartText}</p>

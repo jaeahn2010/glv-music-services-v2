@@ -2,7 +2,7 @@ import { useState } from "react"
 import { sendEmail } from "../../../utils/backend"
 import { useNavigate } from "react-router-dom"
 
-export default function RequestPage({ isMenuOpen, allMusicians, loginStatus, userCart, states }) {
+export default function RequestPage({ isMenuOpen, allMusicians, loginStatus, userCart, states, userType }) {
     const [requestData, setRequestData] = useState({
         clientEmail: '',
         musicianEmail: '',
@@ -82,7 +82,7 @@ export default function RequestPage({ isMenuOpen, allMusicians, loginStatus, use
 
     return (
         <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} font-poppins`}>
-            {loginStatus
+            {loginStatus && userType === 'client'
             ? 
             <>
                 <div className="text-center w-11/12 mx-auto my-6">
