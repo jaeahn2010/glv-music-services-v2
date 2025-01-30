@@ -1,5 +1,24 @@
-export default function ClientProfilePage({ isMenuOpen, loginStatus, setCliensDetails, userType }){
+import { useEffect, useState } from "react"
+import { getClientByEmail } from "../../../utils/backend"
+
+export default function ClientProfilePage({ isMenuOpen, loginStatus, setLoginStatus, setClientDetails, userType, setUserType }){
+    const [loggedInUser, setLoggedInUser] = useState({})
     let trStyle = 'h-12 border-stone-400 border-y-2'
+
+    async function getClientInfo() {
+        if (loginStatus && userType === 'client') {
+            try {
+                const clientInfo = await getClientByEmail(localStorage.getItem('email'))
+                if (clientInfo) setLoggedInUser(clientInfo)
+            } catch (err) {
+                alert('Could not get client info. Please try again.')
+            }
+        }
+    }
+
+    useEffect(() => {
+        getClientInfo()
+	}, [loginStatus])
 
     return loginStatus && userType === 'client' 
     ? (
@@ -10,15 +29,15 @@ export default function ClientProfilePage({ isMenuOpen, loginStatus, setCliensDe
                 <tbody>
                     <tr className={trStyle}>
                         <td className="w-1/3 text-sm">Name</td>
-                        <td className="w-1/2">{`${localStorage.getItem('firstName')} ${localStorage.getItem('lastName')}`}</td>
+                        <td className="w-1/2">{loggedInUser.clientName}</td>
                     </tr>
                     <tr className={trStyle}>
                         <td className='w-1/3 text-sm'>Primary Instrument</td>
-                        <td className="w-1/2">{localStorage.getItem('instrument')}</td>
+                        <td className="w-1/2">{loggedInUser.clientInstrument}</td>
                     </tr>
                     <tr className={trStyle}>
                         <td className="w-1/3 text-sm">Email</td>
-                        <td>{localStorage.getItem('email')}</td>
+                        <td>{loggedInUser.clientEmail}</td>
                     </tr>
                 </tbody>
             </table>

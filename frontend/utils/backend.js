@@ -6,6 +6,11 @@ export async function getClients() {
     return data
 }
 
+export async function getClientByEmail(clientEmail) {
+    const { data } = await axios.get(`/api/clients/${clientEmail}`, { withCredentials: true })
+    return data
+}
+
 export async function signUp(user) {
     const { data } = await axios.post('/api/clients/signup', user)
     return data

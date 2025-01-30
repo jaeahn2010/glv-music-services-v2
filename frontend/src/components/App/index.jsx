@@ -97,12 +97,12 @@ export default function App() {
 	// for user auth & role
 	useEffect(() => {
 		const token = localStorage.getItem('token')
-		console.log(token)
-		if (token) {
-			setUserType(localStorage.getItem('role'))
+		const role = localStorage.getItem('role')
+		if (token && role) {
+			setUserType(role)
 			setLoginStatus(true)
 		}
-	}, [userType])
+	}, [])
 
 	let authLink =
 		<div className='border-t border-stone-200 pt-3 lg:w-1/2 mx-auto'>
@@ -265,8 +265,10 @@ export default function App() {
 					<ClientProfilePage
 						isMenuOpen={isMenuOpen}
 						loginStatus={loginStatus}
+						setLoginStatus={setLoginStatus}
 						setClientDetails={setClientDetails}
 						userType={userType}
+						setUserType={setUserType}
 					/>}
 				/>
 				<Route path="/ncs" element={

@@ -37,6 +37,15 @@ router.get('/', function (req, res) {
         .then(clients => res.json(clients))
 })
 
+router.get('/:clientEmail', function (req, res) {
+    db.Client.findOne({ email: req.params.clientEmail })
+        .then(client => res.json({
+            clientEmail: client.email,
+            clientName: `${client.lastName}, ${client.firstName}`,
+            clientInstrument: client.instrument,
+        }))
+})
+
 // create client (signup route) (no access restriction)
 router.post('/signup', (req, res) => {
     db.Client.create(req.body)
