@@ -59,7 +59,7 @@ export default function PerformancesPage({ isMenuOpen }) {
             {performances.length
             ? <section className="career-items my-24 min-h-[25rem]">
                 {performances.map((performance, index) => 
-                    <div key={index} className='card-flip flex my-10 w-11/12 md:w-3/4 h-[5rem] md:h-[15rem] mx-auto border border-stone-200 rounded-xl bg-gradient-to-r from-stone-800 via-stone-500 to-stone-800'>
+                    <div key={index} className='card-flip flex my-10 w-11/12 md:w-3/4 h-[5rem] md:h-[20rem] mx-auto border border-stone-200 rounded-xl bg-gradient-to-r from-stone-800 via-stone-500 to-stone-800'>
                         <div className="card-front flex w-full">
                             <div className="w-full flex flex-col items-center justify-center">
                                 <p className="text-sm md:text-2xl underline">{performance.title}</p>
@@ -91,6 +91,21 @@ export default function PerformancesPage({ isMenuOpen }) {
                                 <div className='flex justify-between my-3 text-lg'>
                                     <p className={performance.openToPublic ? 'text-green-300' : 'text-red-300'}>{performance.openToPublic ? 'Open to Public' : 'Private Event'}</p>
                                     <p>Ticket price range: <span className={!performance.minPrice && !performance.maxPrice ? 'text-green-300' : 'text-amber-300'}>{!performance.minPrice && !performance.maxPrice ? 'Free event' : `$${performance.minPrice}-$${performance.maxPrice}`}</span></p>
+                                </div>
+                                <div className='flex justify-center items-center'>
+                                    {performance.ticketsLink
+                                    ? <p>Purchase tickets <span className='underline cursor-pointer'>
+                                        <a 
+                                            href={performance.ticketsLink} 
+                                            target="_blank" 
+                                            rel="noopener noreferrer">
+                                            here
+                                        </a></span>.</p>
+                                    : !performance.openToPublic 
+                                        ? <p>This is a private event. No tickets are available for the public.</p>
+                                        : !performance.minPrice && !performance.maxPrice
+                                            ? <p>This is a free event. No ticket purchase necessary!</p>
+                                            : <p>Tickets are available for sale at the location of the performance.</p>}
                                 </div>
                             </div>	
                         </div>
