@@ -1,6 +1,6 @@
 // `localhost:3000/api/clients`
 // req modules
-const jwt = require('jwt-simple')
+const jwt = require('jsonwebtoken')
 const express = require('express')
 const router = express.Router()
 
@@ -50,7 +50,7 @@ router.get('/:clientEmail', function (req, res) {
 router.post('/signup', (req, res) => {
     db.Client.create(req.body)
         .then(client => {
-            const token = jwt.encode({ id: client.id, role: 'client' }, config.jwtSecret)
+            const token = jwt.sign({ id: client.id, role: 'client' }, config.jwtSecret)
             res.cookie('token', token, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production', // use 'secure' in production
@@ -74,7 +74,7 @@ router.post('/login', async (req, res) => {
     const foundClient = await db.Client.findOne({ email: req.body.email })
     if (foundClient && foundClient.password === req.body.password) {
         const payload = { id: foundClient.id, role: 'client' }
-        const token = jwt.encode(payload, config.jwtSecret)
+        const token = jwt.sign(payload, config.jwtSecret)
         res.cookie('token', token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production', // use 'secure' in production

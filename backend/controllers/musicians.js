@@ -1,7 +1,7 @@
 // `localhost:3000/api/musicians`
 
 // req modules
-const jwt = require('jwt-simple')
+const jwt = require('jsonwebtoken')
 const express = require('express')
 const router = express.Router()
 
@@ -48,7 +48,7 @@ router.get('/musician/:musicianId', function (req, res) {
 router.post('/signup', (req, res) => {
     db.Musician.create(req.body)
         .then(musician => {
-            const token = jwt.encode({ id: musician.id, role: 'musician' }, config.jwtSecret)
+            const token = jwt.sign({ id: musician.id, role: 'musician' }, config.jwtSecret)
             res.cookie('token', token, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production', // use 'secure' in production
@@ -72,7 +72,7 @@ router.post('/login', async (req, res) => {
     const foundMusician = await db.Musician.findOne({ email: req.body.email })
     if (foundMusician && foundMusician.password === req.body.password) {
         const payload = { id: foundMusician.id, role: 'musician' }
-        const token = jwt.encode(payload, config.jwtSecret)
+        const token = jwt.sign(payload, config.jwtSecret)
         res.cookie('token', token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production', // use 'secure' in production

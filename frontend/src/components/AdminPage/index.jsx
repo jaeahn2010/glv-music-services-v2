@@ -59,6 +59,7 @@ export default function AdminPage({ isMenuOpen, sortObjects, instruments, states
         openToPublic: true,
         minPrice: 0,
         maxPrice: 0,
+        ticketsLink: '',
         description: '',
     })
     const btnStyle = 'border border-stone-200 rounded-xl p-2 mx-auto my-4 hover:scale-110 hover:bg-gradient-to-r from-green-700 via-green-500 to-green-700'
@@ -288,12 +289,16 @@ export default function AdminPage({ isMenuOpen, sortObjects, instruments, states
                             time: '',
                             featuredGLVMSMusicians: [],
                             collaborators: [],
+                            openToPublic: true,
+                            minPrice: 0,
+                            maxPrice: 0,
+                            ticketsLink: '',
                             description: '',
                         })
                         break
                 }
                 if (newItem) alert(`Successfully created new ${crudItem}.`)
-            } catch(err) {
+            } catch (err) {
                 alert(`Could not add new ${crudItem}: ${err}`)
                 console.error(err)
             }
@@ -501,7 +506,7 @@ export default function AdminPage({ isMenuOpen, sortObjects, instruments, states
                                 className='m-2 p-1 bg-stone-200 text-stone-800 rounded-lg'
                                 onChange={handleChange}
                             />
-                            <label htmlFor={bool} className='text-right m-2'>{bool ? 'Yes' : 'No'}</label>
+                            <label htmlFor={'openToPublic-' + bool} className='text-right m-2'>{bool ? 'Yes' : 'No'}</label>
                         </div>
                     )}
                 </div>
@@ -526,6 +531,17 @@ export default function AdminPage({ isMenuOpen, sortObjects, instruments, states
                         className={inputStyle}
                         defaultValue={performanceFormData.maxPrice}
                         placeholder={0}
+                        onChange={handleChange}
+                    />
+                </div>
+                <div className={'mx-auto w-11/12 flex justify-center items-center p-1 m-2 rounded-xl'}>
+                    <label htmlFor="ticketsLink" className={labelStyle}>Tickets URL:</label>
+                    <input
+                        name='ticketsLink'
+                        id='ticketsLink'
+                        className={inputStyle}
+                        defaultValue={performanceFormData.ticketsLink}
+                        placeholder='Tickets URL'
                         onChange={handleChange}
                     />
                 </div>

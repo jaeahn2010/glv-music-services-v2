@@ -1,7 +1,7 @@
 // `localhost:3000/api/opuses`
 
 // req modules
-const jwt = require('jwt-simple')
+const jwt = require('jsonwebtoken')
 const express = require('express')
 const router = express.Router()
 

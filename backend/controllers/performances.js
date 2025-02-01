@@ -1,7 +1,7 @@
 // `localhost:3000/api/performances`
 
 // req modules
-const jwt = require('jwt-simple')
+const jwt = require('jsonwebtoken')
 const express = require('express')
 const router = express.Router()
 
@@ -26,6 +26,7 @@ const authMiddleware = (allowedRoles = []) => {
             }
             next()
         } catch (err) {
+            console.error("JWT verification failed: ", err)
             res.status(401).json({ message: 'Invalid or expired token' })
         }
     }

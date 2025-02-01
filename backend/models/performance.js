@@ -15,6 +15,7 @@ const performanceSchema = new mongoose.Schema(
             collaboratorInstrument: { type: String, required: true },
         }],
         openToPublic: { type: Boolean, required: true },
+        ticketsLink: { type: String },
         minPrice: { type: Number, required: true },
         maxPrice: { type: Number, required: true },
         description: { type: String },

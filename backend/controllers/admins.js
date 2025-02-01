@@ -1,6 +1,6 @@
 // `localhost:3000/api/admins`
 // req modules
-const jwt = require('jwt-simple')
+const jwt = require('jsonwebtoken')
 const express = require('express')
 const router = express.Router()
 
@@ -16,7 +16,7 @@ router.post('/login', async (req, res) => {
     const foundAdmin = await db.Admin.findOne({ email: req.body.email })
     if (foundAdmin && foundAdmin.password === req.body.password) {
         const payload = { id: foundAdmin.id, role: 'admin' }
-        const token = jwt.encode(payload, config.jwtSecret)
+        const token = jwt.sign(payload, config.jwtSecret)
         res.cookie('token', token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production', // use 'secure' in production
