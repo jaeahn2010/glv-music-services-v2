@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 export default function CurrentCart({ isMenuOpen, allOpuses, loginStatus, userCart, setUserCart, allMusicians, scrollToTop, userType }) {
     let cartText = userCart.length > 0 ? 'Your cart' : 'Your cart is empty.'
-    const btnStyle = 'border-stone-200 border rounded-xl px-3 py-1 my-2 w-full hover:scale-110 hover:cursor-pointer hover:bg-amber-400 hover:text-stone-900 hover:duration-500'
+    const btnStyle = 'border-stone-800 border rounded-xl px-3 py-1 my-2 w-full hover:scale-105 hover:cursor-pointer hover:bg-green-400 hover:text-stone-900 hover:duration-500'
 
     function handleClick(evt) {
         evt.preventDefault()
@@ -34,13 +34,13 @@ export default function CurrentCart({ isMenuOpen, allOpuses, loginStatus, userCa
     
     return loginStatus && userType === 'client'
     ? (
-        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} flex flex-col justify-center items-center font-poppins mx-auto lg:w-1/2`}>
+        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} flex flex-col justify-center items-center font-bodoni mx-auto lg:w-1/2`}>
             <p className="text-center my-12">{cartText}</p>
             {userCart.map(item => {
                 let mvmts = item.movements.length > 0
                 ? <table key={item._id} className="w-11/12">
                     <tbody>
-                        {item.movements.map(movement => <tr key={movement.movementTitle} className="border-b-2 border-white">
+                        {item.movements.map(movement => <tr key={movement.movementTitle} className="border-b-2 border-stone-800">
                             <td>{movement.movementTitle}</td>
                             <td>
                                 <img src={trashIcon} className="w-[25px] hover:bg-red-600 hover:opacity-50 hover:cursor-pointer" id={`${item._id}-movement-${movement.movementNumber}`} onClick={handleClick}/>
@@ -50,7 +50,7 @@ export default function CurrentCart({ isMenuOpen, allOpuses, loginStatus, userCa
                 </table>
                 : 'NONE'
                 return (
-                    <div className='border m-4 p-4 border-stone-200 bg-stone-800 w-full rounded-3xl' key={item._id}>
+                    <div className='border m-4 p-4 border-stone-800 bg-stone-300 w-full rounded-3xl' key={item._id}>
                         <section className="my-3">
                             <div>
                                 <p className="underline">TITLE</p>
@@ -75,7 +75,7 @@ export default function CurrentCart({ isMenuOpen, allOpuses, loginStatus, userCa
                             <br/>
                         </section>
                         <section className="flex flex-col items-center justify-center mx-auto text-center">
-                            <button className='border border-stone-200 px-4 rounded-xl py-2 hover:bg-red-600 hover:cursor-pointer' id={`${item._id}-bulk-0`} onClick={handleClick}>Remove entire opus from cart</button>
+                            <button className='border border-stone-800 px-4 rounded-xl py-2 hover:bg-red-400 hover:cursor-pointer' id={`${item._id}-bulk-0`} onClick={handleClick}>Remove entire opus from cart</button>
                         </section>
                     </div>
                 )})

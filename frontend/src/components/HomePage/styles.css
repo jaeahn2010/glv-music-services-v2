@@ -23,7 +23,7 @@
     left: 0;
     width: 0;
     height: 100%;
-    background-image: linear-gradient(to right, rgb(0, 100, 0), rgb(0, 200, 0), rgb(0, 100, 0));
+    background-image: linear-gradient(to right, rgb(255, 204, 0), rgb(255, 165, 0), rgb(255, 204, 0));
     transition: width 0.5s ease-in-out;
     z-index: -1;
 }

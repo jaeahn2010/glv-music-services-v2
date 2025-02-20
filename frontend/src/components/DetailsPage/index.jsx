@@ -83,8 +83,8 @@ export default function DetailsPage({ isMenuOpen, opusDetails, loginStatus, user
             <table className="w-full border-separate border-spacing-y-2">
                 <thead>
                     <tr>
-                        <td className="underline">MOVEMENT</td>
-                        <td className="underline">MUSICIANS OFFERING THIS MOVEMENT</td>
+                        <td className="underline">Movement</td>
+                        <td className="underline">Offering musicians</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -93,8 +93,8 @@ export default function DetailsPage({ isMenuOpen, opusDetails, loginStatus, user
                     let musicianObjs = movement.movementOfferingMusicians.map(id => allMusicians.find(musician => musician._id === id))
                     let musicianNames = musicianObjs.map(musician => `${musician.firstName} ${musician.lastName}`)
                     return <tr key={movement._id} onClick={handleClick} id={movement._id} className="w-full hover:scale-105 hover:cursor-pointer hover:bg-amber-400 hover:text-stone-900 hover:duration-500">
-                        <td className="w-1/2 border-l border-y border-stone-300 p-2 rounded-l-xl">{movement.movementTitle}</td>
-                        <td className="w-1/2 border-r border-y border-stone-300 p-2 rounded-r-xl">{musicianNames.join(', ')}</td>
+                        <td className="w-1/2 border-l border-y border-stone-700 p-2 rounded-l-xl">{movement.movementTitle}</td>
+                        <td className="w-1/2 border-r border-y border-stone-700 p-2 rounded-r-xl">{musicianNames.join(', ')}</td>
                     </tr>})
                 }
                 </tbody>
@@ -103,8 +103,9 @@ export default function DetailsPage({ isMenuOpen, opusDetails, loginStatus, user
         : ''
 
         return (
-            <section className={`${isMenuOpen ? 'z-0 opacity-5' : ''} flex flex-col justify-center items-center font-poppins min-h-[150vh]`}>
-                <div className={`w-11/12 lg:w-1/2 mx-auto border border-stone-400 rounded-lg text-stone-300 p-5 m-5 flex-col justify-center bg-stone-600`}>
+            <section className={`${isMenuOpen ? 'z-0 opacity-5' : ''} flex flex-col justify-center items-center font-bodoni`}>
+                <p className="mt-24">Details of this repertoire</p>
+                <div className={`w-11/12 lg:w-1/2 mx-auto border border-stone-400 rounded-lg text-stone-700 p-5 m-5 flex-col justify-center bg-stone-300`}>
                     <section className="text-center">
                         <div>
                             <p className="underline">TITLE</p>
@@ -127,13 +128,13 @@ export default function DetailsPage({ isMenuOpen, opusDetails, loginStatus, user
                         </div>
                         <br/>
                         <div>
-                            <button onClick={handleClick} value="allMvmts" className="border border-stone-300 text-sm p-2 rounded-xl hover:scale-105 hover:cursor-pointer hover:bg-amber-400 hover:text-stone-900 duration-500">{opus.movements.length ? 'ADD ALL MOVEMENTS TO CART' : 'ADD TO CART'}</button>
+                            <button onClick={handleClick} value="allMvmts" className="border border-stone-700 text-sm p-2 rounded-xl hover:scale-105 hover:cursor-pointer bg-stone-300 hover:bg-green-400 duration-500">{opus.movements.length ? 'ADD ALL MOVEMENTS TO CART' : 'ADD TO CART'}</button>
                         </div>
                         <br/>
                     </section>
                     {movementsDisplay}
                 </div>
-                <button onClick={() => navigate('/repertoire')} className="border border-stone-200 p-2 rounded-xl my-6 mx-auto hover:bg-amber-400 hover:text-stone-800 hover:scale-105 duration-500">CHOOSE MORE REPERTOIRE</button>
+                <button onClick={() => navigate('/repertoire')} className="border border-stone-800 p-2 rounded-xl my-6 mx-auto hover:bg-green-400 hover:scale-105 duration-500">CHOOSE MORE REPERTOIRE</button>
             </section>
         )
     }

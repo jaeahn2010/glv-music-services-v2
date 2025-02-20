@@ -53,19 +53,19 @@ export default function PerformancesPage({ isMenuOpen }) {
 	}, [])
 
     return (
-        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} font-poppins min-h-[125vh]`}>
+        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} font-bodoni min-h-[125vh]`}>
             <h1 className="text-xl text-center my-10 lg:text-3xl">Our performances</h1>
             <p className='w-3/4 mx-auto my-10'>Come check out our fantastic musicians in action! Hover over each card to see other featured musicians and a short description of each performance. Performance dates in red indicate past events, whereas those in green indicate upcoming performances.</p>
             {performances.length
             ? <section className="career-items my-24 min-h-[25rem]">
                 {performances.map((performance, index) => 
-                    <div key={index} className='card-flip flex my-10 w-11/12 md:w-3/4 h-[5rem] md:h-[20rem] mx-auto border border-stone-200 rounded-xl bg-gradient-to-r from-stone-800 via-stone-500 to-stone-800'>
+                    <div key={index} className='card-flip flex my-10 w-11/12 md:w-3/4 h-[5rem] md:h-[20rem] mx-auto border border-stone-800 rounded-xl bg-gradient-to-r from-stone-300 via-stone-400 to-stone-300'>
                         <div className="card-front flex w-full">
                             <div className="w-full flex flex-col items-center justify-center">
                                 <p className="text-sm md:text-2xl underline">{performance.title}</p>
                                 <div className='flex justify-between items-center w-5/6 my-8 text-lg'>
                                     <p>{performance.locationName} ({performance.city}, {performance.state})</p>
-                                    <p className={new Date(new Date(performance.date).getTime() + 8 * 60 * 60 * 1000) > new Date() ? 'text-green-300' : 'text-red-300'}>{new Date(new Date(performance.date).getTime() + 8 * 60 * 60 * 1000).toLocaleDateString()}, {nonMilitaryTime(performance.time)}</p>
+                                    <p className={new Date(new Date(performance.date).getTime() + 8 * 60 * 60 * 1000) > new Date() ? 'text-green-600' : 'text-red-600'}>{new Date(new Date(performance.date).getTime() + 8 * 60 * 60 * 1000).toLocaleDateString()}, {nonMilitaryTime(performance.time)}</p>
                                 </div>
                                 <p>Featured GLVMS Musician(s): {performance.featuredGLVMSMusicians.map((musicianId, index) => {
                                     let musician = musicians.find(musician => musician._id === musicianId)
@@ -89,8 +89,8 @@ export default function PerformancesPage({ isMenuOpen }) {
                                 : ''}
                                 <p className='my-3'>{performance.description}</p>
                                 <div className='flex justify-between my-3 text-lg'>
-                                    <p className={performance.openToPublic ? 'text-green-300' : 'text-red-300'}>{performance.openToPublic ? 'Open to Public' : 'Private Event'}</p>
-                                    <p>Ticket price range: <span className={!performance.minPrice && !performance.maxPrice ? 'text-green-300' : 'text-amber-300'}>{!performance.minPrice && !performance.maxPrice ? 'Free event' : `$${performance.minPrice}-$${performance.maxPrice}`}</span></p>
+                                    <p className={performance.openToPublic ? 'text-green-600' : 'text-red-600'}>{performance.openToPublic ? 'Open to Public' : 'Private Event'}</p>
+                                    <p>Ticket price range: <span className={!performance.minPrice && !performance.maxPrice ? 'text-green-600' : 'text-amber-600'}>{!performance.minPrice && !performance.maxPrice ? 'Free event' : `$${performance.minPrice}-$${performance.maxPrice}`}</span></p>
                                 </div>
                                 <div className='flex justify-center items-center'>
                                     {performance.ticketsLink

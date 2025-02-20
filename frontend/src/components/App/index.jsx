@@ -18,6 +18,7 @@ import CurrentCart from '../CurrentCart'
 import { getOpuses, getMusicians } from '../../../utils/backend'
 import './styles.css'
 import cartIcon from '../../assets/cart-icon.jpeg'
+import logo from '../../assets/logo-transparent-wide.png'
 
 let allComposers = []
 const categories = ['accompanist', 'arranger', 'audio / sound engineer', 'baroque music specialist', 'composer', 'conductor',  'diction & language specialist', 'ear training specialist', 'instructor (private institution or studio)', 'instructor (public institution)', 'instrument repairperson', 'jazz specialist', 'music director', 'music history specialist', 'music theory specialist', 'performer - brass',  'performer - keyboard', 'performer - percussion', 'performer - string', 'performer - woodwind', 'performer - voice', 'piano tuner', 'vocal coach', 'other']
@@ -44,10 +45,10 @@ export default function App() {
 	const [isMobile, setIsMobile] = useState(false)
 	const [userType, setUserType] = useState('')
 	const navigate = useNavigate()
-	const h2Style = "text-stone-200 my-5 hover:scale-110 duration-500"
+	const h2Style = "text-stone-800 my-5 hover:scale-110 duration-500"
 	const linkStyle = "border-t border-stone-200 lg:w-1/2 mx-auto"
 	const pCategoryStyle = 'underline font-bold text-2xl p-2'
-	const hamburgerMenuBaseStyle = "border-stone-200 border-y-2 w-[5vw] lg:w-[30px] min-w-[30px] my-1.5 rounded-3xl duration-500"
+	const hamburgerMenuBaseStyle = "border-stone-800 border-y-2 w-[5vw] lg:w-[30px] min-w-[30px] my-1.5 rounded-3xl duration-500"
 
 	// composers list
 	for (let opus of allOpuses) {
@@ -143,9 +144,11 @@ export default function App() {
 	
 	return (
 		<>
-			<nav className="flex items-center justify-between h-16 bg-gradient-to-r from-green-950 via-green-500 to-green-950 shadow-lg lg:px-9 md:px-6 px-3 font-poppins">
+			<nav className="flex items-center justify-between h-16 bg-stone-200 shadow-lg lg:px-9 md:px-6 px-3 font-bodoni">
 				<Link to="/">
-					<h2 onClick={() => setIsMenuOpen(false)} className="text-white font-bold md:text-2xl sm:text-xl">Greater Las Vegas Music Services</h2>
+					<div onClick={() => setIsMenuOpen(false)} className='h-16'>
+						<img src={logo} alt='logo' className='h-full'/>
+					</div>
 				</Link>
 				<div className="text-3xl hover:cursor-pointer" onClick={() => setIsMenuOpen(!isMenuOpen)}>
 					<div className={`${hamburgerMenuBaseStyle} ${isMenuOpen ? '-rotate-45 translate-y-[10px]' : ''}`}></div>
@@ -153,9 +156,9 @@ export default function App() {
 					<div className={`${hamburgerMenuBaseStyle} ${isMenuOpen ? '-rotate-45 -translate-y-[10px]' : ''}`}></div>
 				</div>
 			</nav>
-			<div className={`${isMenuOpen ? 'opacity-100 z-50' : 'hidden'} duration-500 absolute left-[12.5%] top-1/4 w-3/4 text-xl text-center font-poppins`}>
+			<div className={`${isMenuOpen ? 'opacity-100 z-50' : 'hidden'} duration-500 absolute left-[12.5%] top-1/4 w-3/4 text-xl text-center font-bodoni`}>
 				<p className={pCategoryStyle}>INFORMATION</p>
-				<Link to='/about' onClick={() => setIsMenuOpen(false)}><h1 className={h2Style}>About GLVMS</h1></Link>
+				<Link to='/about' onClick={() => setIsMenuOpen(false)}><h1 className={h2Style}>About Forte & Piano</h1></Link>
 				<Link to='/repertoire' onClick={() => setIsMenuOpen(false)}><h1 className={h2Style}>Repertoire List</h1></Link>
 				<Link to='/musicians' onClick={() => setIsMenuOpen(false)}><h1 className={h2Style}>Our Musicians</h1></Link>
 				<Link to='/performances' onClick={() => setIsMenuOpen(false)}><h1 className={h2Style}>Our Performances</h1></Link>
@@ -302,16 +305,13 @@ export default function App() {
 			</Routes>
 			{userType === 'client'
 			? <>
-				<div className='fixed bottom-5 right-5 w-[50px] h-[50px] bg-gradient-to-r from-green-600 via-green-400 to-green-600 rounded-full flex align-center justify-center cursor-pointer hover:animate-bounce z-10'>
+				<div className='fixed bottom-5 right-5 w-[50px] h-[50px] bg-gradient-to-r from-stone-600 via-stone-400 to-stone-600 rounded-full flex align-center justify-center cursor-pointer hover:animate-bounce z-10'>
 					<Link to="/cart"><img src={cartIcon} className="rounded-full p-1 cursor-pointer"/></Link>
 				</div>
-				<p className="fixed bottom-4 right-4 bg-red-500 rounded-full w-[22.5px] h-[20px] z-10 text-center pb-6">{userCart.length}</p>
+				<p className="fixed bottom-4 right-4 bg-red-300 rounded-full w-[22.5px] h-[20px] z-10 text-center pb-6">{userCart.length}</p>
 			</>
 			: ''
 			}
-			<footer className={`w-full py-2 bg-gradient-to-r from-green-950 via-green-500 to-green-950 font-poppins`}>
-                <p className="text-center text-xs">Copyright &#169; 2024 DMZ.DEV</p>
-            </footer>
 		</>
 	)
 }

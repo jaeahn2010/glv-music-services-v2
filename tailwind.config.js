@@ -7,6 +7,7 @@ export default {
 	theme: {
 		extend: {
 			fontFamily: {
+				bodoni: ['"Bodoni Moda"', 'serif'],
 				poppins: ['"Poppins"', 'sans-serif'],
 			}
 		},

@@ -24,8 +24,8 @@ export default function RequestPage({ isMenuOpen, allMusicians, loginStatus, use
     const navigate = useNavigate()
     const divStyle = 'w-full lg:w-1/2 mx-auto flex'
     const labelStyle = 'w-1/3 m-2 flex justify-end items-center text-right'
-    const inputStyle = 'w-2/3 text-left m-2 p-1 bg-stone-200 text-stone-800 rounded-lg'
-    const btnStyle = 'w-1/2 lg:w-1/3 my-5 border border-stone-200 rounded-xl hover:bg-amber-400 hover:text-stone-800 hover:cursor-pointer'
+    const inputStyle = 'w-2/3 text-left m-2 p-1 border border-stone-800 bg-stone-200 text-stone-800 rounded-lg'
+    const btnStyle = 'w-1/2 lg:w-1/3 my-5 border border-stone-800 rounded-xl hover:bg-green-400 hover:text-stone-800 hover:cursor-pointer'
 
     function handleChange(evt) {
         setRequestData({
@@ -81,7 +81,7 @@ export default function RequestPage({ isMenuOpen, allMusicians, loginStatus, use
     }
 
     return (
-        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} font-poppins`}>
+        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} font-bodoni`}>
             {loginStatus && userType === 'client'
             ? 
             <>
@@ -209,7 +209,7 @@ export default function RequestPage({ isMenuOpen, allMusicians, loginStatus, use
                     <div className='flex lg:w-1/2 mx-auto'>
                         <p className={labelStyle}>Requested Repertoire:</p>
                         <div className="w-2/3">
-                            {userCart.map(opusInCart => <div key={opusInCart._id} className="border border-stone-200 p-2 rounded-xl bg-stone-700 my-2">
+                            {userCart.map(opusInCart => <div key={opusInCart._id} className="border border-stone-800 p-2 rounded-xl bg-stone-300 my-2">
                                 <p className="underline">{opusInCart.composer}: {opusInCart.title}</p>
                                 {opusInCart.movements.map(movement => <p key={movement._id}>{movement.movementTitle}</p>)}
                             </div>)}
@@ -231,7 +231,7 @@ export default function RequestPage({ isMenuOpen, allMusicians, loginStatus, use
                         <button onClick={(evt) => {
                             evt.preventDefault()
                             navigate('/repertoire')
-                        }} className={btnStyle}>CANCEL</button>
+                        }} className={btnStyle + ' hover:bg-red-400'}>CANCEL</button>
                     </div>
                 </form>
             </>

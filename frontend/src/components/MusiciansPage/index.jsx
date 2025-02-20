@@ -20,7 +20,7 @@ export default function MusiciansPage({ isMenuOpen, allMusicians, setMusicianDet
     const pStyle = 'my-3'
     const labelStyle = 'w-1/3 mx-2 text-right'
     const inputStyle = 'w-2/3 mx-2 p-1 rounded-xl text-stone-800'
-    const btnStyle = 'border border-stone-200 px-2 py-1 my-6 rounded-xl hover:bg-amber-400 hover:text-stone-800 hover:cursor-pointer'
+    const btnStyle = 'border border-stone-800 px-2 py-1 my-6 rounded-xl hover:bg-amber-400 hover:cursor-pointer'
 
     //get full list of musicians, or filter by instrument
 	function getFilteredMusiciansData(filter) {
@@ -76,7 +76,7 @@ export default function MusiciansPage({ isMenuOpen, allMusicians, setMusicianDet
     }
 
     return (
-        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} font-poppins min-h-[125vh]`}>
+        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} font-bodoni min-h-[125vh]`}>
             <h1 className="text-xl text-center my-10 lg:text-3xl">Our Musicians</h1>
             {/* <section className="flex flex-col justify-center items-center my-2 py-2">
                 <label htmlFor='instrumentFilter'>FILTER BY INSTRUMENT</label>
@@ -96,10 +96,10 @@ export default function MusiciansPage({ isMenuOpen, allMusicians, setMusicianDet
                 setMusicianDetails={setMusicianDetails}
                 loginStatus={loginStatus}
             />
-            <section className='border-t border-stone-200 my-12 py-12 mx-auto w-5/6 flex flex-col justify-center'>
-                <h2 className='text-2xl text-center my-4'>JOIN THE GLVMS TEAM</h2>
+            <section className='border-t border-stone-800 my-12 py-12 mx-auto w-5/6 flex flex-col justify-center'>
+                <h2 className='text-2xl text-center my-4'>JOIN THE FORTE & PIANO TEAM</h2>
                 <p>Are you a music performer, teacher, composer, or arranger based in Las Vegas, NV? Are you looking to grow your studio, clientele, or sell more of your works? Join our team! Fill out the form below, and we will contact you for a phone interview. If we resonate well with each other, we will then schedule an in-person interview in a semi-formal audition setting, where we will further assess how we fit each other's needs.</p>
-                <form onSubmit={handleSubmit} className={showForm ? 'w-5/6 mx-auto my-6 py-10 flex flex-col items-center border border-stone-200 rounded-xl' : 'hidden'} encType="multipart/form-data">
+                <form onSubmit={handleSubmit} className={showForm ? 'w-5/6 mx-auto my-6 py-10 flex flex-col items-center border border-stone-800 rounded-xl' : 'hidden'} encType="multipart/form-data">
                         <div className={divStyle2}>
                             <label htmlFor="email" className={labelStyle}>Email:</label>
                             <input
@@ -175,7 +175,7 @@ export default function MusiciansPage({ isMenuOpen, allMusicians, setMusicianDet
                         <input
                             type="file"
                             accept=".pdf,.doc,.docx"
-                            className='text-sm border border-stone-200 p-3'
+                            className='text-sm border border-stone-800 p-3 rounded-xl'
                             name='resume'
                             id='resume'
                             onChange={handleChange}

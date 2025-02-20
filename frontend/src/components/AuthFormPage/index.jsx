@@ -148,7 +148,7 @@ export default function AuthFormPage({ isMenuOpen, setLoginStatus, scrollToTop, 
     }, [])
 
     return (
-        <section className={`${isMenuOpen ? 'z-0 opacity-5' : ''} bg-stone-800 rounded-xl border border-stone-200 p-8 lg:w-1/3 mx-auto mt-24 mb-48 font-poppins`}>
+        <section className={`${isMenuOpen ? 'z-0 opacity-5' : ''} bg-stone-300 rounded-xl border border-stone-800 p-8 lg:w-1/3 mx-auto mt-24 mb-48 font-bodoni`}>
             <h2 className="text-3xl text-center font-bold mb-8">{btnText}</h2>
             <form className="w-full flex flex-col" onSubmit={handleSubmit}>
                 <div>
@@ -182,10 +182,10 @@ export default function AuthFormPage({ isMenuOpen, setLoginStatus, scrollToTop, 
                 {adminField}
                 <button
                     type="submit"
-                    className="w-1/2 mx-auto border border-stone-200 my-5 rounded-xl duration-500 hover:bg-gradient-to-r from-green-950 via-green-500 to-green-950 py-1">
+                    className="w-1/2 mx-auto border border-stone-800 my-5 rounded-xl duration-500 hover:bg-green-400 py-1">
                     {btnText}
                 </button>
-                <p className="text-center pt-2 hover:text-green-400 hover:cursor-pointer" onClick={() => {
+                <p className="text-center pt-2 hover:text-green-600 hover:cursor-pointer" onClick={() => {
                     scrollToTop()
                     formType === 'login' ? navigate('/auth/signup') : navigate('/auth/login')
                 }}>{formType === 'login' ? 'Don\'t have an account? Click here to sign up.' : 'Already have an account? Click here to log in.'}</p>

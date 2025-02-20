@@ -803,9 +803,9 @@ const availableConcerts = [
 ]
 
 const concertObjs = availableConcerts.map(concert => new Concert ('Ahn-Benton, Jae', concert[0], concert[1], concert[2], concert[3], concert[4], concert[5]))
-let tdStyle = 'border border-stone-200 text-center py-1'
-let btnStyle = 'w-1/2 lg:w-3/4 border border-stone-200 rounded-xl p-2 m-3 hover:bg-amber-400 hover:text-stone-800'
-let modalStyle = 'absolute w-full lg:w-3/4 lg:left-[12.5%] border border-stone-200 flex flex-col justify-center items-center bg-stone-700 rounded-3xl'
+let tdStyle = 'border border-stone-800 text-center py-1'
+let btnStyle = 'w-1/2 lg:w-3/4 border border-stone-800 rounded-xl p-2 m-3 hover:bg-amber-400 hover:text-stone-800'
+let modalStyle = 'absolute w-full lg:w-3/4 lg:left-[12.5%] border border-stone-800 flex flex-col justify-center items-center bg-stone-300 rounded-3xl'
 let liStyle = 'my-4'
 let divStyle = 'w-full lg:w-11/12 mx-auto flex'
 let labelStyle = 'w-1/3 lg:w-1/2 text-right m-2'
@@ -890,7 +890,7 @@ export default function MobilePianoConcertSeriesPage({ isMenuOpen, allMusicians,
     }
 
     return (
-        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} relative font-poppins`}>
+        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} relative font-bodoni`}>
             {currentConcert.pianist
             ? <div className={`${showDetails ? 'z-50' : 'hidden'} ${modalStyle} overflow-y-auto py-6 h-[40%]`}>
                 <p className="text-lg lg:text-3xl py-12 font-bold text-center">{currentConcert.title}</p>
@@ -898,7 +898,7 @@ export default function MobilePianoConcertSeriesPage({ isMenuOpen, allMusicians,
                 <p>{`${currentConcert.pianist.split(', ')[1]} ${currentConcert.pianist.split(', ')[0]}`}, piano</p>
                 <img className="border border-stone-200 rounded-xl w-1/2 my-5" src={currentConcert.poster} alt='poster'/>
                 <div className="w-11/12 mx-auto my-5">{currentConcert.description}</div>
-                <div className="border border-stone-200 rounded-xl w-11/12 bg-stone-500">
+                <div className="border border-stone-800 rounded-xl w-11/12 bg-stone-400">
                     <p className="text-xl underline text-center my-2">Program</p>
                     {currentConcert.program.map(opus => <div key={opus[0] + opus[1]} className="flex justify-between my-1 p-1 text-xs">
                         <p className="w-1/2">{opus[0]}</p>
@@ -1067,11 +1067,11 @@ export default function MobilePianoConcertSeriesPage({ isMenuOpen, allMusicians,
                     }>CLOSE</button>
                 </form>
             </section>
-            <h1 className={`${showDetails ? 'z-0 opacity-5' : ''} text-center text-3xl my-24`}>GLVMS Mobile Piano Concert Series</h1>
+            <h1 className={`${showDetails ? 'z-0 opacity-5' : ''} text-center text-3xl my-24`}>Forte & Piano Mobile Piano Concert Series</h1>
             <p className={`${showDetails ? 'z-0 opacity-5' : ''} w-11/12 mx-auto text-lg`}>Bring a professional classical piano performance right to your doorstep! Simply pick a concert from the menu below, and request a date, time, and location. Once confirmed by GLVMS and payment is made, the designated pianist will show up at your location at the specified date and time, and will perform the requested concert. That's it! No hassle, no confusion.</p>
-            <table className={`${showDetails ? 'z-0 opacity-5' : ''} border border-stone-200 w-11/12 mx-auto mb-12 table-fixed my-12 text-xs lg:text-base`}>
+            <table className={`${showDetails ? 'z-0 opacity-5' : ''} border border-stone-800 w-11/12 mx-auto mb-12 table-fixed my-12 text-xs lg:text-base`}>
                 <thead>
-                    <tr className="font-bold border border-stone-200 bg-gradient-to-r from-green-950 via-green-700 to-green-950" >
+                    <tr className="font-bold border border-stone-800 bg-gradient-to-r from-stone-300 via-stone-400 to-stone-300" >
                         <td className={tdStyle + ' w-[25%] lg:w-[20%]'}>Pianist</td>
                         <td className={tdStyle + ' w-[35%] lg:w-[45%]'}>Title</td>
                         <td className={tdStyle + ' w-[25%] lg:w-[20%]'}>Approximate Duration</td>
@@ -1079,7 +1079,7 @@ export default function MobilePianoConcertSeriesPage({ isMenuOpen, allMusicians,
                     </tr>
                 </thead>
                 <tbody>
-                    {concertObjs.map(concert => <tr key={concert.title} className="hover:bg-gradient-to-r from-green-950 via-green-700 to-green-950 hover:cursor-pointer" onClick={() => {
+                    {concertObjs.map(concert => <tr key={concert.title} className="hover:bg-gradient-to-r from-stone-300 via-stone-400 to-stone-300 hover:cursor-pointer" onClick={() => {
                         setShowDetails(true)
                         setCurrentConcert(concert)
                         scrollToTop()
@@ -1094,7 +1094,7 @@ export default function MobilePianoConcertSeriesPage({ isMenuOpen, allMusicians,
             <aside className={`${showDetails ? 'z-0 opacity-5' : ''} w-11/12 mx-auto`}>
                 <p className="text-2xl underline text-center my-6">Disclaimers</p>
                 <ul className="list-disc list-inside text-sm mb-10">
-                    <li className={liStyle}>These mobile concerts are primarily designed for intimate home settings, either completely private just for 1 person, or up to an audience size of 10 people. They are not recommended for large audiences or for the general public. For large-scale performance requests, please visit the main GLVMS repertoire page <Link to="/repertoire" className="underline hover:text-amber-600">here</Link>.</li>
+                    <li className={liStyle}>These mobile concerts are primarily designed for intimate home settings, either completely private just for 1 person, or up to an audience size of 10 people. They are not recommended for large audiences or for the general public. For large-scale performance requests, please visit the main Forte & Piano repertoire page <Link to="/repertoire" className="underline hover:text-amber-600">here</Link>.</li>
                     <li className={liStyle}>Light snacks and/or ambience lighting may be added for your enjoyment during the concert for a small fee.</li>
                     <li className={liStyle}>No piano at home? No problem. Our pianist will bring a fully functional electric keyboard.</li>
                     <li className={liStyle}>Please allow up to 15 minutes of setup and strike-down time before and after the requested performance timeframe.</li>

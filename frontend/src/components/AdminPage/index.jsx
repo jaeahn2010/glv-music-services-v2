@@ -62,16 +62,16 @@ export default function AdminPage({ isMenuOpen, sortObjects, instruments, states
         ticketsLink: '',
         description: '',
     })
-    const btnStyle = 'border border-stone-200 rounded-xl p-2 mx-auto my-4 hover:scale-110 hover:bg-gradient-to-r from-green-700 via-green-500 to-green-700'
-    const divStyle = 'border border-stone-200 w-1/2 flex flex-col justify-center p-1 m-2 rounded-xl'
+    const btnStyle = 'border border-stone-800 rounded-xl p-2 mx-auto my-4 hover:scale-105 hover:bg-green-400'
+    const divStyle = 'border border-stone-800 w-1/2 flex flex-col justify-center p-1 m-2 rounded-xl'
     const labelStyle = 'w-1/4 text-right m-2'
-    const inputStyle = 'w-3/4 text-left m-2 p-1 bg-stone-200 text-stone-800 rounded-lg'
+    const inputStyle = 'w-3/4 text-left m-2 p-1 border border-stone-800 bg-stone-200 text-stone-800 rounded-lg'
     const pStyle = 'text-center my-3 underline'
     const selectStyle = 'text-stone-900 my-3 w-3/4 mx-auto'
 
     let addFields
     let editFields = []
-    let movementsModal = <section className={showMovementsModal ? 'absolute left-1/4 z-40 border border-stone-200 w-1/2 flex flex-col justify-center items-center p-4 bg-stone-600' : 'hidden'}>
+    let movementsModal = <section className={showMovementsModal ? 'absolute left-1/4 z-40 border border-stone-800 w-1/2 flex flex-col justify-center items-center p-4 bg-stone-300' : 'hidden'}>
         <div className={divStyle + ' w-11/12'}>
             <label htmlFor="movementNumber" className={labelStyle}>Movement Number:</label>
             <input
@@ -453,7 +453,7 @@ export default function AdminPage({ isMenuOpen, sortObjects, instruments, states
                     />
                 </div>
                 <div className={'mx-auto w-11/12 p-1 m-2'}>
-                    <p className="text-center underline">Featured GLVMS Musicians</p>
+                    <p className="text-center underline">Featured Forte & Piano Musicians</p>
                     {allMusicians.map(musician => 
                         <div key={musician._id} className="flex justify-start items-center mx-auto w-1/2">
                             <input
@@ -575,7 +575,7 @@ export default function AdminPage({ isMenuOpen, sortObjects, instruments, states
 
     return userType === 'admin'
     ? <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} text-xl min-h-[100vh]`}>
-        <h1 className="text-center my-6">This is the GLVMS admin page. Use it to CRUD sensitive data (opuses, musicians, clients, performances).</h1>
+        <h1 className="text-center my-6">This is the Forte & Piano admin page. Use it to CRUD sensitive data (opuses, musicians, clients, performances).</h1>
         <section className="flex items-center justify-around my-12">
             <button className={btnStyle} onClick={() => setCrudItem('opus')}>ADD/EDIT OPUS</button>
             <button className={btnStyle} onClick={() => setCrudItem('musician')}>ADD/EDIT MUSICIAN</button>
@@ -632,5 +632,5 @@ export default function AdminPage({ isMenuOpen, sortObjects, instruments, states
         </section>
     </main>
     : <h1 className={`${isMenuOpen ? 'z-0 opacity-5' : ''} text-center text-3xl my-24 h-[100vh]`}>ACCESS 
-    DENIED. PLEASE LOG IN AS A GLVMS ADMIN.</h1>
+    DENIED. PLEASE LOG IN AS A FORTE & PIANO ADMIN.</h1>
 }

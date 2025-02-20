@@ -162,8 +162,8 @@ const ahnBentonAvailableCompositions = [
 
 const ahnBentonCompositionObjs = ahnBentonAvailableCompositions.map(composition => new Composition ('Ahn-Benton, Jae', composition[0], composition[1], composition[2], composition[3], composition[4], composition[5], composition[6]))
 
-let tdStyle = 'border border-stone-200 text-center py-1'
-let btnStyle = 'border border-stone-200 rounded-xl p-2 m-3 hover:bg-amber-400 hover:text-stone-800'
+let tdStyle = 'border border-stone-800 text-center py-1'
+let btnStyle = 'border border-stone-800 rounded-xl p-2 m-3 hover:bg-amber-400 hover:text-stone-800'
 
 export default function NewCompositionsPage({ isMenuOpen, loginStatus, scrollToTop }) {
     const [showDetails, setShowDetails] = useState(false)
@@ -183,9 +183,9 @@ export default function NewCompositionsPage({ isMenuOpen, loginStatus, scrollToT
     }, [currentComposition])
 
     return (
-        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} relative font-poppins`}>
+        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} relative font-bodoni`}>
             {currentComposition.composer
-            ? <div className={`${showDetails ? 'z-50' : 'hidden'} absolute w-11/12 left-[4.17%] top-[5%] lg:w-1/2 lg:left-1/4 border border-stone-200 flex flex-col justify-center items-center bg-stone-700 rounded-3xl overflow-y-auto`}>
+            ? <div className={`${showDetails ? 'z-50' : 'hidden'} absolute w-11/12 left-[4.17%] top-[5%] lg:w-1/2 lg:left-1/4 border border-stone-800 flex flex-col justify-center items-center bg-stone-300 rounded-3xl overflow-y-auto`}>
                 <p className="font-bold text-lg my-2">{currentComposition.composer}</p>
                 <p className="text-lg lg:text-3xl my-2 font-bold text-center">{currentComposition.title}
                     {currentComposition.nickname
@@ -198,7 +198,7 @@ export default function NewCompositionsPage({ isMenuOpen, loginStatus, scrollToT
                         ? `${String(currentComposition.opusNo).split('_')[0]}, No. ${String(currentComposition.opusNo).split('_')[1]}`
                         : currentComposition.opusNo}</span></p>
                 <p className="italic">for {currentComposition.instrumentation}</p>
-                <img className="border border-stone-200 rounded-xl w-11/12 lg:w-2/3 my-5" src={currentSamplePage} alt={`Sample page: Op.${currentComposition.opusNo}`}/>
+                <img className="border border-stone-800 rounded-xl w-11/12 lg:w-2/3 my-5" src={currentSamplePage} alt={`Sample page: Op.${currentComposition.opusNo}`}/>
                 <p className="underline">Movements</p>
                 <div>{currentComposition.movements.length
                     ? currentComposition.movements.map(movement => <p key={movement.movementNo}>{movement.movementTitle} {movement.movementNickname
@@ -216,18 +216,18 @@ export default function NewCompositionsPage({ isMenuOpen, loginStatus, scrollToT
                     }}>CLOSE</button>
                 </div>
                 {showPaymentInfo
-                ? <section className="flex flex-col justify-center items-center border border-stone-200 rounded-xl mx-4 my-6 p-2">
-                    <p>The official payment portal is still under construction. We are sorry for the inconvenience. For now, please use the QR code below to be connected to the GLVMS Venmo account. Please write the below "Order Shortcode" for the Venmo description. Once the correct payment is confirmed, we will send you the PDF as soon as possible, no later than within 24 hours.</p>
-                    <img src={ahnbentonVenmo} alt="GLVMS Venmo QR code" className="w-1/2 m-5"/>
+                ? <section className="flex flex-col justify-center items-center border border-stone-800 rounded-xl mx-4 my-6 p-2">
+                    <p>The official payment portal is still under construction. We are sorry for the inconvenience. For now, please use the QR code below to be connected to the Forte & Piano Venmo account. Please write the below "Order Shortcode" for the Venmo description. Once the correct payment is confirmed, we will send you the PDF as soon as possible, no later than within 24 hours.</p>
+                    <img src={ahnbentonVenmo} alt="Venmo QR code" className="w-1/2 m-5 rounded-xl"/>
                     <p>Order shortcode: {currentComposition.composer.toLowerCase().slice(0, 3) + currentComposition.opusNo + currentComposition.title.toLowerCase().slice(0, 3) + currentComposition.instrumentation.toLowerCase().slice(0, 3)}</p>
                 </section>
                 : ''}
             </div>
             : ''}
-            <h1 className="text-center text-3xl my-24">GLVMS New Compositions Store</h1>
+            <h1 className="text-center text-3xl my-24">Forte & Piano New Compositions Store</h1>
             <table className={`${showDetails ? 'opacity-20 z-0' : 'z-50'} border border-stone-200 text-[0.7em] lg:text-sm w-11/12 mx-auto mb-12 table-fixed`}>
                 <thead>
-                    <tr className="font-bold border border-stone-200 bg-gradient-to-r from-green-950 via-green-700 to-green-950">
+                    <tr className="font-bold border border-stone-800 bg-gradient-to-r from-stone-300 via-stone-400 to-stone-300">
                         <td className={tdStyle + ' w-[25%] lg:w-[15%]'}>Composer</td>
                         <td className={tdStyle + ' w-[20%] lg:w-[10%]'}>Opus</td>
                         <td className={tdStyle + ' w-[30%] lg:w-[50%]'}>Title</td>
@@ -237,14 +237,14 @@ export default function NewCompositionsPage({ isMenuOpen, loginStatus, scrollToT
                 </thead>
                 <tbody>
                     {ahnBentonCompositionObjs.map(composition => 
-                    <tr key={composition.composer + composition.opusNo} className="hover:bg-stone-600 hover:cursor-pointer" onClick={() => {
+                    <tr key={composition.composer + composition.opusNo} className="hover:bg-stone-400 hover:cursor-pointer" onClick={() => {
                         setShowDetails(true)
                         setCurrentComposition(composition)
                         scrollToTop()
                     }}>
                         <td className={tdStyle}>{composition.composer}</td>
                         <td className={tdStyle}>{'Op. ' + composition.opusNo.replace('_', ', No. ')}</td>
-                        <td className='border border-stone-200 p-1 text-center lg:text-left'>{composition.nickname
+                        <td className='border border-stone-800 p-1 text-center lg:text-left'>{composition.nickname
                             ? composition.title + ` "${composition.nickname}"`
                             : composition.title}</td>
                         <td className={tdStyle}>{composition.instrumentation}</td>

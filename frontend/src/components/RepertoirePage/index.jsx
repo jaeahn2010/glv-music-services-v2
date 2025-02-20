@@ -13,7 +13,7 @@ export default function RepertoirePage({ isMenuOpen, allOpuses, allComposers, al
     const filterDivStyle = 'flex justify-center items-center w-11/12 mx-auto my-2'
     const filterLabelStyle = 'w-1/2 text-right mr-2 text-sm'
     const filterInputStyle = 'w-1/2 text-stone-800 text-sm'
-    const btnStyle = 'mx-auto my-5 p-2 border border-stone-200 rounded-xl hover:bg-amber-400 hover:text-stone-800 bg:scale-105'
+    const btnStyle = 'mx-auto my-5 p-2 border border-stone-800 rounded-xl hover:bg-stone-300 hover:text-stone-700 bg:scale-105'
     const arrowStyle = `text-xl duration-500 ${showFilters ? 'rotate-180' : ''}`
 
     function handleChange(evt) {
@@ -55,14 +55,14 @@ export default function RepertoirePage({ isMenuOpen, allOpuses, allComposers, al
     }, [filterSwitch])
 
     return (
-        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} text-stone-200 font-poppins min-h-[125vh]`}>
+        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} text-stone-800 font-bodoni min-h-[125vh]`}>
             <h1 className="text-xl text-center my-10 lg:text-3xl">Available Repertoire</h1>
             <p className='w-11/12 mx-auto my-10 '>Start your event request by choosing your desired repertoire below. Please note that the indicated prices are only applicable for events with a repertoire fee type. Our musicians may choose to apply more discounts at each of their own discretion.</p>
             <div className='w-1/6 mx-auto flex justify-around items-center'>
                 <p className={arrowStyle}>&#10507;</p>
                 <button
                     onClick={() => setShowFilters(!showFilters)}
-                    className={`${showFilters ? 'text-red-300' : 'text-green-300'} text-center`}
+                    className={`${showFilters ? 'text-red-600' : 'text-green-600'} text-center`}
                 >{showFilters ? 'HIDE FILTERS' : 'SHOW FILTERS'}</button>
                 <p className={arrowStyle}>&#10507;</p>
             </div>

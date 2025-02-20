@@ -38,7 +38,7 @@ export default function HomePage({isMenuOpen, isMobile}) {
     const imgStyle = 'w-[350px] rounded-xl hover:scale-110 duration-500'
     const pStyle = 'text-center text-lg mt-6 hover:text-green-300'
     const contactDivStyle = 'text-center mx-auto py-3 lg:w-1/2 lg:mx-10'
-    const aStyle = 'fill-container flex justify-center items-center w-2/3 lg:w-1/2 mx-auto my-5 p-2 border-stone-200 border rounded-3xl'
+    const aStyle = 'fill-container flex justify-center items-center w-2/3 lg:w-1/2 mx-auto my-5 p-2 border-stone-800 border rounded-3xl'
 
     useEffect(() => {
         const observers = domRefs.map((domRef, index) => {
@@ -65,8 +65,8 @@ export default function HomePage({isMenuOpen, isMobile}) {
     }, [])
 
     return (
-        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} mx-auto w-5/6 font-poppins`}>
-            <h1 className="text-center text-xl lg:text-3xl my-20">Greater Las Vegas Music Services (GLVMS)</h1>
+        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} mx-auto w-5/6 font-bodoni`}>
+            <h1 className="text-center text-xl lg:text-3xl my-20">Forte & Piano</h1>
             <p className="lg:text-xl lg:leading-loose mx-auto w-5/6">In a need to hire musicians for your special event? On this website, you can customize your music setlist to perfectly match your event - weddings, corporate events, open houses, private parties, formal recitals, and more! And the exact cost of the music is disclosed to you up front. No hassle, no ambiguity. Explore our menu above to explore more about us, our musicians, and our available repertoire.</p>
             <section className="w-full my-10">
                 {divElements.map(([tagline, img], index) => 
@@ -79,10 +79,10 @@ export default function HomePage({isMenuOpen, isMobile}) {
                 )}
             </section>
             <h2 className='text-center text-xl my-6'>OUR SERVICES</h2>
-            <section className={`py-2 font-poppins ${isMobile ? '' : 'flex items-center'}`}>
+            <section className={`py-2 font-bodoni ${isMobile ? '' : 'flex items-center'}`}>
                 <ul className={`flex flex-col p-2 list-disc list-inside ${isMobile ? 'w-full' : 'w-1/2'}`}>
                     {services.map(([service, description, feeType], index) => 
-                        <li key={index} className={`${isMobile ? 'w-full' : 'w-3/4'} mx-auto hover:text-green-300 my-2 hover:cursor-pointer hover:scale-105 duration-500 ${currentServiceDisplay.index === -1 ? 'text-stone-200' : currentServiceDisplay.index === index ? 'text-green-300' : 'text-stone-700'}`} onClick={() => {
+                        <li key={index} className={`${isMobile ? 'w-full' : 'w-3/4'} mx-auto my-2 hover:cursor-pointer hover:scale-105 duration-500 ${currentServiceDisplay.index === -1 ? 'text-stone-800' : currentServiceDisplay.index === index ? 'text-stone-800' : 'text-stone-300'}`} onClick={() => {
                             setCurrentServiceDisplay({
                                 description: description,
                                 index: index,
@@ -91,35 +91,32 @@ export default function HomePage({isMenuOpen, isMobile}) {
                         }}>{service}</li>
                     )}
                 </ul>
-                <div className={`${isMobile ? 'w-full' : 'w-1/2'} mx-1 my-10 p-2 border border-stone-200 bg-stone-700 rounded-xl ${currentServiceDisplay.index === -1 ? 'flex justify-center items-center' : ''}`}>
+                <div className={`${isMobile ? 'w-full' : 'w-1/2'} mx-1 my-10 p-2 border border-stone-800 bg-stone-300 rounded-xl ${currentServiceDisplay.index === -1 ? 'flex justify-center items-center' : ''}`}>
                     {currentServiceDisplay.description}
                     {currentServiceDisplay.index !== -1
                     ? <div className='my-5 flex justify-center items-center relative'>
                         <p>Fee type</p>
-                        <p className='border border-stone-200 rounded-full text-[9px] mr-1 px-1 -translate-y-2 hover:bg-green-700 hover:cursor-pointer' onMouseEnter={() => setFeeModalDisplay(true)} onMouseLeave={() => setFeeModalDisplay(false)}>?</p>
+                        <p className='border border-stone-800 rounded-full text-[9px] mr-1 px-1 -translate-y-2 hover:bg-stone-400 hover:cursor-pointer' onMouseEnter={() => setFeeModalDisplay(true)} onMouseLeave={() => setFeeModalDisplay(false)}>?</p>
                         <p>: {currentServiceDisplay.feeType}</p>
-                        <p className={`${feeModalDisplay ? 'absolute top-3/4 z-50 left-[16.67%] w-3/4 mx-auto text-xs border border-stone-200 p-2 rounded-xl bg-stone-700 leading-6' : 'hidden'}`}>
+                        <p className={`${feeModalDisplay ? 'absolute top-3/4 z-50 left-[16.67%] w-3/4 mx-auto text-xs border border-stone-800 p-2 rounded-xl bg-stone-300 leading-6' : 'hidden'}`}>
                             Fee types describe how an event is charged. A <span className='font-bold'>flat</span> fee is a small one-time fee that covers a small performance usually with a time limit, such as an audition or a competition. A <span className='font-bold'>repertoire</span> fee is a larger, custom-quoted fee that covers a full performance that depends on a variety of factors such as difficulty of the repertoire, duration of the performance, distance traveled, and equipment setup. An <span className='font-bold'>hourly</span> fee is solely dependent on the duration of the event that would have a designated time frame, such as a rehearsal, lesson, or a class.
                         </p>
                     </div>
                     : ''}
                 </div>
             </section>
-            <section className='w-full font-poppins flex flex-col border border-white'>
-
-            </section>
-            <section className="w-[vw-100] py-2 mt-12 font-poppins flex flex-col">
+            <section className="w-[vw-100] py-2 mt-12 font-bodoni flex flex-col">
                 <p className='w-full mx-auto text-center my-5 text-xl'>CONTACT US</p>
                 <div className='lg:flex'>
                     <div className={contactDivStyle}>
-                        <p className="text-sm">Can't find your desired repertoire or have a custom request? Contact us directly.</p>
-                        <a href="mailto:glvmusicservices@gmail.com" className={aStyle}>
-                            <p className="fill-content text-sm">Email GLVMS</p>
+                        <p className="text-sm">Can't find your desired music or have a custom request?</p>
+                        <a href="mailto:forteandpiano702@gmail.com" className={aStyle}>
+                            <p className="fill-content text-sm">Email Forte & Piano</p>
                         </a>
                     </div>
                     <div className={contactDivStyle}>
-                        <p className="text-sm">Problems or questions about using this site? Contact the site admin.</p>
-                        <a href="mailto:jaeahn2010@gmail.com" className={aStyle}>
+                        <p className="text-sm">Problems or questions about using this site?</p>
+                        <a href="mailto:jaeahnbenton@gmail.com" className={aStyle}>
                             <p className="fill-content text-sm">Email site admin</p>
                         </a>
                     </div>
