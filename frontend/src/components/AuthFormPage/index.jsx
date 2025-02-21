@@ -28,6 +28,7 @@ export default function AuthFormPage({ isMenuOpen, setLoginStatus, scrollToTop, 
                     localStorage.setItem('role', userCredentials.role)
                     localStorage.setItem('token', userCredentials.token)
                     setUserType(userCredentials.role)
+                    setLoginStatus(true)
                     navigate('/')
                 } catch (err) {
                     console.log(err)
@@ -41,6 +42,7 @@ export default function AuthFormPage({ isMenuOpen, setLoginStatus, scrollToTop, 
                     localStorage.setItem('role', adminCredentials.role)
                     localStorage.setItem('token', adminCredentials.token)
                     setUserType('admin')
+                    setLoginStatus(true)
                     navigate('/admin')
                 } catch(err) {
                     console.log(err)
@@ -58,6 +60,7 @@ export default function AuthFormPage({ isMenuOpen, setLoginStatus, scrollToTop, 
                     localStorage.setItem('role', userCredentials.role)
                     localStorage.setItem('token', userCredentials.token)
                     setUserType(userCredentials.role)
+                    setLoginStatus(true)
                     navigate('/')
                 } catch (err) {
                     alert(err) 
