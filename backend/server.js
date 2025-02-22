@@ -25,8 +25,10 @@ const app = express()
 
 // middleware
 app.use(cors({
-    origin: 'http://localhost:5173',
-    credentials: true // allow cookies to be sent across requests
+    origin: process.env.NODE_ENV === 'production' 
+        ? 'https://forte-and-piano-7126ba2670c9.herokuapp.com'
+        : 'http://localhost:5173',
+    credentials: true
 }))
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
