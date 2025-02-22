@@ -804,7 +804,7 @@ const availableConcerts = [
 
 const concertObjs = availableConcerts.map(concert => new Concert ('Ahn-Benton, Jae', concert[0], concert[1], concert[2], concert[3], concert[4], concert[5]))
 let tdStyle = 'border border-stone-800 text-center py-1'
-let btnStyle = 'w-1/2 lg:w-3/4 border border-stone-800 rounded-xl p-2 m-3 hover:bg-amber-400 hover:text-stone-800'
+let btnStyle = 'w-1/2 lg:w-3/4 border border-stone-800 rounded-xl p-2 m-3 hover:bg-amber-300 hover:text-stone-800'
 let modalStyle = 'absolute w-full lg:w-3/4 lg:left-[12.5%] border border-stone-800 flex flex-col justify-center items-center bg-stone-300 rounded-3xl'
 let liStyle = 'my-4'
 let divStyle = 'w-full lg:w-11/12 mx-auto flex'
@@ -896,7 +896,7 @@ export default function MobilePianoConcertSeriesPage({ isMenuOpen, allMusicians,
                 <p className="text-lg lg:text-3xl py-12 font-bold text-center">{currentConcert.title}</p>
                 <p className="italic my-2">presented by</p>
                 <p>{`${currentConcert.pianist.split(', ')[1]} ${currentConcert.pianist.split(', ')[0]}`}, piano</p>
-                <img className="border border-stone-200 rounded-xl w-1/2 my-5" src={currentConcert.poster} alt='poster'/>
+                <img className="border border-stone-800 rounded-xl w-1/2 my-5" src={currentConcert.poster} alt='poster'/>
                 <div className="w-11/12 mx-auto my-5">{currentConcert.description}</div>
                 <div className="border border-stone-800 rounded-xl w-11/12 bg-stone-400">
                     <p className="text-xl underline text-center my-2">Program</p>
@@ -932,7 +932,7 @@ export default function MobilePianoConcertSeriesPage({ isMenuOpen, allMusicians,
                             name='musician'
                             id='musician'
                             className={inputStyle}
-                            defaultValue={currentConcert.pianist}
+                            value={currentConcert.pianist}
                             disabled
                         />
                     </div>
@@ -942,7 +942,7 @@ export default function MobilePianoConcertSeriesPage({ isMenuOpen, allMusicians,
                             name='eventName'
                             id='eventName'
                             className={inputStyle}
-                            defaultValue={currentConcert.title}
+                            value={currentConcert.title}
                             disabled
                         />
                     </div>
@@ -1043,7 +1043,7 @@ export default function MobilePianoConcertSeriesPage({ isMenuOpen, allMusicians,
                     </div>
                     <p className='text-center underline text-xl my-6 '>Requested Repertoire</p>
                     <div className='w-11/12 mx-auto'>
-                        {currentConcert.program.map(opus => <div key={opus} className="flex p-2 rounded-xl bg-stone-700">
+                        {currentConcert.program.map(opus => <div key={opus} className="flex p-2 rounded-xl bg-stone-300">
                             <p className="w-2/3">{opus[0]}</p>
                             <p className="w-1/3">{opus[1]}</p>
                         </div>)}
@@ -1079,7 +1079,7 @@ export default function MobilePianoConcertSeriesPage({ isMenuOpen, allMusicians,
                     </tr>
                 </thead>
                 <tbody>
-                    {concertObjs.map(concert => <tr key={concert.title} className="hover:bg-gradient-to-r from-stone-300 via-stone-400 to-stone-300 hover:cursor-pointer" onClick={() => {
+                    {concertObjs.map(concert => <tr key={concert.title} className="hover:bg-amber-300 hover:cursor-pointer" onClick={() => {
                         setShowDetails(true)
                         setCurrentConcert(concert)
                         scrollToTop()

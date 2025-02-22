@@ -21,7 +21,7 @@ export default function Gallery({ filteredOpuses, setOpusDetails, allMusicians }
     }
 
     return (
-        <div className="w-11/12 lg:w-1/2 mt-10 mx-auto font-bodoni">
+        <div className="w-11/12 lg:w-2/3 mt-10 mx-auto font-bodoni">
             {galleryContent}
         </div>
     )

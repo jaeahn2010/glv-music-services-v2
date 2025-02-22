@@ -9,7 +9,6 @@ export default function CurrentCart({ isMenuOpen, allOpuses, loginStatus, userCa
     function handleClick(evt) {
         evt.preventDefault()
         let [itemId, type, mvmtTitle] = evt.target.id.split('-')
-        console.log(mvmtTitle)
         if (type === 'bulk') { // if removing entire opus from cart
             setUserCart(userCart.filter(item => item._id !== itemId))
         } else if (type === 'movement') { // if removing specific movement only

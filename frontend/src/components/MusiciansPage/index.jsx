@@ -20,7 +20,7 @@ export default function MusiciansPage({ isMenuOpen, allMusicians, setMusicianDet
     const pStyle = 'my-3'
     const labelStyle = 'w-1/3 mx-2 text-right'
     const inputStyle = 'w-2/3 mx-2 p-1 rounded-xl text-stone-800'
-    const btnStyle = 'border border-stone-800 px-2 py-1 my-6 rounded-xl hover:bg-amber-400 hover:cursor-pointer'
+    const btnStyle = 'border border-stone-800 px-2 py-1 my-6 rounded-xl hover:bg-amber-300 hover:cursor-pointer'
 
     //get full list of musicians, or filter by instrument
 	function getFilteredMusiciansData(filter) {
