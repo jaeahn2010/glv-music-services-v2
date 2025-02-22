@@ -34,15 +34,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
 app.use(cookieParser())
 app.use(bodyParser.json())
-
-// Serve static frontend files in production
-if (process.env.NODE_ENV === "production") {
-    const frontendPath = path.join(__dirname, "../frontend/dist")
-    app.use(express.static(frontendPath))
-    app.get("*", (req, res) => {
-      res.sendFile(path.join(frontendPath, "index.html"))
-    })
-}
+app.use(express.static(path.join(path.dirname(__dirname), 'frontend', 'dist')))
 
 // mount routes
 app.use('/api/clients', clientsCtrl)
@@ -52,6 +44,9 @@ app.use('/api/requests', requestsCtrl)
 app.use('/api/reviews', reviewsCtrl)
 app.use('/api/admins', adminsCtrl)
 app.use('/api/performances', performancesCtrl)
+app.get("*", (req, res) => {
+    res.sendFile(path.join(path.dirname(__dirname), 'frontend', 'dist', 'index.html'))
+})
 
 // seed with initial opuses set - do this locally before deployment - localhost:3000/seed
 // app.get('/seed', function (req, res) {
