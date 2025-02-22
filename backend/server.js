@@ -33,6 +33,15 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(bodyParser.json())
 
+// Serve static frontend files in production
+if (process.env.NODE_ENV === "production") {
+    const frontendPath = path.join(__dirname, "../frontend/dist")
+    app.use(express.static(frontendPath))
+    app.get("*", (req, res) => {
+      res.sendFile(path.join(frontendPath, "index.html"))
+    })
+}
+
 // mount routes
 app.use('/api/clients', clientsCtrl)
 app.use('/api/musicians', musiciansCtrl)
@@ -53,11 +62,6 @@ app.use('/api/performances', performancesCtrl)
 //                     res.json(addedOpuses)
 //                 })
 //         })           
-// })
-
-// Any other route not matching the routes above gets routed by React
-// app.get('*', (req, res) => {
-//     res.sendFile(path.join(path.dirname(__dirname), 'frontend', 'dist', 'index.html'))
 // })
 
 // listen to port
