@@ -36,6 +36,11 @@ app.use(cookieParser())
 app.use(bodyParser.json())
 app.use(express.static(path.join(path.dirname(__dirname), 'frontend', 'dist')))
 
+app.use((req, res, next) => {
+    if (req.headers['x-forwarded-proto'] !== 'https') return res.redirect(301, 'https://' + req.headers.host + req.originalUrl)
+    next()
+})
+
 // mount routes
 app.use('/api/clients', clientsCtrl)
 app.use('/api/musicians', musiciansCtrl)
