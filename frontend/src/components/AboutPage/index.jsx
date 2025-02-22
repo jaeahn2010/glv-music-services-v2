@@ -17,7 +17,7 @@ export default function AboutPage({isMenuOpen}) {
     const svgStyle = 'hover:cursor-pointer hover:scale-110 duration-500'
 
     function handleCarouselIndex(evt) {
-        if (evt.target.id === 'left-arrow') {
+        if (evt.currentTarget.id === 'left-arrow') {
             carouselIndex === 0 ? setCarouselIndex(loadedImages.length - 1) : setCarouselIndex(carouselIndex - 1)
         } else {
             carouselIndex === loadedImages.length - 1 ? setCarouselIndex(0) : setCarouselIndex(carouselIndex + 1)
@@ -47,8 +47,7 @@ export default function AboutPage({isMenuOpen}) {
             </article>
             <div className='w-11/12 lg:w-2/3 mx-auto my-10 flex justify-center items-center'>
                 <div className='flex justify-center items-center'>
-                    <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" className={svgStyle + ' mr-3'
-                    } id='left-arrow' onClick={handleCarouselIndex}>
+                    <svg width="50" height="50" className={svgStyle + ' mr-3'} id='left-arrow' onClick={handleCarouselIndex}>
                         <polygon points='40,15 20,25 40,35 33,25' fill='black'/>
                     </svg>
                 </div>
