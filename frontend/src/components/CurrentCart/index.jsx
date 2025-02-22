@@ -1,4 +1,4 @@
-import trashIcon from '../../assets/trash-icon.jpeg'
+import trashIcon from '../../assets/trash-icon-black-transparent.png'
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
@@ -8,17 +8,18 @@ export default function CurrentCart({ isMenuOpen, allOpuses, loginStatus, userCa
 
     function handleClick(evt) {
         evt.preventDefault()
-        let infoArr = evt.target.id.split('-')
-        if (infoArr[1] === 'bulk') {
-            setUserCart(userCart.filter(item => item._id !== infoArr[0]))
-        } else if (infoArr[1] === 'movement') {
-            let tempOpus = userCart.filter(item => item._id === infoArr[0])[0]
-            let adjustedMvmts = tempOpus.movements.filter(mvmt => mvmt.movementNumber !== Number(infoArr[2]))
+        let [itemId, type, mvmtTitle] = evt.target.id.split('-')
+        console.log(mvmtTitle)
+        if (type === 'bulk') { // if removing entire opus from cart
+            setUserCart(userCart.filter(item => item._id !== itemId))
+        } else if (type === 'movement') { // if removing specific movement only
+            let tempOpus = userCart.find(item => item._id === itemId)
+            let adjustedMvmts = tempOpus.movements.filter(mvmt => mvmt.movementTitle !== mvmtTitle)
             tempOpus.movements = adjustedMvmts
-            userCart = userCart.filter(item => item._id !== infoArr[0])
+            userCart = userCart.filter(item => item._id !== itemId)
             userCart.push(tempOpus)
             setUserCart(userCart)
-            if (tempOpus.movements.length === 0) setUserCart(userCart.filter(item => item._id !== infoArr[0]))
+            if (tempOpus.movements.length === 0) setUserCart(userCart.filter(item => item._id !== itemId))
         }
     }
 
@@ -43,7 +44,7 @@ export default function CurrentCart({ isMenuOpen, allOpuses, loginStatus, userCa
                         {item.movements.map(movement => <tr key={movement.movementTitle} className="border-b-2 border-stone-800">
                             <td>{movement.movementTitle}</td>
                             <td>
-                                <img src={trashIcon} className="w-[25px] hover:bg-red-600 hover:opacity-50 hover:cursor-pointer" id={`${item._id}-movement-${movement.movementNumber}`} onClick={handleClick}/>
+                                <img src={trashIcon} className="w-[25px] hover:scale-110 hover:opacity-50 hover:cursor-pointer duration-500" id={`${item._id}-movement-${movement.movementTitle}`} onClick={handleClick}/>
                             </td>
                         </tr>)}
                     </tbody>
@@ -75,7 +76,7 @@ export default function CurrentCart({ isMenuOpen, allOpuses, loginStatus, userCa
                             <br/>
                         </section>
                         <section className="flex flex-col items-center justify-center mx-auto text-center">
-                            <button className='border border-stone-800 px-4 rounded-xl py-2 hover:bg-red-400 hover:cursor-pointer' id={`${item._id}-bulk-0`} onClick={handleClick}>Remove entire opus from cart</button>
+                            <button className='border border-stone-800 px-4 rounded-xl py-2 hover:bg-red-400 hover:cursor-pointer' id={`${item._id}-bulk-none`} onClick={handleClick}>Remove entire opus from cart</button>
                         </section>
                     </div>
                 )})

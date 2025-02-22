@@ -64,7 +64,12 @@ export default function DetailsPage({ isMenuOpen, opusDetails, loginStatus, user
                                     break outerLoop
                                 }
                             } // if above loop finishes w/o match, update w/ newly selected mvmt & break loop
-                            setUserCart(userCart => userCart[userCart.indexOf(opusInCart)].movements.concat(opus.movements.find(mvmt => mvmt._id === evt.target.parentElement.id)))
+                            setUserCart(userCart => {
+                                const tempUserCart = [...userCart]
+                                const selectedOpus = tempUserCart[tempUserCart.indexOf(opusInCart)]
+                                selectedOpus.movements.push(opus.movements.find(mvmt => mvmt._id === evt.target.parentElement.id))
+                                return tempUserCart
+                            })
                             alert("This repertoire was already in the cart, and has been updated with the new movement.")
                             break
                         }
