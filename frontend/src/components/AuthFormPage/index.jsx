@@ -185,10 +185,10 @@ export default function AuthFormPage({ isMenuOpen, setLoginStatus, scrollToTop, 
                 {adminField}
                 <button
                     type="submit"
-                    className="w-1/2 mx-auto border border-stone-800 my-5 rounded-xl duration-500 hover:bg-green-400 py-1">
+                    className="w-1/2 mx-auto border border-stone-800 my-5 rounded-xl duration-500 hover:bg-amber-300 py-1">
                     {btnText}
                 </button>
-                <p className="text-center pt-2 hover:text-green-600 hover:cursor-pointer" onClick={() => {
+                <p className="text-center pt-2 hover:text-stone-500 hover:cursor-pointer" onClick={() => {
                     scrollToTop()
                     formType === 'login' ? navigate('/auth/signup') : navigate('/auth/login')
                 }}>{formType === 'login' ? 'Don\'t have an account? Click here to sign up.' : 'Already have an account? Click here to log in.'}</p>

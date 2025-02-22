@@ -3,6 +3,7 @@ import anyEvent from '../../assets/homepage-any-event.jpg'
 import classicallyTrained from '../../assets/homepage-classically-trained.jpg'
 import noHiddenFees from '../../assets/homepage-no-hidden-fees.png'
 import hassleFreeScheduling from '../../assets/homepage-hassle-free-scheduling.jpg'
+import logo from '../../assets/logo-transparent-wide.png'
 import './styles.css'
 
 export default function HomePage({isMenuOpen, isMobile}) {
@@ -96,7 +97,7 @@ export default function HomePage({isMenuOpen, isMobile}) {
                     {currentServiceDisplay.index !== -1
                     ? <div className='my-5 flex justify-center items-center relative'>
                         <p>Fee type</p>
-                        <p className='border border-stone-800 rounded-full text-[9px] mr-1 px-1 -translate-y-2 hover:bg-stone-400 hover:cursor-pointer' onMouseEnter={() => setFeeModalDisplay(true)} onMouseLeave={() => setFeeModalDisplay(false)}>?</p>
+                        <p className='border border-stone-800 rounded-full text-[9px] mr-1 px-1 -translate-y-2 hover:bg-amber-300 hover:cursor-pointer' onMouseEnter={() => setFeeModalDisplay(true)} onMouseLeave={() => setFeeModalDisplay(false)}>?</p>
                         <p>: {currentServiceDisplay.feeType}</p>
                         <p className={`${feeModalDisplay ? 'absolute top-3/4 z-50 left-[16.67%] w-3/4 mx-auto text-xs border border-stone-800 p-2 rounded-xl bg-stone-300 leading-6' : 'hidden'}`}>
                             Fee types describe how an event is charged. A <span className='font-bold'>flat</span> fee is a small one-time fee that covers a small performance usually with a time limit, such as an audition or a competition. A <span className='font-bold'>repertoire</span> fee is a larger, custom-quoted fee that covers a full performance that depends on a variety of factors such as difficulty of the repertoire, duration of the performance, distance traveled, and equipment setup. An <span className='font-bold'>hourly</span> fee is solely dependent on the duration of the event that would have a designated time frame, such as a rehearsal, lesson, or a class.
@@ -121,6 +122,11 @@ export default function HomePage({isMenuOpen, isMobile}) {
                         </a>
                     </div>
                 </div>
+            </section>
+            {/* add FAQs */}
+            <section className='my-10 flex flex-col items-center justify-center'>
+                <img src={logo} alt="logo" />
+                <p>Copyright &copy; 2025 Forte & Piano. All rights reserved.</p>
             </section>
         </main>
     )
