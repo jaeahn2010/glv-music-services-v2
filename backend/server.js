@@ -37,14 +37,14 @@ app.use(bodyParser.json())
 app.use(express.static(path.join(path.dirname(__dirname), 'frontend', 'dist')))
 
 app.use((req, res, next) => {
-    if (req.headers['x-forwarded-proto'] !== 'https') return res.redirect(301, 'https://' + req.headers.host + req.originalUrl)
+    if (req.headers.host === 'forteandpiano.org') {
+        return res.redirect(301, 'https://www.forteandpiano.org' + req.url)
+    }
     next()
 })
 
 app.use((req, res, next) => {
-    if (req.headers.host === 'forteandpiano.org') {
-        return res.redirect(301, 'https://www.forteandpiano.org' + req.url)
-    }
+    if (req.headers['x-forwarded-proto'] !== 'https') return res.redirect(301, 'https://' + req.headers.host + req.originalUrl)
     next()
 })
 
