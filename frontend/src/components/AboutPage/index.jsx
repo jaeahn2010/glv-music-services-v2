@@ -51,7 +51,7 @@ export default function AboutPage({isMenuOpen}) {
                         <polygon points='40,15 20,25 40,35 33,25' fill='black'/>
                     </svg>
                 </div>
-                <div className='h-[50vh] w-[75vw]'>
+                <div className='h-[25vh] lg:h-[50vh] w-[75vw]'>
                     {loadedImages.map((photo, index) => <img key={index} src={photo} className={`${index !== carouselIndex ? 'hidden' : ''} mx-auto rounded-xl h-full w-auto`}/>)}
                 </div>
                 <div className='flex justify-center items-center'>

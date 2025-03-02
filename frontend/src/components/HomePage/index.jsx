@@ -8,7 +8,7 @@ import './styles.css'
 
 export default function HomePage({isMenuOpen, isMobile}) {
     const [currentServiceDisplay, setCurrentServiceDisplay] = useState({
-        description: `Click on any of the services ${isMobile ? 'above' : 'to the left'} for more details.`,
+        description: `Click on any of the services to the left for more details.`,
         index: -1,
         feeType: '',
     })
@@ -39,7 +39,7 @@ export default function HomePage({isMenuOpen, isMobile}) {
     const imgStyle = 'w-[350px] rounded-xl hover:scale-110 duration-500'
     const pStyle = 'text-center text-lg mt-6 hover:text-green-300'
     const contactDivStyle = 'text-center mx-auto py-3 lg:w-1/2 lg:mx-10'
-    const aStyle = 'fill-container flex justify-center items-center w-2/3 lg:w-1/2 mx-auto my-5 p-2 border-stone-800 border rounded-3xl'
+    const aStyle = 'fill-container flex justify-center items-center w-2/3 lg:w-1/2 mx-auto my-5 p-1 lg:p-2 border-stone-800 border rounded-3xl'
 
     useEffect(() => {
         const observers = domRefs.map((domRef, index) => {
@@ -65,6 +65,13 @@ export default function HomePage({isMenuOpen, isMobile}) {
         }
     }, [])
 
+    useEffect(() => {
+        setCurrentServiceDisplay(prev => ({
+            ...prev,
+            description: `Click on any of the services ${isMobile ? 'above' : 'to the left'} for more details.`,
+        }))
+      }, [isMobile])
+
     return (
         <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} mx-auto w-5/6 font-bodoni`}>
             <h1 className="text-center text-xl lg:text-3xl my-20">Forte & Piano</h1>
@@ -81,7 +88,7 @@ export default function HomePage({isMenuOpen, isMobile}) {
             </section>
             <h2 className='text-center text-xl my-6'>OUR SERVICES</h2>
             <section className={`py-2 font-bodoni ${isMobile ? '' : 'flex items-center'}`}>
-                <ul className={`flex flex-col p-2 list-disc list-inside ${isMobile ? 'w-full' : 'w-1/2'}`}>
+                <ul className={`flex flex-col p-2 list-disc list-inside text-sm ${isMobile ? 'w-full' : 'w-1/2'}`}>
                     {services.map(([service, description, feeType], index) => 
                         <li key={index} className={`${isMobile ? 'w-full' : 'w-3/4'} mx-auto my-2 hover:cursor-pointer hover:scale-105 duration-500 ${currentServiceDisplay.index === -1 ? 'text-stone-800' : currentServiceDisplay.index === index ? 'text-stone-800' : 'text-stone-300'}`} onClick={() => {
                             setCurrentServiceDisplay({
@@ -99,7 +106,7 @@ export default function HomePage({isMenuOpen, isMobile}) {
                         <p>Fee type</p>
                         <p className='border border-stone-800 rounded-full text-[9px] mr-1 px-1 -translate-y-2 hover:bg-amber-300 hover:cursor-pointer' onMouseEnter={() => setFeeModalDisplay(true)} onMouseLeave={() => setFeeModalDisplay(false)}>?</p>
                         <p>: {currentServiceDisplay.feeType}</p>
-                        <p className={`${feeModalDisplay ? 'absolute top-3/4 z-50 left-[16.67%] w-3/4 mx-auto text-xs border border-stone-800 p-2 rounded-xl bg-stone-300 leading-6' : 'hidden'}`}>
+                        <p className={`${feeModalDisplay ? 'absolute top-3/4 z-50 lg:left-[16.67%] w-full lg:w-3/4 mx-auto text-xs border border-stone-800 p-2 rounded-xl bg-amber-300 leading-5 lg:leading-6' : 'hidden'}`}>
                             Fee types describe how an event is charged. A <span className='font-bold'>flat</span> fee is a small one-time fee that covers a small performance usually with a time limit, such as an audition or a competition. A <span className='font-bold'>repertoire</span> fee is a larger, custom-quoted fee that covers a full performance that depends on a variety of factors such as difficulty of the repertoire, duration of the performance, distance traveled, and equipment setup. An <span className='font-bold'>hourly</span> fee is solely dependent on the duration of the event that would have a designated time frame, such as a rehearsal, lesson, or a class.
                         </p>
                     </div>
@@ -110,13 +117,13 @@ export default function HomePage({isMenuOpen, isMobile}) {
                 <p className='w-full mx-auto text-center my-5 text-xl'>CONTACT US</p>
                 <div className='lg:flex'>
                     <div className={contactDivStyle}>
-                        <p className="text-sm">Can't find your desired music or have a custom request?</p>
+                        <p className="text-xs lg:text-sm">Can't find your desired music or have a custom request?</p>
                         <a href="mailto:forteandpiano702@gmail.com" className={aStyle}>
                             <p className="fill-content text-sm">Email Forte & Piano</p>
                         </a>
                     </div>
                     <div className={contactDivStyle}>
-                        <p className="text-sm">Problems or questions about using this site?</p>
+                        <p className="text-xs lg:text-sm">Problems or questions about using this site?</p>
                         <a href="mailto:jaeahnbenton@gmail.com" className={aStyle}>
                             <p className="fill-content text-sm">Email site admin</p>
                         </a>
@@ -126,7 +133,7 @@ export default function HomePage({isMenuOpen, isMobile}) {
             {/* add FAQs */}
             <section className='my-10 flex flex-col items-center justify-center'>
                 <img src={logo} alt="logo" />
-                <p>Copyright &copy; 2025 Forte & Piano. All rights reserved.</p>
+                <p className='text-xs lg:text-sm'>Copyright &copy; 2025 Forte & Piano. All rights reserved.</p>
             </section>
         </main>
     )

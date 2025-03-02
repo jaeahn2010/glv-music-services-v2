@@ -86,7 +86,7 @@ export default function App() {
 	// for responsive design
 	useEffect(() => {
 		const handleResize = () => {
-			setIsMobile(window.innerWidth <= 768)
+			setIsMobile(window.innerWidth <= 640)
 		}
 		handleResize()
 		window.addEventListener("resize", handleResize)
@@ -242,6 +242,7 @@ export default function App() {
 				<Route path="/musicians" element={
 					<MusiciansPage
 						isMenuOpen={isMenuOpen}
+						isMobile={isMobile}
 						allMusicians={allMusicians}
 						setMusicianDetails={setMusicianDetails}
 						loginStatus={loginStatus}
