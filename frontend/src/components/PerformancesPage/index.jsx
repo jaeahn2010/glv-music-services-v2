@@ -23,7 +23,7 @@ export default function PerformancesPage({ isMenuOpen }) {
                     if (timeA > timeB) return 1
                     return 0
                 }
-            }))
+            }).reverse())
         } catch(err) {
 			alert('Cannot load performances data at this time. Please check your internet connection. If the problem persists, please contact the site administrator.')
 		}
@@ -59,15 +59,26 @@ export default function PerformancesPage({ isMenuOpen }) {
             {performances.length
             ? <section className="career-items my-24 min-h-[25rem]">
                 {performances.map((performance, index) => 
-                    <div key={index} className='card-flip flex my-10 w-11/12 md:w-3/4 h-[5rem] md:h-[20rem] mx-auto border border-stone-800 rounded-xl bg-gradient-to-r from-stone-300 via-stone-400 to-stone-300'>
+                    <div key={index} className='card-flip flex my-10 w-11/12 md:w-3/4 h-[15rem] md:h-[20rem] mx-auto border border-stone-800 rounded-xl bg-gradient-to-r from-stone-300 via-stone-400 to-stone-300'>
                         <div className="card-front flex w-full">
                             <div className="w-full flex flex-col items-center justify-center">
-                                <p className="text-sm md:text-2xl underline">{performance.title}</p>
-                                <div className='flex justify-between items-center w-5/6 my-8 text-lg'>
-                                    <p>{performance.locationName} ({performance.city}, {performance.state})</p>
-                                    <p className={new Date(new Date(performance.date).getTime() + 8 * 60 * 60 * 1000) > new Date() ? 'text-green-600' : 'text-red-600'}>{new Date(new Date(performance.date).getTime() + 8 * 60 * 60 * 1000).toLocaleDateString()}, {nonMilitaryTime(performance.time)}</p>
+                                <p className="text-lg md:text-2xl underline text-center">{performance.title}</p>
+                                <div className='lg:flex lg:justify-between lg:items-center w-11/12 lg:w-5/6 my-8 text-sm lg:text-lg'>
+                                    <div className='text-center my-2'>
+                                        <p>{performance.locationName}</p>
+                                        <p>({performance.city}, {performance.state})</p>
+                                    </div>
+                                    <div className={`${new Date(new Date(performance.date).getTime() + 8 * 60 * 60 * 1000) > new Date() ? 'text-green-600' : 'text-red-600'} text-center`}>
+                                        <p>{new Date(new Date(performance.date).getTime() + 8 * 60 * 60 * 1000).toLocaleDateString('en-US', {
+                                            weekday: 'long',
+                                            year: 'numeric',
+                                            month: 'long',
+                                            day: 'numeric'
+                                        })}</p>
+                                        <p>{nonMilitaryTime(performance.time)}</p>
+                                    </div>
                                 </div>
-                                <p>Featured GLVMS Musician(s): {performance.featuredGLVMSMusicians.map((musicianId, index) => {
+                                <p>Featured Musician(s): {performance.featuredGLVMSMusicians.map((musicianId, index) => {
                                     let musician = musicians.find(musician => musician._id === musicianId)
                                     return musician
                                     ? <span key={musician._id}>{index === performance.featuredGLVMSMusicians.length - 1 ? `${musician.firstName} ${musician.lastName}` : `${musician.firstName} ${musician.lastName}, `}</span>
@@ -75,7 +86,7 @@ export default function PerformancesPage({ isMenuOpen }) {
                                 })}</p>
                             </div>
                         </div>
-                        <div className="hidden card-back flex flex-col items-center justify-center w-full h-full">
+                        <div className="hidden card-back flex flex-col items-center justify-center w-full h-full text-xs lg:text-md">
                             <div className='w-11/12 mx-auto'>  
                                 {performance.collaborators.length
                                 ? <>
@@ -88,9 +99,9 @@ export default function PerformancesPage({ isMenuOpen }) {
                                 </>
                                 : ''}
                                 <p className='my-3'>{performance.description}</p>
-                                <div className='flex justify-between my-3 text-lg'>
+                                <div className='flex justify-between my-3 lg:text-lg'>
                                     <p className={performance.openToPublic ? 'text-green-600' : 'text-red-600'}>{performance.openToPublic ? 'Open to Public' : 'Private Event'}</p>
-                                    <p>Ticket price range: <span className={!performance.minPrice && !performance.maxPrice ? 'text-green-600' : 'text-amber-600'}>{!performance.minPrice && !performance.maxPrice ? 'Free event' : `$${performance.minPrice}-$${performance.maxPrice}`}</span></p>
+                                    <p>Ticket price range: <span className={!performance.minPrice && !performance.maxPrice ? 'text-green-600' : 'text-amber-600'}>{!performance.minPrice && !performance.maxPrice ? 'Free event' : `$${performance.minPrice !== performance.maxPrice ? performance.minPrice + '-$' + performance.maxPrice : performance.minPrice}`}</span></p>
                                 </div>
                                 <div className='flex justify-center items-center'>
                                     {performance.ticketsLink
@@ -102,10 +113,10 @@ export default function PerformancesPage({ isMenuOpen }) {
                                             here
                                         </a></span>.</p>
                                     : !performance.openToPublic 
-                                        ? <p>This is a private event. No tickets are available for the public.</p>
+                                        ? <p className='text-center'>This is a private event. No tickets are available for the public.</p>
                                         : !performance.minPrice && !performance.maxPrice
-                                            ? <p>This is a free event. No ticket purchase necessary!</p>
-                                            : <p>Tickets are available for sale at the location of the performance.</p>}
+                                            ? <p className='text-center'>This is a free event. No ticket purchase necessary!</p>
+                                            : <p className='text-center'>Tickets are available for sale at the location of the performance.</p>}
                                 </div>
                             </div>	
                         </div>

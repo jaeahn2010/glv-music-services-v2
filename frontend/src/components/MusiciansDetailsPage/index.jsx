@@ -10,7 +10,7 @@ export default function MusiciansDetailsPage({isMenuOpen, musicianDetails, login
     const [bioModal, setBioModal] = useState(false)
     const params = useParams()
     const navigate = useNavigate()
-    const btnStyle = 'w-1/3 border border-stone-800 rounded-xl p-2 my-3 mx-auto hover:bg-amber-300'
+    const btnStyle = 'lg:w-1/3 border border-stone-800 rounded-xl p-2 my-3 mx-auto hover:bg-amber-300'
 
     async function getMusicianData() {
         const musicianData = await getMusicianById(params.musicianId)
@@ -48,13 +48,13 @@ export default function MusiciansDetailsPage({isMenuOpen, musicianDetails, login
         return (
             <section className={`${isMenuOpen ? 'z-0 opacity-5' : ''} flex flex-col justify-center items-center font-bodoni min-h-[150vh]`}>
                 <div className={`relative w-11/12 lg:w-2/3 mx-auto border border-stone-600 rounded-lg text-stone-700 my-5 bg-gradient-to-r from-stone-300 via-stone-400 to-stone-300 flex flex-col ${bioModal ? 'opacity-25' : ''}`}>
-                    <section className="flex justify-center items-center">
-                        <div className="flex flex-col w-1/3 mx-3">
+                    <section className="flex flex-col lg:flex-row justify-center items-center">
+                        <div className="flex flex-col w-2/3 my-2 lg:w-1/3 mx-3">
                             <img src={headshot} className="rounded-xl my-2"/>
                             <p className="text-xl text-center">{musician.firstName} {musician.lastName}</p>
                             <p className="text-lg text-center">{instruments}</p>
                         </div>
-                        <div className="flex flex-col w-2/3 justify-center items-center h-1/6">
+                        <div className="flex flex-col lg:w-2/3 justify-center items-center h-1/6">
                             <p className="text-xl underline my-3">SPECIALTIES</p>
                             <ul className="list-disc list-inside">
                                 {specialties.map(specialty => <li key={specialty}>{specialty}</li>)}
@@ -64,7 +64,7 @@ export default function MusiciansDetailsPage({isMenuOpen, musicianDetails, login
                     <button className={btnStyle} onClick={() => setBioModal(true)}>BIOGRAPHY</button>
                 </div>
                 <button onClick={() => navigate('/musicians')} className={btnStyle}>BACK TO MUSICIANS GALLERY</button>
-                <div className={`${bioModal ? 'absolute border border-stone-800 bg-stone-300 rounded-xl w-1/2 h-3/4 overflow-auto mx-auto flex flex-col justify-center items-center -translate-y-[2rem]' : 'hidden'}`}>
+                <div className={`${bioModal ? 'absolute border border-stone-800 bg-stone-300 rounded-xl w-11/12 h-5/6 lg:w-1/2 lg:h-3/4 overflow-auto mx-auto flex flex-col justify-center items-center -translate-y-[2rem] pt-[600px]' : 'hidden'}`}>
                     <p className="m-6 py-6">{bio}</p>
                     <button onClick={() => setBioModal(false)} className={btnStyle}>CLOSE</button>
                 </div>

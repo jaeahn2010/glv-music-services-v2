@@ -235,6 +235,7 @@ export default function App() {
 						allMusicians={allMusicians}
 						loginStatus={loginStatus}
 						userCart={userCart}
+						setUserCart={setUserCart}
 						states={states}
 						userType={userType}
 					/>}

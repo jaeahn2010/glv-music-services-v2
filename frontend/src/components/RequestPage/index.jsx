@@ -2,7 +2,7 @@ import { useState } from "react"
 import { sendEmail } from "../../../utils/backend"
 import { useNavigate } from "react-router-dom"
 
-export default function RequestPage({ isMenuOpen, allMusicians, loginStatus, userCart, states, userType }) {
+export default function RequestPage({ isMenuOpen, allMusicians, loginStatus, userCart, setUserCart, states, userType }) {
     const [requestData, setRequestData] = useState({
         clientEmail: '',
         musicianEmail: '',
@@ -57,6 +57,8 @@ export default function RequestPage({ isMenuOpen, allMusicians, loginStatus, use
                 status: 'pending',
             })
             alert('Request sent successfully!')
+            setUserCart([])
+            navigate('/')
         } catch (err) {
             alert('Failed to send request: ', err)
         }
@@ -208,7 +210,7 @@ export default function RequestPage({ isMenuOpen, allMusicians, loginStatus, use
                     </div>
                     <div className='flex lg:w-1/2 mx-auto'>
                         <p className={labelStyle}>Requested Repertoire:</p>
-                        <div className="w-2/3">
+                        <div className="w-2/3 text-xs lg:text-md">
                             {userCart.map(opusInCart => <div key={opusInCart._id} className="border border-stone-800 p-2 rounded-xl bg-stone-300 my-2">
                                 <p className="underline">{opusInCart.composer}: {opusInCart.title}</p>
                                 {opusInCart.movements.map(movement => <p key={movement._id}>{movement.movementTitle}</p>)}
@@ -226,7 +228,7 @@ export default function RequestPage({ isMenuOpen, allMusicians, loginStatus, use
                         />
                     </div>
                     <input type="hidden" name="status" value="pending"/>
-                    <div className="flex w-1/2 justify-around items-center mx-auto">
+                    <div className="flex flex-col lg:flex-row w-full lg:w-1/2 justify-around items-center mx-auto">
                         <input type="submit" value="SUBMIT REQUEST" className={btnStyle}/>
                         <button onClick={(evt) => {
                             evt.preventDefault()

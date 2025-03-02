@@ -1068,7 +1068,7 @@ export default function MobilePianoConcertSeriesPage({ isMenuOpen, allMusicians,
                 </form>
             </section>
             <h1 className={`${showDetails ? 'z-0 opacity-5' : ''} text-center text-3xl my-24`}>Forte & Piano Mobile Piano Concert Series</h1>
-            <p className={`${showDetails ? 'z-0 opacity-5' : ''} w-11/12 mx-auto text-lg`}>Bring a professional classical piano performance right to your doorstep! Simply pick a concert from the menu below, and request a date, time, and location. Once confirmed by Forte & Piano and payment is made, the designated pianist will show up at your location at the specified date and time, and will perform the requested concert. That's it! No hassle, no confusion.</p>
+            <p className={`${showDetails ? 'z-0 opacity-5' : ''} w-11/12 mx-auto text-lg text-center`}>Bring a professional classical piano performance right to your doorstep! Simply pick a concert from the menu below, and request a date, time, and location. Once confirmed by Forte & Piano and payment is made, the designated pianist will show up at your location at the specified date and time, and will perform the requested concert. That's it! No hassle, no confusion.</p>
             <table className={`${showDetails ? 'z-0 opacity-5' : ''} border border-stone-800 w-11/12 mx-auto mb-12 table-fixed my-12 text-xs lg:text-base`}>
                 <thead>
                     <tr className="font-bold border border-stone-800 bg-gradient-to-r from-stone-300 via-stone-400 to-stone-300" >

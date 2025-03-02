@@ -89,7 +89,7 @@ export default function DetailsPage({ isMenuOpen, opusDetails, loginStatus, user
                 <thead>
                     <tr>
                         <td className="underline">Movement</td>
-                        <td className="underline">Offering musicians</td>
+                        <td className="underline text-right">Musician</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -97,9 +97,9 @@ export default function DetailsPage({ isMenuOpen, opusDetails, loginStatus, user
                 {
                     let musicianObjs = movement.movementOfferingMusicians.map(id => allMusicians.find(musician => musician._id === id))
                     let musicianNames = musicianObjs.map(musician => `${musician.firstName} ${musician.lastName}`)
-                    return <tr key={movement._id} onClick={handleClick} id={movement._id} className="w-full hover:scale-105 hover:cursor-pointer hover:bg-amber-400 hover:text-stone-900 hover:duration-500">
-                        <td className="w-1/2 border-l border-y border-stone-700 p-2 rounded-l-xl">{movement.movementTitle}</td>
-                        <td className="w-1/2 border-r border-y border-stone-700 p-2 rounded-r-xl">{musicianNames.join(', ')}</td>
+                    return <tr key={movement._id} onClick={handleClick} id={movement._id} className="w-full hover:scale-105 hover:cursor-pointer hover:bg-amber-400 hover:text-stone-900 hover:duration-500 text-xs lg:text-md">
+                        <td className="w-2/3 border-l border-y border-stone-700 p-2 rounded-l-xl">{movement.movementTitle}</td>
+                        <td className="w-1/3 border-r border-y border-stone-700 p-2 rounded-r-xl text-right">{musicianNames.join(', ')}</td>
                     </tr>})
                 }
                 </tbody>
@@ -128,7 +128,7 @@ export default function DetailsPage({ isMenuOpen, opusDetails, loginStatus, user
                         </div>
                         <br/>
                         <div>
-                            <p className="underline">MUSICIANS OFFERING THIS REPERTOIRE</p>
+                            <p className="underline">AVAILABLE FROM</p>
                             <p className="font-bold">{musicianNames.join(', ')}</p>
                         </div>
                         <br/>

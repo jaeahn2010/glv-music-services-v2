@@ -216,7 +216,7 @@ export default function NewCompositionsPage({ isMenuOpen, loginStatus, scrollToT
                     }}>CLOSE</button>
                 </div>
                 {showPaymentInfo
-                ? <section className="flex flex-col justify-center items-center border border-stone-800 rounded-xl mx-4 my-6 p-2">
+                ? <section className="flex flex-col justify-center items-center border border-stone-800  bg-gray-300 rounded-xl mx-4 my-6 p-2">
                     <p>The official payment portal is still under construction. We are sorry for the inconvenience. For now, please use the QR code below to be connected to the Forte & Piano Venmo account. Please write the below "Order Shortcode" for the Venmo description. Once the correct payment is confirmed, we will send you the PDF as soon as possible, no later than within 24 hours. Please contact us directly if you would like to use a different payment method.</p>
                     <img src={ahnbentonVenmo} alt="Venmo QR code" className="w-1/2 m-5 rounded-xl"/>
                     <p>Order shortcode: {currentComposition.composer.toLowerCase().slice(0, 3) + currentComposition.opusNo + currentComposition.title.toLowerCase().slice(0, 3) + currentComposition.instrumentation.toLowerCase().slice(0, 3)}</p>
