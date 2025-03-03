@@ -57,7 +57,7 @@ export default function RepertoirePage({ isMenuOpen, allOpuses, allComposers, al
     return (
         <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} text-stone-800 font-bodoni min-h-[125vh]`}>
             <h1 className="text-xl text-center my-10 lg:text-3xl">Available Repertoire</h1>
-            <p className='w-11/12 mx-auto my-10 '>Start your event request by choosing your desired repertoire below. Please note that the indicated prices are only applicable for events with a repertoire fee type. Our musicians may choose to apply more discounts at each of their own discretion.</p>
+            <p className='w-11/12 lg:w-2/3 mx-auto my-10 lg:text-xl'>Start your event request by choosing your desired repertoire below. Our musicians will get back to you as soon as possible with a quote for your event. They may choose to apply discounts at each of their own discretion.</p>
             <div className='w-1/2 lg:w-1/6 mx-auto flex justify-around items-center'>
                 <p className={arrowStyle}>&#10507;</p>
                 <button

@@ -17,10 +17,10 @@ export default function MusiciansPage({ isMenuOpen, isMobile, allMusicians, setM
     const [fileMessage, setFileMessage] = useState('')
     const divStyle = 'my-2 w-11/12 mx-auto'
     const divStyle2 = 'my-2 text-sm lg:text-md w-full lg:w-1/2 mx-auto flex items-center lg:pr-10'
-    const pStyle = 'my-3 text-center text-sm lg:text-md'
-    const labelStyle = 'w-1/3 mx-2 text-right'
-    const inputStyle = 'w-2/3 mx-2 p-1 rounded-xl text-stone-800'
-    const btnStyle = 'border border-stone-800 px-2 py-1 my-6 rounded-xl hover:bg-amber-300 hover:cursor-pointer'
+    const pStyle = 'my-3 text-center text-sm lg:text-base'
+    const labelStyle = 'w-1/3 mx-2 text-right lg:text-base'
+    const inputStyle = 'w-2/3 mx-2 p-1 rounded-xl text-stone-800 lg:text-base'
+    const btnStyle = 'border border-stone-800 px-2 py-1 my-6 rounded-xl hover:bg-amber-300 hover:cursor-pointer duration-500 hover:scale-105'
 
     //get full list of musicians, or filter by instrument
 	function getFilteredMusiciansData(filter) {
@@ -98,7 +98,7 @@ export default function MusiciansPage({ isMenuOpen, isMobile, allMusicians, setM
             />
             <section className='border-t border-stone-800 my-12 py-12 mx-auto w-5/6 flex flex-col justify-center'>
                 <h2 className='text-2xl text-center my-4'>JOIN THE FORTE & PIANO TEAM</h2>
-                <p>Are you a music performer, teacher, composer, or arranger based in Las Vegas, NV? Are you looking to grow your studio, clientele, or sell more of your works? Join our team! Fill out the form below, and we will contact you for a phone interview. If we resonate well with each other, we will then schedule an in-person interview in a semi-formal audition setting, where we will further assess how we fit each other's needs.</p>
+                <p className='lg:text-lg'>Are you a music performer, teacher, composer, or arranger based in Las Vegas, NV? Are you looking to grow your studio, clientele, or sell more of your works? Join our team! Fill out the form below, and we will contact you for a phone interview. If we resonate well with each other, we will then schedule an in-person interview in a semi-formal audition setting, where we will further assess how we fit each other's needs.</p>
                 <form onSubmit={handleSubmit} className={showForm ? 'w-11/12 lg:w-5/6 mx-auto my-6 py-10 flex flex-col items-center border border-stone-800 rounded-xl bg-gray-300' : 'hidden'} encType="multipart/form-data">
                         <div className={divStyle2}>
                             <label htmlFor="email" className={labelStyle}>Email:</label>

@@ -52,7 +52,7 @@ export default function RequestPage({ isMenuOpen, allMusicians, loginStatus, use
                 eventDate: requestData.eventDate,
                 eventStartTime: requestData.eventStartTime,
                 eventEndTime: requestData.eventEndTime,
-                requestedRepertoire: userCart,
+                requestedRepertoire: userCart, // fix
                 additionalComments: requestData.additionalComments,
                 status: 'pending',
             })

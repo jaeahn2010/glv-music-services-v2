@@ -55,15 +55,15 @@ export default function PerformancesPage({ isMenuOpen }) {
     return (
         <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} font-bodoni min-h-[125vh]`}>
             <h1 className="text-xl text-center my-10 lg:text-3xl">Our performances</h1>
-            <p className='w-3/4 mx-auto my-10'>Come check out our fantastic musicians in action! Hover over each card to see other featured musicians and a short description of each performance. Performance dates in red indicate past events, whereas those in green indicate upcoming performances.</p>
+            <p className='w-3/4 mx-auto my-10 lg:text-lg'>Come check out our fantastic musicians in action! Hover over each card to see other featured musicians and a short description of each performance. Performance dates in red indicate past events, whereas those in green indicate upcoming performances.</p>
             {performances.length
             ? <section className="career-items my-24 min-h-[25rem]">
                 {performances.map((performance, index) => 
                     <div key={index} className='card-flip flex my-10 w-11/12 md:w-3/4 h-[15rem] md:h-[20rem] mx-auto border border-stone-800 rounded-xl bg-gradient-to-r from-stone-300 via-stone-400 to-stone-300'>
                         <div className="card-front flex w-full">
                             <div className="w-full flex flex-col items-center justify-center">
-                                <p className="text-lg md:text-2xl underline text-center">{performance.title}</p>
-                                <div className='lg:flex lg:justify-between lg:items-center w-11/12 lg:w-5/6 my-8 text-sm lg:text-lg'>
+                                <p className="text-lg lg:text-2xl underline text-center">{performance.title}</p>
+                                <div className='lg:flex lg:justify-between lg:items-center w-11/12 lg:w-5/6 my-8 text-sm lg:text-xl'>
                                     <div className='text-center my-2'>
                                         <p>{performance.locationName}</p>
                                         <p>({performance.city}, {performance.state})</p>
@@ -78,7 +78,7 @@ export default function PerformancesPage({ isMenuOpen }) {
                                         <p>{nonMilitaryTime(performance.time)}</p>
                                     </div>
                                 </div>
-                                <p>Featured Musician(s): {performance.featuredGLVMSMusicians.map((musicianId, index) => {
+                                <p className='lg:text-lg'>Featured Musician(s): {performance.featuredGLVMSMusicians.map((musicianId, index) => {
                                     let musician = musicians.find(musician => musician._id === musicianId)
                                     return musician
                                     ? <span key={musician._id}>{index === performance.featuredGLVMSMusicians.length - 1 ? `${musician.firstName} ${musician.lastName}` : `${musician.firstName} ${musician.lastName}, `}</span>
@@ -86,7 +86,7 @@ export default function PerformancesPage({ isMenuOpen }) {
                                 })}</p>
                             </div>
                         </div>
-                        <div className="hidden card-back flex flex-col items-center justify-center w-full h-full text-xs lg:text-md">
+                        <div className="hidden card-back flex flex-col items-center justify-center w-full h-full text-xs lg:text-lg">
                             <div className='w-11/12 mx-auto'>  
                                 {performance.collaborators.length
                                 ? <>

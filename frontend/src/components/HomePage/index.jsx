@@ -37,7 +37,7 @@ export default function HomePage({isMenuOpen, isMobile}) {
         ['']
     ]
     const imgStyle = 'w-[350px] rounded-xl hover:scale-110 duration-500'
-    const pStyle = 'text-center text-lg mt-6 hover:text-green-300'
+    const pStyle = 'text-center text-lg mt-6 hover:text-stone-400'
     const contactDivStyle = 'text-center mx-auto py-3 lg:w-1/2 lg:mx-10'
     const aStyle = 'fill-container flex justify-center items-center w-2/3 lg:w-1/2 mx-auto my-5 p-1 lg:p-2 border-stone-800 border rounded-3xl'
 
@@ -90,7 +90,7 @@ export default function HomePage({isMenuOpen, isMobile}) {
             <section className={`py-2 font-bodoni ${isMobile ? '' : 'flex items-center'}`}>
                 <ul className={`flex flex-col p-2 list-disc list-inside text-sm ${isMobile ? 'w-full' : 'w-1/2'}`}>
                     {services.map(([service, description, feeType], index) => 
-                        <li key={index} className={`${isMobile ? 'w-full' : 'w-3/4'} mx-auto my-2 hover:cursor-pointer hover:scale-105 duration-500 ${currentServiceDisplay.index === -1 ? 'text-stone-800' : currentServiceDisplay.index === index ? 'text-stone-800' : 'text-stone-300'}`} onClick={() => {
+                        <li key={index} className={`${isMobile ? 'w-full' : 'w-3/4'} mx-auto my-2 hover:cursor-pointer hover:scale-105 duration-500 lg:text-md ${currentServiceDisplay.index === -1 ? 'text-stone-800' : currentServiceDisplay.index === index ? 'text-stone-800' : 'text-stone-300'}`} onClick={() => {
                             setCurrentServiceDisplay({
                                 description: description,
                                 index: index,
@@ -117,13 +117,13 @@ export default function HomePage({isMenuOpen, isMobile}) {
                 <p className='w-full mx-auto text-center my-5 text-xl'>CONTACT US</p>
                 <div className='lg:flex'>
                     <div className={contactDivStyle}>
-                        <p className="text-xs lg:text-sm">Can't find your desired music or have a custom request?</p>
+                        <p className="text-xs lg:text-base">Can't find your desired music or have a custom request?</p>
                         <a href="mailto:forteandpiano702@gmail.com" className={aStyle}>
                             <p className="fill-content text-sm">Email Forte & Piano</p>
                         </a>
                     </div>
                     <div className={contactDivStyle}>
-                        <p className="text-xs lg:text-sm">Problems or questions about using this site?</p>
+                        <p className="text-xs lg:text-base">Problems or questions about using this site?</p>
                         <a href="mailto:jaeahnbenton@gmail.com" className={aStyle}>
                             <p className="fill-content text-sm">Email site admin</p>
                         </a>

@@ -97,7 +97,7 @@ export default function DetailsPage({ isMenuOpen, opusDetails, loginStatus, user
                 {
                     let musicianObjs = movement.movementOfferingMusicians.map(id => allMusicians.find(musician => musician._id === id))
                     let musicianNames = musicianObjs.map(musician => `${musician.firstName} ${musician.lastName}`)
-                    return <tr key={movement._id} onClick={handleClick} id={movement._id} className="w-full hover:scale-105 hover:cursor-pointer hover:bg-amber-400 hover:text-stone-900 hover:duration-500 text-xs lg:text-md">
+                    return <tr key={movement._id} onClick={handleClick} id={movement._id} className="w-full hover:scale-105 hover:cursor-pointer hover:bg-amber-300 hover:text-stone-900 hover:duration-500 text-xs lg:text-base">
                         <td className="w-2/3 border-l border-y border-stone-700 p-2 rounded-l-xl">{movement.movementTitle}</td>
                         <td className="w-1/3 border-r border-y border-stone-700 p-2 rounded-r-xl text-right">{musicianNames.join(', ')}</td>
                     </tr>})
@@ -109,8 +109,8 @@ export default function DetailsPage({ isMenuOpen, opusDetails, loginStatus, user
 
         return (
             <section className={`${isMenuOpen ? 'z-0 opacity-5' : ''} flex flex-col justify-center items-center font-bodoni`}>
-                <p className="mt-24">Details of this repertoire</p>
-                <div className={`w-11/12 lg:w-1/2 mx-auto border border-stone-400 rounded-lg text-stone-700 p-5 m-5 flex-col justify-center bg-stone-300`}>
+                <p className="mt-24 lg:text-lg">Details of this repertoire</p>
+                <div className={`w-11/12 lg:w-1/2 mx-auto border border-stone-400 rounded-lg text-stone-700 p-5 m-5 flex-col justify-center bg-stone-300 lg:text-lg`}>
                     <section className="text-center">
                         <div>
                             <p className="underline">TITLE</p>
@@ -133,13 +133,13 @@ export default function DetailsPage({ isMenuOpen, opusDetails, loginStatus, user
                         </div>
                         <br/>
                         <div>
-                            <button onClick={handleClick} value="allMvmts" className="border border-stone-700 text-sm p-2 rounded-xl hover:scale-105 hover:cursor-pointer bg-stone-300 hover:bg-green-400 duration-500">{opus.movements.length ? 'ADD ALL MOVEMENTS TO CART' : 'ADD TO CART'}</button>
+                            <button onClick={handleClick} value="allMvmts" className="border border-stone-700 text-sm p-2 rounded-xl hover:scale-105 hover:cursor-pointer bg-stone-300 hover:bg-amber-300 duration-500">{opus.movements.length ? 'ADD ALL MOVEMENTS TO CART' : 'ADD TO CART'}</button>
                         </div>
                         <br/>
                     </section>
                     {movementsDisplay}
                 </div>
-                <button onClick={() => navigate('/repertoire')} className="border border-stone-800 p-2 rounded-xl my-6 mx-auto hover:bg-green-400 hover:scale-105 duration-500">CHOOSE MORE REPERTOIRE</button>
+                <button onClick={() => navigate('/repertoire')} className="border border-stone-800 p-2 rounded-xl my-6 mx-auto hover:bg-amber-300 hover:scale-105 duration-500">CHOOSE MORE REPERTOIRE</button>
             </section>
         )
     }

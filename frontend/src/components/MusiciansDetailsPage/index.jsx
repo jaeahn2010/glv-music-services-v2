@@ -10,7 +10,7 @@ export default function MusiciansDetailsPage({isMenuOpen, musicianDetails, login
     const [bioModal, setBioModal] = useState(false)
     const params = useParams()
     const navigate = useNavigate()
-    const btnStyle = 'lg:w-1/3 border border-stone-800 rounded-xl p-2 my-3 mx-auto hover:bg-amber-300'
+    const btnStyle = 'lg:w-1/3 border border-stone-800 rounded-xl p-2 my-3 mx-auto hover:bg-amber-300 hover:scale-105 duration-500'
 
     async function getMusicianData() {
         const musicianData = await getMusicianById(params.musicianId)
@@ -56,7 +56,7 @@ export default function MusiciansDetailsPage({isMenuOpen, musicianDetails, login
                         </div>
                         <div className="flex flex-col lg:w-2/3 justify-center items-center h-1/6">
                             <p className="text-xl underline my-3">SPECIALTIES</p>
-                            <ul className="list-disc list-inside">
+                            <ul className="list-disc list-inside lg:text-lg">
                                 {specialties.map(specialty => <li key={specialty}>{specialty}</li>)}
                             </ul>
                         </div>
@@ -64,7 +64,7 @@ export default function MusiciansDetailsPage({isMenuOpen, musicianDetails, login
                     <button className={btnStyle} onClick={() => setBioModal(true)}>BIOGRAPHY</button>
                 </div>
                 <button onClick={() => navigate('/musicians')} className={btnStyle}>BACK TO MUSICIANS GALLERY</button>
-                <div className={`${bioModal ? 'absolute border border-stone-800 bg-stone-300 rounded-xl w-11/12 h-5/6 lg:w-1/2 lg:h-3/4 overflow-auto mx-auto flex flex-col justify-center items-center -translate-y-[2rem] pt-[600px]' : 'hidden'}`}>
+                <div className={`${bioModal ? 'absolute border border-stone-800 bg-stone-300 rounded-xl w-11/12 h-5/6 lg:w-1/2 lg:h-3/4 overflow-auto mx-auto flex flex-col justify-center items-center -translate-y-[2rem] pt-[600px] lg:pt-0' : 'hidden'}`}>
                     <p className="m-6 py-6">{bio}</p>
                     <button onClick={() => setBioModal(false)} className={btnStyle}>CLOSE</button>
                 </div>
