@@ -6,7 +6,6 @@ export default function RepertoirePage({ isMenuOpen, allOpuses, allComposers, al
     const [filterSwitch, setFilterSwitch] = useState({
         composer: [false, ''],
         instrumentation: [false, ''],
-        price: [false, 0],
         keyword: [false, ''],
     })
     const [filteredOpuses, setFilteredOpuses] = useState([])
@@ -15,6 +14,11 @@ export default function RepertoirePage({ isMenuOpen, allOpuses, allComposers, al
     const filterInputStyle = 'w-1/2 text-stone-800 text-sm'
     const btnStyle = 'mx-auto my-5 p-2 border border-stone-800 rounded-xl hover:bg-stone-300 hover:text-stone-700 bg:scale-105'
     const arrowStyle = `text-xl duration-500 ${showFilters ? 'rotate-180' : ''}`
+
+    let composersNameReformat = allComposers.map(composer => {
+        let lastSpaceIndex = composer.lastIndexOf(' ')
+        return lastSpaceIndex !== -1 ? `${composer.substring(lastSpaceIndex + 1)}, ${composer.substring(0, lastSpaceIndex)}`: composer
+    })
 
     function handleChange(evt) {
         setFilterSwitch({
@@ -32,10 +36,10 @@ export default function RepertoirePage({ isMenuOpen, allOpuses, allComposers, al
                         setFilteredOpuses(filteredOpus => filteredOpus.filter(opus => opus.composer === switchValue))
                         break
                     case 'instrumentation':
-                        setFilteredOpuses(filteredOpus => filteredOpus.filter(opus => opus.instrumentation.includes(switchValue)))
-                        break
-                    case 'price':
-                        setFilteredOpuses(filteredOpus => filteredOpus.filter(opus => opus.price <= switchValue && opus.price !== null))
+                        setFilteredOpuses(filteredOpus => filteredOpus.filter(opus => {
+                            let lowerCaseInstrumentation = opus.instrumentation.map(instrument => instrument.toLowerCase())
+                            return lowerCaseInstrumentation.includes(switchValue)
+                        }))
                         break
                     case 'keyword':
                         setFilteredOpuses(filteredOpus => filteredOpus.filter(opus => opus.title.includes(switchValue)))
@@ -77,7 +81,7 @@ export default function RepertoirePage({ isMenuOpen, allOpuses, allComposers, al
                             defaultValue={0}
                             onChange={handleChange}>
                             <option key={0} value={0} disabled>Select a composer</option>
-                            {allComposers.sort().map(composer => <option key={composer} value={composer}>{composer}</option>)}
+                            {composersNameReformat.sort().map(composer => <option key={composer} value={composer.split(', ').reverse().join(' ')}>{composer}</option>)}
                         </select>
                     </div>
                     <div className={filterDivStyle}>
@@ -92,16 +96,6 @@ export default function RepertoirePage({ isMenuOpen, allOpuses, allComposers, al
                             {instruments.map(instrument => <option key={instrument} value={instrument}>{instrument}</option>)}
                         </select>
                     </div>
-                    <div className={filterDivStyle}>
-                        <label className={filterLabelStyle} htmlFor='price'>MAXIMUM PRICE</label>
-                        <input
-                            className={filterInputStyle + ' px-1'}
-                            name="price"
-                            id="price"
-                            defaultValue={0}
-                            onChange={handleChange}
-                        />
-                    </div>
                     <div className='flex justify-around items-center'>
                         <button className={btnStyle} onClick={applyFilters}>APPLY</button>
                         <button className={btnStyle} onClick={() => {
@@ -109,7 +103,6 @@ export default function RepertoirePage({ isMenuOpen, allOpuses, allComposers, al
                             setFilterSwitch({
                                 composer: [false, ''],
                                 instrumentation: [false, ''],
-                                price: [false, 0],
                                 keyword: [false, ''],
                             })
                         }}>CLEAR</button>
