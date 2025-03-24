@@ -14,6 +14,7 @@ const config = require('../../jwt.config.js')
 // jwt middleware
 const authMiddleware = (allowedRoles = []) => {
     return (req, res, next) => {
+        console.log(req.user)
         const token = req.cookies.token
         if (!token) {
             return res.status(401).json({ message: 'Missing or invalid authentication token' })

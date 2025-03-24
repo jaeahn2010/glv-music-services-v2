@@ -17,9 +17,8 @@ export default function AdminPage({ isMenuOpen, sortObjects, instruments, states
     const [showMovementsModal, setShowMovementsModal] = useState(false)
     const [showCollaboratorModal, setShowCollaboratorModal] = useState(false)
     const [movementToBeAdded, setMovementToBeAdded] = useState({
-        movementNumber: 0,
         movementTitle: '',
-        movementPrice: 0,
+        movementOfferingMusicians: [],
     })
     const [collaboratorToBeAdded, setCollaboratorToBeAdded] = useState({
         collaboratorLastName: '',
@@ -27,11 +26,12 @@ export default function AdminPage({ isMenuOpen, sortObjects, instruments, states
         collaboratorInstrument: '',
     })
     const [opusFormData, setOpusFormData] = useState({
-        title: '',
+        repType: '',
         composer: '',
+        title: '',
         movements: [],
         instrumentation: [],
-        price: 0,
+        offeringMusicians: [],
     })
     const [musicianFormData, setMusicianFormData] = useState({
         firstName: '',
@@ -62,7 +62,7 @@ export default function AdminPage({ isMenuOpen, sortObjects, instruments, states
         ticketsLink: '',
         description: '',
     })
-    const btnStyle = 'border border-stone-800 rounded-xl p-2 mx-auto my-4 hover:scale-105 hover:bg-green-400'
+    const btnStyle = 'border border-stone-800 rounded-xl p-2 mx-auto my-4 hover:scale-105 hover:bg-amber-300 duration-500'
     const divStyle = 'border border-stone-800 w-1/2 flex flex-col justify-center p-1 m-2 rounded-xl'
     const labelStyle = 'w-1/4 text-right m-2'
     const inputStyle = 'w-3/4 text-left m-2 p-1 border border-stone-800 bg-stone-200 text-stone-800 rounded-lg'
@@ -73,17 +73,6 @@ export default function AdminPage({ isMenuOpen, sortObjects, instruments, states
     let editFields = []
     let movementsModal = <section className={showMovementsModal ? 'absolute left-1/4 z-40 border border-stone-800 w-1/2 flex flex-col justify-center items-center p-4 bg-stone-300' : 'hidden'}>
         <div className={divStyle + ' w-11/12'}>
-            <label htmlFor="movementNumber" className={labelStyle}>Movement Number:</label>
-            <input
-                name='movementNumber'
-                id='movementNumber'
-                type='number'
-                className={inputStyle}
-                placeholder='movementNumber'
-                onChange={handleMovementChange}
-            />
-        </div>
-        <div className={divStyle + ' w-11/12'}>
             <label htmlFor="movementTitle" className={labelStyle}>Movement Title:</label>
             <input
                 name='movementTitle'
@@ -93,26 +82,29 @@ export default function AdminPage({ isMenuOpen, sortObjects, instruments, states
                 onChange={handleMovementChange}
             />
         </div>
-        <div className={divStyle + ' w-11/12'}>
-            <label htmlFor="movementPrice" className={labelStyle}>Movement Price:</label>
-            <input
-                name='movementPrice'
-                type='number'
-                id='movementPrice'
-                className={inputStyle}
-                placeholder='movementPrice'
-                onChange={handleMovementChange}
-            />
-        </div>
+        <p className="underline text-center my-2">MUSICIAN(S) OFFERING THIS MOVEMENT</p>
+            <div className={'mx-auto my-3 w-1/3'}>
+                {allMusicians.map(musician => 
+                    <div key={musician._id}>
+                        <input
+                            type='checkbox'
+                            name='movementOfferingMusicians'
+                            id={musician._id}
+                            defaultValue={musician._id}
+                            onChange={handleMovementChange}
+                        />
+                        <label htmlFor="movementOfferingMusicians" className={labelStyle}>{musician.lastName}, {musician.firstName}</label>
+                    </div>
+                )}
+            </div>
         <button className={btnStyle} onClick={() => {
             setOpusFormData({
                 ...opusFormData,
                 movements: opusFormData.movements.concat(movementToBeAdded)
             })
             setMovementToBeAdded({
-                movementNumber: 0,
                 movementTitle: '',
-                movementPrice: 0,
+                movementOfferingMusicians: [],
             })
             setShowMovementsModal(false)
         }}>ADD</button>
@@ -187,7 +179,15 @@ export default function AdminPage({ isMenuOpen, sortObjects, instruments, states
     }
 
     function handleMovementChange(evt) {
-        setMovementToBeAdded({...movementToBeAdded, [evt.target.name]: evt.target.value})
+        if (evt.target.name === 'movementOfferingMusicians') {
+            if (evt.target.checked && !movementToBeAdded.movementOfferingMusicians.includes(evt.target.id)) {
+                setMovementToBeAdded({...movementToBeAdded, movementOfferingMusicians: movementToBeAdded.movementOfferingMusicians.concat(evt.target.id)})
+            } else if (!evt.target.checked && movementToBeAdded.movementOfferingMusicians.includes(evt.target.id)) {
+                setMovementToBeAdded({...movementToBeAdded, movementOfferingMusicians: movementToBeAdded.movementOfferingMusicians.filter(musician => musician !== evt.target.id)})
+            }
+        } else {
+            setMovementToBeAdded({...movementToBeAdded, [evt.target.name]: evt.target.value})
+        }
     }
 
     function handleCollaboratorChange(evt) {
@@ -197,14 +197,20 @@ export default function AdminPage({ isMenuOpen, sortObjects, instruments, states
     function handleChange(evt) {
         switch(crudItem) {
             case 'opus':
-                if (evt.target.name !== 'instruments') {
-                    setOpusFormData({...opusFormData, [evt.target.name]: evt.target.value})
-                } else {
+                if (evt.target.name === 'instruments') {
                     if (evt.target.checked && !opusFormData.instrumentation.includes(evt.target.id)) {
                         setOpusFormData({...opusFormData, instrumentation: opusFormData.instrumentation.concat(evt.target.id)})
                     } else if (!evt.target.checked && opusFormData.instrumentation.includes(evt.target.id)) {
                         setOpusFormData({...opusFormData, instrumentation: opusFormData.instrumentation.filter(instrument => instrument !== evt.target.id)})
                     }
+                } else if (evt.target.name === 'offeringMusicians') {
+                    if (evt.target.checked && !opusFormData.offeringMusicians.includes(evt.target.id)) {
+                        setOpusFormData({...opusFormData, offeringMusicians: opusFormData.offeringMusicians.concat(evt.target.id)})
+                    } else if (!evt.target.checked && opusFormData.instrumentation.includes(evt.target.id)) {
+                        setOpusFormData({...opusFormData, offeringMusicians: opusFormData.offeringMusicians.filter(musician => musician !== evt.target.id)})
+                    }
+                } else {
+                    setOpusFormData({...opusFormData, [evt.target.name]: evt.target.value})
                 }
                 break
             case 'musician':
@@ -261,11 +267,12 @@ export default function AdminPage({ isMenuOpen, sortObjects, instruments, states
                     case 'opus':
                         newItem = await postOpus(opusFormData)
                         setOpusFormData({
-                            title: '',
+                            repType: '',
                             composer: '',
+                            title: '',
                             movements: [],
                             instrumentation: [],
-                            price: 0,
+                            offeringMusicians: [],
                         })
                         break
                     case 'musician':
@@ -310,6 +317,19 @@ export default function AdminPage({ isMenuOpen, sortObjects, instruments, states
             editFields = allOpuses
             addFields = <form onSubmit={handleSubmit} className="flex flex-col">
                 <div className={'mx-auto w-11/12 flex justify-center items-center p-1 m-2 rounded-xl'}>
+                    <label htmlFor="repType" className={labelStyle}>Repertoire Type:</label>
+                    <select
+                        name='repType'
+                        id='repType'
+                        className={inputStyle}
+                        defaultValue={0}
+                        onChange={handleChange}
+                    >
+                        <option value={0} disabled>Select a repertoire type</option>
+                        {['Solo', 'Chamber', 'Reduction'].map(type => <option key={type} value={type.toLowerCase()}>{type}</option>)}
+                    </select>
+                </div>
+                <div className={'mx-auto w-11/12 flex justify-center items-center p-1 m-2 rounded-xl'}>
                     <label htmlFor="title" className={labelStyle}>Title:</label>
                     <input
                         name='title'
@@ -336,10 +356,14 @@ export default function AdminPage({ isMenuOpen, sortObjects, instruments, states
                     setShowMovementsModal(true)
                 }} className={btnStyle + ' text-center'}>Add movement</button>
                 {opusFormData.movements.length
-                ? opusFormData.movements.map(mvmt => <div key={mvmt.movementNumber} className="border border-stone-200 rounded-xl w-3/4 mx-auto p-2 my-3">
-                    <p className="border-b border-stone-200 font-bold text-center">{mvmt.movementNumber}</p>
-                    <p>{mvmt.movementTitle}</p>
-                    <p>${mvmt.movementPrice}</p>
+                ? opusFormData.movements.map((mvmt, idx) => <div key={idx} className="border border-stone-200 rounded-xl w-3/4 mx-auto">
+                    <p>
+                        {idx + 1}. {mvmt.movementTitle}&nbsp;
+                        <span>({mvmt.movementOfferingMusicians.map((musicianId, index) => {
+                            let foundMusician = allMusicians.find(musician => musician._id === musicianId)
+                            return <span key={musicianId}>{index === mvmt.movementOfferingMusicians.length - 1 ? `${foundMusician.firstName} ${foundMusician.lastName}` : `${foundMusician.firstName} ${foundMusician.lastName}, `}</span>
+                    })})</span>
+                    </p>
                 </div>)
                 : ''}
                 {showMovementsModal ? movementsModal : ''}
@@ -351,24 +375,27 @@ export default function AdminPage({ isMenuOpen, sortObjects, instruments, states
                                 type='checkbox'
                                 name='instruments'
                                 id={instrument}
-                                className={''}
+                                defaultValue={instrument}
                                 onChange={handleChange}
                             />
                             <label htmlFor="instruments" className={labelStyle}>{instrument}</label>
                         </div>
                     )}
                 </div>
-                <div className={'mx-auto w-11/12 flex justify-center items-center p-1 m-2 rounded-xl'}>
-                    <label htmlFor="price" className={labelStyle}>Price:</label>
-                    $<input
-                        type='number'
-                        name='price'
-                        id='price'
-                        className={inputStyle}
-                        defaultValue={opusFormData.price}
-                        placeholder='price'
-                        onChange={handleChange}
-                    />
+                <p className="underline text-center my-2">MUSICIAN(S) OFFERING THIS REPERTOIRE</p>
+                <div className={'mx-auto my-3 w-1/3'}>
+                    {allMusicians.map(musician => 
+                        <div key={musician._id}>
+                            <input
+                                type='checkbox'
+                                name='offeringMusicians'
+                                id={musician._id}
+                                defaultValue={musician._id}
+                                onChange={handleChange}
+                            />
+                            <label htmlFor="offeringMusicians" className={labelStyle}>{musician.lastName}, {musician.firstName}</label>
+                        </div>
+                    )}
                 </div>
                 <input type="submit" value='Submit' className={btnStyle}/>
             </form>
@@ -574,7 +601,7 @@ export default function AdminPage({ isMenuOpen, sortObjects, instruments, states
     }, [allOpuses])
 
     return userType === 'admin'
-    ? <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} text-xl min-h-[100vh]`}>
+    ? <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} text-xl min-h-[100vh] font-bodoni`}>
         <h1 className="text-center my-6">This is the Forte & Piano admin page. Use it to CRUD sensitive data (opuses, musicians, clients, performances).</h1>
         <section className="flex items-center justify-around my-12">
             <button className={btnStyle} onClick={() => setCrudItem('opus')}>ADD/EDIT OPUS</button>
@@ -631,6 +658,6 @@ export default function AdminPage({ isMenuOpen, sortObjects, instruments, states
             </div>
         </section>
     </main>
-    : <h1 className={`${isMenuOpen ? 'z-0 opacity-5' : ''} text-center text-3xl my-24 h-[100vh]`}>ACCESS 
+    : <h1 className={`${isMenuOpen ? 'z-0 opacity-5' : ''} text-center text-3xl my-24 h-[100vh] font-bodoni`}>ACCESS 
     DENIED. PLEASE LOG IN AS A FORTE & PIANO ADMIN.</h1>
 }
