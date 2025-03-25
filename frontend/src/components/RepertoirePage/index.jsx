@@ -4,6 +4,7 @@ import Gallery from '../Gallery'
 export default function RepertoirePage({ isMenuOpen, allOpuses, allComposers, allMusicians, setOpusDetails, instruments, scrollToTop }) {
     const [showFilters, setShowFilters] = useState(false)
     const [filterSwitch, setFilterSwitch] = useState({
+        repType: [false, ''],
         composer: [false, ''],
         instrumentation: [false, ''],
         keyword: [false, ''],
@@ -32,6 +33,9 @@ export default function RepertoirePage({ isMenuOpen, allOpuses, allComposers, al
             let [switchOn, switchValue] = filterSwitch[category]
             if (switchOn) {
                 switch(category) {
+                    case 'repType':
+                        setFilteredOpuses(filteredOpus => filteredOpus.filter(opus => opus.repType.toLowerCase() === switchValue.toLowerCase()))
+                        break
                     case 'composer':
                         setFilteredOpuses(filteredOpus => filteredOpus.filter(opus => opus.composer === switchValue))
                         break
@@ -73,6 +77,18 @@ export default function RepertoirePage({ isMenuOpen, allOpuses, allComposers, al
             <section className={`${showFilters ? '' : 'hidden'} duration-500 border border-stone-400 rounded-xl my-2 py-2 w-11/12 lg:w-1/2 mx-auto bg-gray-300`}>
                 <div className="w-full flex flex-col">
                     <div className={filterDivStyle}>
+                        <label className={filterLabelStyle} htmlFor='repType'>REPERTOIRE TYPE</label>
+                        <select
+                            className={filterInputStyle}
+                            name="repType"
+                            id="repType"
+                            defaultValue={0}
+                            onChange={handleChange}>
+                            <option key={0} value={0} disabled>Select a type</option>
+                            {['Solo', 'Chamber', 'Piano Reduction'].map(type => <option key={type} value={type}>{type}</option>)}
+                        </select>
+                    </div>
+                    <div className={filterDivStyle}>
                         <label className={filterLabelStyle} htmlFor='composer'>COMPOSER</label>
                         <select
                             className={filterInputStyle}
@@ -101,6 +117,7 @@ export default function RepertoirePage({ isMenuOpen, allOpuses, allComposers, al
                         <button className={btnStyle} onClick={() => {
                             setFilteredOpuses(allOpuses)
                             setFilterSwitch({
+                                repType: [false, ''],
                                 composer: [false, ''],
                                 instrumentation: [false, ''],
                                 keyword: [false, ''],

@@ -78,7 +78,7 @@ export default function PerformancesPage({ isMenuOpen }) {
                                         <p>{nonMilitaryTime(performance.time)}</p>
                                     </div>
                                 </div>
-                                <p className='lg:text-lg'>Featured Musician(s): {performance.featuredGLVMSMusicians.map((musicianId, index) => {
+                                <p className='lg:text-lg'>Featured Forte & Piano Musician(s): {performance.featuredGLVMSMusicians.map((musicianId, index) => {
                                     let musician = musicians.find(musician => musician._id === musicianId)
                                     return musician
                                     ? <span key={musician._id}>{index === performance.featuredGLVMSMusicians.length - 1 ? `${musician.firstName} ${musician.lastName}` : `${musician.firstName} ${musician.lastName}, `}</span>

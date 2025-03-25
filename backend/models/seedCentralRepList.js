@@ -811,7 +811,7 @@ class PianoRepBuilder {
 // rep format:
 // [repType, comp, setLen, opusType, seq#, key, nick, op#, opPt#, origComp, origWork, arr, [mvmt#, mvmtTitle, mvmtMus], [instr], [mus]]
 
-// GLVMS master piano solo list
+// Forte & Piano master piano solo list
 const availablePianoSoloList = [
     [solo, ahnbentonComp, 4, 'pr', 0, '', '', 6, 0, '', '', '', [
         [1, 'Nostalgia', [ahnbenton]],
@@ -1467,7 +1467,7 @@ const availablePianoSoloList = [
     // (type, comp, typeAmt, opType, opType#, key, nick, op#, opPart#, origComp, origWork, arr, mvmts, instr, glvmsMus)
 ]
 
-// GLVMS master piano chamber/orchestral list
+// Forte & Piano master piano chamber/orchestral list
 const availablePianoChamberList = [
     [chamber, adamsHL, 5, 'Millay songs', 0, '', '', 0, 0, '', '', '', [
         [3, 'For you there is no song', [ahnbenton, kolesnyk]],
@@ -3399,7 +3399,7 @@ const availablePianoChamberList = [
     // (type, comp, typeAmt (totalMvmts in opus), opType, opType#, key, nick, op#, opPart#, origComp, origWork, arr, mvmts, instr, glvmsMus)
 ]
 
-// GLVMS master piano reduction list
+// Forte & Piano master piano reduction list
 const availablePianoReductionList = [
     [reduction, accolay, 1, 'con', 1, 'a-', '', 0, 0, '', '', '', [], [vln, orch], [ahnbenton, kolesnyk]],
     [reduction, adamo, 1, 'Little women', 0, '', '', 0, 0, '', '', '', [

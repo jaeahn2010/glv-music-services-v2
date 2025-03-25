@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 import { getOpuses, getClients, getMusicians, getPerformances, postOpus, postMusician, postPerformance, updateOpus, updateMusician, updateClient, updatePerformance, deleteOpus, deleteClient, deleteMusician, deletePerformance } from "../../../utils/backend"
 
 export default function AdminPage({ isMenuOpen, sortObjects, instruments, states, scrollToTop, userType }) {
@@ -62,6 +63,7 @@ export default function AdminPage({ isMenuOpen, sortObjects, instruments, states
         ticketsLink: '',
         description: '',
     })
+    const navigate = useNavigate()
     const btnStyle = 'border border-stone-800 rounded-xl p-2 mx-auto my-4 hover:scale-105 hover:bg-amber-300 duration-500'
     const divStyle = 'border border-stone-800 w-1/2 flex flex-col justify-center p-1 m-2 rounded-xl'
     const labelStyle = 'w-1/4 text-right m-2'
@@ -305,6 +307,7 @@ export default function AdminPage({ isMenuOpen, sortObjects, instruments, states
                         break
                 }
                 if (newItem) alert(`Successfully created new ${crudItem}.`)
+                navigate(0)
             } catch (err) {
                 alert(`Could not add new ${crudItem}: ${err}`)
                 console.error(err)
