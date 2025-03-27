@@ -151,7 +151,7 @@ export default function AuthFormPage({ isMenuOpen, setLoginStatus, scrollToTop, 
     }, [])
 
     return (
-        <section className={`${isMenuOpen ? 'z-0 opacity-5' : ''} bg-stone-300 rounded-xl border border-stone-800 p-8 lg:w-1/3 mx-auto mt-24 mb-48 font-bodoni`}>
+        <section className={`${isMenuOpen ? 'z-0 opacity-5' : ''} bg-stone-300 rounded-xl border border-stone-800 p-8 lg:w-1/3 mx-auto mt-24 mb-48 font-montserrat`}>
             <h2 className="text-3xl text-center font-bold mb-8">{btnText}</h2>
             <form className="w-full flex flex-col" onSubmit={handleSubmit}>
                 <div>

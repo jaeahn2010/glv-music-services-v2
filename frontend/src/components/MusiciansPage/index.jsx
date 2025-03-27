@@ -76,7 +76,7 @@ export default function MusiciansPage({ isMenuOpen, isMobile, allMusicians, setM
     }
 
     return (
-        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} font-bodoni min-h-[125vh]`}>
+        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} font-montserrat min-h-[125vh]`}>
             <h1 className="text-xl text-center my-10 lg:text-3xl">Our Musicians</h1>
             {/* <section className="flex flex-col justify-center items-center my-2 py-2">
                 <label htmlFor='instrumentFilter'>FILTER BY INSTRUMENT</label>

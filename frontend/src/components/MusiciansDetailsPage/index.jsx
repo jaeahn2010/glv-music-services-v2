@@ -46,7 +46,7 @@ export default function MusiciansDetailsPage({isMenuOpen, musicianDetails, login
             musician.instruments.indexOf(instrument) === musician.instruments.length - 1 ? instruments += instrument : instruments += `${instrument}, `
         }
         return (
-            <section className={`${isMenuOpen ? 'z-0 opacity-5' : ''} flex flex-col justify-center items-center font-bodoni min-h-[150vh]`}>
+            <section className={`${isMenuOpen ? 'z-0 opacity-5' : ''} flex flex-col justify-center items-center font-montserrat min-h-[150vh]`}>
                 <div className={`relative w-11/12 lg:w-2/3 mx-auto border border-stone-600 rounded-lg text-stone-700 my-5 bg-gradient-to-r from-stone-300 via-stone-400 to-stone-300 flex flex-col ${bioModal ? 'opacity-25' : ''}`}>
                     <section className="flex flex-col lg:flex-row justify-center items-center">
                         <div className="flex flex-col w-2/3 my-2 lg:w-1/3 mx-3">

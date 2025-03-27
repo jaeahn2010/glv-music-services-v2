@@ -83,7 +83,7 @@ export default function RequestPage({ isMenuOpen, allMusicians, loginStatus, use
     }
 
     return (
-        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} font-bodoni`}>
+        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} font-montserrat`}>
             {loginStatus && userType === 'client'
             ? 
             <>

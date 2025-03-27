@@ -9,6 +9,7 @@ export default {
 			fontFamily: {
 				bodoni: ['"Bodoni Moda"', 'serif'],
 				poppins: ['"Poppins"', 'sans-serif'],
+				montserrat: ['Montserrat', 'serif'],
 			}
 		},
 	},

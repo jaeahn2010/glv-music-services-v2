@@ -22,7 +22,7 @@ export default function ClientProfilePage({ isMenuOpen, loginStatus, setLoginSta
 
     return loginStatus && userType === 'client' 
     ? (
-        <section className={`${isMenuOpen ? 'z-0 opacity-5' : ''} w-11/12 mx-auto font-bodoni h-[200vh]`}>
+        <section className={`${isMenuOpen ? 'z-0 opacity-5' : ''} w-11/12 mx-auto font-montserrat h-[200vh]`}>
             <h1 className="text-3xl text-center my-24">Your Account Information</h1>
             <p className="text-2xl"></p>
             <table className="w-full lg:w-3/4 mx-auto mb-24 table-fixed">

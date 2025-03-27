@@ -53,7 +53,7 @@ export default function PerformancesPage({ isMenuOpen }) {
 	}, [])
 
     return (
-        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} font-bodoni min-h-[125vh]`}>
+        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} font-montserrat min-h-[125vh]`}>
             <h1 className="text-xl text-center my-10 lg:text-3xl">Our performances</h1>
             <p className='w-3/4 mx-auto my-10 lg:text-lg'>Come check out our fantastic musicians in action! Hover over each card to see other featured musicians and a short description of each performance. Performance dates in red indicate past events, whereas those in green indicate upcoming performances.</p>
             {performances.length

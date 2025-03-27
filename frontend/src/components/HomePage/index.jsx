@@ -73,7 +73,7 @@ export default function HomePage({isMenuOpen, isMobile}) {
       }, [isMobile])
 
     return (
-        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} mx-auto w-5/6 font-bodoni`}>
+        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} mx-auto w-5/6 font-montserrat`}>
             <h1 className="text-center text-xl lg:text-3xl my-20">Forte & Piano</h1>
             <p className="lg:text-xl lg:leading-loose mx-auto w-5/6">In a need to hire musicians for your special event? On this website, you can customize your music setlist to perfectly match your event - weddings, corporate events, open houses, private parties, formal recitals, and more! And the exact cost of the music is disclosed to you up front. No hassle, no ambiguity. Explore our menu above to explore more about us, our musicians, and our available repertoire.</p>
             <section className="w-full my-10">
@@ -87,7 +87,7 @@ export default function HomePage({isMenuOpen, isMobile}) {
                 )}
             </section>
             <h2 className='text-center text-xl my-6'>OUR SERVICES</h2>
-            <section className={`py-2 font-bodoni ${isMobile ? '' : 'flex items-center'}`}>
+            <section className={`py-2 font-montserrat ${isMobile ? '' : 'flex items-center'}`}>
                 <ul className={`flex flex-col p-2 list-disc list-inside text-sm ${isMobile ? 'w-full' : 'w-1/2'}`}>
                     {services.map(([service, description, feeType], index) => 
                         <li key={index} className={`${isMobile ? 'w-full' : 'w-3/4'} mx-auto my-2 hover:cursor-pointer hover:scale-105 duration-500 lg:text-md ${currentServiceDisplay.index === -1 ? 'text-stone-800' : currentServiceDisplay.index === index ? 'text-stone-800' : 'text-stone-300'}`} onClick={() => {
@@ -113,7 +113,7 @@ export default function HomePage({isMenuOpen, isMobile}) {
                     : ''}
                 </div>
             </section>
-            <section className="w-[vw-100] py-2 mt-12 font-bodoni flex flex-col">
+            <section className="w-[vw-100] py-2 mt-12 font-montserrat flex flex-col">
                 <p className='w-full mx-auto text-center my-5 text-xl'>CONTACT US</p>
                 <div className='lg:flex'>
                     <div className={contactDivStyle}>

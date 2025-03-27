@@ -144,7 +144,7 @@ export default function App() {
 	
 	return (
 		<>
-			<nav className="flex items-center justify-between h-16 bg-stone-200 shadow-lg lg:px-9 md:px-6 px-3 font-bodoni">
+			<nav className="flex items-center justify-between h-16 bg-stone-200 shadow-lg lg:px-9 md:px-6 px-3 font-montserrat">
 				<Link to="/">
 					<div onClick={() => setIsMenuOpen(false)} className='h-16'>
 						<img src={logo} alt='logo' className='h-full'/>
@@ -156,7 +156,7 @@ export default function App() {
 					<div className={`${hamburgerMenuBaseStyle} ${isMenuOpen ? '-rotate-45 -translate-y-[10px]' : ''}`}></div>
 				</div>
 			</nav>
-			<div className={`${isMenuOpen ? 'opacity-100 z-50' : 'hidden'} duration-500 absolute left-[12.5%] top-1/4 w-3/4 text-xl text-center font-bodoni`}>
+			<div className={`${isMenuOpen ? 'opacity-100 z-50' : 'hidden'} duration-500 absolute left-[12.5%] top-1/4 w-3/4 text-xl text-center font-montserrat`}>
 				<p className={pCategoryStyle}>INFORMATION</p>
 				<Link to='/about' onClick={() => setIsMenuOpen(false)}><h1 className={h2Style}>About Forte & Piano</h1></Link>
 				<Link to='/repertoire' onClick={() => setIsMenuOpen(false)}><h1 className={h2Style}>Repertoire List</h1></Link>

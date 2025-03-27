@@ -3,7 +3,7 @@ import MusiciansCard from '../MusiciansCard'
 export default function MusiciansGallery({ allMusicians, getFilteredMusiciansData, setMusicianDetails, loginStatus }) {
 
     return (
-        <section className="w-11/12 mt-10 mx-auto font-bodoni lg:flex lg:justify-around lg:items-center">
+        <section className="w-11/12 mt-10 mx-auto font-montserrat lg:flex lg:justify-around lg:items-center">
             {allMusicians.length
             ? allMusicians.map(musician => <div className='w-2/3 mx-auto lg:w-1/4 hover:scale-110 duration-500' key={musician._id}>
                 <MusiciansCard

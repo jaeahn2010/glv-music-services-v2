@@ -37,7 +37,7 @@ export default function AboutPage({isMenuOpen}) {
     }, [])
     
     return (
-        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} flex flex-col items-center justify-center text-stone-800 font-bodoni`}>
+        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} flex flex-col items-center justify-center text-stone-800 font-montserrat`}>
             <h1 className="text-xl text-center my-10 lg:text-3xl">About Us</h1>
             <article className='relative w-11/12 lg:w-1/2 mx-auto lg:text-xl'>
                 <img className='rounded-xl mr-5 my-2 w-1/2 lg:w-1/3 float-left' src={mariaHead} alt="maria-headshot" />

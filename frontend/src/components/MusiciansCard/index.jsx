@@ -22,7 +22,7 @@ export default function MusiciansCard({ musician, getFilteredMusiciansData, setM
 
     return (
         <Link to={"/musician/details/" + musician._id} onClick={() => setMusicianDetails(musician)}>
-            <figure className={`my-12 w-full mx-auto p-2 border border-stone-800 rounded-xl bg-gradient-to-r from-stone-200 via-stone-400 to-stone-200 font-bodoni flex justify-center items-center lg:text-lg`}>
+            <figure className={`my-12 w-full mx-auto p-2 border border-stone-800 rounded-xl bg-gradient-to-r from-stone-200 via-stone-400 to-stone-200 font-montserrat flex justify-center items-center lg:text-lg`}>
                 <div>
                     <img src={headshotSrc} className="rounded-xl mx-auto lg:w-full"/>
                     <figcaption className="p-2 w-full text-stone-800 flex flex-col items-center justify-center">

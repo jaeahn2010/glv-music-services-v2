@@ -7,7 +7,7 @@ export default function Card({ opus, setOpusDetails, allMusicians }) {
 
     return (
         <Link to={"/opus/details/" + opus._id} onClick={() => setOpusDetails(opus)}>
-            <figure className="flex my-16 p-2 text-stone-700 border-2 border-stone-600 rounded-xl bg-stone-300 shadow-lg hover:scale-105 hover:cursor-pointer hover:duration-500 hover:bg-amber-300 font-bodoni text-sm lg:text-lg">
+            <figure className="flex my-16 p-2 text-stone-700 border-2 border-stone-600 rounded-xl bg-stone-300 shadow-lg hover:scale-105 hover:cursor-pointer hover:duration-500 hover:bg-amber-300 font-montserrat text-sm lg:text-lg">
                 <figcaption className="py-2 px-2 w-full">
                     <div className='flex justify-between bg-stone-400 rounded-xl'>
                         <h1 className={h1Style}>{opus.title.toUpperCase()}</h1>

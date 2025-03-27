@@ -890,7 +890,7 @@ export default function MobilePianoConcertSeriesPage({ isMenuOpen, allMusicians,
     }
 
     return (
-        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} relative font-bodoni`}>
+        <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} relative font-montserrat`}>
             {currentConcert.pianist
             ? <div className={`${showDetails ? 'z-50' : 'hidden'} ${modalStyle} overflow-y-auto py-6 h-[40%]`}>
                 <p className="text-lg lg:text-3xl py-12 font-bold text-center">{currentConcert.title}</p>

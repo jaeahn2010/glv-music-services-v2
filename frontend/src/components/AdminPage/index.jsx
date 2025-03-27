@@ -604,7 +604,7 @@ export default function AdminPage({ isMenuOpen, sortObjects, instruments, states
     }, [allOpuses])
 
     return userType === 'admin'
-    ? <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} text-xl min-h-[100vh] font-bodoni`}>
+    ? <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} text-xl min-h-[100vh] font-montserrat`}>
         <h1 className="text-center my-6">This is the Forte & Piano admin page. Use it to CRUD sensitive data (opuses, musicians, clients, performances).</h1>
         <section className="flex items-center justify-around my-12">
             <button className={btnStyle} onClick={() => setCrudItem('opus')}>ADD/EDIT OPUS</button>

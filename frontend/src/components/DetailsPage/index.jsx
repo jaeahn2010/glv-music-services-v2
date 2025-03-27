@@ -108,7 +108,7 @@ export default function DetailsPage({ isMenuOpen, opusDetails, loginStatus, user
         : ''
 
         return (
-            <section className={`${isMenuOpen ? 'z-0 opacity-5' : ''} flex flex-col justify-center items-center font-bodoni`}>
+            <section className={`${isMenuOpen ? 'z-0 opacity-5' : ''} flex flex-col justify-center items-center font-montserrat`}>
                 <p className="mt-24 lg:text-lg">Details of this repertoire</p>
                 <div className={`w-11/12 lg:w-1/2 mx-auto border border-stone-400 rounded-lg text-stone-700 p-5 m-5 flex-col justify-center bg-stone-300 lg:text-lg`}>
                     <section className="text-center">
