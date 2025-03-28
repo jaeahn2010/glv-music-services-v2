@@ -15,6 +15,7 @@ import MusiciansDetailsPage from '../MusiciansDetailsPage'
 import PerformancesPage from '../PerformancesPage'
 import ClientProfilePage from '../ClientProfilePage'
 import CurrentCart from '../CurrentCart'
+import ContactPage from '../ContactPage'
 import { getOpuses, getMusicians } from '../../../utils/backend'
 import './styles.css'
 import cartIcon from '../../assets/cart-icon.jpeg'
@@ -162,6 +163,7 @@ export default function App() {
 				<Link to='/repertoire' onClick={() => setIsMenuOpen(false)}><h1 className={h2Style}>Repertoire List</h1></Link>
 				<Link to='/musicians' onClick={() => setIsMenuOpen(false)}><h1 className={h2Style}>Our Musicians</h1></Link>
 				<Link to='/performances' onClick={() => setIsMenuOpen(false)}><h1 className={h2Style}>Our Performances</h1></Link>
+				<Link to='/contact' onClick={() => setIsMenuOpen(false)}><h1 className={h2Style}>Contact Us</h1></Link>
 				<div className='border-t pt-3 border-stone-200 lg:w-1/2 mx-auto'>
 					<p className={pCategoryStyle}>STORES</p>
 					<Link onClick={() => setIsMenuOpen(false)} to="/ncs">
@@ -301,6 +303,12 @@ export default function App() {
 						states={states}
 						scrollToTop={scrollToTop}
 						userType={userType}
+					/>}
+				/>
+				<Route path="/contact" element={
+					<ContactPage
+						isMenuOpen={isMenuOpen}
+						isMobile={isMobile}
 					/>}
 				/>
 				<Route path="/*" element={<NotFoundPage/>} />

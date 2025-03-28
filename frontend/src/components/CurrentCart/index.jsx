@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 export default function CurrentCart({ isMenuOpen, allOpuses, loginStatus, userCart, setUserCart, allMusicians, scrollToTop, userType }) {
     let cartText = userCart.length > 0 ? 'Your cart' : 'Your cart is empty.'
-    const btnStyle = 'border-stone-800 border rounded-xl px-3 py-1 my-2 w-full hover:scale-105 hover:cursor-pointer hover:bg-green-400 hover:text-stone-900 hover:duration-500'
+    const btnStyle = 'border-stone-800 border rounded-xl px-3 py-1 my-2 w-full hover:scale-105 hover:cursor-pointer hover:bg-amber-400 hover:text-stone-900 hover:duration-500'
 
     function handleClick(evt) {
         evt.preventDefault()

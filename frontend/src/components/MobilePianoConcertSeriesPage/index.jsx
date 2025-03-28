@@ -47,6 +47,7 @@ import kanto2 from '../../assets/mpcs-pokemon-kanto-2.jpeg'
 import heroesVillains from '../../assets/mpcs-heroes-villains.png'
 import goodbye from '../../assets/mpcs-goodbye.png'
 import winter from '../../assets/mpcs-winter.png'
+import pedagogy from '../../assets/mpcs-pedagogy.jpg'
 
 class Concert {
     constructor(pianist, title, description, program = [], duration, basePrice, poster) {
@@ -88,6 +89,7 @@ const chaminade = 'Cécile Chaminade'
 const chopin = 'Frédéric Chopin'
 const clementi = 'Muzio Clementi'
 const crumb = 'George Crumb'
+const czerny = 'Carl Czerny'
 const cziffra = 'György Cziffra'
 const davidov = 'Karl Davidov'
 const davis = 'Katherine Kannicott Davis'
@@ -170,6 +172,7 @@ const scriabin = 'Aleksandr Scriabin'
 const shchedrin = 'Rodion Shchedrin'
 const shostakovich = 'Dmitri Shostakovich'
 const sibelius = 'Jean Sibelius'
+const siloti = 'Alexandr Siloti'
 const silvestrov = 'Valentin Silvestrov'
 const skoryk = 'Myroslav Skoryk'
 const still = 'Willam Grant Still'
@@ -243,7 +246,9 @@ const aWholeNewWorld = ['"A Whole New World" from "Aladdin" (arr. Ahn-Benton)', 
 const babbino = ['"O mio babbino caro" from "Gianni Schicchi" (arr. Ahn-Benton)', puccini]
 const babadjanianElegy = ['Elegy in G minor', babadjanian]
 const bachAir = ['"Air" from "Orchestral Suite No. 3" (arr. Martucci)', bachJS]
+const bachAirSiloti = ['Transcription of J.S. Bach\'s "Air"', siloti]
 const bachChaconne = ['Transcription of J.S. Bach\'s "Chaconne"', busoni]
+const bachCPERondo = ['Rondo in E-flat major, H. 288', bachCPE]
 const bachMinuet = ['Minuet in G major', bachJS]
 const bachPartita2 = ['Partita No. 2 in C minor', bachJS]
 const bachPartita6 = ['Partita No. 6 in E minor', bachJS]
@@ -279,6 +284,7 @@ const beethovenSonata17_1 = ['"Allegro" from "Sonata No. 17 in D minor "Tempest"
 const beethovenSonata21 = ['Sonata No. 21 in C major "Waldstein"', beethoven]
 const beethovenSonata23 = ['Sonata No. 23 in F minor "Appassionata", Op. 57', beethoven]
 const beethovenSonata23_3 = ['"Allegro ma non troppo" from "Sonata No. 23 in F minor "Appassionata", Op. 57"', beethoven]
+const beethovenSonata24 = ['Sonata No. 24 in F-sharp major "A Thérèse", Op. 78', beethoven]
 const beethovenSonata25 = ['Sonata No. 25 in G major, Op. 79 "Cuckoo"', beethoven]
 const beethovenSonata26 = ['Sonata No. 26 in E-flat major, Op. 81 "Les adieux"', beethoven]
 const beethovenSonata27 = ['Sonata No. 27 in E minor, Op. 90', beethoven]
@@ -418,6 +424,7 @@ const consolation3 = ['Consolation No. 3 in D-flat major', liszt]
 const cruella = ['"Cruella de Vil" from "101 Dalmatians"', radcliffe]
 const cuckooWaltz = ['Cuckoo Waltz', jonasson]
 const cygne = ['Le cygne', saintSaens]
+const czernyToccata = ['Toccata in C major', czerny]
 const danseMacabre = ['Danse macabre (arr. Liszt)', saintSaens]
 const danzaRitualDelFuego = ['Danza ritual del fuego', falla]
 const danzasArgentinas = ['Danzas argentinas', ginastera]
@@ -783,6 +790,7 @@ const availableConcerts = [
     ['Overcoming Tragedy', 'Tragedy is an unfortunate but inevitable part of life. Let this concert assist you with expressing and overcoming grief and allow yourself to slowly enter the stage of acceptance.', [chopinPolonaise44, beethovenSonata7_2, preludeFugueVariation, scriabinEtude42_5, consolation3, etudeTableau33_7, bachAir, beethovenSonata27, dvorakLargo], 80, 150, tragedy],
     ['The Opera House 1', 'Explore the drama, the romance, the scandal, and the tragedy of famous operatic works, now brought to you in a home concert on the piano.', [figaroOverture, isoldesLiebestod, carmenVariations, forzaOverture, songbookSelections, vocalise, lisztFigaro], 60, 200, opera1],
     ['The Opera House 2', 'The world of opera is vast and deep: with this opera-inside-a-piano concert, delve more into the storyline, the plot, and the hidden meanings and intentions of characters.', [williamTellOverture, solveig, chopinGiovanni, mascagniIntermezzo, tarasBulbaOverture, carmenSelections, erlkonig, babbino, lisztRigoletto], 70, 200, opera2],
+    ['Passing Down Pedagogy', 'Trace the centuries-long path of music pedagogy, where great composers mentor younger musicians, who in turn become great composers and pedagogues themselves.', [bachToccata, bachCPERondo, haydnSonata32, beethovenSonata24, czernyToccata, hungarianRhapsody2, bachAirSiloti, rachmaninovSonata2], 75, 225, pedagogy],
     ['A Pokémon Journey: Kanto - Part 1', 'Let out both your inner nerd and childhood nostalgia! Explore both the iconic music of Junichi Masuda, and the epic battling music of the protagonist against many foes, if the battles were to be represented by equally iconic classical music. Follow the first generation gameplay through the Kanto region, from Pallet Town to Celadon City.', [masudaKantoOpening, masudaPallet, masudaOakLab, haydnSonata33_3, masudaKantoTravel1, masudaViridian, clementiSonata40_2_1, masudaViridianForest, masudaPewter, brahmsSonata1_3, masudaMoon, masudaCerulean, chopinEtude25_2, mozartSonata8_3, masudaVermillion, masudaAnne, beethovenSonata5_3, kapustin3, masudaRock, masudaLavender, masudaTower, beethovenSonata1_4, masudaKantoTravel2, masudaCeladon, masudaKantoRocket, diabolicSuggestion, mendelssohnRondo], 80, 175, kanto1],
     ['A Pokémon Journey: Kanto - Part 2', 'Continue your trip down the memory lane in the region of Kanto, accompanied by the music of Masuda and equally dramatic works by other composers. Conquer the last four gym leaders, the elite four, and the champion!', [masudaBike, masudaFuchsia, transcendental8, masudaKantoTravel3, masudaSaffron, beethovenSonata17_1, prokofievToccata, scriabinEtude65_3, masudaSurf, masudaCinnabar, masudaMansion, ginasteraSonata1_4, prokofievSonata7_3, beethovenSonata23_3, masudaKantoVictory, chopinEtude25_11, rachmaninovPrelude23_5, ginasteraSonata1_2, valkyries, masudaChampion, masudaHall, masudaKantoEnding], 80, 175, kanto2],
     ['Power of Prokofiev', 'Immerse in the powerfully striking musical fantasy land of Sergei Prokofiev, filled with obsession, feud, lust, war, and sarcasm.', [diabolicSuggestion, prokofievRomeoJuliet, prokofievSonata3, prokofievToccata, prokofievSonata7], 65, 225, prokofievPortrait],
