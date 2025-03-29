@@ -82,14 +82,14 @@ const sendEmail = async (formData) => {
                     status: pending,`
                 }
             break
-            case 'joinGLVMS': // for 'join our team' requests
+            case 'joinUs': // for 'join our team' requests
                 mailOptions = {
                     from: formData.email,
                     to: 'glvmusicservices@gmail.com',
                     subject: `Interview Request from ${formData.firstName} ${formData.lastName}`,
                     text: `categories: ${formData.categories},
                     instruments: ${formData.instruments},
-                    resume: ${formData.resume}`,
+                    resume: ${formData.file}`,
                     attachments: formData.file ? [{
                         filename: formData.file.originalname,
                         path: formData.file.path,
@@ -165,12 +165,8 @@ router.post('/', authMiddleware(['client', 'admin']), (req, res) => {
 })
 
 // email sender (client & admin access only)
-router.post('/send-email', authMiddleware(['client', 'admin']), upload.single('resume'), async (req, res) => {
+router.post('/send-email', authMiddleware(['client', 'admin']), async (req, res) => {
     let formData = req.body
-    if (req.body.requestType === 'joinGLVMS') {
-        if (!req.file) res.status(400).send('No resume uploaded.')
-        formData = {...req.body, file: req.file}
-    }
     try {
         const result = await sendEmail(formData)
         console.log('Email sent:', result)
@@ -181,10 +177,14 @@ router.post('/send-email', authMiddleware(['client', 'admin']), upload.single('r
     }
 })
 
-// email sender for generic requests through contactPage (no account required)
-router.post('/submit-form', async (req, res) => {
-    const { requestType, firstName, lastName, email, message, captchaValue } = req.body
-    if (!captchaValue) {
+// email sender for generic requests through contactPage & 'join us' form w/ resume upload (no account required)
+router.post('/submit-form', upload.single('resume'), async (req, res) => {
+    let formData = req.body
+    if (formData.requestType === 'joinUs') { // if join us request
+        if (!req.file) res.status(400).send('No resume uploaded.')
+        formData = {...req.body, file: req.file}
+    }
+    if (!formData.captchaValue) {
         return res.status(400).json({ message: 'Captcha is required.' })
     }
     try {
@@ -194,14 +194,14 @@ router.post('/submit-form', async (req, res) => {
             {
                 params: {
                     secret: RECAPTCHA_SECRET_KEY,
-                    response: captchaValue,
+                    response: formData.captchaValue,
                 },
             }
         )
         if (!captchaResponse.data.success) {
             return res.status(400).json({ message: 'Captcha verification failed' })
         }
-        const result = await sendEmail({ requestType, firstName, lastName, email, message })
+        const result = await sendEmail(formData)
         console.log('Generic request submitted:', result)
         res.status(200).send('Generic request sent successfully')
     } catch (err) {

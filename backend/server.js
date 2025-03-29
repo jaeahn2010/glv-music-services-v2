@@ -31,7 +31,7 @@ app.use(cors({
         : 'http://localhost:5173',
     credentials: true
 }))
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cookieParser())
 app.use(bodyParser.json())
@@ -46,10 +46,10 @@ app.use((req, res, next) => {
 
 if (process.env.NODE_ENV === 'production') {
     app.use((req, res, next) => {
-      if (req.headers['x-forwarded-proto'] !== 'https') {
-        return res.redirect(301, 'https://' + req.headers.host + req.originalUrl)
-      }
-      next()
+        if (req.headers['x-forwarded-proto'] !== 'https') {
+            return res.redirect(301, 'https://' + req.headers.host + req.originalUrl)
+        }
+        next()
     })
 }
 

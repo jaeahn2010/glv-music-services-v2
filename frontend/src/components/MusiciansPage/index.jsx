@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import MusiciansGallery from '../MusiciansGallery'
-import { sendEmail } from '../../../utils/backend'
+import { submitForm } from '../../../utils/backend'
 
 export default function MusiciansPage({ isMenuOpen, isMobile, allMusicians, setMusicianDetails, loginStatus, categories, instrumentsExtended }) {
     const [showForm, setShowForm] = useState(false)
@@ -15,12 +16,26 @@ export default function MusiciansPage({ isMenuOpen, isMobile, allMusicians, setM
     })
     const [resume, setResume] = useState(null)
     const [fileMessage, setFileMessage] = useState('')
+    const [isRecaptchaReady, setRecaptchaReady] = useState(false)
+    const navigate = useNavigate()
     const divStyle = 'my-2 w-11/12 mx-auto'
     const divStyle2 = 'my-2 text-sm lg:text-md w-full lg:w-1/2 mx-auto flex items-center lg:pr-10'
     const pStyle = 'my-3 text-center text-sm lg:text-base'
     const labelStyle = 'w-1/3 mx-2 text-right lg:text-base'
     const inputStyle = 'w-2/3 mx-2 p-1 rounded-xl text-stone-800 lg:text-base'
     const btnStyle = 'border border-stone-800 px-2 py-1 my-6 rounded-xl hover:bg-amber-300 hover:cursor-pointer duration-500 hover:scale-105'
+
+    useEffect(() => { // wait until recaptcha is available
+        const checkRecaptcha = setInterval(() => {
+            if (window.grecaptcha && typeof window.grecaptcha.ready === "function") {
+                clearInterval(checkRecaptcha)
+                setRecaptchaReady(true)
+                console.log("reCAPTCHA script loaded successfully.")
+            }
+        }, 500)
+
+        return () => clearInterval(checkRecaptcha)
+    }, [])
 
     //get full list of musicians, or filter by instrument
 	function getFilteredMusiciansData(filter) {
@@ -48,13 +63,17 @@ export default function MusiciansPage({ isMenuOpen, isMobile, allMusicians, setM
         }
     }
 
-    function handleSubmit(evt) {
+    async function handleSubmit(evt) {
         evt.preventDefault()
+        if (!isRecaptchaReady || !window.grecaptcha) {
+            alert("reCAPTCHA is not ready. Please try again.")
+            return
+        }
         if (!resume) return setFileMessage('Please select a file first.')
 
         const officialFormData = new FormData()
         officialFormData.append('resume', resume)
-        officialFormData.append('requestType', 'joinGLVMS')
+        officialFormData.append('requestType', 'joinUs')
         officialFormData.append('clientEmail', formData.email)
         officialFormData.append('firstName', formData.firstName)
         officialFormData.append('lastName', formData.lastName)
@@ -62,10 +81,17 @@ export default function MusiciansPage({ isMenuOpen, isMobile, allMusicians, setM
         officialFormData.append('instruments', formData.instruments)
 
         try {
-            sendEmail(officialFormData)
+            if (!window.grecaptcha) {
+                alert("reCAPTCHA failed to load. Please refresh the page.")
+                return
+            }
+            const token = await window.grecaptcha.execute("6LcXZAMrAAAAAPjCkXBkmMBJkCS6h4P1wRXi9Gcl", { action: "submit" })
+            officialFormData.append('captchaValue', token)
+            submitForm(officialFormData)
                 .then((res) => {
                     setFileMessage(res.message)
-                    alert('Successfully sent resume.')
+                    alert('Successfully sent resume! We will get back to you as soon as we can.')
+                    navigate('/')
                 })
                 .catch((err) => {
                     setFileMessage(err.response?.data?.error || 'File upload failed.')
@@ -78,18 +104,6 @@ export default function MusiciansPage({ isMenuOpen, isMobile, allMusicians, setM
     return (
         <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} font-montserrat min-h-[125vh]`}>
             <h1 className="text-xl text-center my-10 lg:text-3xl">Our Musicians</h1>
-            {/* <section className="flex flex-col justify-center items-center my-2 py-2">
-                <label htmlFor='instrumentFilter'>FILTER BY INSTRUMENT</label>
-                <select
-                    className='mt-2 text-stone-800'
-                    name="instrumentFilter"
-                    id="instrumentFilter"
-                    defaultValue='none'
-                    onChange={evt => getFilteredData('instrument', evt.target.value)}>
-                    <option key='0' value='none' disabled>Select an instrument</option>
-                    {instruments.map(instrument => <option key={instrument} value={instrument}>{instrument}</option>)}
-                </select>
-            </section> */}
             <MusiciansGallery
                 allMusicians={allMusicians}
                 getFilteredMusiciansData={getFilteredMusiciansData}
@@ -181,7 +195,7 @@ export default function MusiciansPage({ isMenuOpen, isMobile, allMusicians, setM
                         />
                     </div>
                     <input type="submit" value='Submit' className={btnStyle}/>
-                    {fileMessage && <p className='text-red-300'>{fileMessage}</p>}
+                    {fileMessage && <p className='text-red-400'>{fileMessage}</p>}
                 </form>
                 <button className={btnStyle + ' lg:w-1/6 mx-auto'} onClick={() => setShowForm(!showForm)}>{showForm ? 'CLOSE FORM' : 'OPEN FORM'}</button>
             </section>

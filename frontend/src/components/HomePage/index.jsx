@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import anyEvent from '../../assets/homepage-any-event.jpg'
 import classicallyTrained from '../../assets/homepage-classically-trained.jpg'
 import noHiddenFees from '../../assets/homepage-no-hidden-fees.png'
@@ -99,38 +100,24 @@ export default function HomePage({isMenuOpen, isMobile}) {
                         }}>{service}</li>
                     )}
                 </ul>
-                <div className={`${isMobile ? 'w-full' : 'w-1/2'} mx-1 my-10 p-2 border border-stone-800 bg-stone-300 rounded-xl ${currentServiceDisplay.index === -1 ? 'flex justify-center items-center' : ''}`}>
+                <div className={`${isMobile ? 'w-full' : 'w-1/2'} mx-1 my-10 p-2 border border-stone-800 bg-stone-300 rounded-xl lg:min-h-[300px] flex flex-col justify-center items-center leading-loose`}>
                     {currentServiceDisplay.description}
                     {currentServiceDisplay.index !== -1
-                    ? <div className='my-5 flex justify-center items-center relative'>
+                    ? <div className='my-5 flex justify-center items-center relative w-full'>
                         <p>Fee type</p>
-                        <p className='border border-stone-800 rounded-full text-[9px] mr-1 px-1 -translate-y-2 hover:bg-amber-300 hover:cursor-pointer' onMouseEnter={() => setFeeModalDisplay(true)} onMouseLeave={() => setFeeModalDisplay(false)}>?</p>
+                        <p className='border border-stone-800 rounded-full text-[9px] mr-1 px-1.5 -translate-y-2 hover:bg-amber-300 hover:cursor-pointer' onMouseEnter={() => setFeeModalDisplay(true)} onMouseLeave={() => setFeeModalDisplay(false)}>?</p>
                         <p>: {currentServiceDisplay.feeType}</p>
-                        <p className={`${feeModalDisplay ? 'absolute top-3/4 z-50 lg:left-[16.67%] w-full lg:w-3/4 mx-auto text-xs border border-stone-800 p-2 rounded-xl bg-amber-300 leading-5 lg:leading-6' : 'hidden'}`}>
+                        <p className={`${feeModalDisplay ? 'absolute top-3/4 z-50 lg:left-[12.5%] w-3/4 mx-auto text-xs border border-stone-800 p-2 rounded-xl bg-amber-300 leading-5 lg:leading-6' : 'hidden'}`}>
                             Fee types describe how an event is charged. A <span className='font-bold'>flat</span> fee is a small one-time fee that covers a small performance usually with a time limit, such as an audition or a competition. A <span className='font-bold'>repertoire</span> fee is a larger, custom-quoted fee that covers a full performance that depends on a variety of factors such as difficulty of the repertoire, duration of the performance, distance traveled, and equipment setup. An <span className='font-bold'>hourly</span> fee is solely dependent on the duration of the event that would have a designated time frame, such as a rehearsal, lesson, or a class.
                         </p>
                     </div>
                     : ''}
                 </div>
             </section>
-            <section className="w-[vw-100] py-2 mt-12 font-montserrat flex flex-col">
-                <p className='w-full mx-auto text-center my-5 text-xl'>CONTACT US</p>
-                <div className='lg:flex'>
-                    <div className={contactDivStyle}>
-                        <p className="text-xs lg:text-base">Can't find your desired music or have a custom request?</p>
-                        <a href="mailto:forteandpiano702@gmail.com" className={aStyle}>
-                            <p className="fill-content text-sm">Email Forte & Piano</p>
-                        </a>
-                    </div>
-                    <div className={contactDivStyle}>
-                        <p className="text-xs lg:text-base">Problems or questions about using this site?</p>
-                        <a href="mailto:jaeahnbenton@gmail.com" className={aStyle}>
-                            <p className="fill-content text-sm">Email site admin</p>
-                        </a>
-                    </div>
-                </div>
-            </section>
             {/* add FAQs */}
+            <section className='my-10'>
+                <p className='text-center'>Questions or concerns? Please feel free to contact us <Link to='/contact' className='underline hover:text-stone-400 duration-500'>here</Link> at anytime.</p>
+            </section>
             <section className='my-10 flex flex-col items-center justify-center'>
                 <img src={logo} alt="logo" />
                 <p className='text-xs lg:text-sm'>Copyright &copy; 2025 Forte & Piano. All rights reserved.</p>

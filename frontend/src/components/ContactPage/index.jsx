@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 import { submitForm } from "../../../utils/backend"
 
-export default function ContactPage({ isMenuOpen, isMobile }) {
+export default function ContactPage({ isMenuOpen, isMobile, scrollToTop }) {
 	const [formData, setFormData] = useState({
         topic: '',
 		firstName: '',
@@ -10,8 +11,10 @@ export default function ContactPage({ isMenuOpen, isMobile }) {
 		message: '',
 	})
     const [isRecaptchaReady, setRecaptchaReady] = useState(false)
+    const navigate = useNavigate()
 
     useEffect(() => { // wait until recaptcha is available
+        scrollToTop()
         const checkRecaptcha = setInterval(() => {
             if (window.grecaptcha && typeof window.grecaptcha.ready === "function") {
                 clearInterval(checkRecaptcha)
@@ -63,6 +66,7 @@ export default function ContactPage({ isMenuOpen, isMobile }) {
                 message: '',
             })
             alert('Message successfully sent! We will be contacting you shortly.')
+            navigate('/')
         } catch(err) {
             console.log(err)
             alert('Failed to send message. Please try again later.')

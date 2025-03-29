@@ -309,6 +309,7 @@ export default function App() {
 					<ContactPage
 						isMenuOpen={isMenuOpen}
 						isMobile={isMobile}
+						scrollToTop={scrollToTop}
 					/>}
 				/>
 				<Route path="/*" element={<NotFoundPage/>} />

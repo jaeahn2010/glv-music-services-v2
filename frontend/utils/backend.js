@@ -203,7 +203,7 @@ export async function sendEmail(email) {
     }
 }
 
-// generic request sender via contactPage form
+// generic request sender via contactPage form & 'join us' form
 export async function submitForm(formData) {
     try {
         const { data } = await axios.post('/api/requests/submit-form', formData)
