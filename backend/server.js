@@ -6,6 +6,7 @@ const cors = require('cors')
 const path = require('path')
 const nodemailer = require('nodemailer')
 const bodyParser = require('body-parser')
+const helmet = require("helmet")
 
 // db connection, models, seed data
 const db = require('./models')
@@ -50,7 +51,21 @@ if (process.env.NODE_ENV === 'production') {
       }
       next()
     })
-  }
+}
+
+app.use(
+    helmet.contentSecurityPolicy({
+        directives: {
+            defaultSrc: ["'self'"],
+            scriptSrc: [
+                "'self'",
+                "https://www.google.com",
+                "https://www.gstatic.com",
+            ],
+            frameSrc: ["'self'", "https://www.google.com"],
+        },
+    })
+)
 
 // mount routes
 app.use('/api/clients', clientsCtrl)
