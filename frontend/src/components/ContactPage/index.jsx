@@ -1,5 +1,5 @@
-import { useState } from "react"
-import { sendEmail } from "../../../utils/backend"
+import { useState, useEffect } from "react"
+import { submitForm } from "../../../utils/backend"
 
 export default function ContactPage({ isMenuOpen, isMobile }) {
 	const [formData, setFormData] = useState({
@@ -9,6 +9,19 @@ export default function ContactPage({ isMenuOpen, isMobile }) {
 		email: '',
 		message: '',
 	})
+    const [isRecaptchaReady, setRecaptchaReady] = useState(false)
+
+    useEffect(() => { // wait until recaptcha is available
+        const checkRecaptcha = setInterval(() => {
+            if (window.grecaptcha && typeof window.grecaptcha.ready === "function") {
+                clearInterval(checkRecaptcha)
+                setRecaptchaReady(true)
+                console.log("reCAPTCHA script loaded successfully.")
+            }
+        }, 500)
+
+        return () => clearInterval(checkRecaptcha)
+    }, [])
 
     const topics = ['General', 'Account', 'Employment', 'Mobile Piano Concert Series', 'New Compositions', 'Repertoire', 'Performances & Events', 'Subscription', 'Website']
 
@@ -16,47 +29,50 @@ export default function ContactPage({ isMenuOpen, isMobile }) {
 	let labelStyle = 'w-1/3 md:w-1/4 lg:w-1/3 text-right mr-5 text-sm md:text-xl'
 	let inputStyle = 'w-2/3 text-stone-800 bg-stone-300 text-sm md:text-xl p-1 rounded-xl'
 
-    // function handleSubmit(evt) {
-    //     evt.preventDefault()
-    //     try {
-    //         let [musicianLastName, musicianFirstName] = currentConcert.pianist.split(', ')
-    //         sendEmail({
-    //             requestType: 'main',
-    //             clientEmail: localStorage.getItem('email'),
-    //             musicianEmail: allMusicians.find(musician => musician.lastName === musicianLastName && musician.firstName === musicianFirstName).email,
-    //             eventName: currentConcert.title,
-    //             eventLocation: {
-    //                 locationName: concertRequestData.locationName,
-    //                 address: concertRequestData.address,
-    //                 city: concertRequestData.city,
-    //                 state: concertRequestData.state,
-    //                 zipCode: concertRequestData.zipCode,
-    //             },
-    //             eventDate: concertRequestData.eventDate,
-    //             eventStartTime: concertRequestData.eventStartTime,
-    //             eventEndTime: concertRequestData.eventEndTime,
-    //             requestedRepertoire: currentConcert.program,
-    //             additionalComments: concertRequestData.additionalComments,
-    //             status: 'pending',
-    //         })
-    //         setFormData({
-    //             topic: '',
-    //             firstName: '',
-    //             lastName: '',
-    //             email: '',
-    //             message: '',
-    //         })
-    //         alert('Message successfully sent! We will be contacting you shortly.')
-    //     } catch(err) {
-    //         console.log(err)
-    //         alert('Failed to send message. Please try again later.')
-    //     }
-    // }
+    function handleChange(evt) {
+        const { name, value } = evt.target
+        setFormData({ ...formData, [name]: value })
+    }
+
+    async function handleSubmit(evt) {
+        evt.preventDefault()
+        if (!isRecaptchaReady || !window.grecaptcha) {
+            alert("reCAPTCHA is not ready. Please try again.")
+            return
+        }
+        try {
+            if (!window.grecaptcha) {
+                alert("reCAPTCHA failed to load. Please refresh the page.")
+                return
+            }
+            const token = await window.grecaptcha.execute("6LcXZAMrAAAAAPjCkXBkmMBJkCS6h4P1wRXi9Gcl", { action: "submit" })
+            submitForm({
+                requestType: 'generic',
+                topic: formData.topic,
+                firstName: formData.firstName,
+                lastName: formData.lastName,
+                email: formData.email,
+                message: formData.message,
+                captchaValue: token,
+            })
+            setFormData({
+                topic: '',
+                firstName: '',
+                lastName: '',
+                email: '',
+                message: '',
+            })
+            alert('Message successfully sent! We will be contacting you shortly.')
+        } catch(err) {
+            console.log(err)
+            alert('Failed to send message. Please try again later.')
+        }
+    }
   
 	return (
 		<div className={`${isMenuOpen ? 'z-0 opacity-5' : ''} text-stone-800 font-montserrat min-h-[125vh]`}>
             <p className="lg:text-xl text-center my-10">Have questions or concerns? Please fill out this form, and we will get back to you as soon as possible!</p>
-			<form name="contact" className="contact-form w-11/12 lg:w-1/2 mx-auto flex flex-col justify-center items-center py-5">
+			<form className="w-11/12 lg:w-1/2 mx-auto flex flex-col justify-center items-center py-5" onSubmit={handleSubmit}>
                 <div className={divStyle}>
                     <label className={labelStyle} htmlFor='topic'>Topic:</label>
                     <select
@@ -64,7 +80,7 @@ export default function ContactPage({ isMenuOpen, isMobile }) {
                         name="topic"
                         id="topic"
                         defaultValue={0}
-                        onChange={(evt) => setFormData({...formData, topic: evt.target.value})}
+                        onChange={handleChange}
                         required
                     >
                         <option key={0} value={0} disabled>Select a topic</option>
@@ -79,7 +95,7 @@ export default function ContactPage({ isMenuOpen, isMobile }) {
 						name="firstName"
 						placeholder="Your first name"
 						value={formData.firstName}
-						onChange={(evt) => setFormData({...formData, firstName: evt.target.value})}
+						onChange={handleChange}
 						className={inputStyle}
 						required
 					/>
@@ -92,7 +108,7 @@ export default function ContactPage({ isMenuOpen, isMobile }) {
 						name="lastName"
 						placeholder="Your last name"
 						value={formData.lastName}
-						onChange={(evt) => setFormData({...formData, lastName: evt.target.value})}
+						onChange={handleChange}
 						className={inputStyle}
 						required
 					/>
@@ -105,7 +121,7 @@ export default function ContactPage({ isMenuOpen, isMobile }) {
 						name="email"
 						placeholder="youremail@email.com"
 						value={formData.email}
-						onChange={(evt) => setFormData({...formData, email: evt.target.value})}
+						onChange={handleChange}
 						className={inputStyle}
 						required
 					/>
@@ -117,7 +133,7 @@ export default function ContactPage({ isMenuOpen, isMobile }) {
 						name="message"
 						placeholder="Your message"
 						value={formData.message}
-						onChange={(evt) => setFormData({...formData, message: evt.target.value})}
+						onChange={handleChange}
 						className={inputStyle + ' h-[30vh]'}
 						required
 					/>

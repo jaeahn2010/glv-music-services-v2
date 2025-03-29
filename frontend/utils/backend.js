@@ -203,6 +203,17 @@ export async function sendEmail(email) {
     }
 }
 
+// generic request sender via contactPage form
+export async function submitForm(formData) {
+    try {
+        const { data } = await axios.post('/api/requests/submit-form', formData)
+        return data
+    } catch (err) {
+        console.error('Error sending generic request: ', err)
+        throw err
+    }
+}
+
 //performances CRUD
 export async function getPerformances() {
     const { data } = await axios.get(`/api/performances`)

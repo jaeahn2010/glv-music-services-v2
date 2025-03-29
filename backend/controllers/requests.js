@@ -8,6 +8,9 @@ const nodemailer = require('nodemailer')
 const multer = require('multer')
 const path = require('path')
 const fs = require('fs')
+const axios = require('axios')
+
+const RECAPTCHA_SECRET_KEY = process.env.GOOGLE_RECAPTCHA_SECRET_KEY
 
 const uploadDir = path.join(__dirname, 'backend/uploads')
 if (!fs.existsSync(uploadDir)) {
@@ -50,27 +53,36 @@ const sendEmail = async (formData) => {
 
         let mailOptions 
         switch(formData.requestType) {
-            case 'main':
-            case 'MPCS':
-            mailOptions = {
-                from: formData.clientEmail,
-                to: 'glvmusicservices@gmail.com',
-                subject: `Performance Request from ${formData.clientEmail}`, // change to fname/lname later
-                text: `eventName: ${formData.eventName},
-                locationName: ${formData.eventLocation.locationName},
-                address: ${formData.eventLocation.address},
-                city: ${formData.eventLocation.city},
-                state: ${formData.eventLocation.state},
-                zipCode: ${formData.eventLocation.zipCode},
-                eventDate: ${formData.eventDate},
-                eventStartTime: ${formData.eventStartTime},
-                eventEndTime: ${formData.eventEndTime},
-                requestedRepertoire: ${formData.mainRequest ? formData.requestedRepertoire.map(rep => `${rep.composer}: ${rep.title} (${rep.movements})`) : formData.requestedRepertoire.map(rep => `${rep[1]}: ${rep[0]}`)},
-                additionalComments: ${formData.additionalComments},
-                status: pending,`
-            }
+            case 'generic': // for generic requests
+                mailOptions = {
+                    from: `${formData.email}`,
+                    to: 'glvmusicservices@gmail.com',
+                    subject: `Generic Request from ${formData.lastName}, ${formData.firstName}`,
+                    text: `Topic: ${formData.topic},
+                    Message: ${formData.message}`
+                }
+                break
+            case 'main': // for repertoirePage requests
+            case 'MPCS': // for MPCS requests
+                mailOptions = {
+                    from: formData.clientEmail,
+                    to: 'glvmusicservices@gmail.com',
+                    subject: `Performance Request from ${formData.clientEmail}`, // change to fname/lname later
+                    text: `eventName: ${formData.eventName},
+                    locationName: ${formData.eventLocation.locationName},
+                    address: ${formData.eventLocation.address},
+                    city: ${formData.eventLocation.city},
+                    state: ${formData.eventLocation.state},
+                    zipCode: ${formData.eventLocation.zipCode},
+                    eventDate: ${formData.eventDate},
+                    eventStartTime: ${formData.eventStartTime},
+                    eventEndTime: ${formData.eventEndTime},
+                    requestedRepertoire: ${formData.mainRequest ? formData.requestedRepertoire.map(rep => `${rep.composer}: ${rep.title} (${rep.movements})`) : formData.requestedRepertoire.map(rep => `${rep[1]}: ${rep[0]}`)},
+                    additionalComments: ${formData.additionalComments},
+                    status: pending,`
+                }
             break
-            case 'joinGLVMS':
+            case 'joinGLVMS': // for 'join our team' requests
                 mailOptions = {
                     from: formData.email,
                     to: 'glvmusicservices@gmail.com',
@@ -79,9 +91,9 @@ const sendEmail = async (formData) => {
                     instruments: ${formData.instruments},
                     resume: ${formData.resume}`,
                     attachments: formData.file ? [{
-                            filename: formData.file.originalname,
-                            path: formData.file.path,
-                        }] : [],
+                        filename: formData.file.originalname,
+                        path: formData.file.path,
+                    }] : [],
                 }
             break
             default:
@@ -166,6 +178,35 @@ router.post('/send-email', authMiddleware(['client', 'admin']), upload.single('r
     } catch (err) {
         console.error('Error sending email:', err)
         res.status(500).send('Error sending email')
+    }
+})
+
+// email sender for generic requests through contactPage (no account required)
+router.post('/submit-form', async (req, res) => {
+    const { requestType, firstName, lastName, email, message, captchaValue } = req.body
+    if (!captchaValue) {
+        return res.status(400).json({ message: 'Captcha is required.' })
+    }
+    try {
+        const captchaResponse = await axios.post(
+            `https://www.google.com/recaptcha/api/siteverify`,
+            null,
+            {
+                params: {
+                    secret: RECAPTCHA_SECRET_KEY,
+                    response: captchaValue,
+                },
+            }
+        )
+        if (!captchaResponse.data.success) {
+            return res.status(400).json({ message: 'Captcha verification failed' })
+        }
+        const result = await sendEmail({ requestType, firstName, lastName, email, message })
+        console.log('Generic request submitted:', result)
+        res.status(200).send('Generic request sent successfully')
+    } catch (err) {
+        console.error('Error sending generic request:', err)
+        res.status(500).send('Error sending generic request')
     }
 })
 
