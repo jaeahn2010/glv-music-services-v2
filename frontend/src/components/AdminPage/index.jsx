@@ -74,13 +74,13 @@ export default function AdminPage({ isMenuOpen, sortObjects, instruments, states
     let addFields
     let editFields = []
     let movementsModal = <section className={showMovementsModal ? 'absolute left-1/4 z-40 border border-stone-800 w-1/2 flex flex-col justify-center items-center p-4 bg-stone-300' : 'hidden'}>
-        <div className={divStyle + ' w-11/12'}>
-            <label htmlFor="movementTitle" className={labelStyle}>Movement Title:</label>
+        <div className='text-center'>
+            <label htmlFor="movementTitle">Movement Title</label>
             <input
                 name='movementTitle'
                 id='movementTitle'
                 className={inputStyle}
-                placeholder='movementTitle'
+                placeholder='Movement Title'
                 onChange={handleMovementChange}
             />
         </div>
@@ -99,16 +99,21 @@ export default function AdminPage({ isMenuOpen, sortObjects, instruments, states
                     </div>
                 )}
             </div>
-        <button className={btnStyle} onClick={() => {
-            setOpusFormData({
-                ...opusFormData,
-                movements: opusFormData.movements.concat(movementToBeAdded)
-            })
-            setMovementToBeAdded({
-                movementTitle: '',
-                movementOfferingMusicians: [],
-            })
-            setShowMovementsModal(false)
+        <button className={btnStyle} onClick={(evt) => {
+            evt.preventDefault()
+            if (!movementToBeAdded.movementTitle || !movementToBeAdded.movementOfferingMusicians.length) {
+                alert('Please ensure that the title isn\'t empty and that there is at least 1 musician offering this movement.')
+            } else {
+                setOpusFormData({
+                    ...opusFormData,
+                    movements: opusFormData.movements.concat(movementToBeAdded)
+                })
+                setMovementToBeAdded({
+                    movementTitle: '',
+                    movementOfferingMusicians: [],
+                })
+                setShowMovementsModal(false)
+            }
         }}>ADD</button>
         <button className={btnStyle} onClick={() => setShowMovementsModal(false)}>CLOSE</button>
     </section>
@@ -329,7 +334,7 @@ export default function AdminPage({ isMenuOpen, sortObjects, instruments, states
                         onChange={handleChange}
                     >
                         <option value={0} disabled>Select a repertoire type</option>
-                        {['Solo', 'Chamber', 'Reduction'].map(type => <option key={type} value={type.toLowerCase()}>{type}</option>)}
+                        {['Solo', 'Chamber Music', 'Piano Reduction'].map(type => <option key={type} value={type}>{type}</option>)}
                     </select>
                 </div>
                 <div className={'mx-auto w-11/12 flex justify-center items-center p-1 m-2 rounded-xl'}>
@@ -641,15 +646,13 @@ export default function AdminPage({ isMenuOpen, sortObjects, instruments, states
                             <p>Composer: {currentOpus.composer}</p>
                             <div>{currentOpus.movements.length ? 'Available ' : ''}Movements: {currentOpus.movements.length
                                 ? currentOpus.movements.map(mvmt => 
-                                    <div key={mvmt.movementNumber} className="flex">
+                                    <div key={mvmt.movementTitle} className="flex">
                                         <p className="ml-10">{mvmt.movementTitle}</p>
-                                        <p className="ml-3">(${mvmt.movementPrice})</p>
                                     </div>
                                 )
                                 : 'None'}
                             </div>
                             <p>Instrumentation: {currentOpus.instrumentation.map((instrument, index) => <span key={index}>{index === 0 ? instrument : `, ${instrument}`}</span>)}</p>
-                            <p>{currentOpus.movements.length ? 'Bulk ' : ''}Price: {currentOpus.price ? `$${currentOpus.price}` : 'Not available in bulk'}</p>
                         </section>
                         : ''}
                     </>

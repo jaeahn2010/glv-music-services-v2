@@ -14,7 +14,7 @@ export default function RepertoirePage({ isMenuOpen, allOpuses, allComposers, al
     const filterDivStyle = 'flex justify-center items-center w-11/12 mx-auto my-2'
     const filterLabelStyle = 'w-1/2 text-right mr-2 text-sm'
     const filterInputStyle = 'w-1/2 text-stone-800 text-sm'
-    const btnStyle = 'mx-auto my-5 p-2 border border-stone-800 rounded-xl hover:bg-stone-300 hover:text-stone-700 bg:scale-105'
+    const btnStyle = 'mx-auto my-5 p-2 border border-stone-800 rounded-xl hover:bg-amber-300 hover:text-stone-700 bg:scale-105 duration-500'
     const arrowStyle = `text-xl duration-500 ${showFilters ? 'rotate-180' : ''}`
 
     let composersNameReformat = allComposers.map(composer => {
@@ -127,6 +127,9 @@ export default function RepertoirePage({ isMenuOpen, allOpuses, allComposers, al
                         }}>CLEAR</button>
                     </div>
                 </div>
+            </section>
+            <section>
+                <p className='text-center my-4'>({filteredOpuses.length} item{filteredOpuses.length === 1 ? '' : 's'} found)</p>
             </section>
             <Gallery
                 filteredOpuses={filteredOpuses}
