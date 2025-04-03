@@ -59,11 +59,11 @@ export default function PerformancesPage({ isMenuOpen }) {
             {performances.length
             ? <section className="career-items my-24 min-h-[25rem]">
                 {performances.map((performance, index) => 
-                    <div key={index} className='card-flip flex my-10 w-11/12 md:w-3/4 h-[15rem] md:h-[20rem] mx-auto border border-stone-800 rounded-xl bg-gradient-to-r from-stone-300 via-stone-400 to-stone-300'>
+                    <div key={index} className='card-flip flex my-10 w-11/12 md:w-3/4 h-[20rem] md:h-[25rem] mx-auto border border-stone-800 rounded-xl bg-gradient-to-r from-stone-300 via-stone-400 to-stone-300'>
                         <div className="card-front flex w-full">
                             <div className="w-full flex flex-col items-center justify-center">
-                                <p className="text-lg lg:text-2xl underline text-center">{performance.title}</p>
-                                <div className='lg:flex lg:justify-between lg:items-center w-11/12 lg:w-5/6 my-8 text-sm lg:text-xl'>
+                                <p className="text-2xl lg:text-3xl underline text-center">{performance.title}</p>
+                                <div className='lg:flex lg:justify-between lg:items-center w-11/12 lg:w-5/6 my-8 text-lg lg:text-xl'>
                                     <div className='text-center my-2'>
                                         <p>{performance.locationName}</p>
                                         <p>({performance.city}, {performance.state})</p>
@@ -78,7 +78,8 @@ export default function PerformancesPage({ isMenuOpen }) {
                                         <p>{nonMilitaryTime(performance.time)}</p>
                                     </div>
                                 </div>
-                                <p className='lg:text-lg'>Featured Forte & Piano Musician(s): {performance.featuredGLVMSMusicians.map((musicianId, index) => {
+                                <p className='text-center text-sm lg:text-lg'>Featured Forte & Piano Musician(s):</p>
+                                <p className='text-center text-base lg:text-lg font-bold'>{performance.featuredGLVMSMusicians.map((musicianId, index) => {
                                     let musician = musicians.find(musician => musician._id === musicianId)
                                     return musician
                                     ? <span key={musician._id}>{index === performance.featuredGLVMSMusicians.length - 1 ? `${musician.firstName} ${musician.lastName}` : `${musician.firstName} ${musician.lastName}, `}</span>

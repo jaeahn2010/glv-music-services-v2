@@ -288,6 +288,7 @@ export default function App() {
 				<Route path="/mpcs" element={
 					<MobilePianoConcertSeriesPage
 						isMenuOpen={isMenuOpen}
+						isMobile={isMobile}
 						allMusicians={allMusicians}
 						loginStatus={loginStatus}
 						states={states}
@@ -319,7 +320,7 @@ export default function App() {
 				<div className='fixed bottom-5 left-5 w-[50px] h-[50px] bg-gradient-to-r from-stone-600 via-stone-400 to-stone-600 rounded-full flex align-center justify-center cursor-pointer hover:animate-bounce hover:bg-gradient-to-r hover:from-amber-500 hover:via-amber-300 hover:to-amber-500 z-10'>
 					<Link to="/cart"><img src={cartIcon} className="rounded-full p-1 cursor-pointer"/></Link>
 				</div>
-				<p className="fixed bottom-4 left-[4%] bg-red-300 rounded-full w-[22.5px] h-[20px] z-10 text-center pb-6">{userCart.length}</p>
+				<p className="fixed bottom-4 left-[14%] lg:left-[4%] bg-red-300 rounded-full w-[22.5px] h-[20px] z-10 text-center pb-6">{userCart.length}</p>
 			</>
 			: ''
 			}

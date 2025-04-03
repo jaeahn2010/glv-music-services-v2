@@ -812,14 +812,14 @@ const availableConcerts = [
 
 const concertObjs = availableConcerts.map(concert => new Concert ('Ahn-Benton, Jae', concert[0], concert[1], concert[2], concert[3], concert[4], concert[5]))
 let tdStyle = 'border border-stone-800 text-center py-1'
-let btnStyle = 'w-1/2 lg:w-3/4 border border-stone-800 rounded-xl p-2 m-3 hover:bg-amber-300 hover:text-stone-800'
+let btnStyle = 'w-3/4 lg:w-3/4 border border-stone-800 rounded-xl p-2 m-3 hover:bg-amber-300 hover:text-stone-800'
 let modalStyle = 'absolute w-full lg:w-3/4 lg:left-[12.5%] border border-stone-800 flex flex-col justify-center items-center bg-stone-300 rounded-3xl'
 let liStyle = 'my-4'
 let divStyle = 'w-full lg:w-11/12 mx-auto flex'
 let labelStyle = 'w-1/3 lg:w-1/2 text-right m-2'
 let inputStyle = 'w-2/3 lg:w-1/2 text-left m-2 p-1 bg-stone-200 text-stone-800 rounded-lg'
 
-export default function MobilePianoConcertSeriesPage({ isMenuOpen, allMusicians, loginStatus, states, scrollToTop, userType }) {
+export default function MobilePianoConcertSeriesPage({ isMenuOpen, isMobile, allMusicians, loginStatus, states, scrollToTop, userType }) {
     const [showDetails, setShowDetails] = useState(false)
     const [showScheduleModal, setShowScheduleModal] = useState(false)
     const [currentConcert, setCurrentConcert] = useState(concertObjs[0])
@@ -924,7 +924,7 @@ export default function MobilePianoConcertSeriesPage({ isMenuOpen, allMusicians,
                         } else {
                             alert('Please log in as a client to order a concert.')
                         }
-                    }}>ADD THIS CONCERT TO CART</button>
+                    }}>REQUEST THIS CONCERT</button>
                     <button className={btnStyle} onClick={() => {
                         setShowDetails(false)
                     }}>CLOSE</button>
@@ -1082,7 +1082,7 @@ export default function MobilePianoConcertSeriesPage({ isMenuOpen, allMusicians,
                     <tr className="font-bold border border-stone-800 bg-gradient-to-r from-stone-300 via-stone-400 to-stone-300" >
                         <td className={tdStyle + ' w-[25%] lg:w-[20%]'}>Pianist</td>
                         <td className={tdStyle + ' w-[35%] lg:w-[45%]'}>Title</td>
-                        <td className={tdStyle + ' w-[25%] lg:w-[20%]'}>Approximate Duration</td>
+                        <td className={tdStyle + ' w-[15%] lg:w-[20%]'}>{isMobile ? 'Approx.' : 'Approximate'} Duration</td>
                         <td className={tdStyle + ' w-[15%] lg:w-[10%]'}>Base Price</td>
                     </tr>
                 </thead>
@@ -1094,7 +1094,7 @@ export default function MobilePianoConcertSeriesPage({ isMenuOpen, allMusicians,
                     }}>
                         <td className={tdStyle}>{concert.pianist}</td>
                         <td className={tdStyle}>{concert.title}</td>
-                        <td className={tdStyle}>{concert.duration} minutes</td>
+                        <td className={tdStyle}>{concert.duration}{isMobile ? 'm' : ' minutes'}</td>
                         <td className={tdStyle}>${concert.basePrice}</td>
                     </tr>)}
                 </tbody>
