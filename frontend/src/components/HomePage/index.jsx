@@ -26,6 +26,7 @@ export default function HomePage({isMenuOpen, isMobile}) {
         ['AUDITIONS, COMPETITIONS, JURIES, & EXAMS', 'Increase your chances of success by hiring our collaborative pianists. They are highly experienced in representing your best musical interests in a high-importance and/or high-stress settings, such as a college audition, state or national level competition, or a music school examinations or jury.', 'flat'],
         ['COMPOSING & ARRANGING', 'Commission a composition with a composer on our team. Our composers are versatile and creative - they can customize it to perfectly fit your vision, in terms of style, instrumentation, duration, theme, and/or atmosphere. Already found the perfect music or song, but not quite the right instrumentation? No problem! Our composers can expertly arrange the original for your desired instrumentation.', 'repertoire'],
         ['FORMAL RECITALS & CONCERTS', 'Need an accompanist for your academic recital or formal concert? We have a vast amount of repertoire under our belts, ready to go at a moment\'s notice. Available for all instruments (piano, strings, woodwinds, brass, percussion, and voice), as well as for conductors and composers.', 'repertoire'],
+        ['PRACTICE & PERFORMANCE TRACKS', 'Need a track to practice with, or even for a performance where a pianist cannot physically be present at the venue? We got you covered! Our pianists will expertly record anything in any tempo you desire by your deadline.', 'hourly'],
         ['PRIVATE HOME & MOBILE CONCERTS', 'Love classical piano music, but don\'t really enjoy public concert setting? Bring a professional caliber performance right to your doorstep! Simply pick a concert from our designated menu, and request a date, time, and location. Once confirmed, a pianist from our team will show up at your location at the specified date and time, and will perform the requested concert.', 'flat'],
         ['PRIVATE MUSIC LESSONS', 'Whether you would like private music lessons for your children or for yourself, you will be in good hands with our musicians. We only hire professionally trained, college educated musicians with proven experience and expertise in their field. Currently offering lessons in solo piano, collaborative piano, ear training, and music theory. Suitable for both children and adults of any level.', 'hourly'],
         ['RECORDING SESSIONS', 'Recording an album or in need to send recordings for an audition round? Look no further. Our musicians are highly experienced in being in professional recordings, whether recording live takes of entire selections or individual parts with a click track. Struggling to find a good recording venue? Ask for recommendations!', 'hourly'],
@@ -75,7 +76,7 @@ export default function HomePage({isMenuOpen, isMobile}) {
 
     return (
         <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} mx-auto w-5/6 font-montserrat`}>
-            <h1 className="text-center text-xl lg:text-3xl my-20">Forte & Piano</h1>
+            <h1 className="text-center text-6xl my-20 font-vibes">Forte & Piano</h1>
             <p className="lg:text-xl lg:leading-loose mx-auto w-5/6">In a need to hire musicians for your special event? On this website, you can customize your music setlist to perfectly match your event - weddings, corporate events, open houses, private parties, formal recitals, and more! And the exact cost of the music is disclosed to you up front. No hassle, no ambiguity. Explore our menu above to explore more about us, our musicians, and our available repertoire.</p>
             <section className="w-full my-10">
                 {divElements.map(([tagline, img], index) => 
@@ -87,7 +88,7 @@ export default function HomePage({isMenuOpen, isMobile}) {
                     </div>
                 )}
             </section>
-            <h2 className='text-center text-xl my-6'>OUR SERVICES</h2>
+            <h2 className='text-center text-4xl my-6 font-vibes'>Our Services</h2>
             <section className={`py-2 font-montserrat ${isMobile ? '' : 'flex items-center'}`}>
                 <ul className={`flex flex-col p-2 list-disc list-inside text-sm ${isMobile ? 'w-full' : 'w-1/2'}`}>
                     {services.map(([service, description, feeType], index) => 
@@ -100,7 +101,7 @@ export default function HomePage({isMenuOpen, isMobile}) {
                         }}>{service}</li>
                     )}
                 </ul>
-                <div className={`${isMobile ? 'w-full' : 'w-1/2'} mx-1 my-10 p-2 border border-stone-800 bg-stone-300 rounded-xl lg:min-h-[300px] flex flex-col justify-center items-center leading-loose`}>
+                <div className={`${isMobile ? 'w-full' : 'w-1/2'} mx-1 my-10 p-2 border border-stone-800 bg-stone-100 rounded-xl lg:min-h-[300px] flex flex-col justify-center items-center leading-loose`}>
                     {currentServiceDisplay.description}
                     {currentServiceDisplay.index !== -1
                     ? <div className='my-5 flex justify-center items-center relative w-full'>

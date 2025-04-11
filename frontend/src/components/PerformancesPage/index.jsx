@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { getPerformances, getMusicians } from '../../../utils/backend'
+import elegantPerformance from '../../assets/elegant-performance.jpg'
 import './styles.css'
 
 export default function PerformancesPage({ isMenuOpen }) {
@@ -54,7 +55,8 @@ export default function PerformancesPage({ isMenuOpen }) {
 
     return (
         <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} font-montserrat min-h-[125vh]`}>
-            <h1 className="text-xl text-center my-10 lg:text-3xl">Our performances</h1>
+            <h1 className="text-6xl font-vibes text-center my-10">Our performances</h1>
+            <img src={elegantPerformance} alt="elegant-performance" className="w-11/12 lg:w-1/2 rounded-xl mx-auto"/>
             <p className='w-3/4 mx-auto my-10 lg:text-lg'>Come check out our fantastic musicians in action! Hover over each card to see other featured musicians and a short description of each performance. Performance dates in red indicate past events, whereas those in green indicate upcoming performances.</p>
             {performances.length
             ? <section className="career-items my-24 min-h-[25rem]">
@@ -62,7 +64,7 @@ export default function PerformancesPage({ isMenuOpen }) {
                     <div key={index} className='card-flip flex my-10 w-11/12 md:w-3/4 h-[20rem] md:h-[25rem] mx-auto border border-stone-800 rounded-xl bg-gradient-to-r from-stone-300 via-stone-400 to-stone-300'>
                         <div className="card-front flex w-full">
                             <div className="w-full flex flex-col items-center justify-center">
-                                <p className="text-2xl lg:text-3xl underline text-center">{performance.title}</p>
+                                <p className="text-3xl lg:text-5xl font-vibes text-center">{performance.title}</p>
                                 <div className='lg:flex lg:justify-between lg:items-center w-11/12 lg:w-5/6 my-8 text-lg lg:text-xl'>
                                     <div className='text-center my-2'>
                                         <p>{performance.locationName}</p>

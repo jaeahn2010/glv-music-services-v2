@@ -75,6 +75,7 @@ export default function ContactPage({ isMenuOpen, isMobile, scrollToTop }) {
   
 	return (
 		<div className={`${isMenuOpen ? 'z-0 opacity-5' : ''} text-stone-800 font-montserrat min-h-[125vh]`}>
+            <h1 className="text-6xl font-vibes text-center my-10">Contact Us</h1>
             <p className="lg:text-xl text-center my-10">Have questions or concerns? Please fill out this form, and we will get back to you as soon as possible!</p>
 			<form className="w-11/12 lg:w-1/2 mx-auto flex flex-col justify-center items-center py-5" onSubmit={handleSubmit}>
                 <div className={divStyle}>

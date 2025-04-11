@@ -608,7 +608,7 @@ let divStyle = 'w-full lg:w-11/12 mx-auto flex'
 let labelStyle = 'w-1/3 lg:w-1/2 text-right m-2'
 let inputStyle = 'w-2/3 lg:w-1/2 text-left m-2 p-1 bg-stone-200 text-stone-800 rounded-lg'
 let subsectionDivStyle = 'flex justify-between items-center border border-stone-800 w-3/4 bg-stone-100 my-6 mx-auto px-5 rounded-xl hover:bg-amber-300 duration-500 hover:cursor-pointer'
-let subsectionStyle = 'text-center text-2xl my-6'
+let subsectionStyle = 'text-center text-3xl my-6 font-vibes'
 
 export default function MobilePianoConcertSeriesPage({ isMenuOpen, isMobile, allMusicians, loginStatus, states, scrollToTop, userType }) {
     const [showDetails, setShowDetails] = useState(false)
@@ -870,30 +870,30 @@ export default function MobilePianoConcertSeriesPage({ isMenuOpen, isMobile, all
             </section>
             <div className={`${showDetails ? 'z-0 opacity-5' : ''} text-center text-3xl my-24`}>
                 <h1 className='text-lg'>Forte & Piano's</h1>
-                <h2 className='mt-5 text-6xl font-vibes'>Mobile Piano Concert Series</h2>
+                <h2 className='mt-5 text-4xl lg:text-6xl font-vibes'>Mobile Piano Concert Series</h2>
             </div>
             <img src={elegantPiano} alt="elegant-piano" className="w-11/12 lg:w-1/2 rounded-xl mx-auto"/>
             <p className={`${showDetails ? 'z-0 opacity-5' : ''} w-11/12 lg:w-3/4 mx-auto my-10 text-lg`}>Bring a professional classical piano performance right to your doorstep! Simply pick a concert from the menu below, and request a date, time, and location. Once confirmed by Forte & Piano and payment is made, the designated pianist will show up at your location at the specified date and time, and will perform the requested concert. That's it! No hassle, no confusion.</p>
             <div className={subsectionDivStyle} onClick={() => setShowMenu(!showMenu)}>
-                <p className={subsectionStyle}>Menu</p>
+                <p className={subsectionStyle}>Concert Menu</p>
                 <p className={`mx-3 hover:cursor-pointer duration-300 ${showMenu ? 'rotate-180' : ''}`}>&#9660;</p>
             </div>
             <table className={`${showDetails ? 'z-0 opacity-5' : ''} ${showMenu ? '' : 'hidden'} border border-stone-800 w-11/12 mx-auto mb-12 table-fixed mt-4 text-xs lg:text-base`}>
                 <thead>
                     <tr className="font-bold border border-stone-800 bg-gradient-to-r from-stone-300 via-stone-400 to-stone-300 lg:h-[50px] lg:text-lg">
-                        <td className={tdStyle + ' w-[25%] lg:w-[20%]'}>Pianist</td>
-                        <td className={tdStyle + ' w-[35%] lg:w-[45%]'}>Title</td>
+                        <td className={tdStyle + ' w-[15%] lg:w-[20%]'}>Pianist</td>
+                        <td className={tdStyle + ' w-[55%] lg:w-[45%]'}>Title</td>
                         <td className={tdStyle + ' w-[15%] lg:w-[20%]'}>{isMobile ? 'Approx.' : 'Approximate'} Duration</td>
                         <td className={tdStyle + ' w-[15%] lg:w-[10%]'}>Base Price</td>
                     </tr>
                 </thead>
                 <tbody>
-                    {concertObjs.map(concert => <tr key={concert.title} className="bg-stone-100 hover:bg-amber-300 hover:cursor-pointer lg:h-[3rem] lg:text-lg" onClick={() => {
+                    {concertObjs.map(concert => <tr key={concert.title} className="bg-stone-100 hover:bg-amber-300 hover:cursor-pointer h-[2rem] lg:h-[3rem] lg:text-lg" onClick={() => {
                         setShowDetails(true)
                         setCurrentConcert(concert)
                         scrollToTop()
                     }}>
-                        <td className={tdStyle}>{concert.pianist}</td>
+                        <td className={tdStyle}>{concert.pianist.split(' ')[0]}</td>
                         <td className={tdStyle}>{concert.title}</td>
                         <td className={tdStyle}>{concert.duration}{isMobile ? 'm' : ' minutes'}</td>
                         <td className={tdStyle}>${concert.basePrice}</td>

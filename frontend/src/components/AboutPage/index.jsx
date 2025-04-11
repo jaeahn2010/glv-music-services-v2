@@ -38,7 +38,7 @@ export default function AboutPage({isMenuOpen}) {
     
     return (
         <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} flex flex-col items-center justify-center text-stone-800 font-montserrat`}>
-            <h1 className="text-xl text-center my-10 lg:text-3xl">About Us</h1>
+            <h1 className="text-6xl font-vibes text-center my-10">About Us</h1>
             <article className='relative w-11/12 lg:w-1/2 mx-auto lg:text-xl'>
                 <img className='rounded-xl mr-5 my-2 w-1/2 lg:w-1/3 float-left' src={mariaHead} alt="maria-headshot" />
                 <p className='leading-loose'><span className="font-bold">Forte & Piano</span> is an all-encompassing music business owned by a husband-and-wife team of classically trained pianists: <span className='font-bold'>Jae Ahn-Benton</span> and <span className='font-bold'>Maria Kolesnyk</span>. Jae (from South Korea) and Maria (from Ukraine) met while studying music in college in Las Vegas, NV. Jae had started his music business in 2010, mainly focusing on collaboration with opera singers, composing/arranging, and providing music for weddings. Maria had started her music business in 2013, mainly focusing on building her private piano studio, as well as collaboration with violinists, violists, cellists, double bassists, flutists, and trumpeters.</p>
