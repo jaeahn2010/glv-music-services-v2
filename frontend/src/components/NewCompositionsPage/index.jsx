@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import ahnbentonVenmo from '../../assets/venmo-qr-ahnbenton.jpg'
 const csSampleImages = import.meta.glob('../../assets/cs-sample-*.{png,jpg,jpeg}')
+import elegantComposition from '../../assets/elegant-composition.jpg'
 
 class Composition {
     constructor(composer, opusNo, title, nickname, movements = [], yearComposed, instrumentation, price) {
@@ -158,18 +159,23 @@ const ahnBentonAvailableCompositions = [
     ['96b', 'Theme and Variations No. 5', 'In the Garden', [], 2014, 'piano (4 hands)', 18],
     ['99a', 'Theme and Variations No. 6', 'Impressions of Ukraine', [], 2019, 'piano (4 hands)', 18],
     ['99b', 'Theme and Variations No. 6', 'Impressions of Ukraine', [], 2020, 'piano', 15],
+    ['101', 'Theme and Variations No. 7', 'God rest ye merry, gentlemen', [], 2024, 'piano', 15],
 ]
 
 const ahnBentonCompositionObjs = ahnBentonAvailableCompositions.map(composition => new Composition ('Ahn-Benton, Jae', composition[0], composition[1], composition[2], composition[3], composition[4], composition[5], composition[6]))
-
-let tdStyle = 'border border-stone-800 text-center py-1'
-let btnStyle = 'border border-stone-800 rounded-xl p-2 m-3 hover:bg-amber-300 hover:text-stone-800'
 
 export default function NewCompositionsPage({ isMenuOpen, loginStatus, scrollToTop }) {
     const [showDetails, setShowDetails] = useState(false)
     const [currentComposition, setCurrentComposition] = useState({})
     const [currentSamplePage, setCurrentSamplePage] = useState('')
     const [showPaymentInfo, setShowPaymentInfo] = useState(false)
+    const [showCompositions, setShowCompositions] = useState(false)
+    const [showArrangements, setShowArrangements] = useState(false)
+
+    let tdStyle = 'border border-stone-800 text-center py-1'
+    let btnStyle = 'border border-stone-800 rounded-xl p-2 m-3 hover:bg-amber-300 hover:text-stone-800'
+    let subsectionDivStyle = `${showDetails ? 'z-0 opacity-5' : ''} flex justify-between items-center border border-stone-800 w-3/4 bg-stone-100 my-6 mx-auto px-5 rounded-xl hover:bg-amber-300 duration-500 hover:cursor-pointer`
+    let subsectionStyle = 'text-center text-3xl my-6 font-vibes'
     
     useEffect(() => {
         if (currentComposition.opusNo) {
@@ -224,10 +230,19 @@ export default function NewCompositionsPage({ isMenuOpen, loginStatus, scrollToT
                 : ''}
             </div>
             : ''}
-            <h1 className="text-center text-3xl my-24">Forte & Piano New Compositions Store</h1>
-            <table className={`${showDetails ? 'opacity-20 z-0' : 'z-50'} border border-stone-200 text-[0.7em] lg:text-sm w-11/12 mx-auto mb-12 table-fixed`}>
+            <div className={`${showDetails ? 'z-0 opacity-5' : ''} text-center text-3xl my-24`}>
+                <h1 className='text-lg'>Forte & Piano's</h1>
+                <h2 className='mt-5 text-6xl font-vibes'>New Compositions Store</h2>
+            </div>
+            <img src={elegantComposition} alt="elegant-composition" className="w-11/12 lg:w-1/2 rounded-xl mx-auto"/>
+            <p className={`${showDetails ? 'z-0 opacity-5' : ''} w-11/12 lg:w-3/4 mx-auto my-10 text-lg`}>Browse our new compositions store, where talented and creative composers of Forte & Piano offer a variety of original works and clever arrangements featuring all kinds of atmosphere, instruments, and styles of music.</p>
+            <div className={subsectionDivStyle} onClick={() => setShowCompositions(!showCompositions)}>
+                <p className={subsectionStyle}>Original Compositions</p>
+                <p className={`mx-3 hover:cursor-pointer duration-300 ${showCompositions ? 'rotate-180' : ''}`}>&#9660;</p>
+            </div>
+            <table className={`${showDetails ? 'opacity-20 z-0' : 'z-50'} ${showCompositions ? '' : 'hidden'} border border-stone-200 text-[0.7em] lg:text-sm w-11/12 mx-auto mb-12 table-fixed`}>
                 <thead>
-                    <tr className="font-bold border border-stone-800 bg-gradient-to-r from-stone-300 via-stone-400 to-stone-300">
+                    <tr className="font-bold border border-stone-800 bg-gradient-to-r from-stone-300 via-stone-400 to-stone-300 lg:h-[50px] lg:text-lg">
                         <td className={tdStyle + ' w-[25%] lg:w-[15%]'}>Composer</td>
                         <td className={tdStyle + ' w-[20%] lg:w-[10%]'}>Opus</td>
                         <td className={tdStyle + ' w-[30%] lg:w-[50%]'}>Title</td>
@@ -237,7 +252,7 @@ export default function NewCompositionsPage({ isMenuOpen, loginStatus, scrollToT
                 </thead>
                 <tbody>
                     {ahnBentonCompositionObjs.map(composition => 
-                    <tr key={composition.composer + composition.opusNo} className="hover:bg-amber-300 hover:cursor-pointer" onClick={() => {
+                    <tr key={composition.composer + composition.opusNo} className="bg-stone-100 hover:bg-amber-300 hover:cursor-pointer lg:h-[3rem] lg:text-lg" onClick={() => {
                         setShowDetails(true)
                         setCurrentComposition(composition)
                         scrollToTop()
@@ -252,6 +267,10 @@ export default function NewCompositionsPage({ isMenuOpen, loginStatus, scrollToT
                     </tr>)}
                 </tbody>
             </table>
+            <div className={subsectionDivStyle} onClick={() => setShowArrangements(!showArrangements)}>
+                <p className={subsectionStyle}>Arrangements & Transcriptions</p>
+                <p className={`mx-3 hover:cursor-pointer duration-300 ${showArrangements ? 'rotate-180' : ''}`}>&#9660;</p>
+            </div>
         </main>
     )
 }

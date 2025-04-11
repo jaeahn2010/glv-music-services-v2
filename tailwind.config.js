@@ -10,6 +10,7 @@ export default {
 				bodoni: ['"Bodoni Moda"', 'serif'],
 				poppins: ['"Poppins"', 'sans-serif'],
 				montserrat: ['Montserrat', 'serif'],
+				vibes: ['"Great Vibes"', 'cursive'],
 			}
 		},
 	},

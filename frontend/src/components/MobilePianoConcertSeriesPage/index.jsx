@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { sendEmail } from "../../../utils/backend"
+import elegantPiano from '../../assets/elegant-piano.jpg'
 import allAmerican1 from '../../assets/mpcs-all-american-1.jpg'
 import allAmerican2 from '../../assets/mpcs-all-american-2.png'
 import ballroom1 from '../../assets/mpcs-dance-floor-1.jpg'
@@ -48,6 +49,7 @@ import heroesVillains from '../../assets/mpcs-heroes-villains.png'
 import goodbye from '../../assets/mpcs-goodbye.png'
 import winter from '../../assets/mpcs-winter.png'
 import pedagogy from '../../assets/mpcs-pedagogy.jpg'
+import musicForMusic from '../../assets/mpcs-music-for-music.jpg'
 
 class Concert {
     constructor(pianist, title, description, program = [], duration, basePrice, poster) {
@@ -134,6 +136,7 @@ const kapustin = 'Nikolai Kapustin'
 const key = 'Francis Scott Key'
 const khachaturian = 'Aram Khachaturian'
 const kirkor = 'Georgy Kirkor'
+const kolesnyk = 'Maria Kolesnyk'
 const kosenko = 'Viktor Kosenko'
 const kosma = 'Joseph Kosma'
 const kreisler = 'Fritz Kreisler'
@@ -303,15 +306,15 @@ const chopinBarcarolle = ['Barcarolle, Op. 60', chopin]
 const chopinBerceuse = ['Berceuse, Op. 57', chopin]
 const chopinFuneral = ['Funeral March (Sonata No. 2)', chopin]
 const chopinGiovanni = ['Variations on "Là ci darem la mano"', chopin]
-const chopinEtude10_1 = ['Etude in C major, Op. 10, No. 1 "Waterfall"', chopin]
-const chopinEtude10_3 = ['Etude in E major, Op. 10, No. 3 "Farewell"', chopin]
-const chopinEtude25_1 = ['Etude in A-flat major, Op. 25, No. 1 "Aeolian Harp"', chopin]
-const chopinEtude25_2 = ['Etude in F minor, Op. 25, No. 2 "Bees"', chopin]
-const chopinEtude25_3 = ['Etude in F major, Op. 25, No. 3 "Horsemen"', chopin]
-const chopinEtude25_7 = ['Etude in C-sharp minor, Op. 25, No. 7 "Cello"', chopin]
-const chopinEtude25_9 = ['Etude in G-flat major, Op. 25, No. 9 "Butterfly"', chopin]
-const chopinEtude25_11 = ['Etude in A minor, Op. 25, No. 11 "Winter Wind"', chopin]
-const chopinEtude25_12 = ['Etude in C minor, Op. 25, No. 12 "Ocean"', chopin]
+const chopinEtude10_1 = ['Étude in C major, Op. 10, No. 1 "Waterfall"', chopin]
+const chopinEtude10_3 = ['Étude in E major, Op. 10, No. 3 "Farewell"', chopin]
+const chopinEtude25_1 = ['Étude in A-flat major, Op. 25, No. 1 "Aeolian Harp"', chopin]
+const chopinEtude25_2 = ['Étude in F minor, Op. 25, No. 2 "Bees"', chopin]
+const chopinEtude25_3 = ['Étude in F major, Op. 25, No. 3 "Horsemen"', chopin]
+const chopinEtude25_7 = ['Étude in C-sharp minor, Op. 25, No. 7 "Cello"', chopin]
+const chopinEtude25_9 = ['Étude in G-flat major, Op. 25, No. 9 "Butterfly"', chopin]
+const chopinEtude25_11 = ['Étude in A minor, Op. 25, No. 11 "Winter Wind"', chopin]
+const chopinEtude25_12 = ['Étude in C minor, Op. 25, No. 12 "Ocean"', chopin]
 const chopinMazurka6_1 = ['Mazurka in F-sharp minor, Op. 6, No. 1', chopin]
 const chopinMazurka7_1 = ['Mazurka in B-flat major, Op. 7, No. 1', chopin]
 const chopinMazurka17_4 = ['Mazurka in A minor, Op. 17, No. 4', chopin]
@@ -352,13 +355,14 @@ const entertainer = ['The entertainer', joplin]
 const erdasWarning = ['Erda\'s Warning', wagner, ahnbenton]
 const eros = ['Eros (3 morceaux, Op. 24)', bortkevych]
 const estampes3 = ['Jardins sous la pluie (Estampes)', debussy]
-const etudeTableau33_4 = ['Etude-Tableau in D minor, Op. 33, No. 4', rachmaninov]
-const etudeTableau33_5 = ['Etude-Tableau in E-flat minor, Op. 33, No. 5', rachmaninov]
-const etudeTableau33_7 = ['Etude-Tableau in G minor, Op. 33, No. 7', rachmaninov]
-const etudeTableau39_1 = ['Etude-Tableau in C minor, Op. 39, No. 1', rachmaninov]
-const etudeTableau39_2 = ['Etude-Tableau in A minor, Op. 39, No. 2', rachmaninov]
-const etudeTableau39_5 = ['Etude-Tableau in E-flat minor, Op. 39, No. 5', rachmaninov]
-const etudeTableau39_6 = ['Etude-Tableau in A minor, Op. 39, No. 6', rachmaninov]
+const etudeTableau33_4 = ['Étude-Tableau in D minor, Op. 33, No. 4', rachmaninov]
+const etudeTableau33_5 = ['Étude-Tableau in E-flat minor, Op. 33, No. 5', rachmaninov]
+const etudeTableau33_7 = ['Étude-Tableau in G minor, Op. 33, No. 7', rachmaninov]
+const etudeTableau39_1 = ['Étude-Tableau in C minor, Op. 39, No. 1', rachmaninov]
+const etudeTableau39_2 = ['Étude-Tableau in A minor, Op. 39, No. 2', rachmaninov]
+const etudeTableau39_5 = ['Étude-Tableau in E-flat minor, Op. 39, No. 5', rachmaninov]
+const etudeTableau39_6 = ['Étude-Tableau in A minor, Op. 39, No. 6', rachmaninov]
+const etudeTableau39_9 = ['Étude-Tableau in D major, Op. 39, No. 9', rachmaninov]
 const fantaisieImpromptu = ['Fantaisie-Impromptu, Op. 66', chopin]
 const fantasticDances = ['Fantastic Dances, Op. 5', shostakovich]
 const faurePavane = ['Pavane', faure]
@@ -380,8 +384,8 @@ const ginasteraSonata1_4 = ['Ruvido ed ostinato from (Sonata No. 1)', ginastera]
 const giovanniOverture = ['Overture (Don Giovanni)', mozart]
 const halloweenTheme = ['Theme from "Halloween"', carpenter, ahnbenton]
 const harryPotterSelections = ['Selections from "Harry Potter"', williams]
-const haydnSonata32 = ['Sonata No. 33 in E-flat major', haydn]
-const haydnSonata33_3 = ['Molto vivace (Sonata No. 34)', haydn]
+const haydnSonata34 = ['Sonata No. 34 in E minor', haydn]
+const haydnSonata34_3 = ['Molto vivace (Sonata No. 34)', haydn]
 const haydnSymphony45 = ['Symphony No. 45 in F-sharp minor "Farewell"', haydn, cruz]
 const hungarianDance5 = ['Hungarian Dance No. 5', brahms]
 const hungarianRhapsody2 = ['Hungarian Rhapsody No. 2 in C-sharp minor', liszt]
@@ -452,8 +456,8 @@ const mozartAdagio = ['Adagio in B minor, K. 540', mozart]
 const mozartSonata8 = ['Sonata No. 8 in A minor', mozart]
 const mozartSonata8_3 = ['Presto (Sonata No. 8)', mozart]
 const mozartSonata12 = ['Sonata No. 12 in F major', mozart]
+const mozartSonata16 = ['Sonata No. 16 in C major', mozart]
 const mozartVariations = ['12 Variations on "Ah vous dirai-je, Maman"', mozart]
-const nutcracker = ['The Nutcracker Suite, Op. 71a', tchaikovsky]
 const oblivion = ['Oblivion', piazzolla]
 const pasDeDeux = ['Pas de deux (The Nutcracker)', tchaikovsky]
 const passacagliaFugue = ['Passacaglia and Fugue', bachJS, albert]
@@ -499,8 +503,8 @@ const scaramouche = ['Scaramouche', milhaud, ahnbenton]
 const scarlatti30 = ['Sonata No. 30 in G minor "Cat Fugue"', scarlatti]
 const scarlatti87 = ['Sonata No. 87 in B minor', scarlatti]
 const scarlatti466 = ['Sonata No. 466 in F minor', scarlatti]
-const scriabinEtude42_5 = ['Etude in C-sharp minor, Op. 42, No. 5', scriabin]
-const scriabinEtude65_3 = ['Etude, Op. 65, No. 3', scriabin]
+const scriabinEtude42_5 = ['Étude in C-sharp minor, Op. 42, No. 5', scriabin]
+const scriabinEtude65_3 = ['Étude, Op. 65, No. 3', scriabin]
 const shamoToccata = ['Toccata', 'Yuri Shamo']
 const shostakovichPreludeFugue24 = ['Prelude and Fugue in D minor, Op. 87, No. 24', shostakovich]
 const shostakovichPreludes34 = ['24 Preludes, Op. 34', shostakovich]
@@ -520,17 +524,19 @@ const swanLakeTheme = ['Theme from "Swan Lake"', tchaikovsky]
 const tarasBulbaOverture = ['Overture (Taras Bulba)', lysenko]
 const tchaikovskyJune = ['June (The Seasons)', tchaikovsky]
 const tchaikovskyMorceaux72_5 = ['Meditation, Op. 72, No. 5', tchaikovsky]
+const tchaikovskySweetDreams = ['Sweet Dreams, Op. 39, No. 21', tchaikovsky]
 const thaisMeditation = ['Meditation (Thaïs)', massenet]
 const totentanz = ['Totentanz', liszt]
-const transcendental6 = ['Transcendental Etude No. 6 "Feux follets"', liszt]
-const transcendental7 = ['Transcendental Etude No. 7 "Eroica"', liszt]
-const transcendental8 = ['Transcendental Etude No. 8 "Wild Jagd"', liszt]
-const transcendental12 = ['Transcendental Etude No. 12 "Chasse-neige"', liszt]
+const transcendental6 = ['Transcendental Étude No. 6 "Feux follets"', liszt]
+const transcendental7 = ['Transcendental Étude No. 7 "Eroica"', liszt]
+const transcendental8 = ['Transcendental Étude No. 8 "Wild Jagd"', liszt]
+const transcendental12 = ['Transcendental Étude No. 12 "Chasse-neige"', liszt]
 const traumerei = ['Träumerei', schumannR]
 const ukrainianSuite1 = ['Ukrainian Suite No. 1 in G minor', lysenko]
 const valkyries = ['Ride of the Valkyries', wagner, tausig]
 const valseGrotesque = ['Valse grotesque (3 morceaux, Op. 24)', bortkevych]
 const versLaFlamme = ['Vers la flamme', scriabin]
+const villaLobosPolichinelle = ['Polichinelle', villaLobos]
 const vivaldiSpring = ['Spring', vivaldi, ahnbenton]
 const vivaldiWinter = ['Winter', vivaldi, ahnbenton]
 const vocalise = ['Vocalise', rachmaninov, ahnbenton]
@@ -543,56 +549,57 @@ const widmung = ['Widmung', schumannR, liszt]
 const williamTellOverture = ['Overture (Guillaume Tell)', rossini, liszt]
 
 const availableConcerts = [
-    ['American Pride 1', 'Enjoy some of the most famous musical depictions of American patriotism, the wild west, blues, and ragtime. Perfect for Fourth of July, Memorial Day, Labor Day, or even to celebrate newly naturalized American citizens.', [starsStripes, excursions, mapleLeafRag, westSideStorySelections, rhapsodyInBlue], 65, 200, allAmerican1],
-    ['American Pride 2', 'Presenting the true diversity of the U.S.A. from classic American composers to naturalized Asian-American composers, from movie scores to musical theater, from lighthearted male composers to introverted female composers.', [gershwinPreludes, supermanSelections, ahnbenton56, phantomSelections, entertainer, beachBallade, americanInParis], 65, 175, allAmerican2],
-    ['At the Carnival', 'Fear the clowns no more! These jesters, pierrots, and mimes are at your service for your aural pleasure.', [miroirs4, scaramouche, petrushka, sabreDance, ahnbenton7, carnaval], 75, 250, carnival],
-    ['Ballroom 1', 'Welcome to Ballroom 1, where you may join the dance floor with Argentinian outlaws, a seductive devil, traditional Viennese, and partying gypsies.', [chopinWaltz18, arabianDance, fantasticDances, mephisto, hungarianDance5, liebesleid, liebesfreud, oblivion, danzasArgentinas, carmenVariations], 55, 200, ballroom1],
-    ['Ballroom 2', 'Welcome to Ballroom 2, where flowers come alive, knives are flying, and even the dead may take part in the festivities along with the Polish and the Romanians.', [waltzOfFlowers, romanianFolkDances, danseMacabre, sabreDance, chopinMazurka6_1, chopinMazurka7_1, chopinMazurka17_4, libertango, pilgrimage2s_3], 55, 200, ballroom2],
-    ['Ballroom 3', 'Welcome to Ballroom 3, where the elegant and the traditional battle the grotesque and the rustic. Which style will you favor?', [chopinPolonaise53, beethovenMinuet, bachPartita6, valseGrotesque, ahnbenton1, americanPreludes3, sugarPlumFairy, totentanz], 70, 200, ballroom3],
-    ['Blast of Beethoven', 'Explore the tumultuous life of Ludwig van Beethoven: a story of love and tragedy with a touch of frivolity.', [beethovenSonata8, beethovenRondo, furElise, beethovenBagatelles33, beethovenSonata23], 70, 175, beethovenPortrait],
-    ['Blueprints By Bach', 'Take a dive into the perfect balance of mathematical structure, musical dramaturgy, emotional depth of the timeless composer J. S. Bach.', [passacagliaFugue, bachAir, chromaticFantasy, bachPartita2, bachToccata], 60, 200, bachPortrait],
-    ['Botanical Garden', 'Imagine walking through an exquisite botanical garden or taking in the fresh air of a rural meadowland - without having to worry about any allergies!', [lilacs, americanPreludes10, blumenlied, beethovenSonata15, flowerSong, lisztPastorale, waltzOfFlowers, ahnbenton96], 60, 175, botanical],
-    ['A Brahmsian Battle', 'Take a plunge into the musical world of Johannes Brahms: larger-than-life, symphonic sounds mixed in with inner emotional tension, all carefully calculated to perfect equilibrium on the piano.', [brahmsSonata1, brahmsIntermezzo118_2, brahmsPaganini1, brahmsLullaby, hungarianDance5, brahmsHandel], 75, 225, brahmsPortrait],
-    ['The Chopin Show', 'Get a glimpse of the genius of Frédéric Chopin, master of the Polish dance style and its depiction through pianistic dexterity.', [chopinPolonaise53, chopinNocturnes48, chopinMazurkas17, chopinBarcarolle, chopinWaltzes70, chopinScherzo4], 65, 175, chopinPortrait],
-    ['The Classics 1', 'Tired of classical concerts trying too hard to feature unknown composers or obscure works? This concert is just right for you! Featuring all-time favorites by famous composers - so famous that it\'s almost pop music.', [hungarianRhapsody2, salutDamour, dvorakHumoresque, clairDeLune, rachmaninovPrelude3_2, entertainer, canon, fantaisieImpromptu, vivaldiSpring, volodosTurkish], 65, 175, classics1],
-    ['The Classics 2', 'Classical Hits cannot fit into just one concert! Explore more well-known tunes that is sure to hit the spot and may leave you humming for the rest of the day.', [radetzky, furElise, liebestraum, tchaikovskyJune, thaisMeditation, mapleLeafRag, chopinNocturne9_2, rhapsodyInBlue], 55, 150, classics2],
-    ['The Classics 3', 'Enjoy even more familiar melodies, specially catered to please both the amateurs and connoisseurs of classical music!', [bachWTC1_1, beethovenSonata8, brahmsLullaby, chopinBallade1, blueDanube, vivaldiWinter, dvorakLargo, weddingMarch], 75, 200, classics3],
-    ['Four Elements: Air & Earth', 'Wind shapes the Earth, and the resulting topography in turn affects the flow of the wind. Get ready to be swept up in the classical music depiction of this endless battle of nature.', [beethovenSonata17, ahnbenton15_2, pilgrimage1_5, erdasWarning, ahnbenton15_4, isleOfTheDead, chopinEtude25_11], 70, 200, airEarth],
-    ['Four Elements: Water & Fire', 'Water douses fire, and fire quenches water. Who will you root for - the scorching lava, or the raging ocean? Listen and decide!', [chopinEtude10_1, versLaFlamme, ahnbenton15_1, danzaRitualDelFuego, estampes3, ahnbenton15_3, jeuxDeau, firebird], 60, 225, fireWater],
-    ['Halloween Special 1', 'Feeling spooky? Fuel the fear with these classic horror tunes, filled with ghosts, witches, and the undead.', [bachToccata, beethovenSonata14, harryPotterSelections, halloweenTheme, ahnbenton28, chopinNocturne27_1, totentanz], 75, 225, halloween1],
-    ['Halloween Special 2', 'Enter this musical haunted house and participate in the mysteries of the paranormal. Beware - some spirits are harmless, but others love to exploit the scare factor!', [ahnbenton91, chopinNocturne48_1, transcendental6, isleOfTheDead, gaspard3, ahnbenton11_2_3, erlkonig, danseMacabre], 65, 200, halloween2],
-    ['Heroes vs. Villains', 'Which is more convincing: the music of the good, or the music of the evil? Decide for yourself in this exciting concert depicting the constant struggle between heroes and villains.', [tarasBulbaOverture, cruella, queenOfTheNight, poorUnfortunateSouls, batmanSelections, transcendental7, starWarsSelections, beethovenSonata12_3, bePrepared, gaston, elegantCaptainHook, chopinPolonaise53], 65, 175, heroesVillains],
-    ['Impostors and Thieves', 'Look carefully with a magnifying glass: this may be a piano concert, but the composers of these works either didn\'t originally write them for the piano, or tried to depict other instruments with the piano.', [bachChaconne, bozzaAria, chopinEtude25_1, chopinEtude25_7, lisztPaganini3, preludeFugueVariation, vivaldiWinter, vocalise, brahmsPaganini1], 75, 200, impostorsThieves],
-    ['Lisztomania', 'Be prepared to lose your mind with this up-close-and-personal concert of legendary pianist and composer, international icon, and unmatched master recitalist - Franz Liszt.', [hungarianRhapsody2, consolation3, lisztPaganini3, pilgrimage2s, liebestraum ,lisztSonata], 75, 250, lisztPortrait],
-    ['Lullaby Collection', 'Get ready for bed first, then listen to this concert in pajamas, perhaps with a nightcap. We mean this literally: this concert is specifically designed so that you can peacefully fall asleep in the middle of the concert!', [consolation3, beethovenSonata14_1, chopinBerceuse, clairDeLune, scarlatti87, traumerei, brahmsLullaby, beethovenSonata1_2, chopinNocturne9_2, debussyReverie, solveig, gershwinPrelude2, bachAir, americanPreludes2, bachWTC1_1_1, chansonTriste, vocalise, salutDamour], 75, 150, lullaby],
-    ['Marching On', 'Marches are everywhere in life: children\'s play, graduation, military, parades, weddings, and funerals. Tap your feet and hum along.', [radetzky, ahnbenton3, chopinPolonaise40_1, beethovenSonata12_3, militaryMarch, bridalMarch, rakoczy, chopinFuneral, pompCircumstance, etudeTableau33_4, starsStripes], 60, 200, march],
-    ['Meditation and Peace', 'Find your inner peace with this relaxing concert. Perfect for yoga, spas, therapeutic massages, or a simple daytime relaxation on a pleasant, clear day.', [peerGynt1_1, thaisMeditation, scarlatti466, traumerei, canon, tchaikovskyMorceaux72_5, rachmaninovPrelude32_5, images1, chopinWaltz34_2, dvorakLargo, debussyReverie, americanPreludes10, bachAir, aveMaria, chopinNocturne62_1], 85, 175, meditation],
-    ['Mozart Mastermind', 'Experience the seamless flow of music so effortlessly brought forth by Wolfgang Amadeus Mozart: the quintessential child prodigy with unparalleled frivolity and versatility.', [giovanniOverture, mozartSonata12, mozartAdagio, mozartVariations, mozartSonata8, volodosTurkish], 75, 200, mozartPortrait],
-    ['Ocean Waves', 'Capable of absolute tranquility and fierce rage, the ocean is both a loyal companion and a formidable force to all of us. Ride the waves of varying intensity as this concert takes you on a journey overseas.', [silveryWaves, etudeTableau39_2, miroirs3, chopinEtude25_12, ahnbenton79_4, mer], 65, 175, ocean],
-    ['Overcoming Tragedy', 'Tragedy is an unfortunate but inevitable part of life. Let this concert assist you with expressing and overcoming grief and allow yourself to slowly enter the stage of acceptance.', [chopinPolonaise44, beethovenSonata7_2, preludeFugueVariation, scriabinEtude42_5, consolation3, etudeTableau33_7, bachAir, beethovenSonata27, dvorakLargo], 80, 150, tragedy],
-    ['The Opera House 1', 'Explore the drama, the romance, the scandal, and the tragedy of famous operatic works, now brought to you in a home concert on the piano.', [figaroOverture, isoldesLiebestod, carmenVariations, forzaOverture, songbookSelections, vocalise, lisztFigaro], 60, 200, opera1],
-    ['The Opera House 2', 'The world of opera is vast and deep: with this opera-inside-a-piano concert, delve more into the storyline, the plot, and the hidden meanings and intentions of characters.', [williamTellOverture, solveig, chopinGiovanni, mascagniIntermezzo, tarasBulbaOverture, carmenSelections, erlkonig, babbino, lisztRigoletto], 70, 200, opera2],
-    ['Passing Down Pedagogy', 'Trace the centuries-long path of music pedagogy, where great composers mentor younger musicians, who in turn become great composers and pedagogues themselves.', [bachToccata, bachCPERondo, haydnSonata32, beethovenSonata24, czernyToccata, hungarianRhapsody2, bachAirSiloti, rachmaninovSonata2], 75, 225, pedagogy],
-    ['A Pokémon Journey: Kanto - Part 1', 'Let out both your inner nerd and childhood nostalgia! Explore both the iconic music of Junichi Masuda, and the epic battling music of the protagonist against many foes, if the battles were to be represented by equally iconic classical music. Follow the first generation gameplay through the Kanto region, from Pallet Town to Celadon City.', [masudaKantoOpening, masudaPallet, masudaOakLab, haydnSonata33_3, masudaKantoTravel1, masudaViridian, clementiSonata40_2_1, masudaViridianForest, masudaPewter, brahmsSonata1_3, masudaMoon, masudaCerulean, chopinEtude25_2, mozartSonata8_3, masudaVermillion, masudaAnne, beethovenSonata5_3, kapustin3, masudaRock, masudaLavender, masudaTower, beethovenSonata1_4, masudaKantoTravel2, masudaCeladon, masudaKantoRocket, diabolicSuggestion, mendelssohnRondo], 80, 175, kanto1],
-    ['A Pokémon Journey: Kanto - Part 2', 'Continue your trip down the memory lane in the region of Kanto, accompanied by the music of Masuda and equally dramatic works by other composers. Conquer the last four gym leaders, the elite four, and the champion!', [masudaBike, masudaFuchsia, transcendental8, masudaKantoTravel3, masudaSaffron, beethovenSonata17_1, prokofievToccata, scriabinEtude65_3, masudaSurf, masudaCinnabar, masudaMansion, ginasteraSonata1_4, prokofievSonata7_3, beethovenSonata23_3, masudaKantoVictory, chopinEtude25_11, rachmaninovPrelude23_5, ginasteraSonata1_2, valkyries, masudaChampion, masudaHall, masudaKantoEnding], 80, 175, kanto2],
-    ['Power of Prokofiev', 'Immerse in the powerfully striking musical fantasy land of Sergei Prokofiev, filled with obsession, feud, lust, war, and sarcasm.', [diabolicSuggestion, prokofievRomeoJuliet, prokofievSonata3, prokofievToccata, prokofievSonata7], 65, 225, prokofievPortrait],
-    ['Remembrance', 'Honor the dearly departed with a musical journey through remembrance, reverence, and nostalgia, filled with many relatable moments of inner suffering, displays of outcry, and eventual tranquility.', [faurePavane, mozartSonata8, rachmaninovElegy, ravelPavane, bachChaconne, chopinFuneral, lisztBallade2, babadjanianElegy], 80, 175, remembrance],
-    ['Reflections with Rachmaninov', 'Enter the incredibly complex world of Sergei Rachmaninov, where endless depth of emotion meets extreme pianistic dexterity to create an unforgettable musical experience.', [etudeTableau39_1, etudeTableau39_5, etudeTableau39_6, rachmaninovElegy, rachmaninovMusical16_3, rachmaninovMusical16_4, rachmaninovPrelude23_5, rachmaninovPrelude32_10, etudeTableau33_5, vocalise, rachmaninovSonata2], 75, 250, rachmaninovPortrait],
-    ['Saying Goodbye', 'Farewells are difficult, whether they are a separation from a loved one or a departure from a hometown. Ease the heartache and express the nostalgia with some of the best depictions in classical music of this uniquely human emotion.', [ahnbenton6_1, haydnSymphony45, chopinEtude10_3, adiosNonino, ahnbenton87, chopinWaltzes69, beethovenSonata26], 80, 225, goodbye],
-    ['The Seasons: Winter Wonderland', 'Turn your fireplace on and get cozy for the fantasy land of classical music\'s best depiction of snowy winter, freezing wind, and holiday spirit.', [chopinEtude25_11, beethovenSonata17, childrensCorner4, vivaldiWinter, sugarPlumFairy, transcendental12, ahnbenton101], 70, 200, winter],
-    ['Shadow of Shostakovich', 'Learn how the genius of Dmitri Shostakovich prevailed over political oppression and heavy tragedy and was still able to find hope, humor, and humanity in the dark times of the 20th century.', [shostakovichPreludeFugue24, fantasticDances, shostakovichSonata2, shostakovichPreludes34, shostakovichSymphony5_4], 80, 250, shostakovichPortrait],
-    ['Traveling Musician', 'Take a tour of the world with the colorful imaginations and impressions of different parts of the world by different creative minds.', [wanderersFantasy, pilgrimage3_4, dvorakSymphony9Finale, islamey, ahnbenton76, americanInParis], 70, 225, traveling],
-    ['Ukrainian Resistance 1', 'Stand with the brave people of Ukraine by immersing yourself in this program of composers of Ukraine: from the father of Ukrainian music to currently living composers, to those who were impacted by Ukrainian culture.', [tarasBulbaOverture, kitschMusyka, revutskyPreludes7, ahnbenton99, skorykBurleska, lyatoshynskyPreludes, kosenkoSonata2], 75, 225, ukraineResistance1],
-    ['Ukrainian Resistance 2', 'Continue your Ukrainian journey and explore how the Ukrainian people and culture withstood hundreds of years of oppression, and how they continue to resist occupation and fight for their independence.', [ukrainianSuite1, bortkevychMorceaux, skorykPartita5, shamoToccata, revutskyPieces17, kosenkoSonata3, skorykMelodia], 65, 175, ukraineResistance2],
-    ['Valentine\'s Day Special 1', 'Enjoy a romantic dinner or a couple\'s dance with your loved one while listening to some of the most beloved romances of classical music.', [ahnbenton64_2, pasDeDeux, chopinBallade3, canYouFeelTheLoveTonight, liebestraum, loveMeTender, mascagniIntermezzo, weddingMarch, isoldesLiebestod, ahnbenton87], 60, 175, valentine1],
-    ['Valentine\'s Day Special 2', 'Follow a lifecycle of love with this wordless musical storyline that tells how love evolves from butterflies in the stomach to full-blown passion to a mere ghost of a memory.', [salutDamour, chopinGiovanni, eros, bridalMarch, cantHelpFallingInLove, weddingMarch, aWholeNewWorld, liebesfreud, liebesleid, chopinBallade2, ahnbenton87], 65, 200, valentine2],
-    ['Valentine\'s Day Special 3', 'Explore the more innocent side of love with this collection of youthful, hope-filled romances.', [widmung, beautyAndTheBeast, pilgrimage2_1, flowerSong, prokofievCinderella, beethovenSonata30], 55, 150, valentine3],
-    ['Women Power', 'Celebrate the power of women and help raise their voices with some of the greatest female composers to ever exist. Perfect birthday or Mother\'s Day gift for any musically interested woman in your life!', [chaminadeBallade, balkanVariations, claraSchumannScherzo2, bonisBarcarolle, dasJahr], 85, 225, womenPower],
-    ['Zookeeper 1', 'Immerse yourself in a land of famous animals of music: from a cat that inspired an epic fugue to a bumblebee that begot one of the most virtuosic piano pieces ever composed.', [swanLakeTheme, miroirs2, poule, images6, chopinEtude25_2, beethovenSonata25, scarlatti30, chopinEtude25_9, lark, cygne, ahnbenton91, bumblebee], 60, 175, zookeeper1],
-    ['Zookeeper 2', 'Add more musical animals to your collection - birds in springtime, a dancing cuckoo, a big bad wolf, a dog chasing its own tail, a violently racing horse, and many more!', [vivaldiSpring, etudeTableau39_2, chopinWaltz64_1, picturesBydlo, forelle, picturesUnhatched, annaKarenina, chopinEtude25_3, miroirs1, cuckooWaltz, etudeTableau39_6, carnavalDesAnimaux], 55, 150, zookeeper2],
+    [ahnbenton, 'American Pride 1', 'Enjoy some of the most famous musical depictions of American patriotism, the wild west, blues, and ragtime. Perfect for Fourth of July, Memorial Day, Labor Day, or even to celebrate newly naturalized American citizens.', [starsStripes, excursions, mapleLeafRag, westSideStorySelections, rhapsodyInBlue], 65, 200, allAmerican1],
+    [ahnbenton, 'American Pride 2', 'Presenting the true diversity of the U.S.A. from classic American composers to naturalized Asian-American composers, from movie scores to musical theater, from lighthearted male composers to introverted female composers.', [gershwinPreludes, supermanSelections, ahnbenton56, phantomSelections, entertainer, beachBallade, americanInParis], 65, 175, allAmerican2],
+    [ahnbenton, 'At the Carnival', 'Fear the clowns no more! These jesters, pierrots, and mimes are at your service for your aural pleasure.', [miroirs4, scaramouche, petrushka, sabreDance, ahnbenton7, carnaval], 75, 250, carnival],
+    [ahnbenton, 'Ballroom 1', 'Welcome to Ballroom 1, where you may join the dance floor with Argentinian outlaws, a seductive devil, traditional Viennese, and partying gypsies.', [chopinWaltz18, arabianDance, fantasticDances, mephisto, hungarianDance5, liebesleid, liebesfreud, oblivion, danzasArgentinas, carmenVariations], 55, 200, ballroom1],
+    [ahnbenton, 'Ballroom 2', 'Welcome to Ballroom 2, where flowers come alive, knives are flying, and even the dead may take part in the festivities along with the Polish and the Romanians.', [waltzOfFlowers, romanianFolkDances, danseMacabre, sabreDance, chopinMazurka6_1, chopinMazurka7_1, chopinMazurka17_4, libertango, pilgrimage2s_3], 55, 200, ballroom2],
+    [ahnbenton, 'Ballroom 3', 'Welcome to Ballroom 3, where the elegant and the traditional battle the grotesque and the rustic. Which style will you favor?', [chopinPolonaise53, beethovenMinuet, bachPartita6, valseGrotesque, ahnbenton1, americanPreludes3, sugarPlumFairy, totentanz], 70, 200, ballroom3],
+    [ahnbenton, 'Blast of Beethoven', 'Explore the tumultuous life of Ludwig van Beethoven: a story of love and tragedy with a touch of frivolity.', [beethovenSonata8, beethovenRondo, furElise, beethovenBagatelles33, beethovenSonata23], 70, 175, beethovenPortrait],
+    [ahnbenton, 'Blueprints By Bach', 'Take a dive into the perfect balance of mathematical structure, musical dramaturgy, emotional depth of the timeless composer J. S. Bach.', [passacagliaFugue, bachAir, chromaticFantasy, bachPartita2, bachToccata], 60, 200, bachPortrait],
+    [ahnbenton, 'Botanical Garden', 'Imagine walking through an exquisite botanical garden or taking in the fresh air of a rural meadowland - without having to worry about any allergies!', [lilacs, americanPreludes10, blumenlied, beethovenSonata15, flowerSong, lisztPastorale, waltzOfFlowers, ahnbenton96], 60, 175, botanical],
+    [ahnbenton, 'A Brahmsian Battle', 'Take a plunge into the musical world of Johannes Brahms: larger-than-life, symphonic sounds mixed in with inner emotional tension, all carefully calculated to perfect equilibrium on the piano.', [brahmsSonata1, brahmsIntermezzo118_2, brahmsPaganini1, brahmsLullaby, hungarianDance5, brahmsHandel], 75, 225, brahmsPortrait],
+    [ahnbenton, 'The Chopin Show', 'Get a glimpse of the genius of Frédéric Chopin, master of the Polish dance style and its depiction through pianistic dexterity.', [chopinPolonaise53, chopinNocturnes48, chopinMazurkas17, chopinBarcarolle, chopinWaltzes70, chopinScherzo4], 65, 175, chopinPortrait],
+    [ahnbenton, 'The Classics 1', 'Tired of classical concerts trying too hard to feature unknown composers or obscure works? This concert is just right for you! Featuring all-time favorites by famous composers - so famous that it\'s almost pop music.', [hungarianRhapsody2, salutDamour, dvorakHumoresque, clairDeLune, rachmaninovPrelude3_2, entertainer, canon, fantaisieImpromptu, vivaldiSpring, volodosTurkish], 65, 175, classics1],
+    [ahnbenton, 'The Classics 2', 'Classical Hits cannot fit into just one concert! Explore more well-known tunes that is sure to hit the spot and may leave you humming for the rest of the day.', [radetzky, furElise, liebestraum, tchaikovskyJune, thaisMeditation, mapleLeafRag, chopinNocturne9_2, rhapsodyInBlue], 55, 150, classics2],
+    [ahnbenton, 'The Classics 3', 'Enjoy even more familiar melodies, specially catered to please both the amateurs and connoisseurs of classical music!', [bachWTC1_1, beethovenSonata8, brahmsLullaby, chopinBallade1, blueDanube, vivaldiWinter, dvorakLargo, weddingMarch], 75, 200, classics3],
+    [ahnbenton, '4 Elements: Air & Earth', 'Wind shapes the Earth, and the resulting topography in turn affects the flow of the wind. Get ready to be swept up in the classical music depiction of this endless battle of nature.', [beethovenSonata17, ahnbenton15_2, pilgrimage1_5, erdasWarning, ahnbenton15_4, isleOfTheDead, chopinEtude25_11], 70, 200, airEarth],
+    [ahnbenton, '4 Elements: Water & Fire', 'Water douses fire, and fire quenches water. Who will you root for - the scorching lava, or the raging ocean? Listen and decide!', [chopinEtude10_1, versLaFlamme, ahnbenton15_1, danzaRitualDelFuego, estampes3, ahnbenton15_3, jeuxDeau, firebird], 60, 225, fireWater],
+    [ahnbenton, 'Halloween Special 1', 'Feeling spooky? Fuel the fear with these classic horror tunes, filled with ghosts, witches, and the undead.', [bachToccata, beethovenSonata14, harryPotterSelections, halloweenTheme, ahnbenton28, chopinNocturne27_1, totentanz], 75, 225, halloween1],
+    [ahnbenton, 'Halloween Special 2', 'Enter this musical haunted house and participate in the mysteries of the paranormal. Beware - some spirits are harmless, but others love to exploit the scare factor!', [ahnbenton91, chopinNocturne48_1, transcendental6, isleOfTheDead, gaspard3, ahnbenton11_2_3, erlkonig, danseMacabre], 65, 200, halloween2],
+    [ahnbenton, 'Heroes vs. Villains', 'Which is more convincing: the music of the good, or the music of the evil? Decide for yourself in this exciting concert depicting the constant struggle between heroes and villains.', [tarasBulbaOverture, cruella, queenOfTheNight, poorUnfortunateSouls, batmanSelections, transcendental7, starWarsSelections, beethovenSonata12_3, bePrepared, gaston, elegantCaptainHook, chopinPolonaise53], 65, 175, heroesVillains],
+    [ahnbenton, 'Impostors and Thieves', 'Look carefully with a magnifying glass: this may be a piano concert, but the composers of these works either didn\'t originally write them for the piano, or tried to depict other instruments with the piano.', [bachChaconne, bozzaAria, chopinEtude25_1, chopinEtude25_7, lisztPaganini3, preludeFugueVariation, vivaldiWinter, vocalise, brahmsPaganini1], 75, 200, impostorsThieves],
+    [ahnbenton, 'Lisztomania', 'Be prepared to lose your mind with this up-close-and-personal concert of legendary pianist and composer, international icon, and unmatched master recitalist - Franz Liszt.', [hungarianRhapsody2, consolation3, lisztPaganini3, pilgrimage2s, liebestraum ,lisztSonata], 75, 250, lisztPortrait],
+    [ahnbenton, 'Lullaby Collection', 'Get ready for bed first, then listen to this concert in pajamas, perhaps with a nightcap. We mean this literally: this concert is specifically designed so that you can peacefully fall asleep in the middle of the concert!', [consolation3, beethovenSonata14_1, chopinBerceuse, clairDeLune, scarlatti87, traumerei, brahmsLullaby, beethovenSonata1_2, chopinNocturne9_2, debussyReverie, solveig, gershwinPrelude2, bachAir, americanPreludes2, bachWTC1_1_1, chansonTriste, vocalise, salutDamour], 75, 150, lullaby],
+    [ahnbenton, 'Marching On', 'Marches are everywhere in life: children\'s play, graduation, military, parades, weddings, and funerals. Tap your feet and hum along.', [radetzky, ahnbenton3, chopinPolonaise40_1, beethovenSonata12_3, militaryMarch, bridalMarch, rakoczy, chopinFuneral, pompCircumstance, etudeTableau33_4, starsStripes], 60, 200, march],
+    [ahnbenton, 'Meditation and Peace', 'Find your inner peace with this relaxing concert. Perfect for yoga, spas, therapeutic massages, or a simple daytime relaxation on a pleasant, clear day.', [peerGynt1_1, thaisMeditation, scarlatti466, traumerei, canon, tchaikovskyMorceaux72_5, rachmaninovPrelude32_5, images1, chopinWaltz34_2, dvorakLargo, debussyReverie, americanPreludes10, bachAir, aveMaria, chopinNocturne62_1], 85, 175, meditation],
+    [ahnbenton, 'Mozart Mastermind', 'Experience the seamless flow of music so effortlessly brought forth by Wolfgang Amadeus Mozart: the quintessential child prodigy with unparalleled frivolity and versatility.', [giovanniOverture, mozartSonata12, mozartAdagio, mozartVariations, mozartSonata8, volodosTurkish], 75, 200, mozartPortrait],
+    [kolesnyk, 'Music for Music\'s Sake', 'Enjoy music in its purest form: without any specific themes, subtext, political undertones, or even association to other forms of art. This concert is built specifically for music itself and for your imagination!', [mozartSonata16, chopinNocturne9_2, rachmaninovElegy, haydnSonata34, tchaikovskySweetDreams, salutDamour, villaLobosPolichinelle, clairDeLune, babadjanianElegy, shamoToccata, brahmsLullaby, etudeTableau39_9], 55, 200, musicForMusic],
+    [ahnbenton, 'Ocean Waves', 'Capable of absolute tranquility and fierce rage, the ocean is both a loyal companion and a formidable force to all of us. Ride the waves of varying intensity as this concert takes you on a journey overseas.', [silveryWaves, etudeTableau39_2, miroirs3, chopinEtude25_12, ahnbenton79_4, mer], 65, 175, ocean],
+    [ahnbenton, 'Overcoming Tragedy', 'Tragedy is an unfortunate but inevitable part of life. Let this concert assist you with expressing and overcoming grief and allow yourself to slowly enter the stage of acceptance.', [chopinPolonaise44, beethovenSonata7_2, preludeFugueVariation, scriabinEtude42_5, consolation3, etudeTableau33_7, bachAir, beethovenSonata27, dvorakLargo], 80, 150, tragedy],
+    [ahnbenton, 'The Opera House 1', 'Explore the drama, the romance, the scandal, and the tragedy of famous operatic works, now brought to you in a home concert on the piano.', [figaroOverture, isoldesLiebestod, carmenVariations, forzaOverture, songbookSelections, vocalise, lisztFigaro], 60, 200, opera1],
+    [ahnbenton, 'The Opera House 2', 'The world of opera is vast and deep: with this opera-inside-a-piano concert, delve more into the storyline, the plot, and the hidden meanings and intentions of characters.', [williamTellOverture, solveig, chopinGiovanni, mascagniIntermezzo, tarasBulbaOverture, carmenSelections, erlkonig, babbino, lisztRigoletto], 70, 200, opera2],
+    [ahnbenton, 'Passing Down Pedagogy', 'Trace the centuries-long path of music pedagogy, where great composers mentor younger musicians, who in turn become great composers and pedagogues themselves.', [bachWTC1_1, bachCPERondo, haydnSonata34, beethovenSonata24, czernyToccata, hungarianRhapsody2, bachAirSiloti, rachmaninovSonata2], 75, 225, pedagogy],
+    [ahnbenton, 'A Pokémon Journey: Kanto - Part 1', 'Let out both your inner nerd and childhood nostalgia! Explore both the iconic music of Junichi Masuda, and the epic battling music of the protagonist against many foes, if the battles were to be represented by equally iconic classical music. Follow the first generation gameplay through the Kanto region, from Pallet Town to Celadon City.', [masudaKantoOpening, masudaPallet, masudaOakLab, haydnSonata34_3, masudaKantoTravel1, masudaViridian, clementiSonata40_2_1, masudaViridianForest, masudaPewter, brahmsSonata1_3, masudaMoon, masudaCerulean, chopinEtude25_2, mozartSonata8_3, masudaVermillion, masudaAnne, beethovenSonata5_3, kapustin3, masudaRock, masudaLavender, masudaTower, beethovenSonata1_4, masudaKantoTravel2, masudaCeladon, masudaKantoRocket, diabolicSuggestion, mendelssohnRondo], 80, 175, kanto1],
+    [ahnbenton, 'A Pokémon Journey: Kanto - Part 2', 'Continue your trip down the memory lane in the region of Kanto, accompanied by the music of Masuda and equally dramatic works by other composers. Conquer the last four gym leaders, the elite four, and the champion!', [masudaBike, masudaFuchsia, transcendental8, masudaKantoTravel3, masudaSaffron, beethovenSonata17_1, prokofievToccata, scriabinEtude65_3, masudaSurf, masudaCinnabar, masudaMansion, ginasteraSonata1_4, prokofievSonata7_3, beethovenSonata23_3, masudaKantoVictory, chopinEtude25_11, rachmaninovPrelude23_5, ginasteraSonata1_2, valkyries, masudaChampion, masudaHall, masudaKantoEnding], 80, 175, kanto2],
+    [ahnbenton, 'Power of Prokofiev', 'Immerse in the powerfully striking musical fantasy land of Sergei Prokofiev, filled with obsession, feud, lust, war, and sarcasm.', [diabolicSuggestion, prokofievRomeoJuliet, prokofievSonata3, prokofievToccata, prokofievSonata7], 65, 225, prokofievPortrait],
+    [ahnbenton, 'Remembrance', 'Honor the dearly departed with a musical journey through remembrance, reverence, and nostalgia, filled with many relatable moments of inner suffering, displays of outcry, and eventual tranquility.', [faurePavane, mozartSonata8, rachmaninovElegy, ravelPavane, bachChaconne, chopinFuneral, lisztBallade2, babadjanianElegy], 80, 175, remembrance],
+    [ahnbenton, 'Reflections with Rachmaninov', 'Enter the incredibly complex world of Sergei Rachmaninov, where endless depth of emotion meets extreme pianistic dexterity to create an unforgettable musical experience.', [etudeTableau39_1, etudeTableau39_5, etudeTableau39_6, rachmaninovElegy, rachmaninovMusical16_3, rachmaninovMusical16_4, rachmaninovPrelude23_5, rachmaninovPrelude32_10, etudeTableau33_5, vocalise, rachmaninovSonata2], 75, 250, rachmaninovPortrait],
+    [ahnbenton, 'Saying Goodbye', 'Farewells are difficult, whether they are a separation from a loved one or a departure from a hometown. Ease the heartache and express the nostalgia with some of the best depictions in classical music of this uniquely human emotion.', [ahnbenton6_1, haydnSymphony45, chopinEtude10_3, adiosNonino, ahnbenton87, chopinWaltzes69, beethovenSonata26], 80, 225, goodbye],
+    [ahnbenton, 'The Seasons: Winter Wonderland', 'Turn your fireplace on and get cozy for the fantasy land of classical music\'s best depiction of snowy winter, freezing wind, and holiday spirit.', [chopinEtude25_11, beethovenSonata17, childrensCorner4, vivaldiWinter, sugarPlumFairy, transcendental12, ahnbenton101], 70, 200, winter],
+    [ahnbenton, 'Shadow of Shostakovich', 'Learn how the genius of Dmitri Shostakovich prevailed over political oppression and heavy tragedy and was still able to find hope, humor, and humanity in the dark times of the 20th century.', [shostakovichPreludeFugue24, fantasticDances, shostakovichSonata2, shostakovichPreludes34, shostakovichSymphony5_4], 80, 250, shostakovichPortrait],
+    [ahnbenton, 'Traveling Musician', 'Take a tour of the world with the colorful imaginations and impressions of different parts of the world by different creative minds.', [wanderersFantasy, pilgrimage3_4, dvorakSymphony9Finale, islamey, ahnbenton76, americanInParis], 70, 225, traveling],
+    [ahnbenton, 'Ukrainian Resistance 1', 'Stand with the brave people of Ukraine by immersing yourself in this program of composers of Ukraine: from the father of Ukrainian music to currently living composers, to those who were impacted by Ukrainian culture.', [tarasBulbaOverture, kitschMusyka, revutskyPreludes7, ahnbenton99, skorykBurleska, lyatoshynskyPreludes, kosenkoSonata2], 75, 225, ukraineResistance1],
+    [ahnbenton, 'Ukrainian Resistance 2', 'Continue your Ukrainian journey and explore how the Ukrainian people and culture withstood hundreds of years of oppression, and how they continue to resist occupation and fight for their independence.', [ukrainianSuite1, bortkevychMorceaux, skorykPartita5, shamoToccata, revutskyPieces17, kosenkoSonata3, skorykMelodia], 65, 175, ukraineResistance2],
+    [ahnbenton, 'Valentine\'s Day Special 1', 'Enjoy a romantic dinner or a couple\'s dance with your loved one while listening to some of the most beloved romances of classical music.', [ahnbenton64_2, pasDeDeux, chopinBallade3, canYouFeelTheLoveTonight, liebestraum, loveMeTender, mascagniIntermezzo, weddingMarch, isoldesLiebestod, ahnbenton87], 60, 175, valentine1],
+    [ahnbenton, 'Valentine\'s Day Special 2', 'Follow a lifecycle of love with this wordless musical storyline that tells how love evolves from butterflies in the stomach to full-blown passion to a mere ghost of a memory.', [salutDamour, chopinGiovanni, eros, bridalMarch, cantHelpFallingInLove, weddingMarch, aWholeNewWorld, liebesfreud, liebesleid, chopinBallade2, ahnbenton87], 65, 200, valentine2],
+    [ahnbenton, 'Valentine\'s Day Special 3', 'Explore the more innocent side of love with this collection of youthful, hope-filled romances.', [widmung, beautyAndTheBeast, pilgrimage2_1, flowerSong, prokofievCinderella, beethovenSonata30], 55, 150, valentine3],
+    [ahnbenton, 'Women Power', 'Celebrate the power of women and help raise their voices with some of the greatest female composers to ever exist. Perfect birthday or Mother\'s Day gift for any musically interested woman in your life!', [chaminadeBallade, balkanVariations, claraSchumannScherzo2, bonisBarcarolle, dasJahr], 85, 225, womenPower],
+    [ahnbenton, 'Zookeeper 1', 'Immerse yourself in a land of famous animals of music: from a cat that inspired an epic fugue to a bumblebee that begot one of the most virtuosic piano pieces ever composed.', [swanLakeTheme, miroirs2, poule, images6, chopinEtude25_2, beethovenSonata25, scarlatti30, chopinEtude25_9, lark, cygne, ahnbenton91, bumblebee], 60, 175, zookeeper1],
+    [ahnbenton, 'Zookeeper 2', 'Add more musical animals to your collection - birds in springtime, a dancing cuckoo, a big bad wolf, a dog chasing its own tail, a violently racing horse, and many more!', [vivaldiSpring, etudeTableau39_2, chopinWaltz64_1, picturesBydlo, forelle, picturesUnhatched, annaKarenina, chopinEtude25_3, miroirs1, cuckooWaltz, etudeTableau39_6, carnavalDesAnimaux], 55, 150, zookeeper2],
 ]
 
-const concertObjs = availableConcerts.map(concert => new Concert ('Ahn-Benton, Jae', concert[0], concert[1], concert[2], concert[3], concert[4], concert[5]))
+const concertObjs = availableConcerts.map(concert => new Concert (concert[0], concert[1], concert[2], concert[3], concert[4], concert[5], concert[6]))
 let tdStyle = 'border border-stone-800 text-center py-1'
 let btnStyle = 'w-3/4 lg:w-3/4 border border-stone-800 rounded-xl p-2 m-3 hover:bg-amber-300 hover:text-stone-800'
 let modalStyle = 'absolute w-full lg:w-3/4 lg:left-[12.5%] border border-stone-800 flex flex-col justify-center items-center bg-stone-300 rounded-3xl'
@@ -600,10 +607,14 @@ let liStyle = 'my-4'
 let divStyle = 'w-full lg:w-11/12 mx-auto flex'
 let labelStyle = 'w-1/3 lg:w-1/2 text-right m-2'
 let inputStyle = 'w-2/3 lg:w-1/2 text-left m-2 p-1 bg-stone-200 text-stone-800 rounded-lg'
+let subsectionDivStyle = 'flex justify-between items-center border border-stone-800 w-3/4 bg-stone-100 my-6 mx-auto px-5 rounded-xl hover:bg-amber-300 duration-500 hover:cursor-pointer'
+let subsectionStyle = 'text-center text-2xl my-6'
 
 export default function MobilePianoConcertSeriesPage({ isMenuOpen, isMobile, allMusicians, loginStatus, states, scrollToTop, userType }) {
     const [showDetails, setShowDetails] = useState(false)
     const [showScheduleModal, setShowScheduleModal] = useState(false)
+    const [showMenu, setShowMenu] = useState(false)
+    const [showDisclaimers, setShowDisclaimers] = useState(false)
     const [currentConcert, setCurrentConcert] = useState(concertObjs[0])
     const [concertRequestData, setConcertRequestData] = useState({
         clientEmail: '',
@@ -682,17 +693,17 @@ export default function MobilePianoConcertSeriesPage({ isMenuOpen, isMobile, all
     return (
         <main className={`${isMenuOpen ? 'z-0 opacity-5' : ''} relative font-montserrat`}>
             {currentConcert.pianist
-            ? <div className={`${showDetails ? 'z-50' : 'hidden'} ${modalStyle} overflow-y-auto py-6 h-[40%]`}>
+            ? <div className={`${showDetails ? 'z-50' : 'hidden'} ${modalStyle} overflow-y-auto py-6 lg:h-[40%]`}>
                 <p className="text-lg lg:text-3xl py-12 font-bold text-center">{currentConcert.title}</p>
                 <p className="italic my-2">presented by</p>
-                <p>{`${currentConcert.pianist.split(', ')[1]} ${currentConcert.pianist.split(', ')[0]}`}, piano</p>
+                <p>{currentConcert.pianist}, piano</p>
                 <img className="border border-stone-800 rounded-xl w-1/2 my-5" src={currentConcert.poster} alt='poster'/>
                 <div className="w-11/12 mx-auto my-5">{currentConcert.description}</div>
                 <div className="border border-stone-800 rounded-xl w-11/12 bg-stone-100 p-2">
                     <p className="text-xl underline text-center my-2">Program</p>
-                    {currentConcert.program.map(opus => <div key={opus[0] + opus[1]} className="flex justify-between my-1 p-1 text-sm">
-                        <p className="w-1/2">{opus[0]}</p>
-                        <p className="w-1/2">{opus[1]}{opus[2] ? ` / ${opus[2]}`: ''}</p>
+                    {currentConcert.program.map(opus => <div key={opus[0] + opus[1]} className="flex justify-between my-1 p-1 text-xs lg:text-base">
+                        <p className="w-2/3 lg:w-1/2 mr-6">{opus[0]}</p>
+                        <p className="w-1/3 lg:w-1/2">{opus[1]}{opus[2] ? ` / ${opus[2]}`: ''}</p>
                     </div>)}
                 </div>
                 <p className="mt-3">Approximate Duration: <span className="font-bold">{currentConcert.duration} minutes</span></p>
@@ -857,11 +868,19 @@ export default function MobilePianoConcertSeriesPage({ isMenuOpen, isMobile, all
                     }>CLOSE</button>
                 </form>
             </section>
-            <h1 className={`${showDetails ? 'z-0 opacity-5' : ''} text-center text-3xl my-24`}>Forte & Piano Mobile Piano Concert Series</h1>
-            <p className={`${showDetails ? 'z-0 opacity-5' : ''} w-11/12 mx-auto text-lg text-center`}>Bring a professional classical piano performance right to your doorstep! Simply pick a concert from the menu below, and request a date, time, and location. Once confirmed by Forte & Piano and payment is made, the designated pianist will show up at your location at the specified date and time, and will perform the requested concert. That's it! No hassle, no confusion.</p>
-            <table className={`${showDetails ? 'z-0 opacity-5' : ''} border border-stone-800 w-11/12 mx-auto mb-12 table-fixed my-12 text-xs lg:text-base`}>
+            <div className={`${showDetails ? 'z-0 opacity-5' : ''} text-center text-3xl my-24`}>
+                <h1 className='text-lg'>Forte & Piano's</h1>
+                <h2 className='mt-5 text-6xl font-vibes'>Mobile Piano Concert Series</h2>
+            </div>
+            <img src={elegantPiano} alt="elegant-piano" className="w-11/12 lg:w-1/2 rounded-xl mx-auto"/>
+            <p className={`${showDetails ? 'z-0 opacity-5' : ''} w-11/12 lg:w-3/4 mx-auto my-10 text-lg`}>Bring a professional classical piano performance right to your doorstep! Simply pick a concert from the menu below, and request a date, time, and location. Once confirmed by Forte & Piano and payment is made, the designated pianist will show up at your location at the specified date and time, and will perform the requested concert. That's it! No hassle, no confusion.</p>
+            <div className={subsectionDivStyle} onClick={() => setShowMenu(!showMenu)}>
+                <p className={subsectionStyle}>Menu</p>
+                <p className={`mx-3 hover:cursor-pointer duration-300 ${showMenu ? 'rotate-180' : ''}`}>&#9660;</p>
+            </div>
+            <table className={`${showDetails ? 'z-0 opacity-5' : ''} ${showMenu ? '' : 'hidden'} border border-stone-800 w-11/12 mx-auto mb-12 table-fixed mt-4 text-xs lg:text-base`}>
                 <thead>
-                    <tr className="font-bold border border-stone-800 bg-gradient-to-r from-stone-300 via-stone-400 to-stone-300" >
+                    <tr className="font-bold border border-stone-800 bg-gradient-to-r from-stone-300 via-stone-400 to-stone-300 lg:h-[50px] lg:text-lg">
                         <td className={tdStyle + ' w-[25%] lg:w-[20%]'}>Pianist</td>
                         <td className={tdStyle + ' w-[35%] lg:w-[45%]'}>Title</td>
                         <td className={tdStyle + ' w-[15%] lg:w-[20%]'}>{isMobile ? 'Approx.' : 'Approximate'} Duration</td>
@@ -869,7 +888,7 @@ export default function MobilePianoConcertSeriesPage({ isMenuOpen, isMobile, all
                     </tr>
                 </thead>
                 <tbody>
-                    {concertObjs.map(concert => <tr key={concert.title} className="hover:bg-amber-300 hover:cursor-pointer" onClick={() => {
+                    {concertObjs.map(concert => <tr key={concert.title} className="bg-stone-100 hover:bg-amber-300 hover:cursor-pointer lg:h-[3rem] lg:text-lg" onClick={() => {
                         setShowDetails(true)
                         setCurrentConcert(concert)
                         scrollToTop()
@@ -881,13 +900,16 @@ export default function MobilePianoConcertSeriesPage({ isMenuOpen, isMobile, all
                     </tr>)}
                 </tbody>
             </table>
-            <aside className={`${showDetails ? 'z-0 opacity-5' : ''} w-11/12 mx-auto`}>
-                <p className="text-2xl underline text-center my-6">Disclaimers</p>
-                <ul className="list-disc list-inside text-sm mb-10">
-                    <li className={liStyle}>These mobile concerts are primarily designed for intimate home settings, either completely private just for 1 person, or up to an audience size of 10 people. They are not recommended for large audiences or for the general public. For large-scale performance requests, please visit the main Forte & Piano repertoire page <Link to="/repertoire" className="underline hover:text-amber-600">here</Link>.</li>
-                    <li className={liStyle}>Light snacks and/or ambience lighting may be added for your enjoyment during the concert for a small fee.</li>
+            <aside className={`${showDetails ? 'z-0 opacity-5' : ''} mx-auto`}>
+                <div className={subsectionDivStyle} onClick={() => setShowDisclaimers(!showDisclaimers)}>
+                    <p className={subsectionStyle}>Disclaimers</p>
+                    <p className={`mx-3 hover:cursor-pointer duration-300 ${showDisclaimers ? 'rotate-180' : ''}`}>&#9660;</p>
+                </div>
+                <ul className={`${showDisclaimers ? '' : 'hidden'} list-disc list-inside text-sm lg:text-base mb-10 w-3/4 mx-auto px-5`}>
+                    <li className={liStyle}>These mobile concerts are primarily designed for intimate home settings, either completely private just for 1 person, or up to an audience size of 20 people. They are not recommended for large audiences or for the general public. For large-scale performance requests, please visit the main Forte & Piano repertoire page <Link to="/repertoire" className="underline hover:text-amber-600">here</Link>.</li>
+                    <li className={liStyle}>Light snacks, refreshments, and/or ambient lighting may be added for your enjoyment during the concert for a small fee.</li>
                     <li className={liStyle}>No piano at home? No problem. Our pianist will bring a fully functional electric keyboard.</li>
-                    <li className={liStyle}>Please allow up to 15 minutes of setup and strike-down time before and after the requested performance timeframe.</li>
+                    <li className={liStyle}>Please allow up to 30 minutes of setup and strike-down time before and after the requested performance timeframe.</li>
                     <li className={liStyle}>A travel fee ranging from $5 to $25 may apply depending on the requested location within the greater Las Vegas area. Additional fees may apply for performance requests outside of the greater Las Vegas area.</li>
                     <li className={liStyle}>Repertoire substitutions may be allowed upon request. Additional fees may apply.</li>
                 </ul>
