@@ -3,7 +3,7 @@ import Card from '../Card'
 
 export default function Gallery({ filteredOpuses, setOpusDetails, allMusicians }) {
     const [endDisplayIndex, setEndDisplayIndex] = useState(20)
-    let galleryContent = <p className='text-center my-10'>No repertoire found. Please check your internect connection. If the problem persists, please contact the site administrator.</p>
+    let galleryContent = <p className='text-center my-10'>No repertoire found. Please clear your filters. If the problem persists, please check your internet connection or contact the site administrator.</p>
 
     if (filteredOpuses.length > 0) {
         galleryContent = filteredOpuses

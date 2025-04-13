@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import jaeHead from '../../assets/jae-head.jpg'
 import mariaHead from '../../assets/maria-head.jpg'
+import './styles.css'
 const musicPhotos = import.meta.glob('../../assets/{duet,jae,maria}-*.{png,jpg,jpeg}')
 const imagePaths = []
 for (const [path, importFunction] of Object.entries(musicPhotos)) {
@@ -14,14 +15,19 @@ for (const [path, importFunction] of Object.entries(musicPhotos)) {
 export default function AboutPage({isMenuOpen}) {
     const [carouselIndex, setCarouselIndex] = useState(0)
     const [loadedImages, setLoadedImages] = useState([])
-    const svgStyle = 'hover:cursor-pointer hover:scale-110 duration-500'
+    const [fadeState, setFadeState] = useState('about-fade-in')
+    const arrowStyle = 'hover:cursor-pointer hover:scale-110 duration-500 text-4xl'
 
     function handleCarouselIndex(evt) {
-        if (evt.currentTarget.id === 'left-arrow') {
-            carouselIndex === 0 ? setCarouselIndex(loadedImages.length - 1) : setCarouselIndex(carouselIndex - 1)
-        } else {
-            carouselIndex === loadedImages.length - 1 ? setCarouselIndex(0) : setCarouselIndex(carouselIndex + 1)
-        }
+        setFadeState('about-fade-out')
+        setTimeout(() => {
+            if (evt.target.id === 'left-arrow') {
+                carouselIndex === 0 ? setCarouselIndex(loadedImages.length - 1) : setCarouselIndex(carouselIndex - 1)
+            } else {
+                carouselIndex === loadedImages.length - 1 ? setCarouselIndex(0) : setCarouselIndex(carouselIndex + 1)
+            }
+            setFadeState('about-fade-in')
+        }, 500)
     }
 
     useEffect(() => {
@@ -47,17 +53,13 @@ export default function AboutPage({isMenuOpen}) {
             </article>
             <div className='w-11/12 lg:w-2/3 mx-auto my-10 flex justify-center items-center'>
                 <div className='flex justify-center items-center'>
-                    <svg width="50" height="50" className={svgStyle + ' mr-3'} id='left-arrow' onClick={handleCarouselIndex}>
-                        <polygon points='40,15 20,25 40,35 33,25' fill='black'/>
-                    </svg>
+                    <p className={arrowStyle + ' mr-3'} id='left-arrow' onClick={handleCarouselIndex}>&#10094;</p>
                 </div>
-                <div className='h-[25vh] lg:h-[50vh] w-[75vw]'>
-                    {loadedImages.map((photo, index) => <img key={index} src={photo} className={`${index !== carouselIndex ? 'hidden' : ''} mx-auto rounded-xl h-full w-auto`}/>)}
+                <div className='h-[25vh] lg:h-[50vh] w-[75vw] relative overflow-hidden'>
+                    {loadedImages.map((photo, index) => <img key={index} src={photo} className={`${index === carouselIndex ? fadeState : 'opacity-0 pointer-events-none'} mx-auto rounded-xl h-full w-auto absolute duration-500 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`}/>)}
                 </div>
                 <div className='flex justify-center items-center'>
-                    <svg width="50" height="50" className={svgStyle + ' ml-3'} id='right-arrow' onClick={handleCarouselIndex}>
-                        <polygon points='10,15 30,25 10,35 17,25' fill='black'/>
-                    </svg>
+                    <p className={arrowStyle + ' ml-3'} id='right-arrow' onClick={handleCarouselIndex}>&#10095;</p>
                 </div>
             </div>
         </main>
