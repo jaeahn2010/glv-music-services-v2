@@ -914,6 +914,15 @@ export default function MobilePianoConcertSeriesPage({ isMenuOpen, isMobile, all
                     <li className={liStyle}>Repertoire substitutions may be allowed upon request. Additional fees may apply.</li>
                 </ul>
             </aside>
+            <div className="w-11/12 mx-auto border border-stone-800"></div>
+            <div className="flex justify-center items-center my-5">
+                <p className="mr-1">If you would prefer an offline version of this page, please feel free to download our latest Mobile Piano Concert Series brochure</p>
+                <a
+                    href="../../files/mpcs-brochure.pdf"
+                    download
+                    className="underline duration-500 hover:scale-105"
+                >here.</a>
+            </div>
         </main>
     )
 }

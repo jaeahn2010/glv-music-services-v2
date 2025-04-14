@@ -14,7 +14,7 @@ export default function RepertoirePage({ isMenuOpen, allOpuses, allComposers, al
     const filterDivStyle = 'flex justify-center items-center w-11/12 mx-auto my-2'
     const filterLabelStyle = 'w-1/2 text-right mr-2 text-sm'
     const filterInputStyle = 'w-1/2 text-stone-800 text-sm'
-    const btnStyle = 'mx-auto my-5 p-2 border border-stone-800 rounded-xl hover:bg-amber-300 hover:text-stone-700 bg:scale-105 duration-500'
+    const btnStyle = 'mx-auto my-5 p-2 border border-stone-800 rounded-xl hover:bg-amber-300 hover:text-stone-700 bg:scale-105 duration-500 shadow-xl'
 
     let composersNameReformat = allComposers.map(composer => {
         let lastSpaceIndex = composer.lastIndexOf(' ')
@@ -42,7 +42,33 @@ export default function RepertoirePage({ isMenuOpen, allOpuses, allComposers, al
                     case 'instrumentation':
                         setFilteredOpuses(filteredOpus => filteredOpus.filter(opus => {
                             let lowerCaseInstrumentation = opus.instrumentation.map(instrument => instrument.toLowerCase())
-                            return lowerCaseInstrumentation.includes(switchValue)
+                            let instrumentFamily
+                            switch(switchValue) {
+                                case 'flute':
+                                    instrumentFamily = new Set(['flute', 'piccolo'])
+                                    break
+                                case 'oboe':
+                                    instrumentFamily = new Set(['oboe', 'english horn'])
+                                    break
+                                case 'clarinet':
+                                    instrumentFamily = new Set(['clarinet', 'bass clarinet'])
+                                    break
+                                case 'saxophone':
+                                    instrumentFamily = new Set(['soprano saxophone', 'alto saxophone', 'tenor saxophone', 'baritone saxophone'])
+                                    break
+                                case 'trombone':
+                                    instrumentFamily = new Set(['trombone', 'bass trombone'])
+                                    break
+                                case 'tuba/euphonium':
+                                    instrumentFamily = new Set(['tuba', 'euphonium'])
+                                    break
+                                case 'contrabass':
+                                    instrumentFamily = new Set(['contrabass', 'double bass'])
+                                    break
+                                default:
+                                    return lowerCaseInstrumentation.includes(switchValue)
+                            }
+                            return lowerCaseInstrumentation.filter(instrument => instrumentFamily.has(instrument)).length
                         }))
                         break
                     case 'keyword':
@@ -80,7 +106,7 @@ export default function RepertoirePage({ isMenuOpen, allOpuses, allComposers, al
                     className={`${showFilters ? 'text-red-600' : 'text-green-600'} text-center`}
                 >{showFilters ? 'HIDE FILTERS' : 'SHOW FILTERS'}</button>
             </div>
-            <section className={`${showFilters ? '' : 'hidden'} duration-500 border border-stone-400 rounded-xl my-2 py-2 w-11/12 lg:w-1/2 mx-auto bg-gray-300`}>
+            <section className={`${showFilters ? '' : 'hidden'} duration-500 border border-stone-400 rounded-xl my-2 py-2 w-11/12 lg:w-1/2 mx-auto bg-stone-100`}>
                 <div className="w-full flex flex-col">
                     <div className={filterDivStyle}>
                         <label className={filterLabelStyle} htmlFor='repType'>REPERTOIRE TYPE</label>
@@ -91,7 +117,7 @@ export default function RepertoirePage({ isMenuOpen, allOpuses, allComposers, al
                             defaultValue={0}
                             onChange={handleChange}>
                             <option key={0} value={0} disabled>Select a type</option>
-                            {['Solo', 'Chamber', 'Piano Reduction'].map(type => <option key={type} value={type}>{type}</option>)}
+                            {['Solo', 'Chamber Music', 'Piano Reduction'].map(type => <option key={type} value={type}>{type}</option>)}
                         </select>
                     </div>
                     <div className={filterDivStyle}>
@@ -115,7 +141,7 @@ export default function RepertoirePage({ isMenuOpen, allOpuses, allComposers, al
                             defaultValue={0}
                             onChange={handleChange}>
                             <option key={0} value={0} disabled>Select an instrument</option>
-                            {instruments.map(instrument => <option key={instrument} value={instrument}>{instrument}</option>)}
+                            {instruments.filter(instrument => !['composer', 'conductor', 'harmonica'].includes(instrument)).map(instrument => <option key={instrument} value={instrument}>{instrument}</option>)}
                         </select>
                     </div>
                     <div className={filterDivStyle}>
