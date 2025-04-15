@@ -103,10 +103,10 @@ export default function RepertoirePage({ isMenuOpen, allOpuses, allComposers, al
             <div className='w-1/2 lg:w-1/6 mx-auto flex justify-around items-center'>
                 <button
                     onClick={() => setShowFilters(!showFilters)}
-                    className={`${showFilters ? 'text-red-600' : 'text-green-600'} text-center`}
+                    className={btnStyle}
                 >{showFilters ? 'HIDE FILTERS' : 'SHOW FILTERS'}</button>
             </div>
-            <section className={`${showFilters ? '' : 'hidden'} duration-500 border border-stone-400 rounded-xl my-2 py-2 w-11/12 lg:w-1/2 mx-auto bg-stone-100`}>
+            <section className={`${showFilters ? '' : 'hidden'} duration-500 border border-stone-400 rounded-xl my-2 py-2 w-11/12 lg:w-1/2 mx-auto bg-stone-100 shadow-lg`}>
                 <div className="w-full flex flex-col">
                     <div className={filterDivStyle}>
                         <label className={filterLabelStyle} htmlFor='repType'>REPERTOIRE TYPE</label>

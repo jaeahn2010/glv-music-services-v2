@@ -101,7 +101,7 @@ export default function HomePage({isMenuOpen, isMobile}) {
                         }}>{service}</li>
                     )}
                 </ul>
-                <div className={`${isMobile ? 'w-full' : 'w-1/2'} mx-1 my-10 p-2 border border-stone-800 bg-stone-100 rounded-xl lg:min-h-[300px] flex flex-col justify-center items-center leading-loose`}>
+                <div className={`${isMobile ? 'w-full' : 'w-1/2'} mx-1 my-10 p-2 border border-stone-800 bg-stone-100 rounded-xl lg:min-h-[300px] flex flex-col justify-center items-center leading-loose shadow-lg`}>
                     {currentServiceDisplay.description}
                     {currentServiceDisplay.index !== -1
                     ? <div className='my-5 flex justify-center items-center relative w-full'>

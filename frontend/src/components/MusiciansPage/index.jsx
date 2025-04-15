@@ -23,7 +23,7 @@ export default function MusiciansPage({ isMenuOpen, isMobile, allMusicians, setM
     const pStyle = 'my-3 text-center text-sm lg:text-base'
     const labelStyle = 'w-1/3 mx-2 text-right lg:text-base'
     const inputStyle = 'w-2/3 mx-2 p-1 rounded-xl text-stone-800 lg:text-base'
-    const btnStyle = 'border border-stone-800 px-2 py-1 my-6 rounded-xl hover:bg-amber-300 hover:cursor-pointer duration-500 hover:scale-105'
+    const btnStyle = 'border border-stone-800 px-2 py-1 my-6 rounded-xl hover:bg-amber-300 hover:cursor-pointer duration-500 hover:scale-105 shadow-lg'
 
     useEffect(() => { // wait until recaptcha is available
         const checkRecaptcha = setInterval(() => {

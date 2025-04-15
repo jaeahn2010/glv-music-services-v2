@@ -133,8 +133,8 @@ export default function NewCompositionsPage({ isMenuOpen, loginStatus, scrollToT
     const [showArrangements, setShowArrangements] = useState(false)
 
     let tdStyle = 'border border-stone-800 text-center py-1'
-    let btnStyle = 'border border-stone-800 rounded-xl p-2 m-3 hover:bg-amber-300 hover:text-stone-800'
-    let subsectionDivStyle = `${showDetails ? 'z-0 opacity-5' : ''} flex justify-between items-center border border-stone-800 w-3/4 bg-stone-100 my-6 mx-auto px-5 rounded-xl hover:bg-amber-300 duration-500 hover:cursor-pointer`
+    let btnStyle = 'border border-stone-800 rounded-xl p-2 m-3 hover:bg-amber-300 hover:text-stone-800 shadow-lg'
+    let subsectionDivStyle = `${showDetails ? 'z-0 opacity-5' : ''} flex justify-between items-center border border-stone-800 w-3/4 bg-stone-100 my-6 mx-auto px-5 rounded-xl hover:bg-amber-300 duration-500 hover:cursor-pointer shadow-lg`
     let subsectionStyle = 'text-center text-2xl my-6 font-vibes'
     
     useEffect(() => {

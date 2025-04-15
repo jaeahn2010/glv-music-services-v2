@@ -10,7 +10,7 @@ export default function MusiciansDetailsPage({isMenuOpen, musicianDetails, login
     const [bioModal, setBioModal] = useState(false)
     const params = useParams()
     const navigate = useNavigate()
-    const btnStyle = 'lg:w-1/3 border border-stone-800 rounded-xl p-2 my-3 mx-auto hover:bg-amber-300 hover:scale-105 duration-500'
+    const btnStyle = 'lg:w-1/3 border border-stone-800 rounded-xl p-2 my-3 mx-auto hover:bg-amber-300 hover:scale-105 duration-500 shadow-lg'
 
     async function getMusicianData() {
         const musicianData = await getMusicianById(params.musicianId)

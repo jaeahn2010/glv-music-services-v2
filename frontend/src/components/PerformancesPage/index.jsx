@@ -61,7 +61,7 @@ export default function PerformancesPage({ isMenuOpen }) {
             {performances.length
             ? <section className="career-items my-24 min-h-[25rem]">
                 {performances.map((performance, index) => 
-                    <div key={index} className='card-flip flex my-10 w-11/12 md:w-3/4 h-[20rem] md:h-[25rem] mx-auto border border-stone-800 rounded-xl bg-gradient-to-r from-stone-300 via-stone-400 to-stone-300'>
+                    <div key={index} className='card-flip flex my-10 w-11/12 md:w-3/4 h-[20rem] md:h-[25rem] mx-auto border border-stone-800 rounded-xl bg-gradient-to-r from-stone-300 via-stone-400 to-stone-300 shadow-lg'>
                         <div className="card-front flex w-full">
                             <div className="w-full flex flex-col items-center justify-center">
                                 <p className="text-3xl lg:text-5xl font-vibes text-center">{performance.title}</p>

@@ -143,7 +143,7 @@ export default function ContactPage({ isMenuOpen, isMobile, scrollToTop }) {
 						required
 					/>
 				</div>
-				<button type="submit" className="border-stone-800 border rounded-xl px-3 py-1 my-2 hover:scale-105 hover:cursor-pointer hover:bg-amber-300 hover:text-stone-900 hover:duration-500">Submit</button>
+				<button type="submit" className="border-stone-800 border rounded-xl px-3 py-1 my-2 hover:scale-105 hover:cursor-pointer hover:bg-amber-300 hover:text-stone-900 hover:duration-500 shadow-lg">Submit</button>
 			</form>
 		</div>
 	)
