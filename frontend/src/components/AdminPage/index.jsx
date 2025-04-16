@@ -312,7 +312,7 @@ export default function AdminPage({ isMenuOpen, sortObjects, instruments, states
                         break
                 }
                 if (newItem) alert(`Successfully created new ${crudItem}.`)
-                navigate(0)
+                navigate('/')
             } catch (err) {
                 alert(`Could not add new ${crudItem}: ${err}`)
                 console.error(err)

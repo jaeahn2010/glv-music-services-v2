@@ -123,6 +123,11 @@ export default function DetailsPage({ isMenuOpen, opusDetails, loginStatus, user
                         </div>
                         <br/>
                         <div>
+                            <p className="underline">REPERTOIRE TYPE</p>
+                            <p className="font-bold">{opus.repType === 'Chamber Music' ? 'Chamber Music / Orchestral' : opus.repType}</p>
+                        </div>
+                        <br/>
+                        <div>
                             <p className="underline">INSTRUMENTATION</p>
                             <p className="font-bold">{opus.instrumentation.join(', ')}</p>
                         </div>

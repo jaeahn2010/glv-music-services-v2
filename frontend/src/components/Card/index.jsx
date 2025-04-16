@@ -16,10 +16,14 @@ export default function Card({ opus, setOpusDetails, allMusicians }) {
                     <table className="w-full">
                         <tbody>
                             <tr className="h-12">
+                                <td className='w-1/2'>Repertoire Type</td>
+                                <td className='w-1/2'>{opus.repType === 'Chamber Music' ? 'Chamber Music / Orchestral' : opus.repType}</td>
+                            </tr>
+                            <tr className="h-12 border-stone-600 border-y">
                                 <td className='w-1/2'>Instrumentation</td>
                                 <td className="w-1/2">{opus.instrumentation.join(', ')}</td>
                             </tr>
-                            <tr className="h-12 border-stone-600 border-y-2">
+                            <tr className="h-12 border-stone-600 border-b">
                                 <td>Available from:</td>
                                 <td>{musicianNames.join(', ')}</td>
                             </tr>
