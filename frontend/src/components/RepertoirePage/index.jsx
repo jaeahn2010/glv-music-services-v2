@@ -75,7 +75,7 @@ export default function RepertoirePage({ isMenuOpen, allOpuses, allComposers, al
                         setFilteredOpuses(filteredOpus => filteredOpus.filter(opus => {
                             if (opus.movements.length) {
                                 let mvmtTitles = opus.movements.map(mvmt => mvmt.movementTitle).join(';')
-                                return mvmtTitles.toLowerCase().includes(switchValue.toLowerCase())
+                                return mvmtTitles.toLowerCase().includes(switchValue.toLowerCase()) || opus.title.toLowerCase().includes(switchValue.toLowerCase())
                             } else {
                                 return opus.title.toLowerCase().includes(switchValue.toLowerCase())
                             }    
