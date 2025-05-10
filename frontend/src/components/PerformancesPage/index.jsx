@@ -93,7 +93,7 @@ export default function PerformancesPage({ isMenuOpen }) {
                             <div className='w-11/12 mx-auto'>  
                                 {performance.collaborators.length
                                 ? <>
-                                    <p className='text-center underline'>Also featuring:</p>
+                                    <p className='text-center underline'>In collaboration with:</p>
                                     <div className={`${performance.collaborators.length > 5 ? 'columns-2' : ''}`}>
                                         {performance.collaborators.map(collaborator =>
                                             <p key={collaborator.collaboratorLastName + collaborator.collaboratorFirstName} className='text-center'>{collaborator.collaboratorFirstName} {collaborator.collaboratorLastName} ({collaborator.collaboratorInstrument})</p>

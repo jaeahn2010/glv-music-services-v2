@@ -165,7 +165,10 @@ export default function AdminPage({ isMenuOpen, sortObjects, instruments, states
                 })
                 setShowCollaboratorModal(false)
             }}>ADD</button>
-            <button className={btnStyle} onClick={() => setShowMovementsModal(false)}>CLOSE</button>
+            <button className={btnStyle} onClick={(evt) => {
+                evt.preventDefault()
+                setShowCollaboratorModal(false)
+            }}>CLOSE</button>
         </div>
 
     </section>
@@ -426,6 +429,7 @@ export default function AdminPage({ isMenuOpen, sortObjects, instruments, states
                         defaultValue={performanceFormData.title}
                         placeholder='Title'
                         onChange={handleChange}
+                        required
                     />
                 </div>
                 <div className={'mx-auto w-11/12 flex justify-center items-center p-1 m-2 rounded-xl'}>
@@ -437,6 +441,7 @@ export default function AdminPage({ isMenuOpen, sortObjects, instruments, states
                         defaultValue={performanceFormData.locationName}
                         placeholder='Location Name'
                         onChange={handleChange}
+                        required
                     />
                 </div>
                 <div className={'mx-auto w-11/12 flex justify-center items-center p-1 m-2 rounded-xl'}>
@@ -448,6 +453,7 @@ export default function AdminPage({ isMenuOpen, sortObjects, instruments, states
                         defaultValue={performanceFormData.city}
                         placeholder='City'
                         onChange={handleChange}
+                        required
                     />
                 </div>
                 <div className={'mx-auto w-11/12 flex justify-center items-center p-1 m-2 rounded-xl'}>
@@ -458,6 +464,7 @@ export default function AdminPage({ isMenuOpen, sortObjects, instruments, states
                         className={inputStyle}
                         defaultValue={0}
                         onChange={handleChange}
+                        required
                     >
                         <option value={0} disabled>Select a state</option>
                         {states.map(state => <option key={state} value={state}>{state}</option>)}
@@ -473,6 +480,7 @@ export default function AdminPage({ isMenuOpen, sortObjects, instruments, states
                         defaultValue={performanceFormData.date}
                         placeholder={new Date()}
                         onChange={handleChange}
+                        required
                     />
                 </div>
                 <div className={'mx-auto w-11/12 flex justify-center items-center p-1 m-2 rounded-xl'}>
@@ -485,6 +493,7 @@ export default function AdminPage({ isMenuOpen, sortObjects, instruments, states
                         defaultValue={performanceFormData.time}
                         placeholder='12:00'
                         onChange={handleChange}
+                        required
                     />
                 </div>
                 <div className={'mx-auto w-11/12 p-1 m-2'}>
@@ -540,6 +549,7 @@ export default function AdminPage({ isMenuOpen, sortObjects, instruments, states
                                 value={bool}
                                 className='m-2 p-1 bg-stone-200 text-stone-800 rounded-lg'
                                 onChange={handleChange}
+                                required
                             />
                             <label htmlFor={'openToPublic-' + bool} className='text-right m-2'>{bool ? 'Yes' : 'No'}</label>
                         </div>
@@ -555,6 +565,7 @@ export default function AdminPage({ isMenuOpen, sortObjects, instruments, states
                         defaultValue={performanceFormData.minPrice}
                         placeholder={0}
                         onChange={handleChange}
+                        required
                     />
                 </div>
                 <div className={'mx-auto w-11/12 flex justify-center items-center p-1 m-2 rounded-xl'}>
@@ -567,6 +578,7 @@ export default function AdminPage({ isMenuOpen, sortObjects, instruments, states
                         defaultValue={performanceFormData.maxPrice}
                         placeholder={0}
                         onChange={handleChange}
+                        required
                     />
                 </div>
                 <div className={'mx-auto w-11/12 flex justify-center items-center p-1 m-2 rounded-xl'}>
